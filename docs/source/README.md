@@ -12,8 +12,23 @@ Two natures:
 - **Original testimony** — experienced opinion recorded here first. This repo
   is the source of record; provenance is who said it and when.
 
-No fixed layout yet — the first captures shape it. If a local document is
-purchased material, it constrains whether this folder can ever be shared;
-flag it when adding.
+Layout so far, shaped by the first captures: one folder per external corpus
+with a `PROVENANCE.md` stating origin, alterations, and deeper attribution;
+`testimony/` for original testimony. If a local document is purchased
+material, it constrains whether this folder can ever be shared; flag it when
+adding.
 
-**Next:** capture the first two or three sources.
+Captured:
+
+- [cpp-convention/](cpp-convention/) — the tiered Core Guidelines profile
+  and its mechanism matrix (external, from mill_ui)
+- [testimony/coding-rules-2026-07.md](testimony/coding-rules-2026-07.md) —
+  why-annotated coding rules from live study sessions
+
+Leads, not yet captured:
+
+- C++ Core Guidelines — cited by identity only, never copied; re-verify
+  citations upstream when they stop resolving
+- agner.org/optimize — feedstock for future performance variants
+
+**Next:** derive the first policies from the captured convention corpus.
