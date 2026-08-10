@@ -56,7 +56,8 @@ decided yet.
   at authoring time only.
 - The tool is written in Python. The guidance it produces targets C++.
 - Outputs are self-contained guidance documents consumed by reference from a
-  project's own harness. This project never generates CLAUDE.md, AGENTS.md,
+  project's own harness, plus enforcement configs derived from the same policy
+  identities. This project never generates CLAUDE.md, AGENTS.md,
   or any other top-level harness file.
 - Every piece of generated guidance is traceable to a stable decision identity
   and its source material.
