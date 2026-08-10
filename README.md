@@ -6,8 +6,8 @@ for LLM-driven projects.
 ## Why
 
 When an LLM generates C++, its training is fixed; the only lever you hold at
-generation time is what is in its context. Most workflows test quality in
-afterward, through review and repair. This project takes the opposite approach: hold a curated corpus of
+generation time is what is in its context. Whatever judgment is not in context can
+only be tested in afterward, through review and repair. This project takes the opposite approach: hold a curated corpus of
 engineering judgment, and compile it into project-specific guidance that sits
 in front of the model before it writes a line.
 
