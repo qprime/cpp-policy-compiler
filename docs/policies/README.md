@@ -21,9 +21,11 @@ renderings of the same decision identity as the prose.
 
 The format below was derived from the first thirteen policies rather than
 designed ahead of them. Every key exists because some policy could not be
-expressed without it, and nothing appears that no policy needed. The
-projection topic list is a separate question and remains open; thirteen
-policies are far too few to settle it.
+expressed without it, and nothing appears that no policy needed. Deriving the
+rest of the captured corpus took the count to ninety-three and added no key,
+which is the evidence the format was read off real policies rather than
+guessed. The projection topic list is a separate question, still open, and now
+answerable: there is enough content for topics to emerge from.
 
 ## On-disk format
 
@@ -52,7 +54,7 @@ already written. The slug in the filename is a human convenience; frontmatter
 | `applicability` | optional | Axis marks that constrain the policy out. Absent entirely means universal. |
 | `attribution` | required | A list, never empty. Each entry carries `source` (path under `docs/source/`) and `locator` (where in that source), plus optional `upstream` (external citations by identity, e.g. Core Guidelines rule ids). One entry per distinct location, never merged. An entry with no `upstream` means the rule originates in this corpus. |
 | `replacement` | anti-patterns only | List of ids where the replacement guidance lives. Every entry resolves to an existing policy. |
-| `enforcement` | optional | Mechanical expressions of the policy, keyed by tool. Present only where one exists. |
+| `enforcement` | optional | Mechanical expressions of the policy, keyed by tool. Present only where one exists. Keys in use: `clang_tidy`, `warnings`, `sanitizers`, `clang_format`. A key's value takes whatever shape that tool's configuration takes — a list of checks or flags, a mapping of settings. |
 
 Body is markdown, in three parts and in that order: the H1 carries the
 statement, the next block carries the decision procedure a reader applies, and
@@ -92,11 +94,21 @@ checks them.
 
 ### Not in the format yet
 
-- `skeleton`, a pattern's whole-file exemplar form. No pattern policy exists, so
-  nothing forces the field's shape
-  ([#2](https://github.com/qprime/cpp-policy-compiler/issues/2)).
+- `skeleton`, a pattern's whole-file exemplar form. Eleven pattern policies now
+  exist and none of them forced the field: each is expressible as prose plus a
+  fragment, and a compilable whole-file exemplar is a build artifact with a
+  verification step behind it. That is
+  [#2](https://github.com/qprime/cpp-policy-compiler/issues/2) phase 2, and the
+  field's shape follows from what the verification needs.
 - `applicability` marks on the language-version and compiler axes. Version
   differences are content the projection selects among, not gates, so no policy
   yet needs one. When one does, it is the same key with a different axis name.
 
-**Next:** derive the remaining Tier 1 rules and the first pattern policies.
+  The coroutine policies (POL-0080 through POL-0083) are the first case that
+  presses on this. Their subject does not exist below C++20, so they are not
+  wrong on a C++11 project, they are vacuous — and a vacuous entry still spends
+  a projection's size budget. Whether *nothing to apply to* is a gate or content
+  is undecided, and deciding it changes the format rather than any policy.
+
+**Next:** settle the projection topic list, now that there is a corpus to derive
+it from.

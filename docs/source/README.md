@@ -31,5 +31,10 @@ Leads, not yet captured:
   citations upstream when they stop resolving
 - agner.org/optimize — feedstock for future performance variants
 
-**Next:** derive the remaining tiers, patterns, and traps from the captured
-convention corpus.
+The convention corpus is fully derived. What it did not yield is recorded in
+the derivation commits: the Quick Lookup and the mechanism sections are routing
+and mechanism halves rather than decisions, the Divergences are attribution,
+and two rules were dropped because their rationale did not survive the shift to
+the AI-generation objective.
+
+**Next:** capture new source. Everything currently here has been derived.

@@ -6,9 +6,12 @@ attribution:
     locator: "Tier 3: concrete types over templates"
   - source: cpp-convention/conventions.md
     locator: "Tier 2: template parameters are constrained"
-    upstream: ["CG T.10", "CG T.120"]
+  - source: cpp-convention/conventions.md
+    locator: "Divergences: CG T.10"
+    upstream: ["CG T.10"]
   - source: cpp-convention/mechanisms.md
     locator: "§9 Generic code"
+    upstream: ["CG T.10", "CG T.11", "CG T.120"]
 ---
 
 # Concrete types over templates
