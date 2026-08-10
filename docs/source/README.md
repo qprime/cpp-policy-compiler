@@ -31,4 +31,5 @@ Leads, not yet captured:
   citations upstream when they stop resolving
 - agner.org/optimize — feedstock for future performance variants
 
-**Next:** derive the first policies from the captured convention corpus.
+**Next:** derive the remaining tiers, patterns, and traps from the captured
+convention corpus.
