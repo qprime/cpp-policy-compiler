@@ -16,7 +16,8 @@ change.
 
 ```cpp
 // include/proj/store/compact.hpp
-#pragma once
+#ifndef PROJ_STORE_COMPACT_HPP
+#define PROJ_STORE_COMPACT_HPP
 
 #include <vector>
 #include "proj/types.hpp"
@@ -26,6 +27,8 @@ namespace proj::store {
 Result compact(const Store& store, const CompactParams& params);
 
 }  // namespace proj::store
+
+#endif  // PROJ_STORE_COMPACT_HPP
 ```
 
 ```cpp
@@ -50,7 +53,7 @@ Result compact_incremental(const Store& store, const CompactParams& params);
 | No object definitions or non-inline function definitions in a header | `CG SF.2` |
 | A `.cpp` includes the header declaring its own interface, first | `CG SF.5` |
 | No `using namespace` at header scope | `CG SF.7` |
-| An include guard on every header; `#pragma once` is acceptable | `CG SF.8` |
+| An `#ifndef` include guard on every header, named `PROJECT_COMPONENT_FILE_HPP`; `#pragma once` is a non-standard vendor extension and is not used | `CG SF.8` |
 | Namespaces express logical structure, nested by layer | `CG SF.20` |
 
 Where a module's threading model is not obvious from its declarations, it is

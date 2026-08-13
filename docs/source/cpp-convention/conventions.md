@@ -362,7 +362,8 @@ A header is an interface. What it exposes is a promise; what it hides is free to
 
 ```cpp
 // include/proj/algo/plan_2d.hpp
-#pragma once
+#ifndef PROJ_ALGO_PLAN_2D_HPP
+#define PROJ_ALGO_PLAN_2D_HPP
 
 #include <vector>
 #include "proj/types.hpp"
@@ -372,6 +373,8 @@ namespace proj::algo {
 Paths plan_pocket(const PlanarFace& face, const Tool& tool, const PocketParams& params);
 
 }  // namespace proj::algo
+
+#endif  // PROJ_ALGO_PLAN_2D_HPP
 ```
 
 ```cpp
@@ -398,7 +401,7 @@ Paths plan_pocket_spiral(...);
 | A `.cpp` includes the header defining its own interface, first | `[CG SF.5]` |
 | No `using namespace` at header scope | `[CG SF.7]` |
 | Namespaces express logical structure | `[CG SF.20]` |
-| Include guards on every header (`#pragma once` is acceptable) | `[CG SF.8]` |
+| An `#ifndef` include guard on every header, named `PROJECT_COMPONENT_FILE_HPP`; `#pragma once` is a non-standard vendor extension and is not used | `[CG SF.8]` |
 
 **Test for a leaky header:** if changing a private implementation detail forces a recompile of unrelated translation units, the detail is in the wrong file.
 
