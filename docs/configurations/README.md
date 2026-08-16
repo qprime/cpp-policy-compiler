@@ -11,5 +11,8 @@ A configuration selects the policy subset for one project; the compiler
 projects the body of policy through it. Axes gain granularity only when a
 real policy demands gating.
 
-**Next:** write the first configuration when the first projection is
-attempted.
+The first configuration is
+[cpp20-gcc-application.md](cpp20-gcc-application.md); `polc build --config
+docs/configurations/cpp20-gcc-application.md --out <dir>` projects through it.
+
+**Next:** add a configuration when a real project needs one.

@@ -1,0 +1,22 @@
+[project]
+name = "polc"
+version = "0.1.0"
+description = "Projects the policy corpus through a configuration into tiered guidance documents"
+requires-python = ">=3.12"
+dependencies = ["pyyaml>=6"]
+
+[project.scripts]
+polc = "polc.cli:main"
+
+[dependency-groups]
+dev = ["pytest>=8"]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/polc"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

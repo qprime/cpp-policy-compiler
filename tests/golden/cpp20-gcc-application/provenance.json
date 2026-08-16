@@ -1,0 +1,1502 @@
+{
+  "POL-0001": {
+    "kind": "principle",
+    "topic": "tier1",
+    "statement": "Correct by construction beats correct by test",
+    "attribution": [
+      {
+        "source": "cpp-convention/conventions.md",
+        "locator": "Values #1",
+        "upstream": [
+          "CG P.4",
+          "CG P.5"
+        ]
+      }
+    ],
+    "policy_file": "POL-0001-correct-by-construction.md"
+  },
+  "POL-0002": {
+    "kind": "principle",
+    "topic": "tier1",
+    "statement": "Failure modes are visible",
+    "attribution": [
+      {
+        "source": "cpp-convention/conventions.md",
+        "locator": "Values #2",
+        "upstream": [
+          "CG P.6",
+          "CG P.7"
+        ]
+      }
+    ],
+    "policy_file": "POL-0002-failure-modes-are-visible.md"
+  },
+  "POL-0003": {
+    "kind": "principle",
+    "topic": "tier1",
+    "statement": "Ownership is obvious",
+    "attribution": [
+      {
+        "source": "cpp-convention/conventions.md",
+        "locator": "Values #3",
+        "upstream": [
+          "CG P.8"
+        ]
+      }
+    ],
+    "policy_file": "POL-0003-ownership-is-obvious.md"
+  },
+  "POL-0004": {
+    "kind": "principle",
+    "topic": "tier1",
+    "statement": "Boring is a feature",
+    "attribution": [
+      {
+        "source": "cpp-convention/conventions.md",
+        "locator": "Values #4",
+        "upstream": []
+      }
+    ],
+    "policy_file": "POL-0004-boring-is-a-feature.md"
+  },
+  "POL-0005": {
+    "kind": "principle",
+    "topic": "tier1",
+    "statement": "Defensive at boundaries, trusting inside",
+    "attribution": [
+      {
+        "source": "cpp-convention/conventions.md",
+        "locator": "Values #5",
+        "upstream": [
+          "CG P.7"
+        ]
+      }
+    ],
+    "policy_file": "POL-0005-defensive-at-boundaries.md"
+  },
+  "POL-0006": {
+    "kind": "principle",
+    "topic": "tier1",
+    "statement": "Express intent, not mechanism",
+    "attribution": [
+      {
+        "source": "cpp-convention/conventions.md",
+        "locator": "Values #6",
+        "upstream": [
+          "CG P.1",
+          "CG P.3"
+        ]
+      },
+      {
+        "source": "cpp-convention/conventions.md",
+        "locator": "Naming: prefer a name over a comment",
+        "upstream": [
+          "CG NL.1"
+        ]
+      }
+    ],
+    "policy_file": "POL-0006-express-intent-not-mechanism.md"
+  },
+  "POL-0007": {
+    "kind": "principle",
+    "topic": "tier1",
+    "statement": "Determinism is the default",
+    "attribution": [
+      {
+        "source": "cpp-convention/conventions.md",
+        "locator": "Values #7",
+        "upstream": []
+      }
+    ],
+    "policy_file": "POL-0007-determinism-is-the-default.md"
+  },
+  "POL-0008": {
+    "kind": "principle",
+    "topic": "tier1",
+    "statement": "The compiler is your ally",
+    "attribution": [
+      {
+        "source": "cpp-convention/conventions.md",
+        "locator": "Values #8",
+        "upstream": [
+          "CG P.5"
+        ]
+      }
+    ],
+    "policy_file": "POL-0008-the-compiler-is-your-ally.md"
+  },
+  "POL-0009": {
+    "kind": "standard",
+    "topic": "choosing-a-representation",
+    "statement": "Absence is represented, never encoded",
+    "attribution": [
+      {
+        "source": "cpp-convention/conventions.md",
+        "locator": "Tier 1 #3",
+        "upstream": [
+          "CG F.60",
+          "CG P.6"
+        ]
+      },
+      {
+        "source": "cpp-convention/mechanisms.md",
+        "locator": "§1 Absence",
+        "upstream": []
+      }
+    ],
+    "policy_file": "POL-0009-absence-is-represented.md"
+  },
+  "POL-0010": {
+    "kind": "standard",
+    "topic": "everyday-declarations",
+    "statement": "No magic constants",
+    "attribution": [
+      {
+        "source": "cpp-convention/conventions.md",
+        "locator": "Tier 1 #7",
+        "upstream": [
+          "CG ES.45"
+        ]
+      },
+      {
+        "source": "cpp-convention/conventions.md",
+        "locator": "Trap: magic number",
+        "upstream": []
+      }
+    ],
+    "policy_file": "POL-0010-no-magic-constants.md"
+  },
+  "POL-0011": {
+    "kind": "standard",
+    "topic": "handling-failure",
+    "statement": "Errors carry the four-part message",
+    "attribution": [
+      {
+        "source": "cpp-convention/conventions.md",
+        "locator": "Tier 1 #6",
+        "upstream": []
+      },
+      {
+        "source": "cpp-convention/conventions.md",
+        "locator": "Error message format",
+        "upstream": []
+      }
+    ],
+    "policy_file": "POL-0011-four-part-error-message.md"
+  },
+  "POL-0013": {
+    "kind": "anti-pattern",
+    "topic": "choosing-a-representation",
+    "statement": "Never encode absence in a sentinel value",
+    "attribution": [
+      {
+        "source": "cpp-convention/conventions.md",
+        "locator": "Trap: sentinel value",
+        "upstream": []
+      }
+    ],
+    "policy_file": "POL-0013-sentinel-value.md"
+  },
+  "POL-0014": {
+    "kind": "standard",
+    "topic": "deciding-ownership",
+    "statement": "Ownership is single and explicit",
+    "attribution": [
+      {
+        "source": "cpp-convention/conventions.md",
+        "locator": "Tier 1 #1",
+        "upstream": [
+          "CG R.20",
+          "CG R.21",
+          "CG R.3",
+          "CG R.4",
+          "CG R.11"
+        ]
+      },
+      {
+        "source": "cpp-convention/conventions.md",
+        "locator": "Pattern: ownership decision",
+        "upstream": [
+          "CG I.11",
+          "CG R.32"
+        ]
+      },
+      {
+        "source": "cpp-convention/mechanisms.md",
+        "locator": "§3 Ownership",
+        "upstream": []
+      }
+    ],
+    "policy_file": "POL-0014-ownership-is-single-and-explicit.md"
+  },
+  "POL-0015": {
+    "kind": "standard",
+    "topic": "building-a-class",
+    "statement": "Types with invariants establish them at construction",
+    "attribution": [
+      {
+        "source": "cpp-convention/conventions.md",
+        "locator": "Tier 1 #2",
+        "upstream": [
+          "CG C.2",
+          "CG C.40",
+          "CG C.41",
+          "CG C.42"
+        ]
+      },
+      {
+        "source": "cpp-convention/mechanisms.md",
+        "locator": "§7 Invariants and preconditions",
+        "upstream": []
+      }
+    ],
+    "policy_file": "POL-0015-invariants-established-at-construction.md"
+  },
+  "POL-0016": {
+    "kind": "standard",
+    "topic": "writing-a-function",
+    "statement": "Interfaces do not admit silent reordering",
+    "attribution": [
+      {
+        "source": "cpp-convention/conventions.md",
+        "locator": "Tier 1 #4",
+        "upstream": [
+          "CG I.23",
+          "CG I.24"
+        ]
+      },
+      {
+        "source": "cpp-convention/conventions.md",
+        "locator": "Pattern: params struct",
+        "upstream": []
+      }
+    ],
+    "policy_file": "POL-0016-interfaces-reject-silent-reordering.md"
+  },
+  "POL-0017": {
+    "kind": "standard",
+    "topic": "naming",
+    "statement": "Dimensioned values carry their unit in the name",
+    "attribution": [
+      {
+        "source": "cpp-convention/conventions.md",
+        "locator": "Tier 1 #5",
+        "upstream": [
+          "CG I.4",
+          "CG NL.19"
+        ]
+      }
+    ],
+    "policy_file": "POL-0017-dimensioned-values-carry-their-unit.md"
+  },
+  "POL-0018": {
+    "kind": "standard",
+    "topic": "structuring-modules-and-layers",
+    "statement": "Dependency direction holds",
+    "attribution": [
+      {
+        "source": "cpp-convention/conventions.md",
+        "locator": "Tier 1 #8",
+        "upstream": []
+      },
+      {
+        "source": "cpp-convention/conventions.md",
+        "locator": "Dependency Direction",
+        "upstream": []
+      }
+    ],
+    "policy_file": "POL-0018-dependency-direction-holds.md"
+  },
+  "POL-0019": {
+    "kind": "standard",
+    "topic": "everyday-declarations",
+    "statement": "No undefined behaviour, no run-to-run variation",
+    "attribution": [
+      {
+        "source": "cpp-convention/conventions.md",
+        "locator": "Tier 1 #9",
+        "upstream": [
+          "CG P.4",
+          "CG ES.20"
+        ]
+      }
+    ],
+    "policy_file": "POL-0019-no-undefined-behaviour-or-run-variation.md"
+  },
+  "POL-0020": {
+    "kind": "standard",
+    "topic": "everyday-declarations",
+    "statement": "`const` by default",
+    "attribution": [
+      {
+        "source": "cpp-convention/conventions.md",
+        "locator": "Tier 1 #10",
+        "upstream": [
+          "CG P.10",
+          "CG Con.1",
+          "CG Con.2",
+          "CG Con.3",
+          "CG Con.4",
+          "CG Con.5"
+        ]
+      },
+      {
+        "source": "cpp-convention/mechanisms.md",
+        "locator": "§6 Immutability",
+        "upstream": []
+      }
+    ],
+    "policy_file": "POL-0020-const-by-default.md"
+  },
+  "POL-0021": {
+    "kind": "standard",
+    "topic": "building-a-class",
+    "statement": "Rule of zero",
+    "attribution": [
+      {
+        "source": "cpp-convention/conventions.md",
+        "locator": "Tier 1 #11",
+        "upstream": [
+          "CG C.20",
+          "CG C.21",
+          "CG C.22"
+        ]
+      },
+      {
+        "source": "cpp-convention/conventions.md",
+        "locator": "Pattern: rule of zero",
+        "upstream": [
+          "CG C.66"
+        ]
+      },
+      {
+        "source": "cpp-convention/mechanisms.md",
+        "locator": "§8 Special members and value semantics",
+        "upstream": []
+      }
+    ],
+    "policy_file": "POL-0021-rule-of-zero.md"
+  },
+  "POL-0022": {
+    "kind": "pattern",
+    "topic": "building-a-class",
+    "statement": "Value type with invariant",
+    "attribution": [
+      {
+        "source": "cpp-convention/conventions.md",
+        "locator": "Pattern: value type with invariant",
+        "upstream": [
+          "CG C.2",
+          "CG C.8",
+          "CG C.41",
+          "CG C.42",
+          "CG C.45",
+          "CG C.46",
+          "CG C.49",
+          "CG Con.2"
+        ]
+      },
+      {
+        "source": "cpp-convention/mechanisms.md",
+        "locator": "§7 Invariants and preconditions",
+        "upstream": []
+      }
+    ],
+    "policy_file": "POL-0022-value-type-with-invariant.md"
+  },
+  "POL-0023": {
+    "kind": "pattern",
+    "topic": "writing-a-function",
+    "statement": "Params struct",
+    "attribution": [
+      {
+        "source": "cpp-convention/conventions.md",
+        "locator": "Pattern: params struct",
+        "upstream": [
+          "CG I.23",
+          "CG I.24",
+          "CG F.21"
+        ]
+      }
+    ],
+    "policy_file": "POL-0023-params-struct.md"
+  },
+  "POL-0024": {
+    "kind": "pattern",
+    "topic": "deciding-ownership",
+    "statement": "Ownership decision",
+    "attribution": [
+      {
+        "source": "cpp-convention/conventions.md",
+        "locator": "Pattern: ownership decision",
+        "upstream": [
+          "CG R.3",
+          "CG R.4",
+          "CG R.5",
+          "CG R.20",
+          "CG R.21",
+          "CG F.60"
+        ]
+      }
+    ],
+    "policy_file": "POL-0024-ownership-decision.md"
+  },
+  "POL-0025": {
+    "kind": "pattern",
+    "topic": "building-a-class",
+    "statement": "A type that owns a resource directly owns nothing else",
+    "attribution": [
+      {
+        "source": "cpp-convention/conventions.md",
+        "locator": "Pattern: rule of zero",
+        "upstream": [
+          "CG C.20",
+          "CG C.31",
+          "CG P.11"
+        ]
+      }
+    ],
+    "policy_file": "POL-0025-single-purpose-resource-owner.md"
+  },
+  "POL-0026": {
+    "kind": "pattern",
+    "topic": "everyday-declarations",
+    "statement": "Write `const` first, remove it when a mutation is required",
+    "attribution": [
+      {
+        "source": "cpp-convention/conventions.md",
+        "locator": "Pattern: immutability by default",
+        "upstream": [
+          "CG Con.1",
+          "CG Con.5",
+          "CG ES.25",
+          "CG P.10"
+        ]
+      }
+    ],
+    "policy_file": "POL-0026-write-const-first.md"
+  },
+  "POL-0027": {
+    "kind": "pattern",
+    "topic": "building-a-class",
+    "statement": "Wrapper type for preconditions",
+    "attribution": [
+      {
+        "source": "cpp-convention/conventions.md",
+        "locator": "Pattern: wrapper type for preconditions",
+        "upstream": [
+          "CG I.5"
+        ]
+      },
+      {
+        "source": "cpp-convention/conventions.md",
+        "locator": "Divergences: CG I.6, I.8",
+        "upstream": []
+      },
+      {
+        "source": "cpp-convention/mechanisms.md",
+        "locator": "§7 Invariants and preconditions",
+        "upstream": []
+      }
+    ],
+    "policy_file": "POL-0027-wrapper-type-for-preconditions.md"
+  },
+  "POL-0028": {
+    "kind": "pattern",
+    "topic": "structuring-modules-and-layers",
+    "statement": "Module boundary",
+    "attribution": [
+      {
+        "source": "cpp-convention/conventions.md",
+        "locator": "Pattern: module boundary",
+        "upstream": [
+          "CG SF.2",
+          "CG SF.5",
+          "CG SF.7",
+          "CG SF.8",
+          "CG SF.11",
+          "CG SF.20",
+          "CG SF.21",
+          "CG SF.22"
+        ]
+      },
+      {
+        "source": "cpp-convention/conventions.md",
+        "locator": "Trap: cargo-culted mutex",
+        "upstream": []
+      }
+    ],
+    "policy_file": "POL-0028-module-boundary.md"
+  },
+  "POL-0029": {
+    "kind": "pattern",
+    "topic": "writing-a-function",
+    "statement": "Free function by default",
+    "attribution": [
+      {
+        "source": "cpp-convention/conventions.md",
+        "locator": "Pattern: free function by default",
+        "upstream": [
+          "CG C.4",
+          "CG C.5"
+        ]
+      }
+    ],
+    "policy_file": "POL-0029-free-function-by-default.md"
+  },
+  "POL-0030": {
+    "kind": "pattern",
+    "topic": "writing-a-function",
+    "statement": "Named operation",
+    "attribution": [
+      {
+        "source": "cpp-convention/conventions.md",
+        "locator": "Pattern: named operation",
+        "upstream": [
+          "CG F.1",
+          "CG F.2",
+          "CG F.3",
+          "CG F.8",
+          "CG F.56"
+        ]
+      }
+    ],
+    "policy_file": "POL-0030-named-operation.md"
+  },
+  "POL-0031": {
+    "kind": "pattern",
+    "topic": "handling-failure",
+    "statement": "Failure mechanism",
+    "attribution": [
+      {
+        "source": "cpp-convention/conventions.md",
+        "locator": "Pattern: failure mechanism",
+        "upstream": [
+          "CG E.1",
+          "CG E.2",
+          "CG E.14",
+          "CG E.15",
+          "CG E.30",
+          "CG F.60",
+          "CG I.5",
+          "CG I.10"
+        ]
+      },
+      {
+        "source": "cpp-convention/mechanisms.md",
+        "locator": "§5 Failure",
+        "upstream": []
+      }
+    ],
+    "policy_file": "POL-0031-failure-mechanism.md"
+  },
+  "POL-0032": {
+    "kind": "pattern",
+    "topic": "handling-failure",
+    "statement": "Failure becomes less fatal moving outward",
+    "attribution": [
+      {
+        "source": "cpp-convention/conventions.md",
+        "locator": "Failure semantics by layer",
+        "upstream": []
+      }
+    ],
+    "policy_file": "POL-0032-failure-semantics-by-layer.md"
+  },
+  "POL-0033": {
+    "kind": "standard",
+    "topic": "choosing-a-representation",
+    "statement": "Closed-set variation is compiler-checked for exhaustiveness",
+    "attribution": [
+      {
+        "source": "cpp-convention/conventions.md",
+        "locator": "Decision: when a thing becomes a type, fixed set of alternatives",
+        "upstream": []
+      },
+      {
+        "source": "cpp-convention/conventions.md",
+        "locator": "Tier 2: closed-set variation",
+        "upstream": []
+      },
+      {
+        "source": "cpp-convention/mechanisms.md",
+        "locator": "§2 Closed-set variation",
+        "upstream": [
+          "CG C.181",
+          "CG C.182"
+        ]
+      }
+    ],
+    "policy_file": "POL-0033-closed-set-variation-is-compiler-checked.md"
+  },
+  "POL-0034": {
+    "kind": "guideline",
+    "topic": "choosing-a-representation",
+    "statement": "When a thing becomes a type",
+    "attribution": [
+      {
+        "source": "cpp-convention/conventions.md",
+        "locator": "Decision: when a thing becomes a type",
+        "upstream": [
+          "CG C.2"
+        ]
+      }
+    ],
+    "policy_file": "POL-0034-when-a-thing-becomes-a-type.md"
+  },
+  "POL-0035": {
+    "kind": "guideline",
+    "topic": "writing-a-function",
+    "statement": "How to pass a parameter",
+    "attribution": [
+      {
+        "source": "cpp-convention/conventions.md",
+        "locator": "Decision: how to pass a parameter",
+        "upstream": [
+          "CG F.15",
+          "CG F.16",
+          "CG F.17",
+          "CG F.18",
+          "CG F.20",
+          "CG F.21",
+          "CG F.24",
+          "CG F.43",
+          "CG F.60",
+          "CG Con.3"
+        ]
+      },
+      {
+        "source": "cpp-convention/conventions.md",
+        "locator": "Tier 2: sequence parameters, non-owning string parameters",
+        "upstream": []
+      },
+      {
+        "source": "cpp-convention/mechanisms.md",
+        "locator": "§4 Sequences",
+        "upstream": [
+          "CG I.13"
+        ]
+      }
+    ],
+    "policy_file": "POL-0035-how-to-pass-a-parameter.md"
+  },
+  "POL-0036": {
+    "kind": "guideline",
+    "topic": "placing-validation",
+    "statement": "Compile time or runtime",
+    "attribution": [
+      {
+        "source": "cpp-convention/conventions.md",
+        "locator": "Decision: compile time or runtime",
+        "upstream": [
+          "CG P.5",
+          "CG P.6",
+          "CG P.7",
+          "CG Con.5",
+          "CG F.4"
+        ]
+      }
+    ],
+    "policy_file": "POL-0036-compile-time-or-runtime.md"
+  },
+  "POL-0037": {
+    "kind": "guideline",
+    "topic": "choosing-a-representation",
+    "statement": "Is inheritance right",
+    "attribution": [
+      {
+        "source": "cpp-convention/conventions.md",
+        "locator": "Decision: is inheritance right",
+        "upstream": [
+          "CG I.25",
+          "CG C.35",
+          "CG C.82",
+          "CG C.128",
+          "CG C.129"
+        ]
+      }
+    ],
+    "policy_file": "POL-0037-is-inheritance-right.md"
+  },
+  "POL-0038": {
+    "kind": "guideline",
+    "topic": "choosing-a-representation",
+    "statement": "A distinct type for a dimensioned scalar is a named escape, not the default",
+    "attribution": [
+      {
+        "source": "cpp-convention/conventions.md",
+        "locator": "Tier 3: dimensioned scalars stay primitives",
+        "upstream": []
+      },
+      {
+        "source": "cpp-convention/conventions.md",
+        "locator": "Decision: when a thing becomes a type, on strong typedefs",
+        "upstream": []
+      }
+    ],
+    "policy_file": "POL-0038-distinct-types-are-a-named-escape.md"
+  },
+  "POL-0039": {
+    "kind": "guideline",
+    "topic": "handling-failure",
+    "statement": "Exceptions are permitted at module boundaries",
+    "attribution": [
+      {
+        "source": "cpp-convention/conventions.md",
+        "locator": "Tier 3: exceptions are permitted at module boundaries",
+        "upstream": []
+      },
+      {
+        "source": "cpp-convention/conventions.md",
+        "locator": "Divergences: CG E.2, CG I.10",
+        "upstream": []
+      },
+      {
+        "source": "cpp-convention/mechanisms.md",
+        "locator": "§5 Failure, exception-free modules",
+        "upstream": [
+          "CG E.25",
+          "CG E.26",
+          "CG E.27"
+        ]
+      }
+    ],
+    "policy_file": "POL-0039-exceptions-at-module-boundaries.md"
+  },
+  "POL-0040": {
+    "kind": "guideline",
+    "topic": "writing-a-function",
+    "statement": "Concrete types over templates",
+    "attribution": [
+      {
+        "source": "cpp-convention/conventions.md",
+        "locator": "Tier 3: concrete types over templates",
+        "upstream": []
+      },
+      {
+        "source": "cpp-convention/conventions.md",
+        "locator": "Tier 2: template parameters are constrained",
+        "upstream": []
+      },
+      {
+        "source": "cpp-convention/conventions.md",
+        "locator": "Divergences: CG T.10",
+        "upstream": [
+          "CG T.10"
+        ]
+      },
+      {
+        "source": "cpp-convention/mechanisms.md",
+        "locator": "§9 Generic code",
+        "upstream": [
+          "CG T.10",
+          "CG T.11",
+          "CG T.120"
+        ]
+      }
+    ],
+    "policy_file": "POL-0040-concrete-types-over-templates.md"
+  },
+  "POL-0041": {
+    "kind": "guideline",
+    "topic": "placing-validation",
+    "statement": "Public API is validated; internals trust their contracts",
+    "attribution": [
+      {
+        "source": "cpp-convention/conventions.md",
+        "locator": "Tier 3: public API is validated; internals trust their contracts",
+        "upstream": []
+      }
+    ],
+    "policy_file": "POL-0041-validate-at-the-public-api.md"
+  },
+  "POL-0042": {
+    "kind": "guideline",
+    "topic": "choosing-a-representation",
+    "statement": "Constraint-free data stays an aggregate `struct`",
+    "attribution": [
+      {
+        "source": "cpp-convention/conventions.md",
+        "locator": "Tier 3: class with a constructor for types with invariants",
+        "upstream": [
+          "CG C.2"
+        ]
+      }
+    ],
+    "policy_file": "POL-0042-constraint-free-data-stays-an-aggregate.md"
+  },
+  "POL-0043": {
+    "kind": "anti-pattern",
+    "topic": "choosing-a-representation",
+    "statement": "Never dispatch on a string tag",
+    "attribution": [
+      {
+        "source": "cpp-convention/conventions.md",
+        "locator": "Trap: stringly-typed dispatch",
+        "upstream": []
+      },
+      {
+        "source": "cpp-convention/mechanisms.md",
+        "locator": "§2 Closed-set variation, anti-pattern in every standard",
+        "upstream": []
+      }
+    ],
+    "policy_file": "POL-0043-stringly-typed-dispatch.md"
+  },
+  "POL-0044": {
+    "kind": "anti-pattern",
+    "topic": "choosing-a-representation",
+    "statement": "Never build a hierarchy to represent a fixed set of alternatives",
+    "attribution": [
+      {
+        "source": "cpp-convention/conventions.md",
+        "locator": "Trap: inheritance for variation",
+        "upstream": [
+          "CG C.129"
+        ]
+      }
+    ],
+    "policy_file": "POL-0044-inheritance-for-variation.md"
+  },
+  "POL-0045": {
+    "kind": "anti-pattern",
+    "topic": "placing-validation",
+    "statement": "Never check the same precondition at every call site",
+    "attribution": [
+      {
+        "source": "cpp-convention/conventions.md",
+        "locator": "Trap: defensive everywhere",
+        "upstream": []
+      }
+    ],
+    "policy_file": "POL-0045-defensive-everywhere.md"
+  },
+  "POL-0046": {
+    "kind": "anti-pattern",
+    "topic": "writing-a-function",
+    "statement": "Never pass a sequence as a pointer and a length",
+    "attribution": [
+      {
+        "source": "cpp-convention/conventions.md",
+        "locator": "Trap: pointer-and-length pair",
+        "upstream": [
+          "CG I.13"
+        ]
+      }
+    ],
+    "policy_file": "POL-0046-pointer-and-length-pair.md"
+  },
+  "POL-0047": {
+    "kind": "anti-pattern",
+    "topic": "writing-a-function",
+    "statement": "Never store a non-owning view as a member",
+    "attribution": [
+      {
+        "source": "cpp-convention/conventions.md",
+        "locator": "Trap: stored view",
+        "upstream": []
+      },
+      {
+        "source": "cpp-convention/mechanisms.md",
+        "locator": "§4 Sequences, in every standard",
+        "upstream": []
+      }
+    ],
+    "policy_file": "POL-0047-stored-view.md"
+  },
+  "POL-0048": {
+    "kind": "anti-pattern",
+    "topic": "deciding-ownership",
+    "statement": "Never reach for `shared_ptr` because the ownership question is open",
+    "attribution": [
+      {
+        "source": "cpp-convention/conventions.md",
+        "locator": "Trap: reflexive shared_ptr",
+        "upstream": [
+          "CG R.21"
+        ]
+      }
+    ],
+    "policy_file": "POL-0048-reflexive-shared-ptr.md"
+  },
+  "POL-0049": {
+    "kind": "anti-pattern",
+    "topic": "structuring-modules-and-layers",
+    "statement": "Never add a mutex to a class with no threading model",
+    "attribution": [
+      {
+        "source": "cpp-convention/conventions.md",
+        "locator": "Trap: cargo-culted mutex",
+        "upstream": []
+      }
+    ],
+    "policy_file": "POL-0049-cargo-culted-mutex.md"
+  },
+  "POL-0050": {
+    "kind": "anti-pattern",
+    "topic": "writing-a-function",
+    "statement": "Never use `auto` where the type is the load-bearing fact",
+    "attribution": [
+      {
+        "source": "cpp-convention/conventions.md",
+        "locator": "Trap: auto by default",
+        "upstream": [
+          "CG ES.11"
+        ]
+      }
+    ],
+    "policy_file": "POL-0050-auto-by-default.md"
+  },
+  "POL-0051": {
+    "kind": "anti-pattern",
+    "topic": "building-a-class",
+    "statement": "Never apply `noexcept` as a blanket",
+    "attribution": [
+      {
+        "source": "cpp-convention/conventions.md",
+        "locator": "Trap: blanket noexcept",
+        "upstream": [
+          "CG E.12",
+          "CG C.66"
+        ]
+      }
+    ],
+    "policy_file": "POL-0051-blanket-noexcept.md"
+  },
+  "POL-0052": {
+    "kind": "anti-pattern",
+    "topic": "writing-a-function",
+    "statement": "Never templatize for two callers",
+    "attribution": [
+      {
+        "source": "cpp-convention/conventions.md",
+        "locator": "Trap: premature template",
+        "upstream": [
+          "CG T.10",
+          "CG T.120"
+        ]
+      }
+    ],
+    "policy_file": "POL-0052-premature-template.md"
+  },
+  "POL-0053": {
+    "kind": "anti-pattern",
+    "topic": "handling-failure",
+    "statement": "Never catch to re-throw a different type at every layer",
+    "attribution": [
+      {
+        "source": "cpp-convention/conventions.md",
+        "locator": "Trap: mid-stack exception translation",
+        "upstream": [
+          "CG E.3",
+          "CG E.17",
+          "CG E.18"
+        ]
+      }
+    ],
+    "policy_file": "POL-0053-mid-stack-exception-translation.md"
+  },
+  "POL-0054": {
+    "kind": "anti-pattern",
+    "topic": "writing-a-function",
+    "statement": "Never silence an unused parameter with a void cast",
+    "attribution": [
+      {
+        "source": "cpp-convention/conventions.md",
+        "locator": "Trap: void-cast unused param",
+        "upstream": []
+      }
+    ],
+    "policy_file": "POL-0054-void-cast-unused-param.md"
+  },
+  "POL-0055": {
+    "kind": "anti-pattern",
+    "topic": "handling-failure",
+    "statement": "Never ship a public function that returns `{}` because it is unimplemented",
+    "attribution": [
+      {
+        "source": "cpp-convention/conventions.md",
+        "locator": "Trap: empty-stub public function",
+        "upstream": []
+      }
+    ],
+    "policy_file": "POL-0055-empty-stub-public-function.md"
+  },
+  "POL-0056": {
+    "kind": "anti-pattern",
+    "topic": "writing-a-function",
+    "statement": "Never keep two functions that share most of their bodies",
+    "attribution": [
+      {
+        "source": "cpp-convention/conventions.md",
+        "locator": "Trap: parallel near-duplicates",
+        "upstream": []
+      }
+    ],
+    "policy_file": "POL-0056-parallel-near-duplicates.md"
+  },
+  "POL-0057": {
+    "kind": "standard",
+    "topic": "crossing-the-ffi-boundary",
+    "statement": "Names cross the language boundary unchanged",
+    "attribution": [
+      {
+        "source": "cpp-convention/conventions.md",
+        "locator": "FFI Conventions: names cross unchanged",
+        "upstream": []
+      }
+    ],
+    "policy_file": "POL-0057-names-cross-the-boundary-unchanged.md"
+  },
+  "POL-0058": {
+    "kind": "standard",
+    "topic": "crossing-the-ffi-boundary",
+    "statement": "The calling side validates before crossing",
+    "attribution": [
+      {
+        "source": "cpp-convention/conventions.md",
+        "locator": "FFI Conventions: validation is the calling side's job",
+        "upstream": []
+      }
+    ],
+    "policy_file": "POL-0058-the-calling-side-validates.md"
+  },
+  "POL-0059": {
+    "kind": "standard",
+    "topic": "crossing-the-ffi-boundary",
+    "statement": "Errors translate exactly once, at the binding layer",
+    "attribution": [
+      {
+        "source": "cpp-convention/conventions.md",
+        "locator": "FFI Conventions: errors translate exactly once",
+        "upstream": []
+      }
+    ],
+    "policy_file": "POL-0059-errors-translate-exactly-once.md"
+  },
+  "POL-0060": {
+    "kind": "standard",
+    "topic": "crossing-the-ffi-boundary",
+    "statement": "Absence maps to absence across the boundary",
+    "attribution": [
+      {
+        "source": "cpp-convention/conventions.md",
+        "locator": "FFI Conventions: absence maps to absence",
+        "upstream": []
+      },
+      {
+        "source": "cpp-convention/mechanisms.md",
+        "locator": "§1 Absence, FFI",
+        "upstream": []
+      }
+    ],
+    "policy_file": "POL-0060-absence-maps-to-absence.md"
+  },
+  "POL-0061": {
+    "kind": "standard",
+    "topic": "crossing-the-ffi-boundary",
+    "statement": "Unit conversion happens at the outer boundary, never at the FFI seam",
+    "attribution": [
+      {
+        "source": "cpp-convention/conventions.md",
+        "locator": "FFI Conventions: units survive the trip",
+        "upstream": []
+      }
+    ],
+    "policy_file": "POL-0061-convert-units-at-the-outer-boundary.md"
+  },
+  "POL-0062": {
+    "kind": "standard",
+    "topic": "crossing-the-ffi-boundary",
+    "statement": "Ownership is explicit across the FFI boundary",
+    "attribution": [
+      {
+        "source": "cpp-convention/conventions.md",
+        "locator": "FFI Conventions: ownership is explicit",
+        "upstream": []
+      }
+    ],
+    "policy_file": "POL-0062-ownership-is-explicit-across-the-boundary.md"
+  },
+  "POL-0063": {
+    "kind": "standard",
+    "topic": "crossing-the-ffi-boundary",
+    "statement": "A structure shared across the boundary has one schema and one source of truth",
+    "attribution": [
+      {
+        "source": "cpp-convention/conventions.md",
+        "locator": "FFI Conventions: the IR is the contract",
+        "upstream": []
+      }
+    ],
+    "policy_file": "POL-0063-shared-structures-have-one-schema.md"
+  },
+  "POL-0064": {
+    "kind": "guideline",
+    "topic": "crossing-the-ffi-boundary",
+    "statement": "The binding layer is a declared escape hatch",
+    "attribution": [
+      {
+        "source": "cpp-convention/conventions.md",
+        "locator": "FFI Conventions: the binding layer is a declared escape hatch",
+        "upstream": []
+      },
+      {
+        "source": "cpp-convention/conventions.md",
+        "locator": "Tier 3: public API is validated, FFI escape",
+        "upstream": []
+      }
+    ],
+    "policy_file": "POL-0064-the-binding-layer-is-a-declared-escape-hatch.md"
+  },
+  "POL-0065": {
+    "kind": "guideline",
+    "topic": "writing-tests",
+    "statement": "Test where the logic lives",
+    "attribution": [
+      {
+        "source": "cpp-convention/conventions.md",
+        "locator": "Testing: test where the logic lives",
+        "upstream": []
+      }
+    ],
+    "policy_file": "POL-0065-test-where-the-logic-lives.md"
+  },
+  "POL-0066": {
+    "kind": "standard",
+    "topic": "writing-tests",
+    "statement": "Do not test the language or the standard library",
+    "attribution": [
+      {
+        "source": "cpp-convention/conventions.md",
+        "locator": "Testing: do not test the language",
+        "upstream": []
+      }
+    ],
+    "policy_file": "POL-0066-do-not-test-the-language.md"
+  },
+  "POL-0067": {
+    "kind": "standard",
+    "topic": "writing-tests",
+    "statement": "Test the invariant, not the accessor",
+    "attribution": [
+      {
+        "source": "cpp-convention/conventions.md",
+        "locator": "Testing: test the invariant, not the getter",
+        "upstream": []
+      }
+    ],
+    "policy_file": "POL-0067-test-the-invariant-not-the-getter.md"
+  },
+  "POL-0068": {
+    "kind": "standard",
+    "topic": "writing-tests",
+    "statement": "Round-trip tests assert semantic equivalence",
+    "attribution": [
+      {
+        "source": "cpp-convention/conventions.md",
+        "locator": "Testing: round-trip tests assert semantic equivalence",
+        "upstream": []
+      }
+    ],
+    "policy_file": "POL-0068-round-trip-tests-assert-semantic-equivalence.md"
+  },
+  "POL-0069": {
+    "kind": "standard",
+    "topic": "writing-tests",
+    "statement": "One assertion of a behaviour",
+    "attribution": [
+      {
+        "source": "cpp-convention/conventions.md",
+        "locator": "Testing: one assertion of a behaviour",
+        "upstream": []
+      }
+    ],
+    "policy_file": "POL-0069-one-assertion-of-a-behaviour.md"
+  },
+  "POL-0070": {
+    "kind": "standard",
+    "topic": "writing-tests",
+    "statement": "Use the project's test framework",
+    "attribution": [
+      {
+        "source": "cpp-convention/conventions.md",
+        "locator": "Testing: use the framework",
+        "upstream": []
+      }
+    ],
+    "policy_file": "POL-0070-use-the-test-framework.md"
+  },
+  "POL-0071": {
+    "kind": "standard",
+    "topic": "writing-tests",
+    "statement": "Structured output is golden-tested",
+    "attribution": [
+      {
+        "source": "cpp-convention/conventions.md",
+        "locator": "Testing: golden-tested IR",
+        "upstream": []
+      }
+    ],
+    "policy_file": "POL-0071-golden-tested-structured-output.md"
+  },
+  "POL-0072": {
+    "kind": "standard",
+    "topic": "writing-tests",
+    "statement": "Include a test that would fail on a plausible wrong implementation",
+    "attribution": [
+      {
+        "source": "cpp-convention/conventions.md",
+        "locator": "Testing: include a test that would fail",
+        "upstream": []
+      }
+    ],
+    "policy_file": "POL-0072-include-a-test-that-would-fail.md"
+  },
+  "POL-0073": {
+    "kind": "standard",
+    "topic": "logging",
+    "statement": "No `std::cout` or `printf` in library code",
+    "attribution": [
+      {
+        "source": "cpp-convention/conventions.md",
+        "locator": "Logging: no std::cout or printf in library code",
+        "upstream": []
+      },
+      {
+        "source": "cpp-convention/mechanisms.md",
+        "locator": "§11 Strings and formatting, never in library code",
+        "upstream": []
+      }
+    ],
+    "policy_file": "POL-0073-no-console-output-in-library-code.md"
+  },
+  "POL-0074": {
+    "kind": "standard",
+    "topic": "logging",
+    "statement": "Use a structured logger",
+    "attribution": [
+      {
+        "source": "cpp-convention/conventions.md",
+        "locator": "Logging: use a structured logger",
+        "upstream": []
+      }
+    ],
+    "policy_file": "POL-0074-use-a-structured-logger.md"
+  },
+  "POL-0075": {
+    "kind": "guideline",
+    "topic": "logging",
+    "statement": "Log levels have fixed meanings",
+    "attribution": [
+      {
+        "source": "cpp-convention/conventions.md",
+        "locator": "Logging: level table",
+        "upstream": []
+      }
+    ],
+    "policy_file": "POL-0075-log-levels-have-fixed-meanings.md"
+  },
+  "POL-0080": {
+    "kind": "standard",
+    "topic": "coroutines",
+    "statement": "A coroutine that may suspend takes its parameters by value",
+    "attribution": [
+      {
+        "source": "cpp-convention/conventions.md",
+        "locator": "Coroutines: reference parameters",
+        "upstream": []
+      }
+    ],
+    "policy_file": "POL-0080-no-reference-parameters-into-a-suspending-coroutine.md"
+  },
+  "POL-0081": {
+    "kind": "standard",
+    "topic": "coroutines",
+    "statement": "A lambda used as a coroutine captures by value",
+    "attribution": [
+      {
+        "source": "cpp-convention/conventions.md",
+        "locator": "Coroutines: lambda captures",
+        "upstream": []
+      }
+    ],
+    "policy_file": "POL-0081-coroutine-lambdas-capture-by-value.md"
+  },
+  "POL-0082": {
+    "kind": "guideline",
+    "topic": "coroutines",
+    "statement": "Awaitables are non-owning by default",
+    "attribution": [
+      {
+        "source": "cpp-convention/conventions.md",
+        "locator": "Coroutines: awaitable lifetime",
+        "upstream": []
+      }
+    ],
+    "policy_file": "POL-0082-awaitables-are-non-owning-by-default.md"
+  },
+  "POL-0083": {
+    "kind": "guideline",
+    "topic": "coroutines",
+    "statement": "Use symmetric transfer past two or three levels of `co_await`",
+    "attribution": [
+      {
+        "source": "cpp-convention/conventions.md",
+        "locator": "Coroutines: co_await chains",
+        "upstream": []
+      }
+    ],
+    "policy_file": "POL-0083-symmetric-transfer-for-deep-await-chains.md"
+  },
+  "POL-0084": {
+    "kind": "standard",
+    "topic": "naming",
+    "statement": "Naming case is fixed, not a per-project choice",
+    "attribution": [
+      {
+        "source": "cpp-convention/conventions.md",
+        "locator": "Naming: case table",
+        "upstream": [
+          "CG NL.5",
+          "CG NL.8",
+          "CG NL.9",
+          "CG NL.10"
+        ]
+      },
+      {
+        "source": "cpp-convention/conventions.md",
+        "locator": "Divergences: CG NL.10",
+        "upstream": []
+      },
+      {
+        "source": "cpp-convention/conventions.md",
+        "locator": "Divergences: CG SF.1",
+        "upstream": []
+      }
+    ],
+    "policy_file": "POL-0084-naming-case-is-fixed.md"
+  },
+  "POL-0085": {
+    "kind": "standard",
+    "topic": "naming",
+    "statement": "Operation verbs are a fixed vocabulary",
+    "attribution": [
+      {
+        "source": "cpp-convention/conventions.md",
+        "locator": "Naming vocabulary: verb table",
+        "upstream": []
+      }
+    ],
+    "policy_file": "POL-0085-operation-verbs-are-a-fixed-vocabulary.md"
+  },
+  "POL-0086": {
+    "kind": "standard",
+    "topic": "naming",
+    "statement": "A name prefix states the return contract",
+    "attribution": [
+      {
+        "source": "cpp-convention/conventions.md",
+        "locator": "Naming vocabulary: pattern table",
+        "upstream": []
+      }
+    ],
+    "policy_file": "POL-0086-name-prefixes-state-the-return-contract.md"
+  },
+  "POL-0087": {
+    "kind": "standard",
+    "topic": "structuring-modules-and-layers",
+    "statement": "A lower layer that needs a higher layer's type gets an adapter",
+    "attribution": [
+      {
+        "source": "cpp-convention/conventions.md",
+        "locator": "Dependency Direction: a lower layer needs a higher layer's type",
+        "upstream": []
+      }
+    ],
+    "policy_file": "POL-0087-adapt-at-the-boundary-rather-than-invert.md"
+  },
+  "POL-0088": {
+    "kind": "guideline",
+    "topic": "structuring-modules-and-layers",
+    "statement": "A wrapper type lives at the layer that owns its precondition",
+    "attribution": [
+      {
+        "source": "cpp-convention/conventions.md",
+        "locator": "Dependency Direction: a wrapper type used by several layers",
+        "upstream": []
+      }
+    ],
+    "policy_file": "POL-0088-a-wrapper-type-lives-at-the-layer-that-owns-its-precondition.md"
+  },
+  "POL-0089": {
+    "kind": "standard",
+    "topic": "build-and-tooling",
+    "statement": "Warnings are errors, and the set is fixed",
+    "attribution": [
+      {
+        "source": "cpp-convention/conventions.md",
+        "locator": "Tooling Commitments: warnings",
+        "upstream": []
+      }
+    ],
+    "policy_file": "POL-0089-warnings-are-errors.md"
+  },
+  "POL-0090": {
+    "kind": "standard",
+    "topic": "build-and-tooling",
+    "statement": "The tests run under sanitizers in at least one configuration",
+    "attribution": [
+      {
+        "source": "cpp-convention/conventions.md",
+        "locator": "Tooling Commitments: sanitizers",
+        "upstream": []
+      }
+    ],
+    "policy_file": "POL-0090-sanitizers-run-in-a-configuration.md"
+  },
+  "POL-0091": {
+    "kind": "standard",
+    "topic": "build-and-tooling",
+    "statement": "Static analysis runs a fixed set of check families",
+    "attribution": [
+      {
+        "source": "cpp-convention/conventions.md",
+        "locator": "Tooling Commitments: static analysis",
+        "upstream": []
+      }
+    ],
+    "policy_file": "POL-0091-static-analysis-check-set.md"
+  },
+  "POL-0092": {
+    "kind": "standard",
+    "topic": "build-and-tooling",
+    "statement": "Formatting is decided once per project and applied by the tool",
+    "attribution": [
+      {
+        "source": "cpp-convention/conventions.md",
+        "locator": "Tooling Commitments: formatting",
+        "upstream": []
+      }
+    ],
+    "policy_file": "POL-0092-formatting-is-decided-once.md"
+  },
+  "POL-0093": {
+    "kind": "standard",
+    "topic": "build-and-tooling",
+    "statement": "The language standard is declared once, in the build configuration",
+    "attribution": [
+      {
+        "source": "cpp-convention/conventions.md",
+        "locator": "Tooling Commitments: standard",
+        "upstream": []
+      },
+      {
+        "source": "cpp-convention/mechanisms.md",
+        "locator": "A project declares its standard once",
+        "upstream": []
+      }
+    ],
+    "policy_file": "POL-0093-the-standard-is-declared-once.md"
+  }
+}
