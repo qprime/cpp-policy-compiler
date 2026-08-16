@@ -12,6 +12,13 @@ the opposite approach: hold a curated corpus of engineering judgment, and
 compile it into project-specific guidance that sits in front of the model
 before it writes a line.
 
+The target is reasoning consistency, not style consistency: the whole
+codebase should read as the work of one opinionated senior engineer. Each
+policy resolves a decision — in this situation, we do this, because — so the
+model inherits the decision rather than making its own. Engineers express
+intent through this surface, and when generated code needs correcting, the
+durable fix is an amendment to the surface, not just to the file.
+
 ## How it's organized
 
 Three authored layers and one derived:
@@ -43,9 +50,10 @@ harness file.
 
 ## Status
 
-Early design. Source material is captured; the first policies have not yet
-been derived, and the compiler has not been written. The ontology above is
-settled; most structure beneath it is not.
+Corpus derived, compiler pending. Source material is captured, the 93-policy
+corpus is derived from it, and the projection topic list is settled in
+[docs/policies/TOPICS.md](docs/policies/TOPICS.md). The v1 projection
+compiler is the next milestone.
 
 ## License
 
