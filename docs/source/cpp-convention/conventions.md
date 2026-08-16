@@ -230,7 +230,7 @@ static std::optional<Tool> try_from(double diameter_mm, double rpm,
 
 ### Pattern: Params Struct
 
-`[CG I.23]` *Keep the number of function arguments low.* `[CG I.24]` *Avoid adjacent parameters that can be invoked by the same arguments in either order with different meaning.*
+Tier 1 #4 in its pattern form: argument lists stay short, and no two adjacent parameters may be swappable with a change of meaning and no diagnostic. `[CG I.23, I.24]`
 
 I.24 is the sharper of the two, and it is the reason this pattern is Tier 1. The defect is not the count — it is that the compiler cannot tell a correct call from a transposed one.
 
@@ -273,7 +273,7 @@ C++ has no keyword arguments, so a params struct with designated initializers is
 
 **Escape:** genuinely ordered mathematical arguments where the order is the convention and a reader would not expect otherwise — `lerp(a, b, t)`, `clamp(v, lo, hi)`, `atan2(y, x)`. These are not improved by a struct.
 
-**Related:** `[CG F.21]` *To return multiple "out" values, prefer returning a struct.* The same reasoning applies on the way out.
+**Related:** multiple outputs come back as a named struct, never through out-parameters — the same reasoning applies on the way out. `[CG F.21]`
 
 ### Pattern: Ownership Decision
 
@@ -292,7 +292,7 @@ Most code never reaches question two. A value member, a `std::vector<T>`, and a 
 
 ### Pattern: Rule of Zero
 
-`[CG C.20]` *If you can avoid defining default operations, do.*
+Define no special member functions unless the type's job demands them. `[CG C.20]`
 
 A type built out of values and standard containers needs no copy constructor, no assignment operator, and no destructor. The compiler-generated ones are correct, and every one you write by hand is a place to introduce a bug.
 
@@ -314,7 +314,7 @@ Move operations are `noexcept`. `[CG C.66]`
 
 ### Pattern: Immutability By Default
 
-`[CG Con.1]` *By default, make objects immutable.* `[CG P.10]` *Prefer immutable data to mutable data.*
+Data is immutable unless it has a stated reason not to be. `[CG Con.1]`, `[CG P.10]`
 
 This is the Python convention's frozen-dataclass discipline expressed in C++, and it is Tier 1 for the same reason: immutable data cannot be corrupted by a caller you did not think about.
 
@@ -350,7 +350,7 @@ Polygon inset(const ConvexPolygon& poly, double offset_mm);
 
 `inset`'s signature *proves* its precondition. A non-convex polygon cannot reach it without passing through `try_from`. Contrast the alternative, where `inset` either re-checks convexity on every call or trusts a comment.
 
-This is the structural case of [value type with invariant](#pattern-value-type-with-invariant), and it is how `[CG I.5]` *State preconditions* is satisfied without the GSL: the precondition is not stated, it is *enforced by the type*.
+This is the structural case of [value type with invariant](#pattern-value-type-with-invariant), and it is how the obligation `[CG I.5]` places on preconditions is met without the GSL: the precondition is not stated, it is *enforced by the type*.
 
 **Scalar preconditions do not get a wrapper.** A positive width belongs on the type that owns the width field. Reserve wrappers for structure.
 
@@ -407,7 +407,7 @@ Paths plan_pocket_spiral(...);
 
 ### Pattern: Free Function By Default
 
-`[CG C.4]` *Make a function a member only if it needs direct access to the representation of a class.*
+A function becomes a member only when it needs the representation. `[CG C.4]`
 
 A member function is part of a type's interface, and its interface should be as small as the invariant requires. Everything else is a free function in the same namespace. `[CG C.5]`
 
@@ -424,7 +424,7 @@ This keeps the class small enough to audit, lets algorithms be added without tou
 
 ### Pattern: Named Operation
 
-`[CG F.1]` *"Package" meaningful operations as carefully named functions.* `[CG F.2]` *A function should perform a single logical operation.* `[CG F.3]` *Keep functions short and simple.*
+An operation worth doing is worth a name; one function does one thing, and stays short. `[CG F.1, F.2, F.3]`
 
 A long function is usually several operations that have not been named. Naming them is not decomposition for its own sake — it is how the reader learns what the code does without simulating it.
 
@@ -513,7 +513,7 @@ A type supporting the full arithmetic of geometry correctly *is* a units library
 
 ### Decision: How To Pass A Parameter
 
-`[CG F.15]` *Prefer simple and conventional ways of passing information.* `[CG F.16]` *For "in" parameters, pass cheaply-copied types by value and others by reference to `const`.*
+Parameter passing is conventional, never clever — the table below is the whole decision. `[CG F.15, F.16]`
 
 | Pass by | When | Citation |
 |---------|------|----------|
@@ -529,7 +529,7 @@ Return a struct for multiple outputs. `[CG F.21]` Never return a reference or po
 
 ### Decision: Compile Time Or Runtime
 
-`[CG P.5]` *Prefer compile-time checking to run-time checking.*
+A check that can move to compile time does. `[CG P.5]`
 
 | Question | Mechanism |
 |----------|-----------|
@@ -649,7 +649,7 @@ If a module's concurrency model is not obvious from its API, state it in one or 
 
 `auto` hides the type. Use it where the type is obvious from the right-hand side or unspellable — `auto it = container.begin()`, `auto p = std::make_unique<Tool>(...)`, lambdas. Do not use it where the type is the load-bearing fact: `auto result = compute_thing();` tells the reader nothing.
 
-`[CG ES.11]` *Use `auto` to avoid redundant repetition of type names* — the rule is about redundancy, not about avoiding type names.
+`[CG ES.11]` licenses `auto` against *redundancy* — repeating a type the line already names — not against naming types.
 
 ### Trap: blanket noexcept
 
@@ -669,7 +669,7 @@ On C++20 an unconstrained template parameter is incomplete. `[CG T.10]`
 
 Catching to re-throw a different type at every layer produces noise that buries real handling.
 
-**Use** exceptions for genuinely exceptional conditions and translate exactly once — at the FFI boundary, into the host language's mechanism. `[CG E.17]` *Don't try to catch every exception in every function.* `[CG E.18]` *Minimize the use of explicit `try`/`catch`.*
+**Use** exceptions for genuinely exceptional conditions and translate exactly once — at the FFI boundary, into the host language's mechanism. Catching at every layer is exactly what `[CG E.17]` and `[CG E.18]` warn against.
 
 Exceptions as control flow are forbidden. `[CG E.3]`
 
@@ -818,7 +818,7 @@ Names are mandated machine-wide, not per project. The FFI rule requires names to
 | Namespaces | `snake_case`, nested by layer | `proj::algo` |
 | Files | `snake_case`, `.hpp` / `.cpp` | `plan_2d.cpp` |
 
-`[CG NL.8]` *Use a consistent naming style.* `[CG NL.10]` *Prefer `underscore_style` names.* `[CG NL.9]` *Use `ALL_CAPS` for macro names only.* `[CG NL.5]` *Avoid encoding type information in names.*
+The table is the machine-wide answer to `[CG NL.5, NL.8, NL.9, NL.10]`: one consistent style, underscore base, `ALL_CAPS` only ever a macro, and no type encoding in names.
 
 Do not relitigate this per project.
 
@@ -848,7 +848,7 @@ Same verb, same operation — in both languages, so names cross the FFI unchange
 | `find_*` | Optional or iterator |
 | `make_*` | Constructs a value |
 
-Prefer a name over a comment. `[CG NL.1]` *Don't say in comments what can be clearly stated in code.*
+Prefer a name over a comment — what code can state, a comment must not restate. `[CG NL.1]`
 
 ---
 
@@ -875,13 +875,13 @@ Every deliberate difference, with its reason. Nothing silent.
 
 | CG rule | Our position | Reason |
 |---------|-------------|--------|
-| `[CG I.6]` *Prefer `Expects()` for preconditions*, `[CG I.8]` *Prefer `Ensures()`* | Concept adopted, GSL dependency declined. Preconditions are made unrepresentable by a [wrapper type](#pattern-wrapper-type-for-preconditions) where structural, and `assert`ed otherwise. | A third-party dependency in an FFI kernel is not worth two macros. `std::span` — the GSL facility with real value — is in C++20. |
-| `[CG I.12]` *Declare a pointer that must not be null as `not_null`*, `[CG F.23]` | Documented and asserted rather than typed. | Same GSL reason. |
-| `[CG ES.107]` *Don't use `unsigned` for subscripts, prefer `gsl::index`* | Use a signed type for arithmetic per `[CG ES.102]`; no `gsl::index`. | Same GSL reason. |
+| `[CG I.6]`, `[CG I.8]` — GSL `Expects()`/`Ensures()` for pre- and postconditions | Concept adopted, GSL dependency declined. Preconditions are made unrepresentable by a [wrapper type](#pattern-wrapper-type-for-preconditions) where structural, and `assert`ed otherwise. | A third-party dependency in an FFI kernel is not worth two macros. `std::span` — the GSL facility with real value — is in C++20. |
+| `[CG I.12]`, `[CG F.23]` — `gsl::not_null` for never-null pointers | Documented and asserted rather than typed. | Same GSL reason. |
+| `[CG ES.107]` — `gsl::index` for subscripts | Use a signed type for arithmetic per `[CG ES.102]`; no `gsl::index`. | Same GSL reason. |
 | `[CG E.2]`, `[CG I.10]` — exceptions as the general failure mechanism | Exceptions are for genuinely exceptional conditions. Routine fallible operations return a result type. Exceptions are forbidden in real-time loops and never cross the FFI un-translated. | Latency determinism and the FFI seam. The CG assumes neither constraint. |
-| `[CG NL.10]` *Prefer `underscore_style`* — offered as a preference | Mandated machine-wide, along with `PascalCase` types and `kPascalCase` constants. | The FFI rule requires names to cross unchanged; that is unachievable if case is a per-project choice. |
-| `[CG SF.1]` *Use `.h` for interface files* | `.hpp` for C++ headers. | Distinguishes C++ headers from C headers at a glance in a mixed FFI tree. |
-| `[CG T.10]` *Specify concepts for all template arguments* | Tier 2, gated on C++20. | Concepts do not exist earlier; a `static_assert` carries the same information. |
+| `[CG NL.10]` — `underscore_style`, offered as a preference | Mandated machine-wide, along with `PascalCase` types and `kPascalCase` constants. | The FFI rule requires names to cross unchanged; that is unachievable if case is a per-project choice. |
+| `[CG SF.1]` — `.h` as the header extension | `.hpp` for C++ headers. | Distinguishes C++ headers from C headers at a glance in a mixed FFI tree. |
+| `[CG T.10]` — concepts on every template argument | Tier 2, gated on C++20. | Concepts do not exist earlier; a `static_assert` carries the same information. |
 
 Where this document is silent and the Core Guidelines are not, the Core Guidelines apply.
 

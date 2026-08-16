@@ -14,6 +14,12 @@ through the modern-cpp study KB on 2026-07-30, captured here 2026-07-31.
 **Alterations at capture:** organization identifiers stripped from title and
 scope lines. Content otherwise verbatim.
 
+**Alterations after capture:** 2026-08-16 — quoted Core Guidelines rule
+titles (~30, in conventions.md and mechanisms.md) restated in this corpus's
+own words. The upstream LICENSE permits copying for personal or internal
+business use only, and this repository is public; citations by identity
+remain, prose does not.
+
 **Not captured:** the matched Python convention (`python_guidelines.md`)
 referenced by the FFI sections — links to it are inert here.
 

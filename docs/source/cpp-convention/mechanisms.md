@@ -55,7 +55,7 @@ The C++11 form is not a lesser pattern — it is the same guarantee obtained fro
 
 **Anti-pattern in every standard:** a `std::string kind` field with optional payload members. That is a tagged union with no checking whatsoever. See [conventions.md — Trap: stringly-typed dispatch](conventions.md#trap-stringly-typed-dispatch).
 
-**`[CG C.181]`** *Avoid "naked" `union`s.* **`[CG C.182]`** *Use anonymous `union`s to implement tagged unions.*
+A bare `union` with no discriminant is forbidden in every standard; the checked, tagged form above is its replacement. `[CG C.181, C.182]`
 
 ---
 
@@ -75,7 +75,7 @@ The C++11 form is not a lesser pattern — it is the same guarantee obtained fro
 
 **Banned in every standard:** `std::auto_ptr` (removed in C++17, broken copy semantics in C++11 — never use it), owning raw pointers, `malloc`/`free` in C++ code, `new`/`delete` outside a resource-management function.
 
-**`[CG R.20]`** *Use `unique_ptr` to express exclusive ownership.* **`[CG R.21]`** *Prefer `unique_ptr` over `shared_ptr` unless you actually need to share ownership.* **`[CG R.3]`** *A raw pointer (a `T*`) is non-owning.* **`[CG R.11]`** *Avoid calling `new` and `delete` explicitly.*
+The table restates the smart-pointer division of labour: exclusive ownership spelled `unique_ptr`, sharing only when genuine, raw pointers never owning, `new`/`delete` never explicit. `[CG R.3, R.11, R.20, R.21]`
 
 ---
 
