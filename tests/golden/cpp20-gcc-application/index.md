@@ -147,9 +147,12 @@ to run it. Work moved into it is work that cannot be skipped.
 - [Handling failure](handling-failure.md) — choosing what happens when an operation cannot do what it was asked.
 - [Placing validation](placing-validation.md) — deciding where a check lives — boundaries validate, internals trust.
 - [Structuring modules and layers](structuring-modules-and-layers.md) — laying out headers, includes, namespaces, dependency direction, or a threading model.
-- [Naming](naming.md) — naming anything — case, operation verbs, return-contract prefixes, unit suffixes.
+- [Naming](naming.md) — naming anything — case, operation verbs, return-contract prefixes, unit suffixes — and deciding whether to write a comment.
 - [Crossing the FFI boundary](crossing-the-ffi-boundary.md) — writing or touching the binding layer — names, validation, errors, absence, units, ownership, shared schemas.
 - [Writing tests](writing-tests.md) — writing or reviewing tests — what to test, what not to, goldens, round-trips, the framework.
 - [Logging](logging.md) — emitting diagnostics from library or application code.
 - [Coroutines](coroutines.md) — writing coroutines — lifetimes across suspension, captures, awaitables, deep chains. Vacuous below C++20.
+- [Writing an expression](writing-an-expression.md) — writing the line itself — casts, arithmetic and signedness, which standard-library facility to reach for, how text gets formatted.
+- [Iterating a sequence](iterating-a-sequence.md) — walking a container — whether a loop is the right shape at all, how the element is bound, what may not change while iterating.
+- [Running concurrently](running-concurrently.md) — a threading model exists and shared state has to be reached from more than one thread.
 - [Build and tooling](build-and-tooling.md) — setting up or changing a project's build — warnings, sanitizers, static analysis, formatting, the standard declaration.

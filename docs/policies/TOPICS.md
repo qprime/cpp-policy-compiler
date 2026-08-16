@@ -10,8 +10,8 @@ Principles (POL-0001 through POL-0008) belong to no topic. They are Tier 1
 content.
 
 Membership is single. A policy that matters in a second situation gets a
-one-line cross-reference there, never a second entry, because an entry spends
-the topical document's size budget and a cross-reference barely does. The
+one-line cross-reference there, never a second entry, because two entries are
+two places to edit and a reader cannot tell which one is canonical. The
 compiler treats a policy in two topics as a build error.
 
 ## Topics
@@ -22,7 +22,7 @@ Read when: deciding what type holds a piece of data — alternatives, absence,
 aggregates, inheritance, whether a thing becomes a type at all.
 
 POL-0009, POL-0013, POL-0033, POL-0034, POL-0037, POL-0038, POL-0042,
-POL-0043, POL-0044
+POL-0043, POL-0044, POL-0103, POL-0104
 
 ### Building a class
 
@@ -53,7 +53,7 @@ Cross-reference: POL-0017 (unit suffixes, homed in Naming).
 Read when: declaring anything — `const`, named constants, initialization,
 determinism.
 
-POL-0010, POL-0019, POL-0020, POL-0026
+POL-0010, POL-0019, POL-0020, POL-0026, POL-0096, POL-0097
 
 ### Handling failure
 
@@ -79,9 +79,9 @@ POL-0018, POL-0028, POL-0049, POL-0087, POL-0088
 ### Naming
 
 Read when: naming anything — case, operation verbs, return-contract prefixes,
-unit suffixes.
+unit suffixes — and deciding whether to write a comment.
 
-POL-0017, POL-0084, POL-0085, POL-0086
+POL-0017, POL-0084, POL-0085, POL-0086, POL-0112, POL-0113
 
 ### Crossing the FFI boundary
 
@@ -119,6 +119,30 @@ awaitables, deep chains. Vacuous below C++20.
 
 POL-0080, POL-0081, POL-0082, POL-0083
 
+### Writing an expression
+
+Read when: writing the line itself — casts, arithmetic and signedness, which
+standard-library facility to reach for, how text gets formatted.
+
+POL-0094, POL-0095, POL-0101, POL-0102, POL-0109, POL-0110, POL-0111
+
+### Iterating a sequence
+
+Read when: walking a container — whether a loop is the right shape at all, how
+the element is bound, what may not change while iterating.
+
+POL-0098, POL-0099, POL-0100
+
+### Running concurrently
+
+Read when: a threading model exists and shared state has to be reached from
+more than one thread.
+
+POL-0105, POL-0106, POL-0107, POL-0108
+
+Cross-reference: POL-0049 (whether a threading model is warranted at all,
+homed in Structuring modules and layers).
+
 ### Build and tooling
 
 Read when: setting up or changing a project's build — warnings, sanitizers,
@@ -130,9 +154,10 @@ POL-0089, POL-0090, POL-0091, POL-0092, POL-0093
 
 Recorded at ratification, 2026-08-15:
 
-- Large topics stay whole until budget numbers exist. Writing a function (12
-  entries) and the two type topics are not pre-split; the split-into-third-
-  level mechanism already covers the case where a real budget forces it.
+- Large topics stay whole. Writing a function (12 entries) and the two type
+  topics are not pre-split; a topic that stops answering one question splits
+  into two topics here, which is an edit to this file rather than a compiler
+  feature.
 - POL-0019 homes with Everyday declarations, beside its nearest neighbours
   (initialize at declaration, `const` forces it), not with the tooling that
   merely catches violations of it.

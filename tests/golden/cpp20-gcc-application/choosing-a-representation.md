@@ -271,3 +271,53 @@ protect nothing. They add a file's worth of code between the reader and the
 data, and they cost the aggregate initialization that would otherwise make a
 construction site self-describing (POL-0023). Encapsulation is bought to protect
 an invariant, so where there is no invariant the purchase is all cost.
+
+## MUST — Every enumeration is an `enum class`
+
+POL-0103 · CG Enum.1, CG Enum.3
+
+```cpp
+// Never. Converts to int, so it compares equal to an unrelated enumeration.
+enum CompactMode { Full, Incremental };
+
+// Right.
+enum class CompactMode { Full, Incremental };
+```
+
+An unscoped `enum` is permitted only to match a C API, for the reason POL-0046
+permits a pointer-and-length pair at the same boundary: the foreign declaration
+dictates the shape.
+
+A macro or an integer constant where an enumeration belongs is the same defect
+with less syntax. Both give up the distinct type, and with it the exhaustive
+dispatch POL-0033 depends on.
+
+An unscoped enumerator converts implicitly to `int`, so it can be passed where
+a number is expected, compared against a different enumeration, and used in
+arithmetic, all without a diagnostic. The enumeration then documents a closed
+set that the type system is not enforcing, which is the gap POL-0043 names for
+strings. `enum class` makes the set closed in the compiler rather than in the
+reader's memory (POL-0008).
+
+## SHOULD — An underlying type or an explicit enumerator value appears only when it is the contract
+
+POL-0104 · CG Enum.7, CG Enum.8
+
+```cpp
+// Prefer. Nothing is claimed about representation.
+enum class CompactMode { Full, Incremental };
+
+// State both when the numbers cross a boundary and must not move.
+enum class WireOpcode : std::uint8_t { Rapid = 0x01, Cut = 0x02, Dwell = 0x03 };
+```
+
+The contract cases are serialization, an FFI crossing (POL-0063), and a fixed
+width a device or protocol requires. Absent one of those, the default
+underlying type is correct and no enumerator carries a number.
+
+A stated underlying type reads as a claim that the representation matters, and
+a reader who finds one will preserve it through changes that did not need it.
+Explicit values invite a gap or a duplicate, and a duplicate is the worse
+failure: two enumerators that compare equal make a `switch` over them
+unreachable in one arm, which defeats the exhaustiveness POL-0033 relies on
+without producing a diagnostic.

@@ -107,3 +107,58 @@ cases where the claim is wrong are the cases that fail to build. The order also
 changes what the reader learns from a non-`const` local: it means *this
 changes*, and that signal only carries information if the alternative was the
 default.
+
+## MUST — Every variable is initialized at its declaration, with braces
+
+POL-0096 · CG ES.20, CG ES.23
+
+```cpp
+// Never. Indeterminate between the two lines, and reading it there is UB.
+int retries;
+retries = policy.retries;
+
+// Right. Braces also reject the narrowing conversion.
+const int retries{policy.retries};
+const double ratio{0.75};
+```
+
+Braces are the default because they refuse narrowing: `int n{3.7}` fails to
+build where `int n(3.7)` silently truncates.
+
+Use parentheses where braces would select a `std::initializer_list`
+constructor you did not want. `std::vector<int> v{10}` holds one element and
+`std::vector<int> v(10)` holds ten, which is the one case where the brace
+default is a trap rather than a guard.
+
+A variable declared without a value has a window in which it holds whatever was
+on the stack, and reading it is undefined behaviour rather than a wrong value.
+No warning catches it reliably, because the compiler cannot see across the
+branch that was supposed to assign it. Initializing at the declaration removes
+the window rather than narrowing it, and it forces the value's origin to be
+visible on the line that introduces the name (POL-0026).
+
+## SHOULD — A variable is declared where it is first used
+
+POL-0097 · CG ES.21, CG ES.22
+
+```cpp
+// Avoid. Three names live and meaningless for most of the function.
+Plan plan;
+double total;
+std::string label;
+// ... forty lines that do not touch them ...
+
+// Prefer.
+const auto plan = build_plan(input);
+const auto total = plan.total_mm();
+```
+
+Where a value must outlive a branch that computes it, prefer an immediately
+invoked helper or a function that returns it over declaring it early and
+assigning it later, so it can still be `const` (POL-0020).
+
+A variable declared before it means anything has a region of the function in
+which it is live and carries nothing. That region is where a stale read
+happens, and it grows every time the function does. Declaring at first use
+makes the scope match the meaning, which is also what lets the declaration be
+`const` and what makes an unused value visible rather than merely inert.

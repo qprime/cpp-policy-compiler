@@ -1,6 +1,6 @@
 cpp20-gcc-application › Naming
 
-Read when: naming anything — case, operation verbs, return-contract prefixes, unit suffixes.
+Read when: naming anything — case, operation verbs, return-contract prefixes, unit suffixes — and deciding whether to write a comment.
 
 ## MUST — Dimensioned values carry their unit in the name
 
@@ -114,3 +114,58 @@ optional and a `get_` that cannot fail need different handling at every call, so
 encoding the difference in the prefix means the handling is chosen while writing
 rather than after a compile error. The rule earns most where the return type is
 elided (POL-0050): with `auto` on the left, the prefix is all the reader has.
+
+## MUST — A comment states what the code cannot
+
+POL-0112 · CG NL.1
+
+```cpp
+// Right: an identity the reader cannot derive from the expression.
+// Shoelace formula; sign of the result gives the winding direction.
+const auto area2 = cross(a, b) + cross(b, c) + cross(c, a);
+
+// Right: a load-bearing assumption the types do not carry.
+// Caller holds scan_mutex_; this runs inside the scan window.
+void append_trace(const Fault& f);
+```
+
+The three cases are a non-obvious identity or derivation, an assumption the
+code depends on and the types do not express, and the reason for a choice that
+otherwise reads as arbitrary.
+
+No docstring block on every function, and no running prose narrating the next
+few lines. Volume trains the reader to skip comments, which costs the few that
+carry something.
+
+Everything else the name carries instead, which is POL-0006 applied to the
+comment case. A comment is the fallback for what naming cannot reach, so its
+value depends entirely on being rare: a reader who has learned that comments
+here are load-bearing will read them, and a reader who has learned they restate
+the code will skip the one that mattered.
+
+## NEVER — Never write a comment that restates the code
+
+POL-0113 · CG NL.2
+
+```cpp
+// Never.
+// Increment the retry count.
+++retries;
+
+// Never. The signature already says all of this.
+/// @brief Gets the diameter.
+/// @return The diameter.
+double diameter_mm() const;
+```
+
+Delete it. Where the line genuinely needs explaining, the explanation is a
+name or a function (POL-0030), not a sentence above it.
+
+A restating comment doubles the edit surface for no information, and the two
+copies drift on the first change that touches one of them. What remains is a
+false statement sitting immediately beside a true one, with nothing marking
+which is which — and the comment is what a reader in a hurry reads.
+
+Generated docstring blocks are the same defect at scale. They pass any
+documentation-coverage check while telling the reader nothing the declaration
+did not already say (POL-0112).

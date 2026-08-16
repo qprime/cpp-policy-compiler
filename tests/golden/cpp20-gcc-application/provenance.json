@@ -1498,5 +1498,328 @@
       }
     ],
     "policy_file": "POL-0093-the-standard-is-declared-once.md"
+  },
+  "POL-0094": {
+    "kind": "standard",
+    "topic": "writing-an-expression",
+    "statement": "A cast is named, and the named cast is nearly always `static_cast`",
+    "attribution": [
+      {
+        "source": "standard-practice",
+        "locator": "casts",
+        "upstream": [
+          "CG ES.48",
+          "CG ES.49",
+          "CG Type.1"
+        ]
+      }
+    ],
+    "policy_file": "POL-0094-casts-are-named.md"
+  },
+  "POL-0095": {
+    "kind": "anti-pattern",
+    "topic": "writing-an-expression",
+    "statement": "Never cast away const, and never reinterpret an object's bytes through a pointer",
+    "attribution": [
+      {
+        "source": "standard-practice",
+        "locator": "casts, undefined behaviour",
+        "upstream": [
+          "CG ES.50",
+          "CG Type.1"
+        ]
+      }
+    ],
+    "policy_file": "POL-0095-never-cast-away-a-guarantee.md"
+  },
+  "POL-0096": {
+    "kind": "standard",
+    "topic": "everyday-declarations",
+    "statement": "Every variable is initialized at its declaration, with braces",
+    "attribution": [
+      {
+        "source": "standard-practice",
+        "locator": "initialization",
+        "upstream": [
+          "CG ES.20",
+          "CG ES.23"
+        ]
+      }
+    ],
+    "policy_file": "POL-0096-initialize-at-declaration.md"
+  },
+  "POL-0097": {
+    "kind": "guideline",
+    "topic": "everyday-declarations",
+    "statement": "A variable is declared where it is first used",
+    "attribution": [
+      {
+        "source": "standard-practice",
+        "locator": "declaration scope",
+        "upstream": [
+          "CG ES.21",
+          "CG ES.22"
+        ]
+      }
+    ],
+    "policy_file": "POL-0097-declare-at-first-use.md"
+  },
+  "POL-0098": {
+    "kind": "standard",
+    "topic": "iterating-a-sequence",
+    "statement": "Prefer a named standard algorithm to a hand-written loop",
+    "attribution": [
+      {
+        "source": "standard-practice",
+        "locator": "iteration",
+        "upstream": [
+          "CG ES.71",
+          "CG SL.con.1"
+        ]
+      }
+    ],
+    "policy_file": "POL-0098-prefer-a-named-algorithm.md"
+  },
+  "POL-0099": {
+    "kind": "standard",
+    "topic": "iterating-a-sequence",
+    "statement": "A range-`for` binds `const auto&` to read and `auto&` to modify",
+    "attribution": [
+      {
+        "source": "standard-practice",
+        "locator": "iteration, range-for binding",
+        "upstream": [
+          "CG ES.71"
+        ]
+      }
+    ],
+    "policy_file": "POL-0099-range-for-binding-states-intent.md"
+  },
+  "POL-0100": {
+    "kind": "anti-pattern",
+    "topic": "iterating-a-sequence",
+    "statement": "Never insert into or erase from a container while iterating it",
+    "attribution": [
+      {
+        "source": "standard-practice",
+        "locator": "iteration, iterator invalidation",
+        "upstream": [
+          "CG ES.83"
+        ]
+      }
+    ],
+    "policy_file": "POL-0100-never-mutate-while-iterating.md"
+  },
+  "POL-0101": {
+    "kind": "standard",
+    "topic": "writing-an-expression",
+    "statement": "Arithmetic is done in a signed type",
+    "attribution": [
+      {
+        "source": "standard-practice",
+        "locator": "arithmetic",
+        "upstream": [
+          "CG ES.102",
+          "CG ES.103",
+          "CG ES.106"
+        ]
+      }
+    ],
+    "policy_file": "POL-0101-arithmetic-is-signed.md"
+  },
+  "POL-0102": {
+    "kind": "anti-pattern",
+    "topic": "writing-an-expression",
+    "statement": "Never compare a signed value with an unsigned one",
+    "attribution": [
+      {
+        "source": "standard-practice",
+        "locator": "arithmetic, mixed comparison",
+        "upstream": [
+          "CG ES.100"
+        ]
+      }
+    ],
+    "policy_file": "POL-0102-never-compare-across-signedness.md"
+  },
+  "POL-0103": {
+    "kind": "standard",
+    "topic": "choosing-a-representation",
+    "statement": "Every enumeration is an `enum class`",
+    "attribution": [
+      {
+        "source": "standard-practice",
+        "locator": "enumerations",
+        "upstream": [
+          "CG Enum.1",
+          "CG Enum.3"
+        ]
+      }
+    ],
+    "policy_file": "POL-0103-every-enumeration-is-an-enum-class.md"
+  },
+  "POL-0104": {
+    "kind": "guideline",
+    "topic": "choosing-a-representation",
+    "statement": "An underlying type or an explicit enumerator value appears only when it is the contract",
+    "attribution": [
+      {
+        "source": "standard-practice",
+        "locator": "enumerations, underlying type and values",
+        "upstream": [
+          "CG Enum.7",
+          "CG Enum.8"
+        ]
+      }
+    ],
+    "policy_file": "POL-0104-enumerator-values-are-stated-only-when-they-are-the-contract.md"
+  },
+  "POL-0105": {
+    "kind": "pattern",
+    "topic": "running-concurrently",
+    "statement": "Concurrency mechanism",
+    "attribution": [
+      {
+        "source": "cpp-convention/mechanisms.md",
+        "locator": "§10 Concurrency",
+        "upstream": []
+      },
+      {
+        "source": "standard-practice",
+        "locator": "concurrency mechanism selection",
+        "upstream": [
+          "CG CP.110"
+        ]
+      }
+    ],
+    "policy_file": "POL-0105-concurrency-mechanism.md"
+  },
+  "POL-0106": {
+    "kind": "standard",
+    "topic": "running-concurrently",
+    "statement": "A mutex is locked by a scoped lock, never by hand",
+    "attribution": [
+      {
+        "source": "standard-practice",
+        "locator": "concurrency, lock ownership",
+        "upstream": [
+          "CG CP.20",
+          "CG CP.21"
+        ]
+      }
+    ],
+    "policy_file": "POL-0106-a-lock-is-always-scoped.md"
+  },
+  "POL-0107": {
+    "kind": "anti-pattern",
+    "topic": "running-concurrently",
+    "statement": "Never improvise synchronisation out of `volatile`, a flag, or a sleep",
+    "attribution": [
+      {
+        "source": "cpp-convention/mechanisms.md",
+        "locator": "§10 Concurrency, forbidden in every standard",
+        "upstream": []
+      },
+      {
+        "source": "standard-practice",
+        "locator": "concurrency, improvised synchronisation",
+        "upstream": [
+          "CG CP.8"
+        ]
+      }
+    ],
+    "policy_file": "POL-0107-never-improvise-synchronisation.md"
+  },
+  "POL-0108": {
+    "kind": "anti-pattern",
+    "topic": "running-concurrently",
+    "statement": "Never keep thread-local global state",
+    "attribution": [
+      {
+        "source": "cpp-convention/mechanisms.md",
+        "locator": "§10 Concurrency, forbidden in every standard",
+        "upstream": []
+      }
+    ],
+    "policy_file": "POL-0108-never-thread-local-globals.md"
+  },
+  "POL-0109": {
+    "kind": "guideline",
+    "topic": "writing-an-expression",
+    "statement": "Reach for the standard library before writing the facility yourself",
+    "attribution": [
+      {
+        "source": "standard-practice",
+        "locator": "standard library",
+        "upstream": [
+          "CG SL.1",
+          "CG SL.2"
+        ]
+      }
+    ],
+    "policy_file": "POL-0109-reach-for-the-standard-library-first.md"
+  },
+  "POL-0110": {
+    "kind": "anti-pattern",
+    "topic": "writing-an-expression",
+    "statement": "Never use a facility a later standard superseded",
+    "attribution": [
+      {
+        "source": "cpp-convention/mechanisms.md",
+        "locator": "§13 Standard-specific bans",
+        "upstream": []
+      },
+      {
+        "source": "standard-practice",
+        "locator": "standard library, superseded facilities",
+        "upstream": [
+          "CG SL.io.50"
+        ]
+      }
+    ],
+    "policy_file": "POL-0110-never-use-a-superseded-facility.md"
+  },
+  "POL-0111": {
+    "kind": "standard",
+    "topic": "writing-an-expression",
+    "statement": "Text is formatted by a format call, not assembled on a stream",
+    "attribution": [
+      {
+        "source": "cpp-convention/mechanisms.md",
+        "locator": "§11 Strings and formatting",
+        "upstream": []
+      }
+    ],
+    "policy_file": "POL-0111-text-is-formatted-not-streamed.md"
+  },
+  "POL-0112": {
+    "kind": "standard",
+    "topic": "naming",
+    "statement": "A comment states what the code cannot",
+    "attribution": [
+      {
+        "source": "standard-practice",
+        "locator": "comments",
+        "upstream": [
+          "CG NL.1"
+        ]
+      }
+    ],
+    "policy_file": "POL-0112-a-comment-states-what-the-code-cannot.md"
+  },
+  "POL-0113": {
+    "kind": "anti-pattern",
+    "topic": "naming",
+    "statement": "Never write a comment that restates the code",
+    "attribution": [
+      {
+        "source": "standard-practice",
+        "locator": "comments, restatement",
+        "upstream": [
+          "CG NL.2"
+        ]
+      }
+    ],
+    "policy_file": "POL-0113-never-restate-the-code-in-a-comment.md"
   }
 }

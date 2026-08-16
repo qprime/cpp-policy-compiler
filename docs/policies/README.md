@@ -10,14 +10,9 @@ Every policy carries three parts:
 - **Attribution** — the source it derives from; nothing enters unattributed
 - **Applicability** — marks constrain out; absence means universal
 
-Content is not only prose. A policy with a mechanical expression carries it
-as an **enforcement facet** — clang-tidy checks, warning flags, format keys —
-authored alongside the prose, never synthesized at compile time
-([#1](https://github.com/qprime/cpp-policy-compiler/issues/1)). A pattern's
-content may additionally take whole-file form: a compilable **skeleton**
-exemplar, verified at projection build time
-([#2](https://github.com/qprime/cpp-policy-compiler/issues/2)). Both are
-renderings of the same decision identity as the prose.
+Content carries the code that shows the guidance, not prose alone. A rule
+stated without an example is a rule the reader has to imagine, and the reader
+here is a pattern-matcher.
 
 The format below was derived from the first thirteen policies rather than
 designed ahead of them. Every key exists because some policy could not be
@@ -52,14 +47,13 @@ already written. The slug in the filename is a human convenience; frontmatter
 | `kind` | required | One of `principle`, `standard`, `guideline`, `pattern`, `anti-pattern`. |
 | `precedence` | principles only | Integer position in the total order; earlier beats later. Contiguous from 1. Appears on no other kind. |
 | `applicability` | optional | Axis marks that constrain the policy out. Absent entirely means universal. |
-| `attribution` | required | A list, never empty. Each entry carries `source` (path under `docs/source/`) and `locator` (where in that source), plus optional `upstream` (external citations by identity, e.g. Core Guidelines rule ids). One entry per distinct location, never merged. An entry with no `upstream` means the rule originates in this corpus. |
+| `attribution` | required | A list, never empty. Each entry carries `source` and `locator`, plus optional `upstream` (external citations by identity, e.g. Core Guidelines rule ids). `source` is either a path under `docs/source/` with `locator` naming the place in it, or the literal `standard-practice` for a rule that is settled C++ practice rather than a position this corpus took, with `locator` naming the area. One entry per distinct location, never merged. An entry with no `upstream` means the rule originates in this corpus. |
 | `replacement` | anti-patterns only | List of ids where the replacement guidance lives. Every entry resolves to an existing policy. |
-| `enforcement` | optional | Mechanical expressions of the policy, keyed by tool. Present only where one exists. Keys in use: `clang_tidy`, `warnings`, `sanitizers`, `clang_format`. A key's value takes whatever shape that tool's configuration takes — a list of checks or flags, a mapping of settings. |
 
 Body is markdown, in three parts and in that order: the H1 carries the
 statement, the next block carries the decision procedure a reader applies, and
-the rationale comes last. Position ranks importance for a reader working under a
-size budget, so a body that builds to its point inverts its own priority. There
+the rationale comes last. Position ranks importance for a reader who may stop
+early, so a body that builds to its point inverts its own priority. There
 is no `title` key, because the H1 is the title and duplicating it invites drift.
 
 ```yaml
@@ -72,8 +66,6 @@ attribution:
     upstream: ["CG ES.45"]
   - source: cpp-convention/conventions.md
     locator: "Trap: magic number"
-enforcement:
-  clang_tidy: ["readability-magic-numbers"]
 ---
 ```
 
@@ -94,23 +86,22 @@ checks them.
 
 ### Not in the format yet
 
-- `skeleton`, a pattern's whole-file exemplar form. Eleven pattern policies now
-  exist and none of them forced the field: each is expressible as prose plus a
-  fragment, and a compilable whole-file exemplar is a build artifact with a
-  verification step behind it. That is
-  [#2](https://github.com/qprime/cpp-policy-compiler/issues/2) phase 2, and the
-  field's shape follows from what the verification needs.
+- `skeleton`, a pattern's whole-file exemplar form. The eleven pattern policies
+  each carry a fragment, which shows the shape of a construct but not the shape
+  of a file — header discipline, namespace, ordering. Adding the field waits on
+  authoring the first exemplar, because the field's shape follows from what a
+  whole file turns out to need.
 - `applicability` marks on the language-version and compiler axes. Version
   differences are content the projection selects among, not gates, so no policy
   yet needs one. When one does, it is the same key with a different axis name.
 
   The coroutine policies (POL-0080 through POL-0083) are the first case that
   presses on this. Their subject does not exist below C++20, so they are not
-  wrong on a C++11 project, they are vacuous — and a vacuous entry still spends
-  a projection's size budget. Whether *nothing to apply to* is a gate or content
-  is undecided, and deciding it changes the format rather than any policy.
+  wrong on a C++11 project, they are vacuous, and a vacuous entry is one more
+  thing a reader has to rule out. Whether *nothing to apply to* is a gate or
+  content is undecided, and deciding it changes the format rather than any
+  policy.
 
-**Next:** put the projection in front of a real consuming project. The next
-compiler target is the enforcement bundle
-([#1](https://github.com/qprime/cpp-policy-compiler/issues/1)), derived from
-the enforcement facets this format already carries.
+**Next:** derive the captured testimony
+([../source/testimony/](../source/testimony/)). Its lambda and `auto` rules are
+cited by no policy, so a whole body of captured source has produced nothing.
