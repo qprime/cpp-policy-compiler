@@ -24,8 +24,8 @@ designed ahead of them. Every key exists because some policy could not be
 expressed without it, and nothing appears that no policy needed. Deriving the
 rest of the captured corpus took the count to ninety-three and added no key,
 which is the evidence the format was read off real policies rather than
-guessed. The projection topic list is a separate question, still open, and now
-answerable: there is enough content for topics to emerge from.
+guessed. The projection topic list was then derived from the full corpus and
+lives in [TOPICS.md](TOPICS.md).
 
 ## On-disk format
 
@@ -110,5 +110,5 @@ checks them.
   a projection's size budget. Whether *nothing to apply to* is a gate or content
   is undecided, and deciding it changes the format rather than any policy.
 
-**Next:** settle the projection topic list, now that there is a corpus to derive
-it from.
+**Next:** /spec the v1 compiler. The topic list it renders is settled in
+[TOPICS.md](TOPICS.md).
