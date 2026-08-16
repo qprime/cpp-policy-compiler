@@ -7,8 +7,6 @@ attribution:
     upstream: ["CG ES.45"]
   - source: cpp-convention/conventions.md
     locator: "Trap: magic number"
-enforcement:
-  clang_tidy: ["readability-magic-numbers"]
 ---
 
 # No magic constants

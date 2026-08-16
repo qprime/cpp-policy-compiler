@@ -9,8 +9,6 @@ attribution:
     locator: "Divergences: CG NL.10"
   - source: cpp-convention/conventions.md
     locator: "Divergences: CG SF.1"
-enforcement:
-  clang_tidy: ["readability-identifier-naming"]
 ---
 
 # Naming case is fixed, not a per-project choice

@@ -33,7 +33,6 @@ class Policy:
     precedence: int | None = None
     applicability: dict[str, tuple[str, ...]] = field(default_factory=dict)
     replacement: tuple[str, ...] = ()
-    enforcement: dict[str, object] = field(default_factory=dict)
 
 
 @dataclass(frozen=True)

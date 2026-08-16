@@ -4,8 +4,6 @@ kind: standard
 attribution:
   - source: cpp-convention/conventions.md
     locator: "Tooling Commitments: sanitizers"
-enforcement:
-  sanitizers: ["undefined", "address"]
 ---
 
 # The tests run under sanitizers in at least one configuration

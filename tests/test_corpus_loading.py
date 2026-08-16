@@ -16,7 +16,6 @@ class TestCorpusLoading:
                 {"source": "testimony/notes.md", "locator": "L1", "upstream": ["CG A.1"]}
             ],
             applicability={"domain": ["realtime"]},
-            enforcement={"clang_tidy": ["check-a"]},
         )
         [policy] = load_corpus(ws.policies)
         assert policy.id == "POL-0001"
@@ -28,7 +27,6 @@ class TestCorpusLoading:
         )
         assert policy.applicability == {"domain": ("realtime",)}
         assert policy.replacement == ()
-        assert policy.enforcement == {"clang_tidy": ["check-a"]}
 
     def test_reports_all_malformed_files_not_just_first(self, ws):
         (ws.policies / "POL-0001-bad.md").write_text("no frontmatter here\n")

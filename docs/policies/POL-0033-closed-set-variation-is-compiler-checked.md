@@ -9,8 +9,6 @@ attribution:
   - source: cpp-convention/mechanisms.md
     locator: "§2 Closed-set variation"
     upstream: ["CG C.181", "CG C.182"]
-enforcement:
-  warnings: ["-Werror=switch"]
 ---
 
 # Closed-set variation is compiler-checked for exhaustiveness

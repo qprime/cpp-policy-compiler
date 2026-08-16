@@ -13,7 +13,6 @@ POLICY_KEYS = {
     "applicability",
     "attribution",
     "replacement",
-    "enforcement",
 }
 ATTRIBUTION_KEYS = {"source", "locator", "upstream"}
 
@@ -129,11 +128,6 @@ def _parse_policy(path: Path) -> Policy:
         if "replacement" in frontmatter
         else ()
     )
-    enforcement = frontmatter.get("enforcement", {})
-    if not isinstance(enforcement, dict):
-        errors.append(f"{path.name}: 'enforcement' must be a mapping keyed by tool")
-        enforcement = {}
-
     try:
         statement, body = _split_statement(markdown, path.name)
     except PolcError as exc:
@@ -152,7 +146,6 @@ def _parse_policy(path: Path) -> Policy:
         precedence=precedence,
         applicability=applicability,
         replacement=replacement,
-        enforcement=dict(enforcement),
     )
 
 

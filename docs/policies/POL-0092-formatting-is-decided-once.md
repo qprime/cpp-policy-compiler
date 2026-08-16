@@ -4,11 +4,6 @@ kind: standard
 attribution:
   - source: cpp-convention/conventions.md
     locator: "Tooling Commitments: formatting"
-enforcement:
-  clang_format:
-    BasedOnStyle: Google
-    IndentWidth: 4
-    ColumnLimit: 100
 ---
 
 # Formatting is decided once per project and applied by the tool

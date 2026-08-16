@@ -4,8 +4,6 @@ kind: standard
 attribution:
   - source: cpp-convention/conventions.md
     locator: "Tooling Commitments: static analysis"
-enforcement:
-  clang_tidy: ["bugprone-*", "cert-*", "cppcoreguidelines-*", "performance-*", "readability-*"]
 ---
 
 # Static analysis runs a fixed set of check families

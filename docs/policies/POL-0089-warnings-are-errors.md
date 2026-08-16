@@ -4,8 +4,6 @@ kind: standard
 attribution:
   - source: cpp-convention/conventions.md
     locator: "Tooling Commitments: warnings"
-enforcement:
-  warnings: ["-Wall", "-Wextra", "-Wpedantic", "-Wconversion", "-Wsign-conversion", "-Werror"]
 ---
 
 # Warnings are errors, and the set is fixed
