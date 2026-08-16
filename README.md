@@ -33,8 +33,7 @@ Three authored layers and one derived:
   per-project facts on three axes: language version, compiler, domain.
 - **Projections** — the compiled output: the policy body as seen through one
   configuration, rendered as a small always-loaded entry document plus topical
-  documents under hard size budgets. Never authored, never edited, always
-  regenerable.
+  documents. Never authored, never edited, always regenerable.
 
 A project consumes its projection by reference from its own harness files.
 This tool never generates CLAUDE.md, AGENTS.md, or any other top-level
@@ -54,8 +53,7 @@ Corpus derived, compiler built. Source material is captured, the 93-policy
 corpus is derived from it, and the projection topic list is settled in
 [docs/policies/TOPICS.md](docs/policies/TOPICS.md). The v1 compiler (`polc`)
 validates the corpus and projects it through the first configuration,
-[docs/configurations/cpp20-gcc-application.md](docs/configurations/cpp20-gcc-application.md),
-with every document under budget.
+[docs/configurations/cpp20-gcc-application.md](docs/configurations/cpp20-gcc-application.md).
 
 ## License
 

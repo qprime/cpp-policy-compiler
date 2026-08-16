@@ -39,16 +39,14 @@ decided yet.
   below a version, at which point the compiler axis value grows a version.
 - **Projections** — the derived output: the body of policy as seen through
   one configuration. Never authored, never edited, always regenerable. Does
-  not live under `docs/`. Shape: two tiers, breadcrumbed 2–3 levels deep.
-  Tier 1 is a single always-loaded entry document with a hard size budget,
-  containing only the principles and a map of topical documents ("when to
-  read what"). Tier 2 is topical documents partitioned by task situation,
-  never by policy kind — kind renders as a per-entry marking (must /
-  should / this-way / never), and anti-patterns sit adjacent to their
-  replacements. A topical doc that outgrows its budget splits into a third
-  level, its parent becoming a mini-map. Attribution renders as a compact
-  per-entry reference; full provenance lives in a sidecar. Size budgets are
-  build constraints — an overflowing projection fails the build.
+  not live under `docs/`. Shape: two tiers. Tier 1 is a single
+  always-loaded entry document containing only the principles and a map of
+  topical documents ("when to read what"). Tier 2 is topical documents
+  partitioned by task situation, never by policy kind — kind renders as a
+  per-entry marking (must / should / this-way / never), and anti-patterns
+  sit adjacent to their replacements. Attribution renders as a compact
+  per-entry reference; full provenance lives in a sidecar. The build reports
+  each document's size and constrains none of them.
 
 ## Settled Decisions
 
@@ -56,8 +54,7 @@ decided yet.
   at authoring time only.
 - The tool is written in Python. The guidance it produces targets C++.
 - Outputs are self-contained guidance documents consumed by reference from a
-  project's own harness, plus enforcement configs derived from the same policy
-  identities. This project never generates CLAUDE.md, AGENTS.md,
+  project's own harness. This project never generates CLAUDE.md, AGENTS.md,
   or any other top-level harness file.
 - Every piece of generated guidance is traceable to a stable decision identity
   and its source material.

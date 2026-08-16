@@ -45,18 +45,11 @@ class Topic:
 
 
 @dataclass(frozen=True)
-class Budgets:
-    entry_chars: int
-    topic_chars: int
-
-
-@dataclass(frozen=True)
 class Configuration:
     name: str
     language_version: int
     compiler: str
     domain: str
-    budgets: Budgets
 
 
 @dataclass(frozen=True)

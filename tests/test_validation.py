@@ -1,9 +1,3 @@
-import pytest
-
-from polc.config import load_configuration
-from polc.model import PolcError
-
-
 class TestValidation:
     def test_precedence_gap_fails(self, ws):
         ws.standard_corpus()
@@ -82,12 +76,6 @@ class TestValidation:
         assert any(
             "POL-0006: no non-principle replacement shares its topic" in e for e in errors
         )
-
-    def test_missing_budgets_fails(self, ws):
-        ws.standard_corpus()
-        with pytest.raises(PolcError) as excinfo:
-            load_configuration(ws.config(budgets=None))
-        assert any("'budgets'" in e for e in excinfo.value.errors)
 
     def test_illegal_axis_value_fails(self, ws):
         ws.standard_corpus()

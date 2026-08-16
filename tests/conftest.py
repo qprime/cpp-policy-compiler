@@ -73,7 +73,6 @@ class Workspace:
         language_version=20,
         compiler="gcc",
         domain="application",
-        budgets=...,
         filename="config.md",
     ):
         fm = {
@@ -82,10 +81,6 @@ class Workspace:
             "compiler": compiler,
             "domain": domain,
         }
-        if budgets is ...:
-            budgets = {"entry_chars": 100000, "topic_chars": 100000}
-        if budgets is not None:
-            fm["budgets"] = budgets
         path = self.root / filename
         path.write_text("---\n" + yaml.safe_dump(fm, sort_keys=True) + "---\n", encoding="utf-8")
         return path

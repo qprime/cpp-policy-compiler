@@ -3,7 +3,7 @@ from __future__ import annotations
 from pathlib import Path
 
 from .corpus import parse_frontmatter
-from .model import Budgets, Configuration, PolcError
+from .model import Configuration, PolcError
 
 
 def _required_int(value: object, origin: str, key: str, errors: list[str]) -> int:
@@ -35,19 +35,6 @@ def load_configuration(path: Path) -> Configuration:
     compiler = _required_str(frontmatter.get("compiler"), path.name, "compiler", errors)
     domain = _required_str(frontmatter.get("domain"), path.name, "domain", errors)
 
-    budgets_raw = frontmatter.get("budgets")
-    if not isinstance(budgets_raw, dict):
-        errors.append(
-            f"{path.name}: 'budgets' with entry_chars and topic_chars is required; "
-            "the compiler has no defaults"
-        )
-        budgets = Budgets(0, 0)
-    else:
-        budgets = Budgets(
-            _required_int(budgets_raw.get("entry_chars"), path.name, "budgets.entry_chars", errors),
-            _required_int(budgets_raw.get("topic_chars"), path.name, "budgets.topic_chars", errors),
-        )
-
     if errors:
         raise PolcError(errors)
-    return Configuration(name, language_version, compiler, domain, budgets)
+    return Configuration(name, language_version, compiler, domain)

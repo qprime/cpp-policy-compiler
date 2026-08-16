@@ -4,7 +4,7 @@ import json
 from dataclasses import dataclass
 from pathlib import Path
 
-from .model import Budgets, Configuration, Policy, Topic
+from .model import Configuration, Policy, Topic
 
 MARKS = {
     "standard": "MUST",
@@ -186,23 +186,6 @@ def render(
         omitted_topics=tuple(omitted),
         dropped_cross_references=tuple(dropped),
     )
-
-
-def check_budgets(projection: Projection, budgets: Budgets) -> list[str]:
-    overflows: list[str] = []
-
-    def check(name: str, text: str, budget: int) -> None:
-        size = len(text)
-        if size > budget:
-            overflows.append(
-                f"{name}: {size} chars exceeds its budget of {budget}; "
-                "tighten the prose or split the topic in TOPICS.md"
-            )
-
-    check("index.md", projection.entry, budgets.entry_chars)
-    for slug in sorted(projection.topic_documents):
-        check(f"{slug}.md", projection.topic_documents[slug], budgets.topic_chars)
-    return overflows
 
 
 def write(projection: Projection, out_dir: Path) -> None:

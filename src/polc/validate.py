@@ -142,10 +142,6 @@ def _validate_configuration(config: Configuration, errors: list[str]) -> None:
         )
     if not re.fullmatch(r"\S+", config.domain or ""):
         errors.append(f"{origin}: domain must be a non-empty token")
-    if config.budgets.entry_chars <= 0:
-        errors.append(f"{origin}: budgets.entry_chars must be positive")
-    if config.budgets.topic_chars <= 0:
-        errors.append(f"{origin}: budgets.topic_chars must be positive")
 
 
 def validate(
