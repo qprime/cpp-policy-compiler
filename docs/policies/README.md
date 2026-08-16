@@ -110,5 +110,7 @@ checks them.
   a projection's size budget. Whether *nothing to apply to* is a gate or content
   is undecided, and deciding it changes the format rather than any policy.
 
-**Next:** /spec the v1 compiler. The topic list it renders is settled in
-[TOPICS.md](TOPICS.md).
+**Next:** put the projection in front of a real consuming project. The next
+compiler target is the enforcement bundle
+([#1](https://github.com/qprime/cpp-policy-compiler/issues/1)), derived from
+the enforcement facets this format already carries.
