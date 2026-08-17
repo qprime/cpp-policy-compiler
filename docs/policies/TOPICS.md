@@ -32,7 +32,7 @@ aggregates, inheritance, whether a thing becomes a type at all.
 
 POL-0017 POL-0025 POL-0057 POL-0065 POL-0066 POL-0067 POL-0068 POL-0090
 POL-0093 POL-0097 POL-0098 POL-0105 POL-0106 POL-0107 POL-0108 POL-0198
-POL-0210 POL-0222 POL-0224
+POL-0210 POL-0222 POL-0224 POL-0229
 
 ### Building a class
 
@@ -65,7 +65,7 @@ POL-0038 POL-0039 POL-0041 POL-0042 POL-0047 POL-0048 POL-0049 POL-0050
 POL-0051 POL-0052 POL-0053 POL-0054 POL-0055 POL-0061 POL-0102 POL-0103
 POL-0118 POL-0119 POL-0195 POL-0196 POL-0197 POL-0199 POL-0200 POL-0201
 POL-0202 POL-0203 POL-0205 POL-0206 POL-0207 POL-0208 POL-0209 POL-0212
-POL-0213 POL-0214 POL-0215
+POL-0213 POL-0214 POL-0215 POL-0231 POL-0232
 
 ### Everyday declarations
 
@@ -81,7 +81,7 @@ POL-0152 POL-0204
 Read when: choosing what happens when an operation cannot do what it was asked.
 
 POL-0032 POL-0183 POL-0184 POL-0185 POL-0186 POL-0187 POL-0188 POL-0189
-POL-0190 POL-0191 POL-0192 POL-0193
+POL-0190 POL-0191 POL-0192 POL-0193 POL-0228
 
 Cross-reference: POL-0058
 
@@ -96,7 +96,7 @@ POL-0018 POL-0019 POL-0020 POL-0194
 Read when: laying out headers, includes, namespaces, dependency direction, or a
 threading model.
 
-POL-0011 POL-0016 POL-0028 POL-0217 POL-0218 POL-0219
+POL-0011 POL-0016 POL-0028 POL-0217 POL-0218 POL-0219 POL-0239
 
 ### Naming
 
@@ -110,18 +110,21 @@ POL-0122
 Read when: writing or touching the binding layer — names, validation, errors,
 absence, units, ownership, shared schemas.
 
-POL-0026 POL-0027 POL-0043 POL-0211 POL-0216
+POL-0026 POL-0027 POL-0043 POL-0211 POL-0216 POL-0230 POL-0233 POL-0234
+POL-0235 POL-0236 POL-0237 POL-0238
 
 ### Writing tests
 
 Read when: writing or reviewing tests — what to test, what not to, goldens,
 round-trips, the framework.
 
+POL-0240 POL-0241 POL-0242 POL-0243 POL-0244 POL-0245 POL-0246 POL-0247
+
 ### Logging
 
 Read when: emitting diagnostics from library or application code.
 
-POL-0225 POL-0226
+POL-0225 POL-0226 POL-0248
 
 ### Real-time loops
 
