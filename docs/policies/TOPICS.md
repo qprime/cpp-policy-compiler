@@ -180,7 +180,7 @@ POL-0172 POL-0173 POL-0174 POL-0175 POL-0176 POL-0177 POL-0178
 Read when: setting up or changing a project's build — warnings, sanitizers,
 static analysis, formatting, the standard declaration.
 
-POL-0009 POL-0012 POL-0168
+POL-0009 POL-0012
 
 ### Optimizing
 

@@ -10,8 +10,8 @@ licence. Source: <https://github.com/isocpp/CppCoreGuidelines>
 466 rules. FAQ, NR (non-rules and myths), and In.0 are excluded as
 non-normative.
 
-424 rows carry a policy; 227 policies cover them, because one decision often
-answers several rules. 42 rows are struck: 39 belong to the coding standard
+423 rows carry a policy; 226 policies cover them, because one decision often
+answers several rules. 43 rows are struck: 40 belong to the coding standard
 rather than the corpus — see [STANDARD-TOPICS.md](STANDARD-TOPICS.md) — and
 three are not rules (T.46 was removed upstream; T.101 and CP.201 are
 placeholders).
@@ -378,7 +378,7 @@ placeholders).
 | [CP.3](https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#rconc-data) | Minimize explicit sharing of writable data | [POL-0165](POL-0165-no-data-races.md) |
 | [CP.4](https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#rconc-task) | Think in terms of tasks, rather than threads | [POL-0166](POL-0166-think-in-tasks.md) |
 | [CP.8](https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#rconc-volatile) | Don't try to use `volatile` for synchronization | [POL-0167](POL-0167-volatile-is-not-synchronization.md) |
-| [CP.9](https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#rconc-tools) | Whenever feasible use tools to validate your concurrent code | [POL-0168](POL-0168-thread-sanitizer-in-the-build.md) |
+| ~~[CP.9](https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#rconc-tools)~~ | ~~Whenever feasible use tools to validate your concurrent code~~ | coding standard — sanitizer configuration |
 | [CP.20](https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#rconc-raii) | Use RAII, never plain `lock()`/`unlock()` | [POL-0169](POL-0169-locks-are-raii.md) |
 | [CP.21](https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#rconc-lock) | Use `std::lock()` or `std::scoped_lock` to acquire multiple `mutex`es | [POL-0170](POL-0170-acquire-multiple-locks-atomically.md) |
 | [CP.22](https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#rconc-unknown) | Never call unknown code while holding a lock (e.g., a callback) | [POL-0171](POL-0171-no-unknown-code-under-a-lock.md) |

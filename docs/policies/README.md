@@ -64,6 +64,21 @@ An anti-pattern is authored in the same batch as the policy that replaces it,
 never before. A `replacement` entry pointing at an id nobody has authored is a
 dangling citation, so an anti-pattern whose replacement does not exist waits.
 
+### The coding-standard boundary
+
+A policy may rely on a coding-standard fact. It never states one. Naming the
+mechanism is allowed — *the build's warning set makes this a diagnostic* — and
+reproducing its value is not, because a value written in two places is a value
+that drifts in one of them.
+
+The test for which side a rule belongs on: if the body's only concrete content is
+a fixed value — a flag, a tool, a filename shape, a case — it is standard content
+and belongs in the coding standard, whatever the rule's shape suggests. A policy
+body carries a decision its reader makes while writing code.
+
+The split itself is [STANDARD-TOPICS.md](STANDARD-TOPICS.md). This is the rule
+that keeps a policy from restating what lands on the other side of it.
+
 ### Structural invariants
 
 Asserted by the format, enforced by the compiler. Nothing in this directory

@@ -25,5 +25,5 @@ compiler is entitled to assume they never happen and optimize on that basis — 
 is how the check placed *after* the division gets deleted. Establishing the range
 first is the only form that survives optimization.
 
-Build with UBSan in at least one configuration so the cases that slip through are
-reported rather than silently miscompiled.
+The sanitizer build reports the cases that slip through, rather than leaving them
+silently miscompiled.

@@ -9,9 +9,9 @@ attribution:
 
 # A narrowing conversion is written out or it is a defect
 
-Build with `-Wconversion -Wsign-conversion -Werror`. Where a narrowing conversion
-is genuinely intended, write the `static_cast` and, if the value could exceed the
-target, check first.
+The build's warning set makes an implicit narrowing conversion a diagnostic. Where
+one is genuinely intended, write the `static_cast` and, if the value could exceed
+the target, check first.
 
 ```cpp
 const auto count = static_cast<int>(moves.size());   // deliberate, and bounded
