@@ -33,11 +33,8 @@ Three authored layers and one derived:
   per-project facts on three axes: language version, compiler, domain.
 - **Projections** — the compiled output: the policy body as seen through one
   configuration, rendered as a small always-loaded entry document plus topical
-  documents. Never authored, never edited, always regenerable.
+  documents. Regenerable from the corpus; regeneration overwrites hand edits.
 
-A project consumes its projection by reference from its own harness files.
-This tool never generates CLAUDE.md, AGENTS.md, or any other top-level
-harness file.
 
 ## Design commitments
 

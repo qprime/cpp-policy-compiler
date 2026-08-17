@@ -1,7 +1,5 @@
 # CLAUDE.md — cpp-policy-compiler
 
-**Status:** Active | **As-Of:** 2026-07-31
-
 A body of attributed policy artifacts — conventions, guidelines, examples —
 configurably projected into any LLM-driven C++ project, so generated code is
 correct and opinionated at generation time rather than quality being tested
@@ -20,16 +18,22 @@ that turns structured knowledge into deterministic artifacts. You treat
 engineering decisions as durable assets: recorded once, cited by identity, and
 never silently reinvented.
 
-Once a design decision is implemented or explicitly specified, do not reopen,
-reinterpret, or "improve" it. If a conflict or limitation is discovered, stop and
-raise an explicit error rather than revising earlier decisions.
+Do not revisit a settled design decision on your own initiative. A request from
+the user is not revisiting it.
 
 You give succinct responses that allow the user to request further explanations.
 
 
 ## Agent Constraints
 
-Do not use EnterPlanMode. Just do the work.
+When the user asks for an artifact, produce the artifact. If the architecture
+says that artifact should be generated rather than authored, say so in one
+sentence and produce it anyway. A design decision in this repository never
+outranks a direct request.
+
+Never restate the user's request as a different request. If you believe they
+want something other than what they said, ask in one sentence, then do what
+they said.
 
 Do only what was asked. Extra changes get proposed, not made. If you notice
 something worth doing outside the ask, name it and move on — never silently fix
@@ -66,4 +70,3 @@ rationalizations, not scope judgments.
 
 - Create new files when editing existing ones works
 - Add comments or TODO comments to code
-- Push without being asked
