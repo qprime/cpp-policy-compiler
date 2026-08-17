@@ -121,3 +121,62 @@ that never stated one has to infer it from what currently compiles. A single
 declaration also keeps the answer uniform across targets, which matters because
 a feature that compiles in one target and not another produces a build failure
 attributed to the target rather than to the version drift that caused it.
+
+## MUST — The code is ISO standard C++, not a dialect of it
+
+POL-0158 · CG P.2, CG CPL.1
+
+```cpp
+// Never. Compiler extensions, silently accepted, silently non-portable.
+typeof(x) y = x;
+int values[n];                      // variable-length array
+__attribute__((packed)) struct Wire { ... };
+
+// Right.
+decltype(x) y = x;
+std::vector<int> values(n);
+```
+
+`-Wpedantic` under POL-0089 is what reports an extension, and it is on for
+exactly this reason. Where a platform genuinely requires one — an alignment
+attribute, an intrinsic — it is isolated behind an interface that the rest of
+the code sees as ordinary C++, which is the escape hatch POL-0064 describes for
+the binding layer.
+
+C constructs are not written where C++ has an equivalent, and this covers the
+whole family: C casts (POL-0094), C arrays (POL-0155), macros (POL-0157),
+`va_arg` and `setjmp` (POL-0154), `malloc` (POL-0127).
+
+An extension compiles on the compiler it was written against and fails on the
+next one, usually years later during a migration nobody budgeted for. It also
+defeats POL-0093: the declared standard stops describing what the code needs,
+so the build configuration no longer states the truth about the project.
+
+## MUST — A change made for performance carries the measurement that justified it
+
+POL-0172 · CG Per.6
+
+```cpp
+// Never. A claim with no referent, and a departure from POL-0004 on its strength.
+// Faster than std::unordered_map.
+FlatMap<ToolId, Tool> by_id_;
+
+// Right. The number, the workload, and the date.
+// Flat layout: 2.4x faster lookup than std::unordered_map at n<=64,
+// measured 2026-08-14 on the 12k-move planner benchmark.
+FlatMap<ToolId, Tool> by_id_;
+```
+
+This is one of the cases POL-0112 admits a comment for: a reason that makes an
+otherwise unusual choice legible. Without it the next reader sees a departure
+from the boring option (POL-0004) with no way to tell whether it was justified,
+and no basis for undoing it.
+
+An unmeasured performance claim is untestable, so it cannot be wrong and cannot
+be removed. It accumulates: the codebase fills with complexity that was added
+for speed nobody demonstrated and nobody can now argue against.
+
+Most performance rules are deliberately absent from this corpus, because
+optimization is code-local and measured rather than decided in advance. This is
+the rule that makes that position workable — the measurement is what turns a
+local decision into one a later reader can evaluate.

@@ -2118,5 +2118,759 @@
       }
     ],
     "policy_file": "POL-0128-construct-owned-objects-with-a-make-function.md"
+  },
+  "POL-0129": {
+    "kind": "standard",
+    "topic": "writing-a-function",
+    "statement": "Every template parameter states what it requires",
+    "attribution": [
+      {
+        "source": "cpp-convention/mechanisms.md",
+        "locator": "§9 Generic code",
+        "upstream": []
+      },
+      {
+        "source": "standard-practice",
+        "locator": "constraining a template",
+        "upstream": [
+          "CG I.9",
+          "CG T.12",
+          "CG T.13",
+          "CG T.41",
+          "CG T.47",
+          "CG T.150"
+        ]
+      }
+    ],
+    "policy_file": "POL-0129-a-template-parameter-is-constrained.md"
+  },
+  "POL-0130": {
+    "kind": "standard",
+    "topic": "writing-a-function",
+    "statement": "A template names its aliases with `using` and qualifies its calls",
+    "attribution": [
+      {
+        "source": "standard-practice",
+        "locator": "template mechanics",
+        "upstream": [
+          "CG T.42",
+          "CG T.43",
+          "CG T.44",
+          "CG T.60",
+          "CG T.69",
+          "CG T.143"
+        ]
+      }
+    ],
+    "policy_file": "POL-0130-template-mechanics.md"
+  },
+  "POL-0131": {
+    "kind": "standard",
+    "topic": "writing-an-expression",
+    "statement": "The string type states what it owns and what it holds",
+    "attribution": [
+      {
+        "source": "cpp-convention/mechanisms.md",
+        "locator": "§11 Strings and formatting",
+        "upstream": []
+      },
+      {
+        "source": "standard-practice",
+        "locator": "string types",
+        "upstream": [
+          "CG SL.str.1",
+          "CG SL.str.4",
+          "CG SL.str.5",
+          "CG SL.str.10",
+          "CG SL.str.12"
+        ]
+      }
+    ],
+    "policy_file": "POL-0131-which-string-type-to-reach-for.md"
+  },
+  "POL-0132": {
+    "kind": "standard",
+    "topic": "writing-a-function",
+    "statement": "A smart pointer parameter appears only where ownership changes",
+    "attribution": [
+      {
+        "source": "standard-practice",
+        "locator": "smart pointer parameters",
+        "upstream": [
+          "CG R.33",
+          "CG R.34",
+          "CG R.35",
+          "CG R.36",
+          "CG R.37"
+        ]
+      }
+    ],
+    "policy_file": "POL-0132-a-smart-pointer-parameter-states-an-ownership-change.md"
+  },
+  "POL-0133": {
+    "kind": "anti-pattern",
+    "topic": "iterating-a-sequence",
+    "statement": "Never compute with a pointer",
+    "attribution": [
+      {
+        "source": "standard-practice",
+        "locator": "pointer arithmetic",
+        "upstream": [
+          "CG Bounds.1",
+          "CG Bounds.2",
+          "CG ES.62",
+          "CG ES.65",
+          "CG Lifetime.1"
+        ]
+      }
+    ],
+    "policy_file": "POL-0133-never-do-pointer-arithmetic.md"
+  },
+  "POL-0134": {
+    "kind": "standard",
+    "topic": "writing-an-expression",
+    "statement": "One expression, one side effect, and no reliance on the order of the rest",
+    "attribution": [
+      {
+        "source": "standard-practice",
+        "locator": "expression complexity and evaluation order",
+        "upstream": [
+          "CG ES.40",
+          "CG ES.41",
+          "CG ES.43",
+          "CG ES.44",
+          "CG ES.87"
+        ]
+      }
+    ],
+    "policy_file": "POL-0134-an-expression-does-not-depend-on-evaluation-order.md"
+  },
+  "POL-0135": {
+    "kind": "guideline",
+    "topic": "writing-a-function",
+    "statement": "What a function returns",
+    "attribution": [
+      {
+        "source": "standard-practice",
+        "locator": "return types",
+        "upstream": [
+          "CG F.42",
+          "CG F.44",
+          "CG F.45",
+          "CG F.49"
+        ]
+      }
+    ],
+    "policy_file": "POL-0135-what-a-function-returns.md"
+  },
+  "POL-0136": {
+    "kind": "standard",
+    "topic": "building-a-class",
+    "statement": "Members initialize in declaration order, and every member is initialized",
+    "attribution": [
+      {
+        "source": "standard-practice",
+        "locator": "member declaration and initialization order",
+        "upstream": [
+          "CG C.13",
+          "CG C.47",
+          "CG C.48",
+          "CG Type.6"
+        ]
+      }
+    ],
+    "policy_file": "POL-0136-members-are-declared-and-initialized-in-one-order.md"
+  },
+  "POL-0137": {
+    "kind": "standard",
+    "topic": "structuring-modules-and-layers",
+    "statement": "A header compiles on its own, and includes come first",
+    "attribution": [
+      {
+        "source": "standard-practice",
+        "locator": "include order and self-containment",
+        "upstream": [
+          "CG SF.4",
+          "CG SF.10",
+          "CG SF.12",
+          "CG SF.13"
+        ]
+      }
+    ],
+    "policy_file": "POL-0137-a-header-is-self-contained.md"
+  },
+  "POL-0138": {
+    "kind": "guideline",
+    "topic": "running-concurrently",
+    "statement": "Concurrency is expressed as tasks with results, not as threads with side effects",
+    "attribution": [
+      {
+        "source": "standard-practice",
+        "locator": "concurrency, tasks rather than threads",
+        "upstream": [
+          "CG CP.4",
+          "CG CP.41",
+          "CG CP.60",
+          "CG CP.61"
+        ]
+      }
+    ],
+    "policy_file": "POL-0138-think-in-tasks-not-threads.md"
+  },
+  "POL-0139": {
+    "kind": "standard",
+    "topic": "running-concurrently",
+    "statement": "Every thread is owned by a scope that joins it",
+    "attribution": [
+      {
+        "source": "standard-practice",
+        "locator": "concurrency, thread ownership",
+        "upstream": [
+          "CG CP.23",
+          "CG CP.24",
+          "CG CP.26"
+        ]
+      }
+    ],
+    "policy_file": "POL-0139-a-thread-is-owned-and-joined.md"
+  },
+  "POL-0140": {
+    "kind": "standard",
+    "topic": "running-concurrently",
+    "statement": "A lock is named, held briefly, and never held across a call you do not control",
+    "attribution": [
+      {
+        "source": "standard-practice",
+        "locator": "concurrency, critical sections",
+        "upstream": [
+          "CG CP.22",
+          "CG CP.43",
+          "CG CP.44"
+        ]
+      }
+    ],
+    "policy_file": "POL-0140-a-critical-section-is-short-and-calls-nothing-unknown.md"
+  },
+  "POL-0141": {
+    "kind": "pattern",
+    "topic": "running-concurrently",
+    "statement": "Guarded state",
+    "attribution": [
+      {
+        "source": "standard-practice",
+        "locator": "concurrency, mutex placement",
+        "upstream": [
+          "CG CP.50"
+        ]
+      }
+    ],
+    "policy_file": "POL-0141-a-mutex-is-declared-with-what-it-guards.md"
+  },
+  "POL-0142": {
+    "kind": "standard",
+    "topic": "running-concurrently",
+    "statement": "Small data crosses a thread boundary by value; shared ownership is `shared_ptr`",
+    "attribution": [
+      {
+        "source": "standard-practice",
+        "locator": "concurrency, passing data between threads",
+        "upstream": [
+          "CG CP.31",
+          "CG CP.32"
+        ]
+      }
+    ],
+    "policy_file": "POL-0142-data-crosses-a-thread-boundary-by-value.md"
+  },
+  "POL-0143": {
+    "kind": "anti-pattern",
+    "topic": "running-concurrently",
+    "statement": "Never hand-write a lock-free data structure",
+    "attribution": [
+      {
+        "source": "standard-practice",
+        "locator": "concurrency, lock-free programming",
+        "upstream": [
+          "CG CP.100",
+          "CG CP.101",
+          "CG CP.102"
+        ]
+      }
+    ],
+    "policy_file": "POL-0143-never-hand-write-lock-free-code.md"
+  },
+  "POL-0144": {
+    "kind": "standard",
+    "topic": "building-a-class",
+    "statement": "A destructor cannot fail, and neither can `swap` or a deallocation",
+    "attribution": [
+      {
+        "source": "standard-practice",
+        "locator": "destructors",
+        "upstream": [
+          "CG C.36",
+          "CG C.37",
+          "CG E.16"
+        ]
+      }
+    ],
+    "policy_file": "POL-0144-a-destructor-does-not-fail.md"
+  },
+  "POL-0145": {
+    "kind": "standard",
+    "topic": "building-a-class",
+    "statement": "A value type that needs `swap` provides a `noexcept` one that cannot fail",
+    "attribution": [
+      {
+        "source": "standard-practice",
+        "locator": "swap",
+        "upstream": [
+          "CG C.83",
+          "CG C.84",
+          "CG C.85"
+        ]
+      }
+    ],
+    "policy_file": "POL-0145-swap-is-noexcept-and-total.md"
+  },
+  "POL-0146": {
+    "kind": "standard",
+    "topic": "building-a-class",
+    "statement": "`==` is symmetric and `noexcept`, and a `hash` agrees with it",
+    "attribution": [
+      {
+        "source": "standard-practice",
+        "locator": "comparison and hash",
+        "upstream": [
+          "CG C.86",
+          "CG C.87",
+          "CG C.89"
+        ]
+      }
+    ],
+    "policy_file": "POL-0146-comparison-and-hash-agree.md"
+  },
+  "POL-0147": {
+    "kind": "standard",
+    "topic": "building-a-class",
+    "statement": "A special member that is stated is stated as `= default` or `= delete`",
+    "attribution": [
+      {
+        "source": "standard-practice",
+        "locator": "special members, default and delete",
+        "upstream": [
+          "CG C.80",
+          "CG C.81"
+        ]
+      }
+    ],
+    "policy_file": "POL-0147-state-a-special-member-with-default-or-delete.md"
+  },
+  "POL-0148": {
+    "kind": "guideline",
+    "topic": "building-a-class",
+    "statement": "Constructors share their common work by delegating, not by repeating it",
+    "attribution": [
+      {
+        "source": "standard-practice",
+        "locator": "constructor mechanics",
+        "upstream": [
+          "CG C.51",
+          "CG C.52"
+        ]
+      }
+    ],
+    "policy_file": "POL-0148-constructors-delegate-rather-than-repeat.md"
+  },
+  "POL-0149": {
+    "kind": "standard",
+    "topic": "building-a-class",
+    "statement": "A base used as an interface is pure abstract and has no constructor",
+    "attribution": [
+      {
+        "source": "standard-practice",
+        "locator": "abstract interface shape",
+        "upstream": [
+          "CG C.121",
+          "CG C.126"
+        ]
+      }
+    ],
+    "policy_file": "POL-0149-an-interface-base-is-pure-abstract.md"
+  },
+  "POL-0150": {
+    "kind": "standard",
+    "topic": "choosing-a-representation",
+    "statement": "Navigating a hierarchy uses `dynamic_cast`, and its form states whether failure is expected",
+    "attribution": [
+      {
+        "source": "standard-practice",
+        "locator": "dynamic_cast",
+        "upstream": [
+          "CG C.146",
+          "CG C.147",
+          "CG C.148",
+          "CG Type.2"
+        ]
+      }
+    ],
+    "policy_file": "POL-0150-dynamic-cast-form.md"
+  },
+  "POL-0151": {
+    "kind": "standard",
+    "topic": "writing-a-function",
+    "statement": "`std::move` appears only where ownership leaves the current scope",
+    "attribution": [
+      {
+        "source": "standard-practice",
+        "locator": "move and forward",
+        "upstream": [
+          "CG ES.56",
+          "CG F.19",
+          "CG F.48"
+        ]
+      }
+    ],
+    "policy_file": "POL-0151-move-is-written-only-where-it-transfers.md"
+  },
+  "POL-0152": {
+    "kind": "guideline",
+    "topic": "naming",
+    "statement": "A name is as long as its scope is wide",
+    "attribution": [
+      {
+        "source": "standard-practice",
+        "locator": "naming, length and scope",
+        "upstream": [
+          "CG ES.7",
+          "CG ES.8",
+          "CG NL.7"
+        ]
+      }
+    ],
+    "policy_file": "POL-0152-name-length-tracks-scope.md"
+  },
+  "POL-0153": {
+    "kind": "standard",
+    "topic": "everyday-declarations",
+    "statement": "One name per declaration, written in the C++ form",
+    "attribution": [
+      {
+        "source": "standard-practice",
+        "locator": "declaration form",
+        "upstream": [
+          "CG ES.10",
+          "CG NL.11",
+          "CG NL.18",
+          "CG NL.21",
+          "CG NL.25"
+        ]
+      }
+    ],
+    "policy_file": "POL-0153-one-name-per-declaration.md"
+  },
+  "POL-0154": {
+    "kind": "anti-pattern",
+    "topic": "writing-a-function",
+    "statement": "Never write a C-style variadic function, `va_arg`, `setjmp`, or `longjmp`",
+    "attribution": [
+      {
+        "source": "standard-practice",
+        "locator": "C mechanisms with C++ replacements",
+        "upstream": [
+          "CG ES.34",
+          "CG F.55",
+          "CG Type.8",
+          "CG SL.C.1"
+        ]
+      }
+    ],
+    "policy_file": "POL-0154-never-a-c-mechanism-cpp-replaced.md"
+  },
+  "POL-0155": {
+    "kind": "anti-pattern",
+    "topic": "choosing-a-representation",
+    "statement": "Never declare a C array",
+    "attribution": [
+      {
+        "source": "standard-practice",
+        "locator": "C arrays",
+        "upstream": [
+          "CG Bounds.3",
+          "CG ES.27"
+        ]
+      }
+    ],
+    "policy_file": "POL-0155-never-a-c-array.md"
+  },
+  "POL-0156": {
+    "kind": "anti-pattern",
+    "topic": "choosing-a-representation",
+    "statement": "Never declare a raw `union`",
+    "attribution": [
+      {
+        "source": "standard-practice",
+        "locator": "unions",
+        "upstream": [
+          "CG C.180",
+          "CG Type.7"
+        ]
+      }
+    ],
+    "policy_file": "POL-0156-never-a-raw-union.md"
+  },
+  "POL-0157": {
+    "kind": "anti-pattern",
+    "topic": "everyday-declarations",
+    "statement": "Never define a macro for a constant, a function, or program text",
+    "attribution": [
+      {
+        "source": "standard-practice",
+        "locator": "macros",
+        "upstream": [
+          "CG ES.30",
+          "CG ES.31",
+          "CG ES.33"
+        ]
+      }
+    ],
+    "policy_file": "POL-0157-never-a-macro.md"
+  },
+  "POL-0158": {
+    "kind": "standard",
+    "topic": "build-and-tooling",
+    "statement": "The code is ISO standard C++, not a dialect of it",
+    "attribution": [
+      {
+        "source": "standard-practice",
+        "locator": "portability",
+        "upstream": [
+          "CG P.2",
+          "CG CPL.1"
+        ]
+      }
+    ],
+    "policy_file": "POL-0158-the-code-is-iso-cpp.md"
+  },
+  "POL-0159": {
+    "kind": "standard",
+    "topic": "writing-a-function",
+    "statement": "A derived class re-exposes the whole overload set, and a default argument is stated once",
+    "attribution": [
+      {
+        "source": "standard-practice",
+        "locator": "overloading and name hiding",
+        "upstream": [
+          "CG C.138",
+          "CG C.140",
+          "CG F.51"
+        ]
+      }
+    ],
+    "policy_file": "POL-0159-an-overload-set-is-complete-and-consistent.md"
+  },
+  "POL-0160": {
+    "kind": "guideline",
+    "topic": "choosing-a-representation",
+    "statement": "An enumeration is named, and its operations live beside it",
+    "attribution": [
+      {
+        "source": "cpp-convention/mechanisms.md",
+        "locator": "§12 Enumerations",
+        "upstream": []
+      },
+      {
+        "source": "standard-practice",
+        "locator": "enumerations, operations",
+        "upstream": [
+          "CG Enum.4",
+          "CG Enum.6"
+        ]
+      }
+    ],
+    "policy_file": "POL-0160-an-enumeration-carries-its-own-operations.md"
+  },
+  "POL-0161": {
+    "kind": "guideline",
+    "topic": "choosing-a-representation",
+    "statement": "`std::vector` unless something else is required",
+    "attribution": [
+      {
+        "source": "standard-practice",
+        "locator": "containers",
+        "upstream": [
+          "CG SL.con.2"
+        ]
+      }
+    ],
+    "policy_file": "POL-0161-which-container-to-reach-for.md"
+  },
+  "POL-0162": {
+    "kind": "standard",
+    "topic": "structuring-modules-and-layers",
+    "statement": "No `using namespace` in a header, and nothing is added to `namespace std`",
+    "attribution": [
+      {
+        "source": "standard-practice",
+        "locator": "namespaces",
+        "upstream": [
+          "CG SF.6",
+          "CG SL.3"
+        ]
+      }
+    ],
+    "policy_file": "POL-0162-namespaces-are-named-at-the-point-of-use.md"
+  },
+  "POL-0163": {
+    "kind": "standard",
+    "topic": "handling-failure",
+    "statement": "No code that can throw runs while holding something nothing will release",
+    "attribution": [
+      {
+        "source": "standard-practice",
+        "locator": "exception safety, unowned resources",
+        "upstream": [
+          "CG E.13",
+          "CG E.19"
+        ]
+      }
+    ],
+    "policy_file": "POL-0163-nothing-is-owned-without-an-owner.md"
+  },
+  "POL-0164": {
+    "kind": "standard",
+    "topic": "handling-failure",
+    "statement": "`catch` clauses are ordered most-derived first, and catch by `const&`",
+    "attribution": [
+      {
+        "source": "standard-practice",
+        "locator": "exception handling, catch order",
+        "upstream": [
+          "CG E.31"
+        ]
+      }
+    ],
+    "policy_file": "POL-0164-catch-clauses-run-most-derived-first.md"
+  },
+  "POL-0165": {
+    "kind": "standard",
+    "topic": "everyday-declarations",
+    "statement": "A local name is never reused and never shadows an outer one",
+    "attribution": [
+      {
+        "source": "standard-practice",
+        "locator": "local names",
+        "upstream": [
+          "CG ES.12",
+          "CG ES.26"
+        ]
+      }
+    ],
+    "policy_file": "POL-0165-a-local-name-means-one-thing.md"
+  },
+  "POL-0166": {
+    "kind": "guideline",
+    "topic": "building-a-class",
+    "statement": "A getter-and-setter pair on every member means the type is a `struct`",
+    "attribution": [
+      {
+        "source": "standard-practice",
+        "locator": "accessors",
+        "upstream": [
+          "CG C.131"
+        ]
+      }
+    ],
+    "policy_file": "POL-0166-no-trivial-accessors.md"
+  },
+  "POL-0167": {
+    "kind": "standard",
+    "topic": "building-a-class",
+    "statement": "A class declares its members in one order: public interface first, data last",
+    "attribution": [
+      {
+        "source": "standard-practice",
+        "locator": "class member declaration order",
+        "upstream": [
+          "CG NL.16"
+        ]
+      }
+    ],
+    "policy_file": "POL-0167-class-members-are-declared-in-a-fixed-order.md"
+  },
+  "POL-0168": {
+    "kind": "pattern",
+    "topic": "deciding-ownership",
+    "statement": "Weak back-reference",
+    "attribution": [
+      {
+        "source": "standard-practice",
+        "locator": "shared ownership cycles",
+        "upstream": [
+          "CG R.24"
+        ]
+      }
+    ],
+    "policy_file": "POL-0168-break-a-shared-ownership-cycle-with-weak-ptr.md"
+  },
+  "POL-0169": {
+    "kind": "standard",
+    "topic": "writing-an-expression",
+    "statement": "Bit manipulation uses an unsigned type of stated width",
+    "attribution": [
+      {
+        "source": "standard-practice",
+        "locator": "bit manipulation",
+        "upstream": [
+          "CG ES.101"
+        ]
+      }
+    ],
+    "policy_file": "POL-0169-bit-manipulation-is-unsigned-and-fixed-width.md"
+  },
+  "POL-0170": {
+    "kind": "standard",
+    "topic": "writing-an-expression",
+    "statement": "A divisor is established non-zero before the division, not after",
+    "attribution": [
+      {
+        "source": "standard-practice",
+        "locator": "arithmetic preconditions",
+        "upstream": [
+          "CG ES.105"
+        ]
+      }
+    ],
+    "policy_file": "POL-0170-a-divisor-is-checked-before-it-divides.md"
+  },
+  "POL-0171": {
+    "kind": "guideline",
+    "topic": "writing-an-expression",
+    "statement": "Input is read in whole units, not character by character",
+    "attribution": [
+      {
+        "source": "standard-practice",
+        "locator": "reading input",
+        "upstream": [
+          "CG SL.io.1"
+        ]
+      }
+    ],
+    "policy_file": "POL-0171-input-is-read-in-whole-units.md"
+  },
+  "POL-0172": {
+    "kind": "standard",
+    "topic": "build-and-tooling",
+    "statement": "A change made for performance carries the measurement that justified it",
+    "attribution": [
+      {
+        "source": "standard-practice",
+        "locator": "performance claims",
+        "upstream": [
+          "CG Per.6"
+        ]
+      }
+    ],
+    "policy_file": "POL-0172-a-performance-claim-carries-a-measurement.md"
   }
 }

@@ -99,6 +99,38 @@ It also fails silently under a thread pool, where work migrates between threads
 between calls and the state a function expects to find is the state some
 unrelated task left behind.
 
+## NEVER — Never hand-write a lock-free data structure
+
+POL-0143 · CG CP.100, CG CP.101, CG CP.102
+
+```cpp
+// Never. A hand-rolled compare-and-swap stack: the ABA problem, the reclamation
+// problem, and the memory-ordering problem, none of which a test will show.
+void push(Node* n) {
+    do { n->next = head_.load(std::memory_order_relaxed); }
+    while (!head_.compare_exchange_weak(n->next, n));
+}
+```
+
+Take a mutex (POL-0105). A single `std::atomic<T>` with the default sequentially
+consistent ordering is not this anti-pattern — it is the shared-primitive row of
+the mechanism table, and it is fine.
+
+What is excluded is a data structure built out of compare-and-swap loops,
+explicit `memory_order` relaxation, or any published algorithm reproduced from
+memory.
+
+Lock-free code fails in ways testing does not reach. The defects are
+interleavings that occur under a load the test never applied, on a core count
+the test machine did not have, or only after the optimizer reorders operations
+the relaxed ordering permitted it to reorder. A run that passes is not evidence,
+which puts this outside what POL-0001 can offer — neither the type system nor
+the test suite constrains it.
+
+The payoff is a constant factor on contention. The cost is a class of defect
+that is undetectable in review, unreproducible in the field, and correct only if
+the author's memory-ordering reasoning was right the first time.
+
 ## MUST — A mutex is locked by a scoped lock, never by hand
 
 POL-0106 · CG CP.20, CG CP.21
@@ -128,5 +160,166 @@ Two sequential `lock_guard`s in different orders in two functions deadlock
 whenever both run at once. `std::scoped_lock` orders the acquisition
 internally, so the ordering cannot be got wrong at the call site and does not
 have to be documented and remembered.
+
+## SHOULD — Concurrency is expressed as tasks with results, not as threads with side effects
+
+POL-0138 · CG CP.4, CG CP.41, CG CP.60, CG CP.61
+
+```cpp
+// Avoid. A thread, a shared buffer, and a lock to protect what is really a return value.
+std::vector<Plan> results;
+std::mutex m;
+std::thread t([&] { auto p = plan(pocket); std::lock_guard lk(m); results.push_back(p); });
+
+// Prefer. The result comes back through the type system.
+auto future = std::async(std::launch::async, plan, pocket);
+const auto p = future.get();
+```
+
+Prefer a pool or `std::async` to creating and destroying threads per unit of
+work. Thread creation is expensive relative to most tasks, and a thread per item
+turns a bounded workload into unbounded contention.
+
+A task returns its result through a `std::future`, which means the answer
+crosses the thread boundary as a value rather than as shared mutable state
+someone has to lock, publish, and remember to read.
+
+Thinking in threads makes every result a side effect on state two threads can
+see, which is the sharing POL-0105 then has to protect. Thinking in tasks
+removes most of that state: what would have been a guarded buffer becomes a
+return type, and the concurrency question shrinks to what genuinely must be
+shared (POL-0124).
+
+## MUST — Every thread is owned by a scope that joins it
+
+POL-0139 · CG CP.23, CG CP.24, CG CP.26
+
+```cpp
+// Never. Nothing waits for it, and nothing knows what it still refers to.
+std::thread(scan_loop, std::ref(context)).detach();
+
+// Right, on C++20. Joins in its destructor, on every path out.
+std::jthread worker(scan_loop, std::ref(context));
+```
+
+Below C++20 the equivalent is a type holding a `std::thread` that joins in its
+destructor, which is POL-0003 applied to a thread.
+
+Never `detach()`. A detached thread outlives every scope, so it is a global with
+an execution context attached, and it may still be running while the objects it
+captured are destroyed during shutdown.
+
+A joining thread is a scoped container: what it borrows must outlive the join,
+and the join is what proves it. A detached one is unbounded, and no reader can
+say what is still alive when the process exits.
+
+A `std::thread` destroyed while still joinable calls `std::terminate`. That
+turns any exception on the path between construction and `join()` into a process
+abort, so the failure mode of forgetting the join is not a leak but a crash with
+no unwinding and no diagnostic pointing at the thread.
+
+## MUST — A lock is named, held briefly, and never held across a call you do not control
+
+POL-0140 · CG CP.22, CG CP.43, CG CP.44
+
+```cpp
+// Never. The callback may lock something else, re-enter, or block indefinitely.
+{
+    const std::lock_guard lock(m_);
+    for (const auto& observer : observers_) { observer.on_change(state_); }
+}
+
+// Right. Copy what is needed, release, then call out.
+std::vector<Observer> targets;
+{
+    const std::lock_guard lock(m_);
+    targets = observers_;
+}
+for (const auto& observer : targets) { observer.on_change(state_); }
+```
+
+Every lock object has a name. `std::lock_guard(m_)` without one is a temporary
+that is destroyed at the end of the full expression, so it locks and immediately
+unlocks and the section that follows is unprotected. Nothing warns.
+
+Do only what the shared state requires while holding the lock. Formatting,
+allocation, and input or output belong outside it.
+
+An unknown callee under a lock is the general case of deadlock: it may acquire a
+second mutex in the opposite order to some other path (POL-0106), it may block
+on input, or it may re-enter this object and try to take the same lock. None of
+that is visible from the call, because the callee is chosen by whoever
+registered it.
+
+A long critical section serializes every other thread onto this one, which
+converts a concurrency design into a sequential one that also pays for locking.
+
+## THIS WAY — Guarded state
+
+POL-0141 · CG CP.50
+
+```cpp
+class ToolCache {
+ public:
+    std::optional<Tool> find(ToolId id) const {
+        const std::lock_guard lock(guard_.m);
+        const auto it = guard_.by_id.find(id);
+        return it == guard_.by_id.end() ? std::nullopt : std::optional{it->second};
+    }
+
+ private:
+    struct Guarded {
+        mutable std::mutex m;
+        std::unordered_map<ToolId, Tool> by_id;
+    };
+    Guarded guard_;
+};
+```
+
+The mutex and everything it protects sit in one nested structure, declared
+together. What the lock covers is then a fact about the declaration rather than
+a convention a reader has to infer from which members happen to be touched under
+it.
+
+A mutex declared beside unrelated members says nothing about its scope. The
+protected set lives in whoever wrote the locking, and it drifts the first time a
+member is added — nobody can tell from the declaration whether the new one
+belongs inside the lock, so half the accessors take it and half do not.
+
+This applies only where POL-0049 has established that a threading model exists,
+and it does not make the type thread-safe on its own: a caller that reads and
+then writes still races unless the compound operation is itself a method
+(POL-0105).
+
+## MUST — Small data crosses a thread boundary by value; shared ownership is `shared_ptr`
+
+POL-0142 · CG CP.31, CG CP.32
+
+```cpp
+// Never. The caller's frame may be gone before the task reads it.
+std::jthread worker([&request] { handle(request); });
+
+// Right. The task owns its input.
+std::jthread worker([request] { handle(request); });
+
+// Right, where two unrelated threads genuinely both own it.
+auto table = std::make_shared<const ToolTable>(load_tools(path));
+std::jthread worker([table] { plan_with(*table); });
+```
+
+By value is the default: a copy removes the lifetime question and the
+synchronization question at once, and for small data it costs less than the lock
+that would otherwise be needed.
+
+Where the data is large or genuinely shared between threads with no clear
+primary owner, `std::shared_ptr` is the mechanism — this is the case POL-0048
+holds it open for. Prefer `shared_ptr<const T>`, so sharing does not also mean
+shared mutation.
+
+A reference passed to another thread is a lifetime claim that no signature
+states and no compiler checks: the referent must outlive a thread whose end the
+caller may not wait for. When it does not, the read is undefined and lands
+wherever that memory has been reused, which is the failure POL-0002 ranks worst
+because nothing downstream can tell it from a correct value.
 
 See also: [POL-0049 — Never add a mutex to a class with no threading model](structuring-modules-and-layers.md)

@@ -217,6 +217,38 @@ an operation touches every class rather than one function. Most of all, the
 compiler stops being able to report a missing case: adding a fourth derived class
 is well-formed everywhere, including at the sites that needed to know.
 
+## NEVER — Never declare a raw `union`
+
+POL-0156 · CG C.180, CG Type.7
+
+```cpp
+// Never. Nothing records which member is active; reading the wrong one is UB.
+union Value {
+    double number;
+    std::int64_t count;
+};
+
+// Right. The active alternative is part of the type.
+using Value = std::variant<double, std::int64_t>;
+```
+
+`std::variant` knows which alternative it holds, checks on access, and makes an
+added alternative a compile error at every `std::visit` — which is the
+exhaustiveness POL-0033 depends on.
+
+A raw `union` puts the discriminant in the programmer's head. Reading a member
+other than the one last written is undefined behaviour, and it is undefined
+quietly: the bytes are there and reinterpret as something plausible, so the
+program continues with a wrong value rather than failing.
+
+Type punning through a union is the same defect as the pointer cast POL-0095
+rejects, and it has the same answer: `std::bit_cast` on C++20, `std::memcpy`
+before it.
+
+The memory saving that motivates a union is real only where the alternatives are
+large and the object count is high. That is a measured, code-local decision, and
+`std::variant` costs one discriminant.
+
 ## SHOULD — A distinct type for a dimensioned scalar is a named escape, not the default
 
 POL-0038
@@ -321,3 +353,120 @@ Explicit values invite a gap or a duplicate, and a duplicate is the worse
 failure: two enumerators that compare equal make a `switch` over them
 unreachable in one arm, which defeats the exhaustiveness POL-0033 relies on
 without producing a diagnostic.
+
+## MUST — Navigating a hierarchy uses `dynamic_cast`, and its form states whether failure is expected
+
+POL-0150 · CG C.146, CG C.147, CG C.148, CG Type.2
+
+```cpp
+// Never. static_cast down is unchecked: wrong type, undefined behaviour, no diagnostic.
+auto& gcode = static_cast<GcodeExporter&>(exporter);
+
+// Right. Failure is a defect here, so the reference form throws.
+auto& gcode = dynamic_cast<GcodeExporter&>(exporter);
+
+// Right. Failure is an expected outcome, so the pointer form returns null.
+if (auto* gcode = dynamic_cast<GcodeExporter*>(&exporter)) { gcode->emit_header(); }
+```
+
+The reference form where not finding the type is a programming error, since it
+throws `std::bad_cast` and cannot be ignored. The pointer form where absence is
+a normal case, since it yields `nullptr` and the check is the branch.
+
+`static_cast` to a derived type performs no check at all. If the object is not
+that type the program has undefined behaviour, and it usually proceeds — reading
+members at offsets that belong to something else.
+
+Reaching for either is a signal first. A `dynamic_cast` in ordinary code usually
+means the operation belongs on the interface as a virtual function (POL-0037),
+or that the set of alternatives is closed and should have been a `std::variant`
+(POL-0044). The cast is for the case where the hierarchy is genuinely open and
+navigation is genuinely unavoidable.
+
+## SHOULD — An enumeration is named, and its operations live beside it
+
+POL-0160 · CG Enum.4, CG Enum.6
+
+```cpp
+enum class Severity { Trace, Debug, Info, Warn, Error };
+
+constexpr std::string_view to_string(Severity s) {
+    switch (s) {
+        case Severity::Trace: return "TRACE";
+        case Severity::Debug: return "DEBUG";
+        case Severity::Info:  return "INFO";
+        case Severity::Warn:  return "WARN";
+        case Severity::Error: return "ERROR";
+    }
+    return "UNKNOWN";
+}
+```
+
+Conversion, ordering, and validation are free functions in the enumeration's
+namespace (POL-0123), each a `switch` with no `default` so a new enumerator is a
+build error (POL-0119).
+
+An unnamed enumeration has no type, so its enumerators are integers with a
+scope. That gives up everything POL-0103 established — no distinct type, no
+exhaustiveness, no overload that can take one.
+
+Without named operations, every call site writes its own `switch` or, worse, a
+cast to `int` and an array index. Those copies drift the moment an enumerator is
+added, and the array-index form does not even fail to compile: it reads past the
+end of the table and returns whatever was there (POL-0133).
+
+## SHOULD — `std::vector` unless something else is required
+
+POL-0161 · CG SL.con.2
+
+| Need | Container |
+|------|-----------|
+| A sequence | `std::vector` |
+| A fixed size known at compile time | `std::array` |
+| Keyed lookup | `std::unordered_map`, or `std::map` where iteration order must be deterministic |
+| Membership | `std::unordered_set`, or `std::set` on the same condition |
+| Stable addresses across insertion | `std::deque`, or `std::vector` of `std::unique_ptr` |
+
+`std::list` is not a default. It is the answer only where splicing is the
+operation and it has been measured.
+
+Iteration order over an unordered container is unspecified, so anything derived
+from it that reaches output must be sorted first, or the container must be an
+ordered one. That is POL-0007 directly: the output differs between runs and
+between standard library versions, and the golden test that would have caught it
+is the thing that breaks.
+
+`std::vector` is the default because contiguous storage is what current hardware
+is fastest at traversing, and because it is the container every reader already
+understands (POL-0004). Departing from it is a decision with a reason, and the
+reason belongs in the code as a comment where it is not obvious (POL-0112).
+
+## NEVER — Never declare a C array
+
+POL-0155 · CG Bounds.3, CG ES.27
+
+```cpp
+// Never. Decays to a pointer at the first call; the size is gone.
+double offsets[16];
+process(offsets);
+
+// Right. Carries its size, and knows it at compile time.
+std::array<double, 16> offsets{};
+process(offsets);
+```
+
+A fixed size known at compile time is `std::array`; a size known at run time is
+`std::vector`; a view over either is `std::span` (POL-0046).
+
+At an `extern "C"` boundary the foreign signature dictates a pointer, and the
+conversion to `std::span` happens on entry — the same escape POL-0046 grants and
+no wider.
+
+Array-to-pointer decay is silent and immediate: passing an array to anything
+loses the length, so every function downstream depends on a bound the caller
+knows and the type does not carry. That is the pointer-and-length pair with the
+length omitted, and it is the substrate for the pointer arithmetic POL-0133
+forbids.
+
+`std::array` costs nothing at run time, is the same layout, and keeps `size()`
+attached to the object rather than to the reader's memory.

@@ -458,4 +458,239 @@ anything a reader would need to think about. Once it wants a name, wants a
 comment, or acquires a second use, it is a function that has not been given its
 name yet, and POL-0030 already says what to do about that.
 
+## MUST — Every template parameter states what it requires
+
+POL-0129 · CG I.9, CG T.12, CG T.13, CG T.41, CG T.47, CG T.150
+
+```cpp
+// Never, on C++20. The requirement is discoverable only by instantiating it.
+template <typename Range>
+double total_length(const Range& moves);
+
+// Right.
+template <std::ranges::input_range Range>
+    requires std::same_as<std::ranges::range_value_t<Range>, Move>
+double total_length(const Range& moves);
+```
+
+Below C++20 the same information goes in a `static_assert` at the top of the
+body. The requirement is stated either way; only the spelling changes with the
+standard.
+
+Constrain on what the body actually uses and nothing more. A constraint listing
+requirements the implementation never exercises rejects valid callers, and it
+becomes wrong silently the moment the body changes.
+
+An unconstrained template with a common name is worse than an unhelpful error:
+it enters overload resolution for arguments it was never meant to accept, and it
+can win against the intended overload.
+
+An unconstrained parameter moves the interface out of the declaration and into
+the body, which is the inversion POL-0006 rejects. The caller learns the
+requirement from a diagnostic pointing inside the template, at the line that
+happened to fail first — so the error names an implementation detail rather than
+the contract that was broken.
+
+This is reached only after POL-0040 and POL-0052 have established that a
+template is right at all.
+
+## NEVER — Never write a C-style variadic function, `va_arg`, `setjmp`, or `longjmp`
+
+POL-0154 · CG ES.34, CG F.55, CG Type.8, CG SL.C.1
+
+```cpp
+// Never. No type checking, no argument count, undefined behaviour on a mismatch.
+void log_fmt(const char* fmt, ...);
+
+// Right. A constrained variadic template, or std::format at the call site.
+template <typename... Args>
+void log_fmt(std::format_string<Args...> fmt, Args&&... args);
+
+// Never. Jumps past destructors; every object in between leaks.
+if (setjmp(recovery_) != 0) { return -1; }
+```
+
+A variadic template is type-checked and knows its argument count; `std::format`
+covers the message-building case that produced most `printf`-style signatures
+(POL-0111).
+
+`longjmp` unwinds nothing. Destructors between the jump and the landing point do
+not run, so every resource held across it leaks and every invariant established
+by a constructor is silently abandoned — which is the guarantee POL-0003 rests
+on, removed. Error propagation is a return type or an exception (POL-0031).
+
+`va_arg` reads whatever bytes are at the next argument position and interprets
+them as the requested type. A caller that passes an `int` where `long` is read
+produces a garbage value with no diagnostic at either end, which is the class
+POL-0008 exists to hand to the compiler instead.
+
+## MUST — A template names its aliases with `using` and qualifies its calls
+
+POL-0130 · CG T.42, CG T.43, CG T.44, CG T.60, CG T.69, CG T.143
+
+```cpp
+// Never. typedef cannot be parameterized, and the unqualified call is a hook
+// any caller's namespace can hijack.
+template <typename T>
+void emit(const T& value) { write(value); }
+
+// Right.
+template <typename T>
+using Handle = std::unique_ptr<T, Release>;
+
+template <typename T>
+void emit(const T& value) { proj::io::write(value); }
+```
+
+Every non-member call inside a template is qualified, unless the call is a
+deliberate customization point — and then it is opted into with a `using`
+declaration in the template's own scope, so the extension is visible where it is
+allowed rather than wherever a caller happens to define a name.
+
+A template depends on as little of its surrounding context as it can. Deduce
+class template arguments from a function template where that removes a
+redundant type name.
+
+Beware code that is generic only by accident: a template body calling a concrete
+type's member, or assuming `int`, compiles for the one argument it was tested
+with and fails for the second. Constraining the parameter (POL-0129) is what
+turns that into a diagnostic at the declaration.
+
+Unqualified lookup inside a template resolves partly at instantiation, in the
+caller's namespace, so a function nobody in this file can see may be selected.
+That makes the template's behaviour depend on where it is used, which defeats
+POL-0007 and makes the failure impossible to reproduce from the template alone.
+
+## MUST — A smart pointer parameter appears only where ownership changes
+
+POL-0132 · CG R.33, CG R.34, CG R.35, CG R.36, CG R.37
+
+| Parameter | Means |
+|-----------|-------|
+| `std::unique_ptr<T>` | Takes ownership |
+| `std::unique_ptr<T>&` | Reseats the caller's pointer |
+| `std::shared_ptr<T>` | Takes a share of ownership |
+| `std::shared_ptr<T>&` | May reseat the caller's shared pointer |
+| `const std::shared_ptr<T>&` | May retain a share |
+| `const T&` or `T*` | Ownership is unchanged — the usual case |
+
+```cpp
+// Never. Says "shares ownership", does neither, and costs an atomic increment.
+void inspect(std::shared_ptr<const Tool> tool);
+
+// Right.
+void inspect(const Tool& tool);
+void adopt(std::unique_ptr<Tool> tool);
+```
+
+Never pass a pointer or reference obtained by dereferencing an aliased smart
+pointer: the callee holds a raw reference whose lifetime depends on a share the
+caller may release during the call.
+
+A smart pointer in a signature is a statement about lifetime, which is what
+POL-0003 asks every declaration to make answerable. Taking one where ownership
+does not change makes that statement falsely, so a reader tracing lifetimes has
+to open the body to find that nothing happens. It also constrains every caller
+to hold the object that way, which propagates the wrong ownership model outward
+from a function that never needed it (POL-0048).
+
+## SHOULD — What a function returns
+
+POL-0135 · CG F.42, CG F.44, CG F.45, CG F.49
+
+| Return | When |
+|--------|------|
+| By value | The usual case, including several outputs as a struct (POL-0023) |
+| `T&` | A copy is genuinely undesirable and there is always an object to return |
+| `T*` | A position that may not exist — and `std::optional` is preferred where it can hold the answer |
+| `std::optional<T>` / `std::expected<T, E>` | The operation can fail (POL-0031) |
+
+```cpp
+// Never. Returning const by value blocks the caller from moving out of it.
+const Plan build(const Input& in);
+
+// Never. Returns a reference to a destroyed temporary.
+Plan&& build(const Input& in);
+
+// Right.
+Plan build(const Input& in);
+```
+
+Never return an rvalue reference, and never write `return std::move(local)` — it
+prevents the copy elision that would otherwise remove the move entirely.
+
+A returned `T*` says only *here is a position*; it never means the caller now
+owns something. Ownership transfer is `std::unique_ptr` (POL-0014).
+
+Return by value is the default because it is the only form with no lifetime
+question attached. A reference or pointer return makes the caller responsible
+for knowing how long the referent lives, and that knowledge is not in the
+signature — which is exactly what POL-0003 asks a declaration to carry.
+
+## MUST — `std::move` appears only where ownership leaves the current scope
+
+POL-0151 · CG ES.56, CG F.19, CG F.48
+
+```cpp
+// Never. Blocks copy elision; the return was already free.
+Plan build() { Plan p = assemble(); return std::move(p); }
+
+// Right.
+Plan build() { return assemble(); }
+
+// Right. The value is genuinely leaving this scope.
+plans_.push_back(std::move(p));
+
+// Right. A forwarding parameter forwards, once.
+template <typename T>
+void store(T&& value) { items_.emplace_back(std::forward<T>(value)); }
+```
+
+A parameter declared `T&&` in a deduced context is a forwarding reference, not
+an rvalue reference: it is passed on with `std::forward<T>` exactly once, and
+doing anything else with it after that reads a moved-from object.
+
+`std::move` on a return statement suppresses the copy elision that would
+otherwise construct the result in place, so it converts a free return into a
+move. It also breaks return-value optimization for a named local, which is the
+one case where the compiler was already doing better than the annotation.
+
+Everywhere else, `std::move` is a claim that the source will not be read again.
+Writing it where that is untrue leaves a valid but unspecified object that
+subsequent code reads without any diagnostic — the value is not garbage, it is
+merely not what the author expected, which is the failure POL-0002 ranks worst.
+
+## MUST — A derived class re-exposes the whole overload set, and a default argument is stated once
+
+POL-0159 · CG C.138, CG C.140, CG F.51
+
+```cpp
+// Never. write(std::span) hides every base overload; the base one stops being callable.
+class GcodeExporter : public Exporter {
+ public:
+    void write(std::span<const Move>) override;
+};
+
+// Right.
+class GcodeExporter : public Exporter {
+ public:
+    using Exporter::write;
+    void write(std::span<const Move>) override;
+};
+```
+
+Prefer a default argument to two overloads that differ only by one parameter. A
+default states the relationship once; two overloads state it twice and the
+second one drifts (POL-0056).
+
+A default argument on a virtual function is never repeated or changed in an
+override. Default arguments are resolved by static type and the call by dynamic
+type, so the override runs with the base's default, and the code reads as if the
+override's applies.
+
+A name declared in a derived class hides every base declaration of that name,
+regardless of signature. So adding one overload silently removes the others from
+overload resolution for that type, and callers get a conversion error naming
+argument types rather than any mention of the hiding.
+
 See also: [POL-0017 — Dimensioned values carry their unit in the name](naming.md)

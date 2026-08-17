@@ -427,3 +427,301 @@ Regularity is what lets a type be used without being studied. A value that
 copies, compares, and sorts the way `int` does needs no documentation to be put
 in a `std::vector` or a `std::map`, and every deviation is a special case
 someone has to learn before they can use it (POL-0004).
+
+## MUST — Members initialize in declaration order, and every member is initialized
+
+POL-0136 · CG C.13, CG C.47, CG C.48, CG Type.6
+
+```cpp
+// Never. count_ is initialized first, from an uninitialized values_.
+class Histogram {
+ public:
+    explicit Histogram(std::vector<int> values)
+        : count_{values_.size()}, values_{std::move(values)} {}
+ private:
+    std::size_t count_;
+    std::vector<int> values_;
+};
+
+// Right. Declaration order is initialization order, and one default is stated once.
+class Histogram {
+ public:
+    explicit Histogram(std::vector<int> values)
+        : values_{std::move(values)}, count_{values_.size()} {}
+ private:
+    std::vector<int> values_;
+    std::size_t count_{0};
+};
+```
+
+A member that depends on another is declared after it. A member with the same
+initial value in every constructor uses a default member initializer, stated
+once at the declaration rather than repeated in each constructor list.
+
+Members initialize in declaration order regardless of the order written in the
+initializer list, so a list that disagrees with the declarations reads as one
+sequence and executes as another. Reading a member before its initializer has
+run is undefined behaviour, and `-Wreorder` under POL-0089 is what makes the
+mismatch a build error rather than a silent one.
+
+Leaving a member uninitialized is the class-scope form of POL-0096, with the
+same consequence and less visibility: the window is every constructor that
+forgets it, not one declaration a reader can see.
+
+## MUST — A destructor cannot fail, and neither can `swap` or a deallocation
+
+POL-0144 · CG C.36, CG C.37, CG E.16
+
+```cpp
+// Never. If close() throws during unwinding, the program terminates.
+~FileHandle() { close(fd_); }
+
+// Right. Report at the point the caller can act; the destructor only releases.
+~FileHandle() noexcept {
+    if (fd_ >= 0) { ::close(fd_); }
+}
+void flush();  // the operation that can fail is a named operation the caller calls
+```
+
+A destructor is implicitly `noexcept`, and it is written to be true: everything
+inside it either cannot throw or has its exception handled there.
+
+The same holds for `swap`, for deallocation, and for the copy and move
+constructors of an exception type — all four run on paths that have no way to
+report a second failure.
+
+A destructor that throws during stack unwinding calls `std::terminate`, so an
+exception in flight plus a failing destructor is a process abort with no handler
+and no unwinding. That means the failure mode of a throwing destructor is not a
+propagated error but the loss of every error already being reported.
+
+Where releasing a resource genuinely can fail in a way the caller must know
+about, the fallible part is a named operation the caller invokes explicitly
+(POL-0030). The destructor remains the last-resort release that always runs and
+never reports.
+
+## MUST — A value type that needs `swap` provides a `noexcept` one that cannot fail
+
+POL-0145 · CG C.83, CG C.84, CG C.85
+
+```cpp
+class Buffer {
+ public:
+    friend void swap(Buffer& a, Buffer& b) noexcept {
+        using std::swap;
+        swap(a.data_, b.data_);
+        swap(a.size_, b.size_);
+    }
+ private:
+    std::unique_ptr<std::byte[]> data_;
+    std::size_t size_{0};
+};
+```
+
+Provide it as a free function in the type's namespace so argument-dependent
+lookup finds it (POL-0123), and call it through the `using std::swap` idiom so
+the member-wise fallback applies where no custom one exists.
+
+Most types need none of this: rule of zero (POL-0021) gives a correct `swap`
+already, and this is written only where the special members were written.
+
+`swap` is `noexcept` because the standard library and the copy-and-swap idiom
+both depend on it — a `swap` that can throw leaves both objects in an
+indeterminate state with no way to recover either, which is the case POL-0144
+rules out for the same reason. It also has no failure mode to report: exchanging
+two objects that already exist allocates nothing and acquires nothing.
+
+## MUST — `==` is symmetric and `noexcept`, and a `hash` agrees with it
+
+POL-0146 · CG C.86, CG C.87, CG C.89
+
+```cpp
+class ToolId {
+ public:
+    friend bool operator==(ToolId, ToolId) noexcept = default;
+    friend auto operator<=>(ToolId, ToolId) noexcept = default;
+ private:
+    std::uint32_t value_{0};
+};
+
+template <>
+struct std::hash<ToolId> {
+    std::size_t operator()(ToolId id) const noexcept { return std::hash<std::uint32_t>{}(id.value()); }
+};
+```
+
+`==` takes both operands the same way, so it is a free function rather than a
+member (POL-0123). On C++20 prefer `= default` with `operator<=>`, which derives
+the whole set from the members and cannot disagree with itself.
+
+A `std::hash` specialization is `noexcept` and is consistent with `==`: two
+objects that compare equal hash equal. An unordered container silently misbehaves
+otherwise, storing duplicates that no lookup finds.
+
+Never define `==` on a polymorphic base. It compares the base subobject, so two
+objects of different derived types compare equal on their shared half — the same
+slicing defect POL-0121 names, arriving through a comparison instead of a copy.
+Comparison belongs on value types.
+
+## MUST — A special member that is stated is stated as `= default` or `= delete`
+
+POL-0147 · CG C.80, CG C.81
+
+```cpp
+// Never. A hand-written copy that does exactly what the compiler would.
+Config(const Config& other) : retries_{other.retries_}, path_{other.path_} {}
+
+// Right.
+Config(const Config&) = default;
+NonCopyable(const NonCopyable&) = delete;
+NonCopyable& operator=(const NonCopyable&) = delete;
+```
+
+`= default` where the compiler's semantics are wanted and the declaration is
+needed anyway — because another special member was declared, or because the
+access level differs. `= delete` where the operation should not exist, and then
+the whole group goes, since deleting copy without deleting move leaves a type
+that moves when the author meant it to do neither.
+
+A hand-written member-wise copy is the compiler's implementation, retyped, and
+it stops matching the moment a member is added. Nothing reports the omission:
+the new member is simply not copied, and the object is silently half-initialized.
+
+`= delete` is preferred to a private undeclared member because the error arrives
+at the call site, naming the deleted function, rather than as a link failure
+somewhere else. Most types need none of this — POL-0021 is the default, and this
+is what to write when the rule of zero does not apply.
+
+## SHOULD — Constructors share their common work by delegating, not by repeating it
+
+POL-0148 · CG C.51, CG C.52
+
+```cpp
+// Avoid. The same establishment written twice; the second drifts.
+Session::Session(Config c) : config_{std::move(c)}, started_{Clock::now()} { validate(); }
+Session::Session() : config_{Config::defaults()}, started_{Clock::now()} { validate(); }
+
+// Prefer.
+Session::Session(Config c) : config_{std::move(c)}, started_{Clock::now()} { validate(); }
+Session::Session() : Session{Config::defaults()} {}
+```
+
+A derived class that adds no members of its own inherits its base's constructors
+with `using Base::Base` rather than forwarding each one by hand.
+
+A repeated initializer list is the parallel near-duplicate POL-0056 names,
+sitting in the one place where the consequence is an invariant. Two constructors
+establishing the same invariant separately will eventually establish it
+differently, and the object is then valid or not depending on which one the
+caller used — which defeats POL-0015 while appearing to satisfy it.
+
+An initialization step that cannot be reached from one delegating chain is a sign
+the type has two states rather than one, and the answer is two types (POL-0034)
+rather than two constructors.
+
+## MUST — A base used as an interface is pure abstract and has no constructor
+
+POL-0149 · CG C.121, CG C.126
+
+```cpp
+class Exporter {
+ public:
+    virtual ~Exporter() = default;
+    Exporter(const Exporter&) = delete;
+    Exporter& operator=(const Exporter&) = delete;
+
+    virtual void write(std::span<const Move> moves) = 0;
+    virtual std::string_view extension() const = 0;
+
+ protected:
+    Exporter() = default;
+};
+```
+
+No data members, no implemented functions, every function pure virtual. An
+abstract class with no state needs no user-written constructor — there is
+nothing to establish — so the only one present is the protected default that
+stops the interface being instantiated directly.
+
+Adding data or an implementation to an interface base makes it two things at
+once: a contract every implementer must satisfy, and a partial implementation
+every implementer inherits whether it suits them or not. Changing either half
+then forces a change on every derived class, which is the coupling POL-0018
+draws dependency direction to avoid.
+
+This is the shape after POL-0037 has established that a hierarchy is right.
+Variation over a fixed, known set is `std::variant` (POL-0044); an interface is
+for a set that is open, where implementations arrive from elsewhere.
+
+## SHOULD — A getter-and-setter pair on every member means the type is a `struct`
+
+POL-0166 · CG C.131
+
+```cpp
+// Avoid. Six lines of ceremony to expose two public fields.
+class Point {
+ public:
+    double x() const { return x_; }
+    void set_x(double v) { x_ = v; }
+    double y() const { return y_; }
+    void set_y(double v) { y_ = v; }
+ private:
+    double x_{0.0};
+    double y_{0.0};
+};
+
+// Prefer. Constraint-free data is an aggregate.
+struct Point {
+    double x{0.0};
+    double y{0.0};
+};
+```
+
+A read accessor with no matching setter is different and is fine: it exposes a
+value while keeping the invariant, which is what POL-0022 asks for.
+
+A settable pair on every member provides no encapsulation. Any caller can put
+the object in any state, so there is no invariant, which means the private
+members were never protecting anything — the class is an aggregate wearing
+method calls (POL-0042).
+
+It also costs at the point it matters most. A reader who sees a class assumes an
+invariant and goes looking for it, and the accessors are what makes that search
+take a while before coming up empty (POL-0006).
+
+## MUST — A class declares its members in one order: public interface first, data last
+
+POL-0167 · CG NL.16
+
+```cpp
+class ToolTable {
+ public:
+    static std::optional<ToolTable> try_load(const std::filesystem::path& path);
+
+    std::optional<Tool> find(ToolId id) const;
+    std::size_t size() const;
+
+ protected:
+    void invalidate();
+
+ private:
+    explicit ToolTable(std::vector<Tool> tools);
+
+    std::unordered_map<ToolId, Tool> by_id_;
+};
+```
+
+`public`, then `protected`, then `private`. Within each: types and aliases,
+then constructors and the special members, then the operations, then data.
+
+Data members go last and are `private` (POL-0126), and their relative order is
+constrained by POL-0136 where one initializes from another.
+
+A reader opening a class wants its interface, which is the public operations,
+and almost never wants its representation first. Putting data at the top makes
+every reader scroll past the part they were told not to depend on.
+
+The order is fixed rather than chosen per class for the reason POL-0004 gives:
+where two arrangements are equally correct, one arrangement everywhere means no
+one spends attention on the question, and a class that departs from it is
+signalling something rather than expressing a preference.

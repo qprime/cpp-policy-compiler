@@ -188,3 +188,154 @@ applies to every value written afterward, including from a different function
 that shares the stream. The defect appears as a number formatted wrongly a long
 way from the manipulator that caused it. A format string states the formatting
 for each argument at the point of use and carries nothing between calls.
+
+## MUST — The string type states what it owns and what it holds
+
+POL-0131 · CG SL.str.1, CG SL.str.4, CG SL.str.5, CG SL.str.10, CG SL.str.12
+
+| Need | Type |
+|------|------|
+| Own a character sequence | `std::string` |
+| Refer to one without owning it | `std::string_view`; `const std::string&` below C++17 |
+| A single character | `char` |
+| Raw bytes that are not text | `std::span<const std::byte>` |
+| Locale-sensitive operation | `std::string`, never a view |
+
+```cpp
+void log_label(std::string_view label);
+std::string build_label(const Tool& t);
+const auto suffix = "mm"s;
+```
+
+Use the `s` suffix where a `std::string` is wanted from a literal, so overload
+resolution does not pick the `const char*` form and allocate somewhere else.
+
+A `std::string_view` is a non-owning view and carries POL-0047's rule with it: a
+parameter, never a member, and never returned from a function whose argument
+owned the characters.
+
+`char*` for a sequence is the pointer-and-length pair POL-0046 rejects, with the
+length replaced by a convention about a terminator. Bytes that are not text are
+`std::byte` rather than `char` because `char` participates in arithmetic and
+locale rules that mean nothing for a byte, and its signedness is
+implementation-defined — so the same expression differs across platforms
+(POL-0007).
+
+## MUST — One expression, one side effect, and no reliance on the order of the rest
+
+POL-0134 · CG ES.40, CG ES.41, CG ES.43, CG ES.44, CG ES.87
+
+```cpp
+// Never. Unspecified which argument is evaluated first.
+emit(next_move(cursor), remaining(cursor));
+
+// Never. Two modifications of one object with no sequencing between them.
+values[i] = i++;
+
+// Right. Order is stated by statement order.
+const auto move = next_move(cursor);
+const auto left = remaining(cursor);
+emit(move, left);
+```
+
+Parenthesize where precedence is not immediately obvious, even where the default
+is correct. A condition that is already `bool` is written plainly, without a
+redundant `== true` or `!= nullptr`.
+
+An expression that needs study is split into named intermediates, which is
+POL-0030 applied inside a statement.
+
+The order in which function arguments are evaluated is unspecified, so an
+expression that depends on it produces different results on different compilers
+and can change between optimization levels of the same one. That is the class
+POL-0007 rules out: the answer is not wrong so much as unverifiable, since no
+run tells you what another run will do.
+
+Modifying an object twice without an intervening sequence point is worse — it is
+undefined behaviour, and the compiler is entitled to assume it does not happen.
+
+## MUST — Bit manipulation uses an unsigned type of stated width
+
+POL-0169 · CG ES.101
+
+```cpp
+// Never. Shifting into or past the sign bit of a signed type is undefined.
+int flags = 1 << 31;
+
+// Right.
+constexpr std::uint32_t kReadyFlag = std::uint32_t{1} << 31;
+const auto masked = value & kReadyFlag;
+```
+
+`std::uint8_t`, `std::uint32_t`, `std::uint64_t` — the width is stated, because
+a bit position only means something against a known width. A shift count is
+always less than that width; shifting by the width or more is undefined, not
+zero.
+
+This is the one exception to POL-0101, which puts arithmetic in a signed type.
+The reason POL-0101 gives — that unsigned wraps at zero — is exactly the
+behaviour wanted here, where the value is a set of bits rather than a number.
+Keep the two apart: a value being manipulated bitwise is not also used in
+arithmetic, and if it must be, it converts at one named point.
+
+On C++20 prefer `std::popcount`, `std::countl_zero`, `std::rotl`, and
+`std::has_single_bit` to hand-written equivalents (POL-0109). Each of these is a
+loop that is easy to write subtly wrong and that the standard already has
+correct.
+
+## MUST — A divisor is established non-zero before the division, not after
+
+POL-0170 · CG ES.105
+
+```cpp
+// Never. Integer division by zero is undefined behaviour, not an exception.
+const auto per_pass = total_depth_mm / pass_count;
+
+// Right, at a boundary: reject it (POL-0005).
+if (pass_count <= 0) {
+    return std::unexpected(PlanError::NoPasses);   // POL-0011 message at the throw site
+}
+
+// Right, inside: the type already established it.
+const auto per_pass = total_depth_mm / passes.count();   // PassCount cannot be zero
+```
+
+Where the same division happens in several places, the check belongs in a type
+that establishes the precondition once (POL-0027), not at each call site
+(POL-0045).
+
+Integer division by zero is undefined behaviour, so it does not reliably trap —
+the compiler may assume it cannot happen and remove the branch that would have
+detected it, and the observable result depends on the target.
+
+Floating-point division by zero is defined and produces infinity or NaN, which
+is worse for this corpus: the value propagates silently through every subsequent
+computation and reaches output as a number-shaped thing that is not a number.
+POL-0013 already rejects NaN as a value with meaning; this is where it most often
+enters.
+
+## SHOULD — Input is read in whole units, not character by character
+
+POL-0171 · CG SL.io.1
+
+```cpp
+// Avoid. Reassembles a line the library already knows how to read.
+std::string line;
+for (char c{}; in.get(c) && c != '\n'; ) { line += c; }
+
+// Prefer.
+std::string line;
+while (std::getline(in, line)) { parse_line(line); }
+```
+
+Read a line, a record, or the whole file, and parse from the result. Character
+level is for a lexer that genuinely needs one character of lookahead, and there
+it works over a buffer already in memory rather than over the stream.
+
+Every read is checked. A stream in a failed state returns without assigning, so
+an unchecked read leaves the previous value in place and the loop processes the
+same record twice — which is a wrong answer rather than a diagnostic (POL-0002).
+
+Input is the outer boundary, so it is where POL-0005 says validation happens and
+where units get converted (POL-0061). Reading in whole units is what makes that
+possible: a record is the thing that can be validated, where a character is not.

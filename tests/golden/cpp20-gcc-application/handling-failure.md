@@ -167,3 +167,67 @@ empty case, tests are written that pass against it, and the stub acquires
 dependants that will keep working when the real body lands and starts returning
 data. Whoever implements it then discovers the interesting part was never the
 body, it was the four callers who built on the empty result.
+
+## MUST — No code that can throw runs while holding something nothing will release
+
+POL-0163 · CG E.13, CG E.19
+
+```cpp
+// Never. If the second allocation throws, the first leaks.
+void install(Widget* w) {
+    Node* n = new Node(w);
+    registry_.add(n);
+}
+
+// Right. Owned before anything else can fail.
+void install(std::unique_ptr<Widget> w) {
+    registry_.add(std::make_unique<Node>(std::move(w)));
+}
+```
+
+Where the thing to release has no resource-owning type available — a C handle, a
+registration that must be undone, a temporary state change — use a scope guard: a
+small object whose destructor runs the cleanup, released explicitly on the
+success path.
+
+```cpp
+auto guard = ScopeExit{[&] { ::freeaddrinfo(info); }};
+```
+
+This is POL-0127 stated as an invariant rather than a prohibition. A raw
+allocation is one instance of holding something unowned; a file descriptor, a
+lock taken by hand, and a half-finished registration are others, and all of them
+leak on the same paths.
+
+An exception makes every statement between acquisition and release into an exit
+path, including ones nobody wrote. Ownership by a destructor covers all of them
+at once, which is why POL-0003 makes it the default rather than a technique.
+
+## MUST — `catch` clauses are ordered most-derived first, and catch by `const&`
+
+POL-0164 · CG E.31
+
+```cpp
+// Never. The base clause matches everything; the second is unreachable.
+try { load(path); }
+catch (const std::exception& e) { report(e); }
+catch (const std::filesystem::filesystem_error& e) { retry(e); }
+
+// Right.
+try { load(path); }
+catch (const std::filesystem::filesystem_error& e) { retry(e); }
+catch (const std::exception& e) { report(e); }
+```
+
+Catch by `const&`. Catching by value slices a derived exception down to the
+caught type (POL-0121), so the handler loses exactly the information that
+distinguished it.
+
+`catch (...)` appears only where the frame must not propagate — the outermost
+handler of a thread, or the binding layer translating to the host language
+(POL-0059) — and it always rethrows or reports rather than discarding.
+
+Clauses are tried in written order, not by best match, which is the opposite of
+overload resolution and the reason this needs stating at all. A base-class
+clause written first silently makes every later clause dead code, and most
+compilers do not warn.

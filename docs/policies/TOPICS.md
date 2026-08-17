@@ -22,7 +22,8 @@ Read when: deciding what type holds a piece of data — alternatives, absence,
 aggregates, inheritance, whether a thing becomes a type at all.
 
 POL-0009, POL-0013, POL-0033, POL-0034, POL-0037, POL-0038, POL-0042,
-POL-0043, POL-0044, POL-0103, POL-0104
+POL-0043, POL-0044, POL-0103, POL-0104, POL-0150, POL-0155, POL-0156,
+POL-0160, POL-0161
 
 ### Building a class
 
@@ -30,14 +31,15 @@ Read when: writing a type's mechanics — constructors, invariants, special
 members, `noexcept`, wrapper types.
 
 POL-0015, POL-0021, POL-0022, POL-0025, POL-0027, POL-0051, POL-0120,
-POL-0121, POL-0122, POL-0123, POL-0125, POL-0126
+POL-0121, POL-0122, POL-0123, POL-0125, POL-0126, POL-0136, POL-0144,
+POL-0145, POL-0146, POL-0147, POL-0148, POL-0149, POL-0166, POL-0167
 
 ### Deciding ownership
 
 Read when: deciding who owns an allocation or resource and how the declaration
 says so.
 
-POL-0014, POL-0024, POL-0048, POL-0127, POL-0128
+POL-0014, POL-0024, POL-0048, POL-0127, POL-0128, POL-0168
 
 ### Writing a function
 
@@ -46,7 +48,8 @@ duplication, templates, `auto`.
 
 POL-0016, POL-0023, POL-0029, POL-0030, POL-0035, POL-0040, POL-0046,
 POL-0047, POL-0050, POL-0052, POL-0054, POL-0056, POL-0114, POL-0115,
-POL-0116
+POL-0116, POL-0129, POL-0130, POL-0132, POL-0135, POL-0151, POL-0154,
+POL-0159
 
 Cross-reference: POL-0017 (unit suffixes, homed in Naming).
 
@@ -55,14 +58,16 @@ Cross-reference: POL-0017 (unit suffixes, homed in Naming).
 Read when: declaring anything — `const`, named constants, initialization,
 determinism.
 
-POL-0010, POL-0019, POL-0020, POL-0026, POL-0096, POL-0097
+POL-0010, POL-0019, POL-0020, POL-0026, POL-0096, POL-0097, POL-0153,
+POL-0157, POL-0165
 
 ### Handling failure
 
 Read when: choosing what happens when an operation cannot do what it was
 asked.
 
-POL-0011, POL-0031, POL-0032, POL-0039, POL-0053, POL-0055
+POL-0011, POL-0031, POL-0032, POL-0039, POL-0053, POL-0055, POL-0163,
+POL-0164
 
 ### Placing validation
 
@@ -76,14 +81,15 @@ POL-0036, POL-0041, POL-0045
 Read when: laying out headers, includes, namespaces, dependency direction, or
 a threading model.
 
-POL-0018, POL-0028, POL-0049, POL-0087, POL-0088, POL-0124
+POL-0018, POL-0028, POL-0049, POL-0087, POL-0088, POL-0124, POL-0137,
+POL-0162
 
 ### Naming
 
 Read when: naming anything — case, operation verbs, return-contract prefixes,
 unit suffixes — and deciding whether to write a comment.
 
-POL-0017, POL-0084, POL-0085, POL-0086, POL-0112, POL-0113
+POL-0017, POL-0084, POL-0085, POL-0086, POL-0112, POL-0113, POL-0152
 
 ### Crossing the FFI boundary
 
@@ -133,21 +139,23 @@ POL-0117, POL-0118, POL-0119
 Read when: writing the line itself — casts, arithmetic and signedness, which
 standard-library facility to reach for, how text gets formatted.
 
-POL-0094, POL-0095, POL-0101, POL-0102, POL-0109, POL-0110, POL-0111
+POL-0094, POL-0095, POL-0101, POL-0102, POL-0109, POL-0110, POL-0111,
+POL-0131, POL-0134, POL-0169, POL-0170, POL-0171
 
 ### Iterating a sequence
 
 Read when: walking a container — whether a loop is the right shape at all, how
 the element is bound, what may not change while iterating.
 
-POL-0098, POL-0099, POL-0100
+POL-0098, POL-0099, POL-0100, POL-0133
 
 ### Running concurrently
 
 Read when: a threading model exists and shared state has to be reached from
 more than one thread.
 
-POL-0105, POL-0106, POL-0107, POL-0108
+POL-0105, POL-0106, POL-0107, POL-0108, POL-0138, POL-0139, POL-0140,
+POL-0141, POL-0142, POL-0143
 
 Cross-reference: POL-0049 (whether a threading model is warranted at all,
 homed in Structuring modules and layers).
@@ -157,7 +165,7 @@ homed in Structuring modules and layers).
 Read when: setting up or changing a project's build — warnings, sanitizers,
 static analysis, formatting, the standard declaration.
 
-POL-0089, POL-0090, POL-0091, POL-0092, POL-0093
+POL-0089, POL-0090, POL-0091, POL-0092, POL-0093, POL-0158, POL-0172
 
 ## Rulings
 

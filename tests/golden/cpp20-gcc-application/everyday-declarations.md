@@ -24,6 +24,36 @@ diverge. The same threshold gets written at three sites, one is updated, and the
 disagreement is invisible because nothing connects the three. The name is also
 what states the unit and the intent, which the literal cannot.
 
+## NEVER — Never define a macro for a constant, a function, or program text
+
+POL-0157 · CG ES.30, CG ES.31, CG ES.33
+
+```cpp
+// Never. No type, no scope, and MIN(i++, j) evaluates i++ twice.
+#define MAX_TOOLS 64
+#define MIN(a, b) ((a) < (b) ? (a) : (b))
+
+// Right.
+constexpr int kMaxTools = 64;
+constexpr auto smaller = [](auto a, auto b) { return std::min(a, b); };
+```
+
+A constant is `constexpr` (POL-0010), a function is a function or a `constexpr`
+function (POL-0036), and a compile-time choice is `if constexpr` rather than
+`#if`.
+
+The exceptions are an include guard (POL-0028) and the small set of macros a
+platform or test framework requires. Those are `ALL_CAPS` and project-prefixed,
+per POL-0084, precisely because they have no scope and a short name will collide.
+
+A macro is a textual substitution performed before the compiler sees a type, so
+it obeys no scope, appears in no diagnostic, and is invisible to the debugger.
+An argument used twice in the body is evaluated twice, which turns any argument
+with a side effect into a defect that the call site cannot see.
+
+`ALL_CAPS` is reserved for macros for this reason: the name is the only warning a
+reader gets that ordinary language rules do not apply on that line.
+
 ## MUST — No undefined behaviour, no run-to-run variation
 
 POL-0019 · CG P.4, CG ES.20
@@ -162,3 +192,69 @@ which it is live and carries nothing. That region is where a stale read
 happens, and it grows every time the function does. Declaring at first use
 makes the scope match the meaning, which is also what lets the declaration be
 `const` and what makes an unused value visible rather than merely inert.
+
+## MUST — One name per declaration, written in the C++ form
+
+POL-0153 · CG ES.10, CG NL.11, CG NL.18, CG NL.21, CG NL.25
+
+```cpp
+// Never. Only p is a pointer, and the initializers are easy to misread.
+int* p, q;
+const long timeout = 3600000;
+void reset(void);
+
+// Right.
+int* p{nullptr};
+int q{0};
+constexpr auto kTimeoutMs = 3'600'000L;
+void reset();
+```
+
+The declarator binds to the type, not the name: `int* p` rather than `int *p`,
+because the pointer is part of what `p` is. An empty parameter list is written
+`()`, never `(void)`, which is the C spelling.
+
+Long numeric literals use digit separators, and a literal whose type matters
+carries its suffix — `3'600'000L`, `0.5F`, `1U`. A literal that means something
+gets a name instead (POL-0010).
+
+A multi-name declaration distributes the declarator across names unevenly, so
+`int* p, q` declares one pointer and one `int` while reading as two pointers. It
+also blocks the per-name initialization POL-0096 requires, since the natural
+form initializes only the last one, and it makes every later edit that adds a
+name inherit whichever declarator happened to be there.
+
+## MUST — A local name is never reused and never shadows an outer one
+
+POL-0165 · CG ES.12, CG ES.26
+
+```cpp
+// Never. count means two things, and the inner tool hides the outer one.
+int count = tools.size();
+count = failures.size();
+
+for (const auto& tool : tools) {
+    for (const auto& tool : tool.inserts()) { check(tool); }
+}
+
+// Right.
+const auto tool_count = tools.size();
+const auto failure_count = failures.size();
+
+for (const auto& tool : tools) {
+    for (const auto& insert : tool.inserts()) { check(insert); }
+}
+```
+
+A variable holds one thing for its whole life. Reusing it for a second purpose
+is two variables sharing storage, and it is what blocks the `const` POL-0020
+asks for.
+
+Shadowing compiles silently, so an edit to the inner block that meant to touch
+the outer name touches the inner one instead, and the outer value is simply
+never updated. `-Wshadow` reports it, which is why the warning set in POL-0089
+is worth having.
+
+Both are the same defect at different scales: a name that does not identify one
+value forces the reader to track which meaning is live at each line, and the
+declaration no longer answers what the name is (POL-0097).
