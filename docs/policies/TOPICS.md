@@ -29,14 +29,15 @@ POL-0043, POL-0044, POL-0103, POL-0104
 Read when: writing a type's mechanics — constructors, invariants, special
 members, `noexcept`, wrapper types.
 
-POL-0015, POL-0021, POL-0022, POL-0025, POL-0027, POL-0051
+POL-0015, POL-0021, POL-0022, POL-0025, POL-0027, POL-0051, POL-0120,
+POL-0121, POL-0122, POL-0123, POL-0125, POL-0126
 
 ### Deciding ownership
 
 Read when: deciding who owns an allocation or resource and how the declaration
 says so.
 
-POL-0014, POL-0024, POL-0048
+POL-0014, POL-0024, POL-0048, POL-0127, POL-0128
 
 ### Writing a function
 
@@ -44,7 +45,8 @@ Read when: writing a signature or body — parameters, decomposition,
 duplication, templates, `auto`.
 
 POL-0016, POL-0023, POL-0029, POL-0030, POL-0035, POL-0040, POL-0046,
-POL-0047, POL-0050, POL-0052, POL-0054, POL-0056
+POL-0047, POL-0050, POL-0052, POL-0054, POL-0056, POL-0114, POL-0115,
+POL-0116
 
 Cross-reference: POL-0017 (unit suffixes, homed in Naming).
 
@@ -74,7 +76,7 @@ POL-0036, POL-0041, POL-0045
 Read when: laying out headers, includes, namespaces, dependency direction, or
 a threading model.
 
-POL-0018, POL-0028, POL-0049, POL-0087, POL-0088
+POL-0018, POL-0028, POL-0049, POL-0087, POL-0088, POL-0124
 
 ### Naming
 
@@ -118,6 +120,13 @@ Read when: writing coroutines — lifetimes across suspension, captures,
 awaitables, deep chains. Vacuous below C++20.
 
 POL-0080, POL-0081, POL-0082, POL-0083
+
+### Choosing a statement
+
+Read when: shaping control flow — which loop, which selection, early returns,
+`switch` arms and fallthrough.
+
+POL-0117, POL-0118, POL-0119
 
 ### Writing an expression
 

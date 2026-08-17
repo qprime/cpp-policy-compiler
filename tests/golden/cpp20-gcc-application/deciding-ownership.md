@@ -79,3 +79,61 @@ moment no single piece of code decides. What is lost is the question: a
 assumes sharing was required and writes code that requires it. That is how a
 placeholder becomes load-bearing, and by then the cost of asking again is the
 cost of tracing every copy.
+
+## THIS WAY — Make function
+
+POL-0128 · CG C.150, CG C.151, CG R.22, CG R.23
+
+```cpp
+auto exporter = std::make_unique<GcodeExporter>(config);
+auto shared_table = std::make_shared<ToolTable>(load_tools(path));
+```
+
+`std::make_unique` and `std::make_shared` are how an owned heap object is
+created. Both name the type once, both hand the allocation to its owner within a
+single expression, and neither leaves a window in which the memory is unowned
+(POL-0127).
+
+`std::make_shared` also places the control block and the object in one
+allocation. Reach for it only where ownership is genuinely shared (POL-0048);
+the default remains `std::unique_ptr`.
+
+The exception is a custom deleter, which `make_unique` cannot express. There the
+constructor takes the raw pointer, still in one statement.
+
+Writing `std::unique_ptr<T>(new T(...))` names `T` twice, which is one more
+place for the two to disagree after a later edit. It also reintroduces the
+unowned window the smart pointer exists to remove, since the argument is
+evaluated before the constructor runs and the compiler may interleave it with
+other arguments in the same call.
+
+## NEVER — Never write `new`, `delete`, `malloc`, or `free` outside a resource-owning type
+
+POL-0127 · CG ES.60, CG ES.61, CG R.10, CG R.12, CG R.13
+
+```cpp
+// Never. Any throw between the two lines leaks; the delete is on every path.
+Exporter* e = new GcodeExporter(config);
+run(e);
+delete e;
+
+// Never. The allocation is unowned until the call returns, and the order of
+// evaluation of the two arguments is unspecified.
+emit(std::unique_ptr<Exporter>(new GcodeExporter(cfg)), compute_budget());
+
+// Right.
+auto e = std::make_unique<GcodeExporter>(config);
+run(*e);
+```
+
+Where an allocation genuinely must be explicit, it is handed to its owner in the
+same statement and nothing else happens in that statement (POL-0128).
+
+`delete[]` pairs with `new[]` and `delete` with `new`, but neither should appear:
+a dynamic array is a `std::vector` (POL-0109).
+
+A raw allocation is a resource with no owner until something takes it, and every
+path between the two is a leak the compiler will not mention. It is also the one
+case where an exception thrown by unrelated code destroys memory safety, because
+the stack unwinds past a pointer nobody is responsible for. RAII removes the
+window rather than narrowing it, which is what POL-0003 asks of every resource.

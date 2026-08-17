@@ -152,6 +152,7 @@ to run it. Work moved into it is work that cannot be skipped.
 - [Writing tests](writing-tests.md) — writing or reviewing tests — what to test, what not to, goldens, round-trips, the framework.
 - [Logging](logging.md) — emitting diagnostics from library or application code.
 - [Coroutines](coroutines.md) — writing coroutines — lifetimes across suspension, captures, awaitables, deep chains. Vacuous below C++20.
+- [Choosing a statement](choosing-a-statement.md) — shaping control flow — which loop, which selection, early returns, `switch` arms and fallthrough.
 - [Writing an expression](writing-an-expression.md) — writing the line itself — casts, arithmetic and signedness, which standard-library facility to reach for, how text gets formatted.
 - [Iterating a sequence](iterating-a-sequence.md) — walking a container — whether a loop is the right shape at all, how the element is bound, what may not change while iterating.
 - [Running concurrently](running-concurrently.md) — a threading model exists and shared state has to be reached from more than one thread.

@@ -1819,5 +1819,304 @@
       }
     ],
     "policy_file": "POL-0113-never-restate-the-code-in-a-comment.md"
+  },
+  "POL-0114": {
+    "kind": "standard",
+    "topic": "writing-a-function",
+    "statement": "A lambda names every capture; `[=]` and `[&]` are not written",
+    "attribution": [
+      {
+        "source": "testimony/coding-rules-2026-07.md",
+        "locator": "Lambdas 2",
+        "upstream": []
+      },
+      {
+        "source": "standard-practice",
+        "locator": "lambdas, capture list",
+        "upstream": [
+          "CG F.54"
+        ]
+      }
+    ],
+    "policy_file": "POL-0114-a-lambda-captures-explicitly.md"
+  },
+  "POL-0115": {
+    "kind": "standard",
+    "topic": "writing-a-function",
+    "statement": "A lambda that outlives the current scope captures by value",
+    "attribution": [
+      {
+        "source": "testimony/coding-rules-2026-07.md",
+        "locator": "Lambdas 3",
+        "upstream": []
+      },
+      {
+        "source": "testimony/coding-rules-2026-07.md",
+        "locator": "Lambdas 4",
+        "upstream": []
+      },
+      {
+        "source": "testimony/coding-rules-2026-07.md",
+        "locator": "Lambdas 5",
+        "upstream": []
+      },
+      {
+        "source": "standard-practice",
+        "locator": "lambdas, capture lifetime",
+        "upstream": [
+          "CG F.52",
+          "CG F.53"
+        ]
+      }
+    ],
+    "policy_file": "POL-0115-an-escaping-lambda-captures-by-value.md"
+  },
+  "POL-0116": {
+    "kind": "guideline",
+    "topic": "writing-a-function",
+    "statement": "A lambda is trivial glue at one call site; anything else is a named function",
+    "attribution": [
+      {
+        "source": "testimony/coding-rules-2026-07.md",
+        "locator": "Lambdas 1",
+        "upstream": []
+      },
+      {
+        "source": "standard-practice",
+        "locator": "lambdas, when to reach for one",
+        "upstream": [
+          "CG F.11",
+          "CG F.50",
+          "CG T.40",
+          "CG T.141",
+          "CG C.170",
+          "CG ES.28"
+        ]
+      }
+    ],
+    "policy_file": "POL-0116-a-lambda-is-glue-at-one-call-site.md"
+  },
+  "POL-0117": {
+    "kind": "guideline",
+    "topic": "choosing-a-statement",
+    "statement": "Control flow takes the plainest statement that fits",
+    "attribution": [
+      {
+        "source": "standard-practice",
+        "locator": "control flow, statement selection",
+        "upstream": [
+          "CG ES.70",
+          "CG ES.72",
+          "CG ES.73",
+          "CG ES.75",
+          "CG ES.77",
+          "CG ES.85",
+          "CG NR.2",
+          "CG NR.6"
+        ]
+      }
+    ],
+    "policy_file": "POL-0117-control-flow-takes-the-plainest-statement.md"
+  },
+  "POL-0118": {
+    "kind": "anti-pattern",
+    "topic": "choosing-a-statement",
+    "statement": "Never write `goto`",
+    "attribution": [
+      {
+        "source": "standard-practice",
+        "locator": "control flow, goto",
+        "upstream": [
+          "CG ES.76"
+        ]
+      }
+    ],
+    "policy_file": "POL-0118-never-goto.md"
+  },
+  "POL-0119": {
+    "kind": "standard",
+    "topic": "choosing-a-statement",
+    "statement": "A `switch` states every case and never falls through by accident",
+    "attribution": [
+      {
+        "source": "standard-practice",
+        "locator": "control flow, switch",
+        "upstream": [
+          "CG ES.78",
+          "CG ES.79"
+        ]
+      }
+    ],
+    "policy_file": "POL-0119-a-switch-states-every-case.md"
+  },
+  "POL-0120": {
+    "kind": "standard",
+    "topic": "building-a-class",
+    "statement": "A class with a virtual function states its destructor and suppresses copying",
+    "attribution": [
+      {
+        "source": "standard-practice",
+        "locator": "polymorphic class shape",
+        "upstream": [
+          "CG C.67",
+          "CG C.127",
+          "CG C.130",
+          "CG C.133",
+          "CG NR.7"
+        ]
+      }
+    ],
+    "policy_file": "POL-0120-a-polymorphic-base-is-shaped-for-inheritance.md"
+  },
+  "POL-0121": {
+    "kind": "anti-pattern",
+    "topic": "building-a-class",
+    "statement": "Never copy a polymorphic object by value, and never index one through a base pointer",
+    "attribution": [
+      {
+        "source": "standard-practice",
+        "locator": "polymorphic class shape, slicing",
+        "upstream": [
+          "CG ES.63",
+          "CG C.145",
+          "CG C.152",
+          "CG T.81"
+        ]
+      }
+    ],
+    "policy_file": "POL-0121-never-slice-a-polymorphic-object.md"
+  },
+  "POL-0122": {
+    "kind": "standard",
+    "topic": "building-a-class",
+    "statement": "An operator is defined only for its conventional meaning",
+    "attribution": [
+      {
+        "source": "standard-practice",
+        "locator": "operator overloading, meaning",
+        "upstream": [
+          "CG C.160",
+          "CG C.162",
+          "CG C.163",
+          "CG C.167",
+          "CG C.166"
+        ]
+      }
+    ],
+    "policy_file": "POL-0122-an-operator-means-what-it-conventionally-means.md"
+  },
+  "POL-0123": {
+    "kind": "standard",
+    "topic": "building-a-class",
+    "statement": "A symmetric operator is a free function in its type's namespace, and conversions are `explicit`",
+    "attribution": [
+      {
+        "source": "standard-practice",
+        "locator": "operator overloading, placement and form",
+        "upstream": [
+          "CG C.161",
+          "CG C.164",
+          "CG C.165",
+          "CG C.168"
+        ]
+      }
+    ],
+    "policy_file": "POL-0123-operators-are-free-functions-beside-their-type.md"
+  },
+  "POL-0124": {
+    "kind": "standard",
+    "topic": "structuring-modules-and-layers",
+    "statement": "A function's inputs and outputs are all in its signature",
+    "attribution": [
+      {
+        "source": "standard-practice",
+        "locator": "global and hidden state",
+        "upstream": [
+          "CG I.1",
+          "CG I.2",
+          "CG I.3",
+          "CG I.22",
+          "CG R.6",
+          "CG E.28"
+        ]
+      }
+    ],
+    "policy_file": "POL-0124-no-mutable-global-or-hidden-state.md"
+  },
+  "POL-0125": {
+    "kind": "standard",
+    "topic": "building-a-class",
+    "statement": "When copy or move is written out, it takes the standard shape",
+    "attribution": [
+      {
+        "source": "standard-practice",
+        "locator": "copy and move operation shape",
+        "upstream": [
+          "CG C.60",
+          "CG C.61",
+          "CG C.62",
+          "CG C.63",
+          "CG C.64",
+          "CG C.65"
+        ]
+      }
+    ],
+    "policy_file": "POL-0125-copy-and-move-have-a-fixed-shape.md"
+  },
+  "POL-0126": {
+    "kind": "standard",
+    "topic": "building-a-class",
+    "statement": "A value type behaves like `int`",
+    "attribution": [
+      {
+        "source": "standard-practice",
+        "locator": "regular value types",
+        "upstream": [
+          "CG C.11",
+          "CG C.12",
+          "CG C.43",
+          "CG C.44",
+          "CG C.134"
+        ]
+      }
+    ],
+    "policy_file": "POL-0126-a-value-type-is-regular.md"
+  },
+  "POL-0127": {
+    "kind": "anti-pattern",
+    "topic": "deciding-ownership",
+    "statement": "Never write `new`, `delete`, `malloc`, or `free` outside a resource-owning type",
+    "attribution": [
+      {
+        "source": "standard-practice",
+        "locator": "allocation",
+        "upstream": [
+          "CG ES.60",
+          "CG ES.61",
+          "CG R.10",
+          "CG R.12",
+          "CG R.13"
+        ]
+      }
+    ],
+    "policy_file": "POL-0127-never-a-naked-new-or-delete.md"
+  },
+  "POL-0128": {
+    "kind": "pattern",
+    "topic": "deciding-ownership",
+    "statement": "Make function",
+    "attribution": [
+      {
+        "source": "standard-practice",
+        "locator": "make functions",
+        "upstream": [
+          "CG C.150",
+          "CG C.151",
+          "CG R.22",
+          "CG R.23"
+        ]
+      }
+    ],
+    "policy_file": "POL-0128-construct-owned-objects-with-a-make-function.md"
   }
 }

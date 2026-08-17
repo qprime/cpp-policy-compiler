@@ -1,23 +1,26 @@
 # C++ Core Guidelines coverage ledger
 
 Every normative rule in the C++ Core Guidelines, with this corpus's
-disposition. Generated from the upstream document on 2026-08-16 and
-verified total: no rule is unmarked.
+disposition. Generated from the upstream document on 2026-08-16 and verified
+total: no rule is unmarked.
 
 Rule identifiers only. The upstream licence permits copying for personal or
 internal business use, and this repository is public, so rule titles are not
 reproduced here — look an identifier up upstream to read its title.
 
-Four dispositions:
+Five dispositions:
 
 - **covered** — an existing policy answers it, named here
-- **adopt** — no policy answers it yet; the cluster names the policy to be written
-- **decline** — considered and rejected, with the reason
-- **scope** — outside what this corpus governs, with the reason
+- **adopt** — no policy answers it yet; the italic text names the policy to be written
+- **declined** — considered and rejected, with the reason
+- **diverges** — this corpus holds the opposite position, with the reason
+- **out of scope** — outside what this corpus governs, with the reason
 
-A rule marked *adopt* is an open gap. A rule marked *decline* was decided.
-The distinction is the point of the file: without it a gap and a decision look
-identical, which is how casts went missing through two rounds of derivation.
+A rule marked *adopt* is an open gap. A rule marked *declined* was decided and
+needs no further thought. A rule marked *diverges* is a position a reader may
+need to see, and belongs with the divergences the captured convention already
+records. Without the distinction a gap and a decision look identical, which is
+how casts went missing through two rounds of derivation.
 
 ## Philosophy (P)
 
@@ -41,20 +44,20 @@ identical, which is how casts went missing through two rounds of derivation.
 
 | Rule | Disposition | Policy or reason |
 |------|-------------|------------------|
-| I.1 | adopt | *no implicit dependencies: global and hidden state* |
-| I.2 | adopt | *no implicit dependencies: global and hidden state* |
-| I.3 | adopt | *no implicit dependencies: global and hidden state* |
+| I.1 | covered | POL-0124 |
+| I.2 | covered | POL-0124 |
+| I.3 | covered | POL-0124 |
 | I.4 | covered | POL-0017 |
 | I.5 | covered | POL-0027, POL-0031 |
 | I.6 | covered | POL-0027 |
-| I.7 | declined | the corpus makes a precondition a type (POL-0027) rather than a documented assertion; postconditions follow the same route and need no separate rule |
+| I.7 | diverges | the corpus makes a precondition a type (POL-0027) rather than a stated assertion, and sends postconditions the same way |
 | I.8 | out of scope | Guidelines Support Library declined wholesale in the captured Divergences table |
 | I.9 | adopt | *constraining a template* |
 | I.10 | covered | POL-0031, POL-0039 |
 | I.11 | covered | POL-0014 |
 | I.12 | out of scope | Guidelines Support Library declined wholesale in the captured Divergences table |
 | I.13 | covered | POL-0035, POL-0046 |
-| I.22 | adopt | *no implicit dependencies: global and hidden state* |
+| I.22 | covered | POL-0124 |
 | I.23 | covered | POL-0016, POL-0023 |
 | I.24 | covered | POL-0016, POL-0023 |
 | I.25 | covered | POL-0037 |
@@ -76,7 +79,7 @@ identical, which is how casts went missing through two rounds of derivation.
 | F.8 | covered | POL-0030 |
 | F.9 | covered | POL-0054 |
 | F.10 | covered | POL-0030 |
-| F.11 | adopt | *lambdas* |
+| F.11 | covered | POL-0116 |
 | F.15 | covered | POL-0035 |
 | F.16 | covered | POL-0035 |
 | F.17 | covered | POL-0035 |
@@ -99,11 +102,11 @@ identical, which is how casts went missing through two rounds of derivation.
 | F.47 | covered | POL-0021 |
 | F.48 | adopt | *move and forward* |
 | F.49 | adopt | *what a function returns* |
-| F.50 | adopt | *lambdas* |
+| F.50 | covered | POL-0116 |
 | F.51 | adopt | *default arguments over overloading* |
-| F.52 | adopt | *lambdas* |
-| F.53 | adopt | *lambdas* |
-| F.54 | adopt | *lambdas* |
+| F.52 | covered | POL-0115 |
+| F.53 | covered | POL-0115 |
+| F.54 | covered | POL-0114 |
 | F.55 | adopt | *no C-style variadic functions* |
 | F.56 | covered | POL-0030 |
 
@@ -120,8 +123,8 @@ identical, which is how casts went missing through two rounds of derivation.
 | C.8 | covered | POL-0022 |
 | C.9 | covered | POL-0022 |
 | C.10 | covered | POL-0040 |
-| C.11 | adopt | *regular value types* |
-| C.12 | adopt | *regular value types* |
+| C.11 | covered | POL-0126 |
+| C.12 | covered | POL-0126 |
 | C.13 | adopt | *member declaration and initialization order* |
 | C.20 | covered | POL-0021, POL-0025 |
 | C.21 | covered | POL-0021 |
@@ -136,8 +139,8 @@ identical, which is how casts went missing through two rounds of derivation.
 | C.40 | covered | POL-0015 |
 | C.41 | covered | POL-0015, POL-0022 |
 | C.42 | covered | POL-0015, POL-0022 |
-| C.43 | adopt | *regular value types* |
-| C.44 | adopt | *regular value types* |
+| C.43 | covered | POL-0126 |
+| C.44 | covered | POL-0126 |
 | C.45 | covered | POL-0022 |
 | C.46 | covered | POL-0022 |
 | C.47 | adopt | *member declaration and initialization order* |
@@ -146,14 +149,14 @@ identical, which is how casts went missing through two rounds of derivation.
 | C.50 | covered | POL-0022 |
 | C.51 | adopt | *constructor mechanics* |
 | C.52 | adopt | *constructor mechanics* |
-| C.60 | adopt | *copy and move operation shape* |
-| C.61 | adopt | *copy and move operation shape* |
-| C.62 | adopt | *copy and move operation shape* |
-| C.63 | adopt | *copy and move operation shape* |
-| C.64 | adopt | *copy and move operation shape* |
-| C.65 | adopt | *copy and move operation shape* |
+| C.60 | covered | POL-0125 |
+| C.61 | covered | POL-0125 |
+| C.62 | covered | POL-0125 |
+| C.63 | covered | POL-0125 |
+| C.64 | covered | POL-0125 |
+| C.65 | covered | POL-0125 |
 | C.66 | covered | POL-0021, POL-0051 |
-| C.67 | adopt | *polymorphic class shape* |
+| C.67 | covered | POL-0120 |
 | C.80 | adopt | *default and delete on special members* |
 | C.81 | adopt | *default and delete on special members* |
 | C.82 | covered | POL-0037 |
@@ -174,39 +177,39 @@ identical, which is how casts went missing through two rounds of derivation.
 | C.121 | adopt | *abstract interface shape* |
 | C.122 | covered | POL-0037 |
 | C.126 | adopt | *abstract interface shape* |
-| C.127 | adopt | *polymorphic class shape* |
+| C.127 | covered | POL-0120 |
 | C.128 | covered | POL-0037 |
 | C.129 | covered | POL-0037, POL-0044 |
-| C.130 | adopt | *polymorphic class shape* |
+| C.130 | covered | POL-0120 |
 | C.131 | adopt | *no trivial accessors* |
 | C.132 | covered | POL-0037 |
-| C.133 | adopt | *polymorphic class shape* |
-| C.134 | adopt | *regular value types* |
+| C.133 | covered | POL-0120 |
+| C.134 | covered | POL-0126 |
 | C.135 | covered | POL-0037 |
 | C.136 | declined | the corpus routes variation to std::variant (POL-0044); inheritance for implementation attributes is the case POL-0037 already rejects |
 | C.137 | declined | virtual bases follow from multiple implementation inheritance, which POL-0037 already rejects |
 | C.138 | adopt | *overloading and name hiding* |
 | C.139 | declined | a sparing-use rule with no decision procedure a generator can apply |
 | C.140 | adopt | *overloading and name hiding* |
-| C.145 | adopt | *polymorphic class shape* |
+| C.145 | covered | POL-0121 |
 | C.146 | adopt | *dynamic_cast form* |
 | C.147 | adopt | *dynamic_cast form* |
 | C.148 | adopt | *dynamic_cast form* |
 | C.149 | covered | POL-0014 |
-| C.150 | adopt | *make functions* |
-| C.151 | adopt | *make functions* |
-| C.152 | adopt | *polymorphic class shape* |
+| C.150 | covered | POL-0128 |
+| C.151 | covered | POL-0128 |
+| C.152 | covered | POL-0121 |
 | C.153 | covered | POL-0037 |
-| C.160 | adopt | *operator overloading* |
-| C.161 | adopt | *operator overloading* |
-| C.162 | adopt | *operator overloading* |
-| C.163 | adopt | *operator overloading* |
-| C.164 | adopt | *operator overloading* |
-| C.165 | adopt | *operator overloading* |
-| C.166 | adopt | *operator overloading* |
-| C.167 | adopt | *operator overloading* |
-| C.168 | adopt | *operator overloading* |
-| C.170 | adopt | *lambdas* |
+| C.160 | covered | POL-0122 |
+| C.161 | covered | POL-0123 |
+| C.162 | covered | POL-0122 |
+| C.163 | covered | POL-0122 |
+| C.164 | covered | POL-0123 |
+| C.165 | covered | POL-0123 |
+| C.166 | covered | POL-0122 |
+| C.167 | covered | POL-0122 |
+| C.168 | covered | POL-0123 |
+| C.170 | covered | POL-0116 |
 | C.180 | adopt | *never a raw union* |
 | C.181 | covered | POL-0033 |
 | C.182 | covered | POL-0033 |
@@ -234,17 +237,17 @@ identical, which is how casts went missing through two rounds of derivation.
 | R.3 | covered | POL-0014, POL-0024 |
 | R.4 | covered | POL-0014, POL-0024 |
 | R.5 | covered | POL-0024 |
-| R.6 | adopt | *no implicit dependencies: global and hidden state* |
-| R.10 | adopt | *no naked new and delete* |
+| R.6 | covered | POL-0124 |
+| R.10 | covered | POL-0127 |
 | R.11 | covered | POL-0014 |
-| R.12 | adopt | *no naked new and delete* |
-| R.13 | adopt | *no naked new and delete* |
+| R.12 | covered | POL-0127 |
+| R.13 | covered | POL-0127 |
 | R.14 | covered | POL-0046 |
 | R.15 | declined | follows from POL-0021 and no naked new and delete; a matched pair only arises where an override was already written |
 | R.20 | covered | POL-0014, POL-0024 |
 | R.21 | covered | POL-0014, POL-0024, POL-0048 |
-| R.22 | adopt | *make functions* |
-| R.23 | adopt | *make functions* |
+| R.22 | covered | POL-0128 |
+| R.23 | covered | POL-0128 |
 | R.24 | adopt | *breaking a shared_ptr cycle* |
 | R.30 | covered | POL-0035 |
 | R.31 | declined | a non-standard smart pointer is off the ordinary path; POL-0109 sends the author to the standard one |
@@ -278,7 +281,7 @@ identical, which is how casts went missing through two rounds of derivation.
 | ES.25 | covered | POL-0026 |
 | ES.26 | adopt | *one variable, one purpose* |
 | ES.27 | adopt | *no C arrays* |
-| ES.28 | adopt | *lambdas* |
+| ES.28 | covered | POL-0116 |
 | ES.30 | adopt | *macros* |
 | ES.31 | covered | POL-0010 |
 | ES.32 | covered | POL-0084 |
@@ -297,24 +300,24 @@ identical, which is how casts went missing through two rounds of derivation.
 | ES.50 | covered | POL-0095 |
 | ES.55 | covered | POL-0098 |
 | ES.56 | adopt | *move and forward* |
-| ES.60 | adopt | *no naked new and delete* |
-| ES.61 | adopt | *no naked new and delete* |
+| ES.60 | covered | POL-0127 |
+| ES.61 | covered | POL-0127 |
 | ES.62 | adopt | *pointer arithmetic* |
-| ES.63 | adopt | *polymorphic class shape* |
+| ES.63 | covered | POL-0121 |
 | ES.64 | covered | POL-0096 |
 | ES.65 | adopt | *pointer arithmetic* |
-| ES.70 | adopt | *statement selection* |
+| ES.70 | covered | POL-0117 |
 | ES.71 | covered | POL-0098, POL-0099 |
-| ES.72 | adopt | *statement selection* |
-| ES.73 | adopt | *statement selection* |
+| ES.72 | covered | POL-0117 |
+| ES.73 | covered | POL-0117 |
 | ES.74 | covered | POL-0097 |
-| ES.75 | adopt | *statement selection* |
-| ES.76 | adopt | *statement selection* |
-| ES.77 | adopt | *statement selection* |
-| ES.78 | adopt | *switch discipline* |
-| ES.79 | adopt | *switch discipline* |
+| ES.75 | covered | POL-0117 |
+| ES.76 | covered | POL-0118 |
+| ES.77 | covered | POL-0117 |
+| ES.78 | covered | POL-0119 |
+| ES.79 | covered | POL-0119 |
 | ES.84 | declined | a declaration form a generator does not produce, and the compiler warns on it |
-| ES.85 | adopt | *statement selection* |
+| ES.85 | covered | POL-0117 |
 | ES.86 | covered | POL-0098 |
 | ES.87 | adopt | *expression complexity and evaluation order* |
 | ES.100 | covered | POL-0102 |
@@ -353,7 +356,7 @@ identical, which is how casts went missing through two rounds of derivation.
 
 | Rule | Disposition | Policy or reason |
 |------|-------------|------------------|
-| CP.1 | declined | the corpus takes the opposite default: single-threaded by contract until a threading model is declared (POL-0049) |
+| CP.1 | diverges | POL-0049 takes the opposite default: single-threaded by contract until a threading model is declared |
 | CP.2 | covered | POL-0107 |
 | CP.3 | covered | POL-0105 |
 | CP.4 | adopt | *tasks rather than threads* |
@@ -398,7 +401,7 @@ identical, which is how casts went missing through two rounds of derivation.
 | E.5 | covered | POL-0015 |
 | E.6 | covered | POL-0003 |
 | E.7 | covered | POL-0027 |
-| E.8 | declined | the corpus makes a precondition a type (POL-0027) rather than a documented assertion; postconditions follow the same route |
+| E.8 | diverges | the corpus makes a precondition a type (POL-0027) rather than a stated assertion, and sends postconditions the same way |
 | E.12 | covered | POL-0051 |
 | E.13 | adopt | *exception safety while owning a resource* |
 | E.14 | covered | POL-0031 |
@@ -410,7 +413,7 @@ identical, which is how casts went missing through two rounds of derivation.
 | E.25 | covered | POL-0039, POL-0076 |
 | E.26 | covered | POL-0039, POL-0076 |
 | E.27 | covered | POL-0039, POL-0076 |
-| E.28 | adopt | *no implicit dependencies: global and hidden state* |
+| E.28 | covered | POL-0124 |
 | E.30 | covered | POL-0031 |
 | E.31 | adopt | *catch clause order* |
 
@@ -437,14 +440,14 @@ identical, which is how casts went missing through two rounds of derivation.
 | T.11 | covered | POL-0040 |
 | T.12 | adopt | *constraining a template* |
 | T.13 | adopt | *constraining a template* |
-| T.20 | adopt | *concept design* |
-| T.21 | adopt | *concept design* |
+| T.20 | declined | authoring a concept library is the case POL-0052 makes rare enough not to rule on |
+| T.21 | declined | authoring a concept library is the case POL-0052 makes rare enough not to rule on |
 | T.22 | declined | axioms have no language support and nothing checks them |
-| T.23 | adopt | *concept design* |
+| T.23 | declined | authoring a concept library is the case POL-0052 makes rare enough not to rule on |
 | T.24 | declined | a mechanism for distinguishing concepts that differ only semantically, which POL-0052 makes rare enough not to rule on |
 | T.25 | declined | a mechanism for distinguishing concepts that differ only semantically, which POL-0052 makes rare enough not to rule on |
-| T.26 | adopt | *concept design* |
-| T.40 | adopt | *lambdas* |
+| T.26 | declined | authoring a concept library is the case POL-0052 makes rare enough not to rule on |
+| T.40 | covered | POL-0116 |
 | T.41 | adopt | *constraining a template* |
 | T.42 | adopt | *template mechanics* |
 | T.43 | adopt | *template mechanics* |
@@ -456,20 +459,20 @@ identical, which is how casts went missing through two rounds of derivation.
 | T.60 | adopt | *template mechanics* |
 | T.61 | declined | a parameterization tuning concern that POL-0052 makes rare enough not to rule on |
 | T.62 | declined | a parameterization tuning concern that POL-0052 makes rare enough not to rule on |
-| T.64 | adopt | *specialization and dispatch* |
-| T.65 | adopt | *specialization and dispatch* |
-| T.67 | adopt | *specialization and dispatch* |
+| T.64 | declined | tag dispatch and specialization serve the hierarchy POL-0040 routes away from, and concepts supersede them on C++20 |
+| T.65 | declined | tag dispatch and specialization serve the hierarchy POL-0040 routes away from, and concepts supersede them on C++20 |
+| T.67 | declined | tag dispatch and specialization serve the hierarchy POL-0040 routes away from, and concepts supersede them on C++20 |
 | T.68 | covered | POL-0096 |
 | T.69 | adopt | *template mechanics* |
 | T.80 | covered | POL-0052 |
-| T.81 | adopt | *polymorphic class shape* |
+| T.81 | covered | POL-0121 |
 | T.82 | declined | a hierarchy-flattening technique for avoiding virtual calls, which is the performance-local case the ontology keeps as content |
 | T.83 | declined | the compiler already rejects it |
 | T.84 | declined | binary interface stability is a project architecture choice, not a decision made while writing a file |
-| T.100 | adopt | *variadic templates* |
+| T.100 | declined | a variadic template is past the second caller POL-0052 already declines to templatize for |
 | T.101 | out of scope | an unwritten placeholder upstream, with no rule to disposition |
-| T.102 | adopt | *variadic templates* |
-| T.103 | adopt | *variadic templates* |
+| T.102 | declined | a variadic template is past the second caller POL-0052 already declines to templatize for |
+| T.103 | declined | a variadic template is past the second caller POL-0052 already declines to templatize for |
 | T.120 | covered | POL-0040, POL-0052 |
 | T.121 | declined | template metaprogramming beyond constraints is the complexity POL-0040 and POL-0052 route away from |
 | T.122 | declined | template metaprogramming beyond constraints is the complexity POL-0040 and POL-0052 route away from |
@@ -477,10 +480,10 @@ identical, which is how casts went missing through two rounds of derivation.
 | T.124 | covered | POL-0109 |
 | T.125 | declined | template metaprogramming beyond constraints is the complexity POL-0040 and POL-0052 route away from |
 | T.140 | covered | POL-0030 |
-| T.141 | adopt | *lambdas* |
+| T.141 | covered | POL-0116 |
 | T.142 | declined | a notation convenience with no correctness consequence |
 | T.143 | adopt | *template mechanics* |
-| T.144 | adopt | *specialization and dispatch* |
+| T.144 | declined | tag dispatch and specialization serve the hierarchy POL-0040 routes away from, and concepts supersede them on C++20 |
 | T.150 | adopt | *constraining a template* |
 
 ## C-style programming (CPL)
@@ -534,7 +537,7 @@ identical, which is how casts went missing through two rounds of derivation.
 | SL.str.12 | adopt | *which string type to reach for* |
 | SL.io.1 | adopt | *reading input* |
 | SL.io.2 | covered | POL-0005 |
-| SL.io.3 | declined | the corpus routes formatting to std::format and forbids stream output from library code (POL-0111, POL-0073) |
+| SL.io.3 | diverges | POL-0111 routes formatting to std::format and POL-0073 forbids stream output from library code |
 | SL.io.10 | declined | a global performance switch set once per program, not a decision made while writing a file |
 | SL.io.50 | covered | POL-0110 |
 | SL.C.1 | adopt | *no setjmp or longjmp* |
@@ -544,12 +547,12 @@ identical, which is how casts went missing through two rounds of derivation.
 | Rule | Disposition | Policy or reason |
 |------|-------------|------------------|
 | NR.1 | covered | POL-0097 |
-| NR.2 | adopt | *statement selection* |
+| NR.2 | covered | POL-0117 |
 | NR.3 | covered | POL-0039 |
 | NR.4 | covered | POL-0028 |
 | NR.5 | covered | POL-0015 |
-| NR.6 | adopt | *statement selection* |
-| NR.7 | adopt | *polymorphic class shape* |
+| NR.6 | covered | POL-0117 |
+| NR.7 | covered | POL-0120 |
 
 ## Guidelines Support Library (GSL)
 
@@ -614,34 +617,24 @@ identical, which is how casts went missing through two rounds of derivation.
 
 | Disposition | Rules |
 |-------------|-------|
-| covered | 227 |
-| adopt | 197 |
-| declined | 50 |
+| covered | 291 |
+| adopt | 122 |
+| declined | 57 |
+| diverges | 4 |
 | out of scope | 12 |
 | **total** | **486** |
 
-The 197 rules marked *adopt* group into 64 policies:
+The 122 rules marked *adopt* group into 51 policies:
 
-- lambdas (9)
-- operator overloading (9)
-- polymorphic class shape (9)
-- statement selection (9)
 - constraining a template (6)
-- copy and move operation shape (6)
-- no implicit dependencies: global and hidden state (6)
 - template mechanics (6)
 - expression complexity and evaluation order (5)
-- no naked new and delete (5)
 - pointer arithmetic (5)
-- regular value types (5)
 - smart pointer parameters (5)
 - which string type to reach for (5)
-- concept design (4)
 - dynamic_cast form (4)
 - include order and self-containment (4)
-- make functions (4)
 - member declaration and initialization order (4)
-- specialization and dispatch (4)
 - tasks rather than threads (4)
 - what a function returns (4)
 - comparison and hash (3)
@@ -652,7 +645,6 @@ The 197 rules marked *adopt* group into 64 policies:
 - no C-style variadic functions (3)
 - swap (3)
 - thread ownership and lifetime (3)
-- variadic templates (3)
 - what may happen while a lock is held (3)
 - abstract interface shape (2)
 - constructor mechanics (2)
@@ -666,7 +658,6 @@ The 197 rules marked *adopt* group into 64 policies:
 - overloading and name hiding (2)
 - passing data between threads (2)
 - portability: no compiler extensions (2)
-- switch discipline (2)
 - a mutex is declared with the data it guards (1)
 - arithmetic preconditions (1)
 - bit manipulation (1)

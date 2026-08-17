@@ -376,4 +376,86 @@ identically at the call and differ at every use after it. `auto` in that positio
 also survives a change to the callee's return type without a diagnostic, so the
 code keeps compiling and starts meaning something else.
 
+## MUST — A lambda names every capture; `[=]` and `[&]` are not written
+
+POL-0114 · CG F.54
+
+```cpp
+// Never. What state does this carry? The list is the only place that says.
+auto ready = [&] { return count >= limit && !cancelled; };
+
+// Right.
+auto ready = [&count, &limit, &cancelled] { return count >= limit && !cancelled; };
+```
+
+`[this]` counts as a default: it captures the whole object, so a lambda written
+inside a member function reaches every member without naming one. Capture the
+members it uses, by value.
+
+The capture list is the only part of a lambda with lifetime consequences, and a
+default capture hides exactly that. `[&]` binds whatever the body happens to
+name, so adding one identifier to the body silently extends what the lambda
+borrows, and nothing in the diff shows a lifetime changed. An explicit list
+makes the ownership question answerable from the declaration, which is what
+POL-0003 asks of every other construct.
+
+## MUST — A lambda that outlives the current scope captures by value
+
+POL-0115 · CG F.52, CG F.53
+
+```cpp
+// Never. handler_ outlives this function; label_ is a dangling reference.
+void Panel::install() {
+    const std::string label_ = title();
+    handler_ = [&label_] { log(label_); };
+}
+
+// Right. The lambda owns what it needs.
+void Panel::install() {
+    handler_ = [label = title()] { log(label); };
+}
+
+// Right. Runs and dies inside the call; borrowing is safe and avoids a copy.
+std::ranges::sort(tools, [&required_mm](const Tool& a, const Tool& b) {
+    return a.fit(required_mm) < b.fit(required_mm);
+});
+```
+
+Stored in a member, returned, queued, or handed to another thread all count as
+outliving. By-reference capture is permitted only where the lambda provably
+runs and dies within the current scope, which is the algorithm-comparator case
+above.
+
+A by-reference capture is a non-owning view with the lifetime rules of one
+(POL-0047), and it carries no diagnostic when it escapes. The compiler accepts
+a returned lambda holding a reference to a dead local exactly as readily as a
+correct one, so the defect surfaces as corrupted data at call time rather than
+as a build failure. Capturing by value converts the question from a lifetime
+the reader has to trace into a copy the declaration states.
+
+## SHOULD — A lambda is trivial glue at one call site; anything else is a named function
+
+POL-0116 · CG F.11, CG F.50, CG T.40, CG T.141, CG C.170, CG ES.28
+
+```cpp
+// Prefer. One use, one line, reads better inline than as a jump to a name.
+std::ranges::sort(moves, [](const Move& a, const Move& b) { return a.z < b.z; });
+
+// Prefer a function. Two uses, and it wants a name to be understood.
+bool is_finishing_pass(const Move& m);
+```
+
+A lambda also earns its place initializing a `const` value that needs several
+statements to compute, which is the one case where the alternative is a
+non-`const` variable assigned later (POL-0020).
+
+Where a lambda would be overloaded on argument type, write one generic lambda
+rather than a set.
+
+A lambda buys locality, not brevity. It is justified when reading the body in
+place beats jumping to a name, which is true for a comparator and false for
+anything a reader would need to think about. Once it wants a name, wants a
+comment, or acquires a second use, it is a function that has not been given its
+name yet, and POL-0030 already says what to do about that.
+
 See also: [POL-0017 — Dimensioned values carry their unit in the name](naming.md)
