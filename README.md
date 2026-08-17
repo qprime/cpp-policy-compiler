@@ -44,14 +44,6 @@ Three authored layers and one derived:
 - Every piece of generated guidance is traceable to a stable decision identity
   and its source material.
 
-## Status
-
-Corpus derived, compiler built. Source material is captured, the 93-policy
-corpus is derived from it, and the projection topic list is settled in
-[docs/policies/TOPICS.md](docs/policies/TOPICS.md). The v1 compiler (`polc`)
-validates the corpus and projects it through the first configuration,
-[docs/configurations/cpp20-gcc-application.md](docs/configurations/cpp20-gcc-application.md).
-
 ## License
 
 [Apache-2.0](LICENSE)
