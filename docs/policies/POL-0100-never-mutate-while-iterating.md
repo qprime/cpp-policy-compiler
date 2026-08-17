@@ -5,7 +5,6 @@ replacement: [POL-0098]
 attribution:
   - source: standard-practice
     locator: "iteration, iterator invalidation"
-    upstream: ["CG ES.83"]
 ---
 
 # Never insert into or erase from a container while iterating it

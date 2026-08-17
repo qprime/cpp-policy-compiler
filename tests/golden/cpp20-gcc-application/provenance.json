@@ -1603,9 +1603,7 @@
       {
         "source": "standard-practice",
         "locator": "iteration, iterator invalidation",
-        "upstream": [
-          "CG ES.83"
-        ]
+        "upstream": []
       }
     ],
     "policy_file": "POL-0100-never-mutate-while-iterating.md"

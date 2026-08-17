@@ -33,7 +33,7 @@ loop would have had to be read to discover.
 
 ## NEVER — Never insert into or erase from a container while iterating it
 
-POL-0100 · CG ES.83
+POL-0100
 
 ```cpp
 // Never. erase() invalidates it; the next ++it is undefined.
