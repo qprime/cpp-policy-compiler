@@ -1,8 +1,7 @@
 # Policies
 
 The opinionated layer — the accumulated engineering judgment this project exists
-to hold. The corpus is empty pending a rebuild; what follows is the on-disk
-format the compiler enforces.
+to hold. What follows is the on-disk format the compiler enforces.
 
 Every policy carries three parts:
 
