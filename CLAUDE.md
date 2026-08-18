@@ -70,3 +70,5 @@ rationalizations, not scope judgments.
 
 - Create new files when editing existing ones works
 - Add comments or TODO comments to code
+- Read git history except when asked or when tracing a specific defect. Never to
+  support an argument.
