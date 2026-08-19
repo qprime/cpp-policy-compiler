@@ -1,6 +1,13 @@
 from __future__ import annotations
 
-from .model import Configuration, Exclusion, Policy, PolcError, StandardEntry
+from .model import (
+    Configuration,
+    Exclusion,
+    Exemplar,
+    Policy,
+    PolcError,
+    StandardEntry,
+)
 
 
 def _axis_value(config: Configuration, axis: str) -> str:
@@ -64,4 +71,18 @@ def select_standard(
             included.append(entry)
         else:
             exclusions.append(Exclusion(entry.id, axis))
+    return included, exclusions
+
+
+def select_exemplars(
+    exemplars: list[Exemplar], config: Configuration
+) -> tuple[list[Exemplar], list[Exclusion]]:
+    included: list[Exemplar] = []
+    exclusions: list[Exclusion] = []
+    for exemplar in exemplars:
+        axis = excluding_axis(exemplar.applicability, config)
+        if axis is None:
+            included.append(exemplar)
+        else:
+            exclusions.append(Exclusion(exemplar.id, axis))
     return included, exclusions

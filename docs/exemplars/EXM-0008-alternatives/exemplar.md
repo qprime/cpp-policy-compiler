@@ -39,7 +39,7 @@ with one.
 
 `std::variant` is what sets the C++17 floor.
 
-## Reading order
+### Reading order
 
 - `include/sampler/core/device_state.hpp` — four alternatives as their own types,
   the enumeration with neither an underlying type nor explicit values, and its

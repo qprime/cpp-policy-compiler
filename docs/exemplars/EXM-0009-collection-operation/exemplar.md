@@ -37,7 +37,7 @@ do carry — lowest at or below highest — is what makes the window a class.
 element on the first traversal, so `begin()` is non-`const` and a `const` view is
 unusable.
 
-## Reading order
+### Reading order
 
 - `include/sampler/core/reading_stats.hpp` — the bounds as named primitives, the
   predicate under the standard library's name for it, and a `try_` that returns

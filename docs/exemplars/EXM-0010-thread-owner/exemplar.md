@@ -41,7 +41,7 @@ This is the only exemplar where logging appears. `INFO` carries the two lines an
 operator wants, and the dropped sample is `WARN` because it is unexpected and the
 poller carries on.
 
-## Reading order
+### Reading order
 
 - `include/sampler/core/log.hpp`, `core/log.cpp` — the one module that owns a
   stream, and `'\n'` rather than `std::endl`

@@ -35,7 +35,7 @@ that can throw.
 This exemplar is authored and verified against `cpp23-gcc-realtime`. Under a
 configuration whose domain is not realtime it constrains out entirely.
 
-## Reading order
+### Reading order
 
 - `include/sampler/device/sample_loop.hpp` — the deadline-bound operation marked
   `noexcept`, and two accessors that let the caller see what the cycle recorded

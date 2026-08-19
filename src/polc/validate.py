@@ -11,6 +11,7 @@ from .model import (
     RESERVED_SLUGS,
     STANDARD_GROUPS,
     Configuration,
+    Exemplar,
     Policy,
     StandardEntry,
     Topic,
@@ -18,6 +19,7 @@ from .model import (
 
 CONFIG_LANGUAGE_VERSIONS = (14, 17, 20, 23)
 STANDARD_TOPICS = "STANDARD-TOPICS.md"
+DEMONSTRATED_ID = re.compile(r"(?:POL|STD)-\d{4}")
 
 
 def _validate_applicability(
@@ -185,6 +187,88 @@ def _validate_anti_pattern_adjacency(
             )
 
 
+def _validate_demonstrates(
+    origin: str,
+    exemplar: Exemplar,
+    by_id: dict[str, Policy],
+    standard_by_id: dict[str, StandardEntry],
+    errors: list[str],
+) -> None:
+    if not exemplar.demonstrates:
+        errors.append(f"{origin}: 'demonstrates' is required and non-empty")
+    for target in exemplar.demonstrates:
+        if not DEMONSTRATED_ID.fullmatch(target):
+            errors.append(f"{origin}: demonstrates entry '{target}' is not an id")
+        elif target.startswith("POL-"):
+            policy = by_id.get(target)
+            if policy is None:
+                errors.append(f"{origin}: demonstrates {target} does not resolve")
+            elif policy.kind == "anti-pattern":
+                errors.append(
+                    f"{origin}: demonstrates {target}, which is an anti-pattern; "
+                    "an exemplar is code to write"
+                )
+        elif target not in standard_by_id:
+            errors.append(f"{origin}: demonstrates {target} does not resolve")
+
+
+def _validate_neighbours(origin: str, exemplar: Exemplar, errors: list[str]) -> None:
+    present = {source.as_posix() for source in exemplar.sources}
+    if not any(source.name.endswith("_test.cpp") for source in exemplar.sources):
+        errors.append(f"{origin}: no test file in the tree")
+    for source in exemplar.sources:
+        if source.suffix != ".cpp" or source.stem.endswith("_test"):
+            continue
+        test = source.with_name(f"{source.stem}_test.cpp").as_posix()
+        if test not in present:
+            errors.append(f"{origin}: {source.as_posix()} has no {test} beside it")
+        header = source.with_suffix(".hpp").as_posix()
+        if header not in present and not any(
+            path.match(f"include/*/{header}") for path in exemplar.sources
+        ):
+            errors.append(f"{origin}: {source.as_posix()} has no declaring header")
+
+
+def _validate_body_headings(origin: str, body: str, errors: list[str]) -> None:
+    fenced = False
+    for line in body.split("\n"):
+        if line.startswith("```"):
+            fenced = not fenced
+        elif not fenced and re.match(r"#{1,2} ", line):
+            errors.append(
+                f"{origin}: body heading '{line.strip()}' sits at the level the "
+                "statement renders into; use '###' or deeper"
+            )
+
+
+def _validate_exemplars(
+    exemplars: list[Exemplar],
+    by_id: dict[str, Policy],
+    standard_by_id: dict[str, StandardEntry],
+    errors: list[str],
+) -> None:
+    seen: dict[str, Exemplar] = {}
+    for exemplar in exemplars:
+        if exemplar.id in seen:
+            errors.append(
+                f"{exemplar.directory.name}: duplicate id {exemplar.id} "
+                f"(also in {seen[exemplar.id].directory.name})"
+            )
+        else:
+            seen[exemplar.id] = exemplar
+
+    for exemplar in exemplars:
+        origin = f"{exemplar.directory.name}/exemplar.md"
+        if not exemplar.directory.name.startswith(exemplar.id + "-"):
+            errors.append(
+                f"{origin}: id {exemplar.id} does not match the directory prefix"
+            )
+        _validate_demonstrates(origin, exemplar, by_id, standard_by_id, errors)
+        _validate_applicability(origin, exemplar.applicability, errors)
+        _validate_body_headings(origin, exemplar.body, errors)
+        _validate_neighbours(origin, exemplar, errors)
+
+
 def _validate_configuration(config: Configuration, errors: list[str]) -> None:
     origin = config.name or "configuration"
     if config.language_version not in CONFIG_LANGUAGE_VERSIONS:
@@ -206,12 +290,15 @@ def validate(
     config: Configuration,
     standard: list[StandardEntry],
     standard_topic_ids: list[str],
+    exemplars: list[Exemplar],
 ) -> list[str]:
     errors: list[str] = []
     by_id = {p.id: p for p in corpus}
+    standard_by_id = {e.id: e for e in standard}
 
     _validate_policies(corpus, by_id, errors)
     _validate_standard(standard, standard_topic_ids, errors)
+    _validate_exemplars(exemplars, by_id, standard_by_id, errors)
     membership = _validate_topics(topics, by_id, errors)
     for policy in corpus:
         if policy.kind != "principle" and policy.id not in membership:

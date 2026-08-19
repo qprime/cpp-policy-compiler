@@ -37,7 +37,7 @@ outside the layer can name it.
 `resolve_endpoint` has a header rather than an anonymous namespace because two
 translation units use it: the registry and its own test.
 
-## Reading order
+### Reading order
 
 - `include/sampler/device/registry.hpp` — what the layer publishes: an aggregate
   with no invariant, and a class whose constructor holds one

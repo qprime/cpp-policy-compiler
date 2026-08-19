@@ -35,7 +35,7 @@ compiler already answered.
 
 `std::is_copy_constructible_v` is what sets the C++17 floor.
 
-## Reading order
+### Reading order
 
 - `include/sampler/device/device_file.hpp` — the whole set of five, the one
   comment the code cannot carry, and the two `static_assert`s at the definition

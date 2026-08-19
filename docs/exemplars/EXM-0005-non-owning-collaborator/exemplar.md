@@ -33,7 +33,7 @@ contrast this exists against.
 The constructor takes references so neither argument can be null; the members are
 pointers because a reference member would delete assignment.
 
-## Reading order
+### Reading order
 
 - `include/sampler/device/clock.hpp` — a pure abstract base: no data, public
   virtual destructor, copy suppressed, protected default constructor

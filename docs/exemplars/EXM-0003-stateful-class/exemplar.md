@@ -31,7 +31,7 @@ of EXM-0005.
 The five special members are absent because a `std::vector` member already gives the
 right copy, move, and destruction.
 
-## Reading order
+### Reading order
 
 - `include/sampler/core/sample_buffer.hpp` — standard member names where the
   standard library has one, and `is_`-prefixed names where it does not; the

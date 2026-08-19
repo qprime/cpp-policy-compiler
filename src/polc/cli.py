@@ -6,19 +6,20 @@ from pathlib import Path
 
 from .config import load_configuration
 from .corpus import load_corpus
+from .exemplars import load_exemplars
 from .manifest import parse_manifest, parse_standard_topics
-from .model import Configuration, Exclusion, PolcError
+from .model import Configuration, Exclusion, Exemplar, PolcError
 from .render import Projection, render, write
-from .select import select, select_standard
+from .select import select, select_exemplars, select_standard
 from .standard import load_standard
 from .validate import validate
 
 
 def _build_projection(
-    config_path: Path, policies_dir: Path, standard_dir: Path
-) -> tuple[Projection, list[Exclusion], Configuration]:
+    config_path: Path, policies_dir: Path, standard_dir: Path, exemplars_dir: Path
+) -> tuple[Projection, list[Exclusion], Configuration, list[Exemplar]]:
     errors: list[str] = []
-    corpus = topics = config = standard = standard_topic_ids = None
+    corpus = topics = config = standard = standard_topic_ids = exemplars = None
     try:
         corpus = load_corpus(policies_dir)
     except PolcError as exc:
@@ -36,22 +37,29 @@ def _build_projection(
     except PolcError as exc:
         errors.extend(exc.errors)
     try:
+        exemplars = load_exemplars(exemplars_dir)
+    except PolcError as exc:
+        errors.extend(exc.errors)
+    try:
         config = load_configuration(config_path)
     except PolcError as exc:
         errors.extend(exc.errors)
     if errors:
         raise PolcError(errors)
 
-    errors = validate(corpus, topics, config, standard, standard_topic_ids)
+    errors = validate(corpus, topics, config, standard, standard_topic_ids, exemplars)
     if errors:
         raise PolcError(errors)
 
     included, exclusions = select(corpus, config)
     included_standard, standard_exclusions = select_standard(standard, config)
+    admitted, exemplar_exclusions = select_exemplars(exemplars, config)
+    all_exclusions = exclusions + standard_exclusions + exemplar_exclusions
     return (
-        render(topics, config, included, included_standard),
-        exclusions + standard_exclusions,
+        render(topics, config, included, included_standard, admitted, all_exclusions),
+        all_exclusions,
         config,
+        admitted,
     )
 
 
@@ -61,6 +69,8 @@ def _report(projection: Projection, exclusions: list[Exclusion]) -> None:
         print(f"{slug}.md: {len(projection.topic_documents[slug])} chars")
     for slug, text in projection.standard_documents.items():
         print(f"{slug}.md: {len(text)} chars")
+    if projection.exemplars is not None:
+        print(f"exemplars.md: {len(projection.exemplars)} chars")
     print(f"provenance.json: {len(projection.sidecar)} chars")
     for exclusion in exclusions:
         print(f"excluded {exclusion.id} ({exclusion.axis})")
@@ -68,6 +78,8 @@ def _report(projection: Projection, exclusions: list[Exclusion]) -> None:
         print(f"omitted topic '{name}': every member excluded")
     for slug in projection.omitted_standard_documents:
         print(f"omitted {slug}.md: every entry excluded")
+    if projection.exemplars is None:
+        print("omitted exemplars.md: every exemplar excluded")
     for line in projection.dropped_cross_references:
         print(f"dropped {line}")
 
@@ -85,21 +97,22 @@ def main(argv: list[str] | None = None) -> int:
         sub.add_argument("--config", required=True, type=Path)
         sub.add_argument("--policies", type=Path, default=Path("docs/policies"))
         sub.add_argument("--standard", type=Path, default=Path("docs/standard"))
+        sub.add_argument("--exemplars", type=Path, default=Path("docs/exemplars"))
         if name == "build":
             sub.add_argument("--out", required=True, type=Path)
     args = parser.parse_args(argv)
 
     try:
-        projection, exclusions, _ = _build_projection(
-            args.config, args.policies, args.standard
+        projection, exclusions, _, admitted = _build_projection(
+            args.config, args.policies, args.standard, args.exemplars
         )
+        if args.command == "build":
+            write(projection, admitted, args.out)
     except PolcError as exc:
         for message in exc.errors:
             print(message, file=sys.stderr)
         return 1
 
-    if args.command == "build":
-        write(projection, args.out)
     _report(projection, exclusions)
     return 0
 

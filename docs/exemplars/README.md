@@ -38,17 +38,27 @@ frontmatter `id` is the citable thing.
 | Key | Presence | Meaning |
 |-----|----------|---------|
 | `id` | required | `EXM-NNNN`. Matches the directory prefix, unique across the layer. |
-| `demonstrates` | required | A list of `POL-NNNN` and `STD-NNNN` ids, never empty. Every entry resolves to an existing policy or standard entry. |
+| `demonstrates` | required | A list of `POL-NNNN` and `STD-NNNN` ids, never empty. Every entry resolves to an existing policy or standard entry, and never to an anti-pattern. |
 | `applicability` | optional | Axis marks that constrain the exemplar out. Same axes and same value shape as a policy: `language_version`, `compiler`, `domain`. Absent entirely means universal. |
 
 There is no `attribution`. An exemplar derives from the corpus rather than from
-source material, and `demonstrates` is its whole provenance.
+source material, and `demonstrates` is its whole provenance. The key is rejected
+rather than ignored if it appears.
+
+An anti-pattern is code not to write, so an exemplar demonstrating one would assert
+the reverse of the truth. Principles stay legal, and a cited principle links to
+`index.md`.
 
 ### Body
 
 The H1 carries the statement. What follows is a reading order naming the files in
 the order a reader should open them, one clause each. No prose rules and no restated
 policy content.
+
+The statement renders as an H2 in `exemplars.md`, so a heading in the body starts at
+`###`. A body H2 would sit beside fourteen others of the same name, and a reader
+navigating by heading would find `Reading order` as a peer of the situation it
+belongs to.
 
 ## Applicability records an honest floor
 
@@ -142,13 +152,23 @@ design fixed ahead of the code.
 
 ## Structural invariants
 
-Asserted by the format. Nothing in this directory checks them.
+Enforced by `polc check`, which fails the build on any of them:
 
 - `id` is unique across the layer and matches the directory prefix
 - `demonstrates` is present, non-empty, and every entry resolves to an existing
-  policy or standard entry
-- every exemplar has at least one adjacent test file, and no source file is without
-  its neighbour
+  policy or standard entry, never to an anti-pattern
+- every exemplar has at least one `*_test.cpp` in its tree, and every non-test
+  `<layer>/<name>.cpp` has a `<layer>/<name>_test.cpp` beside it and a declaring
+  header at `include/<project>/<layer>/<name>.hpp` or `<layer>/<name>.hpp`
+- every `EXM-*` directory holds an `exemplar.md`, whose frontmatter carries no key
+  beyond `id`, `demonstrates`, and `applicability`
+- no body heading sits at `#` or `##`, the levels the statement renders into
+
+The check runs from source to header and never the reverse, so EXM-0013's foreign C
+ABI header `include/sampler/ffi/driver.h` needs no implementation in the tree.
+
+Asserted by the format. Nothing checks them:
+
 - every exemplar compiles clean under the configurations its `applicability` admits,
   at the warning set [STD-0024](../standard/STD-0024-warning-set.md) fixes, and its
   tests pass

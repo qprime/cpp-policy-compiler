@@ -11,16 +11,23 @@ STANDARD_DOCUMENTS = (
     (
         "standard",
         "Coding standard",
+        "writing any file — the mechanical rules a formatter or a compiler enforces",
         ("files-and-layout", "names", "layout-of-the-line", "comments"),
     ),
-    ("project-setup", "Project setup", ("toolchain",)),
+    (
+        "project-setup",
+        "Project setup",
+        "configuring the toolchain — language standard, warning set, formatter, "
+        "test framework",
+        ("toolchain",),
+    ),
 )
 STANDARD_GROUPS = tuple(
-    group for _, _, groups in STANDARD_DOCUMENTS for group in groups
+    group for _, _, _, groups in STANDARD_DOCUMENTS for group in groups
 )
 ENFORCERS = ("compiler", "clang-format", "clang-tidy", "build", "review")
-RESERVED_SLUGS = ("index", "provenance") + tuple(
-    slug for slug, _, _ in STANDARD_DOCUMENTS
+RESERVED_SLUGS = ("index", "provenance", "exemplars") + tuple(
+    slug for slug, _, _, _ in STANDARD_DOCUMENTS
 )
 
 
@@ -59,6 +66,17 @@ class StandardEntry:
     body: str
     attribution: tuple[Attribution, ...]
     path: Path
+    applicability: dict[str, tuple[str, ...]] = field(default_factory=dict)
+
+
+@dataclass(frozen=True)
+class Exemplar:
+    id: str
+    statement: str
+    body: str
+    demonstrates: tuple[str, ...]
+    directory: Path
+    sources: tuple[Path, ...]
     applicability: dict[str, tuple[str, ...]] = field(default_factory=dict)
 
 

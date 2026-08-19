@@ -37,7 +37,7 @@ meaning for, and is otherwise as ordinary as `int`.
 
 Defaulted `operator==` and `operator<=>` are what set the C++20 floor.
 
-## Reading order
+### Reading order
 
 - `include/sampler/core/temperature.hpp` — the shape of a validated scalar: one
   private member, an `explicit` constructor, a computing accessor beside a

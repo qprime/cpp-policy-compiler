@@ -36,7 +36,7 @@ which is how the property is carried — no test asserts it, because none could.
 follow from that. It is a concrete type rather than a `Task<T>`, because one return
 type is one return type.
 
-## Reading order
+### Reading order
 
 - `include/sampler/device/async_read.hpp` — the awaitable's three functions, the
   promise type as a nested type ahead of the constructors, and a coroutine whose

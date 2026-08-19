@@ -33,7 +33,7 @@ written. It establishes nothing about the absence of races, which no passing run
 can establish; that property is carried by the fact that every path to `reading_`
 goes through the lock.
 
-## Reading order
+### Reading order
 
 - `include/sampler/device/latest_reading.hpp` — the threading model stated in the
   header, and a private section holding the mutex and exactly what it guards

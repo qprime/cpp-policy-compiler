@@ -45,7 +45,7 @@ binary runs.
 
 `std::expected` is what sets the C++23 floor.
 
-## Reading order
+### Reading order
 
 - `include/sampler/ffi/driver.h` — the C-shaped surface: trivially copyable types,
   an out-parameter for the handle, a status code instead of an exception

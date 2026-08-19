@@ -1,12 +1,16 @@
 from __future__ import annotations
 
 import json
+import shutil
 from dataclasses import dataclass
 from pathlib import Path
 
 from .model import (
     STANDARD_DOCUMENTS,
     Configuration,
+    Exclusion,
+    Exemplar,
+    PolcError,
     Policy,
     StandardEntry,
     Topic,
@@ -19,12 +23,21 @@ MARKS = {
     "anti-pattern": "NEVER",
 }
 
+EXEMPLARS_TITLE = "Exemplars"
+EXEMPLARS_READ_WHEN = "reaching for a whole compilable example of a recurring situation"
+EXEMPLARS_PREAMBLE = (
+    "Whole compilable source for a recurring situation. Each tree sits under\n"
+    "`exemplars/` and is laid out from the project root, so a copy into a real "
+    "project\nneeds no edits."
+)
+
 
 @dataclass(frozen=True)
 class Projection:
     entry: str
     topic_documents: dict[str, str]
     standard_documents: dict[str, str]
+    exemplars: str | None
     sidecar: str
     omitted_topics: tuple[str, ...]
     omitted_standard_documents: tuple[str, ...]
@@ -67,14 +80,22 @@ def _order_topic(topic: Topic, included_by_id: dict[str, Policy]) -> list[Policy
     return ordered
 
 
-def _entry_block(heading: str, reference: str, body: str) -> list[str]:
-    return [heading, "", reference, "", body, ""]
+def _entry_block(
+    heading: str, reference: str, body: str, demonstrated_by: list[str] | None = None
+) -> list[str]:
+    lines = [heading, "", reference, "", body, ""]
+    if demonstrated_by:
+        links = ", ".join(f"[{exm}](exemplars.md)" for exm in demonstrated_by)
+        lines.extend([f"Demonstrated by: {links}", ""])
+    return lines
 
 
 def _render_entry_document(
     config: Configuration,
     principles: list[Policy],
     emitted: list[tuple[Topic, list[Policy]]],
+    standard_slugs: list[str],
+    has_exemplars: bool,
 ) -> str:
     lines = [
         f"# {config.name}",
@@ -96,6 +117,11 @@ def _render_entry_document(
     lines.append("")
     for topic, _ in emitted:
         lines.append(f"- [{topic.name}]({topic.slug}.md) — {topic.read_when}")
+    for slug, title, read_when, _ in STANDARD_DOCUMENTS:
+        if slug in standard_slugs:
+            lines.append(f"- [{title}]({slug}.md) — {read_when}")
+    if has_exemplars:
+        lines.append(f"- [{EXEMPLARS_TITLE}](exemplars.md) — {EXEMPLARS_READ_WHEN}")
     return "\n".join(lines).rstrip("\n") + "\n"
 
 
@@ -105,6 +131,7 @@ def _render_topic_document(
     ordered: list[Policy],
     included_by_id: dict[str, Policy],
     home_topic: dict[str, Topic],
+    demonstrated_by: dict[str, list[str]],
     dropped: list[str],
 ) -> str:
     lines = [
@@ -119,6 +146,7 @@ def _render_topic_document(
                 f"## {MARKS[policy.kind]} — {policy.statement}",
                 _compact_ref(policy),
                 policy.body,
+                demonstrated_by.get(policy.id),
             )
         )
     see_also = []
@@ -150,6 +178,7 @@ def _render_standard_document(
     title: str,
     groups: tuple[str, ...],
     members: list[StandardEntry],
+    demonstrated_by: dict[str, list[str]],
 ) -> str:
     lines = [f"{config.name} › {title}", ""]
     for group in groups:
@@ -159,8 +188,46 @@ def _render_standard_document(
         lines.extend([f"## {_group_heading(group)}", ""])
         for entry in grouped:
             lines.extend(
-                _entry_block(f"### {entry.statement}", _standard_ref(entry), entry.body)
+                _entry_block(
+                    f"### {entry.statement}",
+                    _standard_ref(entry),
+                    entry.body,
+                    demonstrated_by.get(entry.id),
+                )
             )
+    return "\n".join(lines).rstrip("\n") + "\n"
+
+
+def _render_exemplars_document(
+    config: Configuration,
+    admitted: list[Exemplar],
+    citations: dict[str, list[str]],
+    home_document: dict[str, str],
+) -> str:
+    lines = [
+        f"{config.name} › {EXEMPLARS_TITLE}",
+        "",
+        EXEMPLARS_PREAMBLE,
+        "",
+    ]
+    for exemplar in admitted:
+        directory = f"exemplars/{exemplar.directory.name}/"
+        lines.extend(
+            [
+                f"## {exemplar.statement}",
+                "",
+                f"{exemplar.id} · [{directory}]({directory})",
+                "",
+                exemplar.body,
+                "",
+            ]
+        )
+        rendered = citations[exemplar.id]
+        if rendered:
+            links = ", ".join(
+                f"[{target}]({home_document[target]})" for target in rendered
+            )
+            lines.extend([f"Demonstrates: {links}", ""])
     return "\n".join(lines).rstrip("\n") + "\n"
 
 
@@ -175,6 +242,8 @@ def _render_sidecar(
     principles: list[Policy],
     emitted: list[tuple[Topic, list[Policy]]],
     standard: list[tuple[str, list[StandardEntry]]],
+    admitted: list[Exemplar],
+    citations: dict[str, list[str]],
 ) -> str:
     entries: dict[str, dict[str, object]] = {}
 
@@ -204,8 +273,50 @@ def _render_sidecar(
                 "attribution": _attribution_records(entry),
                 "file": entry.path.name,
             }
+    for exemplar in admitted:
+        entries[exemplar.id] = {
+            "layer": "exemplar",
+            "statement": exemplar.statement,
+            "directory": f"exemplars/{exemplar.directory.name}",
+            "demonstrates": citations[exemplar.id],
+            "file": "exemplar.md",
+        }
     data = {entry_id: entries[entry_id] for entry_id in sorted(entries)}
     return json.dumps(data, indent=2, ensure_ascii=False) + "\n"
+
+
+def _resolve_citations(
+    admitted: list[Exemplar],
+    included_by_id: dict[str, Policy],
+    included_standard_ids: set[str],
+    exclusions: list[Exclusion],
+    dropped: list[str],
+) -> tuple[dict[str, list[str]], dict[str, list[str]]]:
+    axis_by_id = {exclusion.id: exclusion.axis for exclusion in exclusions}
+    citations: dict[str, list[str]] = {}
+    demonstrated_by: dict[str, list[str]] = {}
+    for exemplar in admitted:
+        rendered: list[str] = []
+        for target in exemplar.demonstrates:
+            if target in included_by_id or target in included_standard_ids:
+                rendered.append(target)
+            else:
+                dropped.append(
+                    f"{exemplar.id}: citation {target} "
+                    f"(excluded by {axis_by_id[target]})"
+                )
+        citations[exemplar.id] = rendered
+        if not rendered:
+            dropped.append(
+                f"{exemplar.id}: every citation dropped; the section renders "
+                "without a citation list"
+            )
+        for target in rendered:
+            policy = included_by_id.get(target)
+            if policy is not None and policy.kind == "principle":
+                continue
+            demonstrated_by.setdefault(target, []).append(exemplar.id)
+    return citations, demonstrated_by
 
 
 def render(
@@ -213,6 +324,8 @@ def render(
     config: Configuration,
     included: list[Policy],
     included_standard: list[StandardEntry],
+    admitted_exemplars: list[Exemplar],
+    exclusions: list[Exclusion],
 ) -> Projection:
     included_by_id = {p.id: p for p in included}
     home_topic = {member: topic for topic in topics for member in topic.members}
@@ -232,40 +345,110 @@ def render(
 
     standard_emitted: list[tuple[str, list[StandardEntry]]] = []
     omitted_documents: list[str] = []
-    standard_documents: dict[str, str] = {}
-    for slug, title, groups in STANDARD_DOCUMENTS:
+    for slug, _, _, groups in STANDARD_DOCUMENTS:
         members = [e for e in included_standard if e.group in groups]
-        if not members:
+        if members:
+            standard_emitted.append((slug, members))
+        else:
             omitted_documents.append(slug)
-            continue
-        standard_emitted.append((slug, members))
-        standard_documents[slug] = _render_standard_document(
-            config, title, groups, members
+
+    home_document = {
+        policy.id: (
+            "index.md"
+            if policy.kind == "principle"
+            else f"{home_topic[policy.id].slug}.md"
         )
+        for policy in included
+    }
+    for slug, members in standard_emitted:
+        for entry in members:
+            home_document[entry.id] = f"{slug}.md"
 
     dropped: list[str] = []
+    citations, demonstrated_by = _resolve_citations(
+        admitted_exemplars,
+        included_by_id,
+        {e.id for e in included_standard},
+        exclusions,
+        dropped,
+    )
+
+    titles = {slug: (title, groups) for slug, title, _, groups in STANDARD_DOCUMENTS}
+    standard_documents = {
+        slug: _render_standard_document(
+            config, titles[slug][0], titles[slug][1], members, demonstrated_by
+        )
+        for slug, members in standard_emitted
+    }
     topic_documents = {
         topic.slug: _render_topic_document(
-            config, topic, ordered, included_by_id, home_topic, dropped
+            config,
+            topic,
+            ordered,
+            included_by_id,
+            home_topic,
+            demonstrated_by,
+            dropped,
         )
         for topic, ordered in emitted
     }
     return Projection(
-        entry=_render_entry_document(config, principles, emitted),
+        entry=_render_entry_document(
+            config,
+            principles,
+            emitted,
+            [slug for slug, _ in standard_emitted],
+            bool(admitted_exemplars),
+        ),
         topic_documents=topic_documents,
         standard_documents=standard_documents,
-        sidecar=_render_sidecar(principles, emitted, standard_emitted),
+        exemplars=(
+            _render_exemplars_document(
+                config, admitted_exemplars, citations, home_document
+            )
+            if admitted_exemplars
+            else None
+        ),
+        sidecar=_render_sidecar(
+            principles, emitted, standard_emitted, admitted_exemplars, citations
+        ),
         omitted_topics=tuple(omitted),
         omitted_standard_documents=tuple(omitted_documents),
         dropped_cross_references=tuple(dropped),
     )
 
 
-def write(projection: Projection, out_dir: Path) -> None:
-    out_dir.mkdir(parents=True, exist_ok=True)
-    (out_dir / "index.md").write_text(projection.entry, encoding="utf-8")
+def write(projection: Projection, admitted: list[Exemplar], out_dir: Path) -> None:
+    owned = (out_dir / "provenance.json").is_file()
+    documents = {"index.md": projection.entry}
     for slug, text in projection.topic_documents.items():
-        (out_dir / f"{slug}.md").write_text(text, encoding="utf-8")
+        documents[f"{slug}.md"] = text
     for slug, text in projection.standard_documents.items():
-        (out_dir / f"{slug}.md").write_text(text, encoding="utf-8")
+        documents[f"{slug}.md"] = text
+    if projection.exemplars is not None:
+        documents["exemplars.md"] = projection.exemplars
+
+    out_dir.mkdir(parents=True, exist_ok=True)
+    if owned:
+        shutil.rmtree(out_dir / "exemplars", ignore_errors=True)
+        for path in out_dir.glob("*.md"):
+            if path.name not in documents:
+                path.unlink()
+    for name, text in documents.items():
+        (out_dir / name).write_text(text, encoding="utf-8")
+    for exemplar in admitted:
+        destination = out_dir / "exemplars" / exemplar.directory.name
+        try:
+            shutil.copytree(
+                exemplar.directory,
+                destination,
+                ignore=shutil.ignore_patterns("exemplar.md"),
+            )
+        except FileExistsError as exc:
+            raise PolcError(
+                [
+                    f"{destination}: already present in an output directory "
+                    "polc does not own"
+                ]
+            ) from exc
     (out_dir / "provenance.json").write_text(projection.sidecar, encoding="utf-8")

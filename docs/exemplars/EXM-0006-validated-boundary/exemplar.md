@@ -34,7 +34,7 @@ encode side has no failure mode and no error type.
 `std::expected` is what sets the C++23 floor. Below it, POL-0183 names a project
 result type instead.
 
-## Reading order
+### Reading order
 
 - `include/sampler/wire/frame.hpp` — the failure set as an `enum class`, the
   decoded value as an aggregate, and the wire size as one named constant

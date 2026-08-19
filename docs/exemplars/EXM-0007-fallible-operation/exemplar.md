@@ -29,7 +29,7 @@ that should never have been constructed — a calibration with a scale of zero �
 where it was constructed, so it never reaches this function at all. The third
 mechanism, an `assert` on the non-empty span, is the one no test can claim.
 
-## Reading order
+### Reading order
 
 - `include/sampler/core/calibration.hpp` — the two mechanisms visible in the
   declarations: a constructor that can throw, and a `try_` that cannot
