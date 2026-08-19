@@ -13,6 +13,11 @@ Content carries the code that shows the guidance, not prose alone. A rule stated
 without an example is a rule the reader has to imagine, and the reader here is a
 pattern-matcher.
 
+A policy's code is a fragment. The whole file a fragment sits in — header
+discipline, namespace, ordering, the adjacent test — is an
+[exemplar](../exemplars/), which cites the policy by id. No policy carries a
+`skeleton` field.
+
 ## On-disk format
 
 One file per policy, flat in this directory, named `POL-NNNN-<slug>.md`. One
@@ -95,15 +100,10 @@ checks them.
   [TOPICS.md](TOPICS.md)
 - every anti-pattern shares a topic with at least one non-principle replacement
 
-### Open format questions
+### Open format question
 
-Neither is decided, and deciding either changes the format rather than any
-policy.
+Deciding it changes the format rather than any policy.
 
-- **A pattern's whole-file exemplar.** Pattern policies carry a fragment, which
-  shows the shape of a construct but not the shape of a file: header discipline,
-  namespace, ordering. A `skeleton` field waits on authoring the first exemplar,
-  because the field's shape follows from what a whole file turns out to need.
 - **Vacuous versus excluded.** A policy whose subject does not exist below a
   given standard is not wrong on an older project, it is vacuous, and a vacuous
   entry is one more thing a reader has to rule out. Whether *nothing to apply

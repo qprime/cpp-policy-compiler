@@ -21,7 +21,7 @@ durable fix is an amendment to the surface, not just to the file.
 
 ## How it's organized
 
-Three authored layers and one derived:
+Four authored layers and one derived:
 
 - **Source** ([docs/source/](docs/source/)) — the material policies derive
   from: captured external documents and original testimony. Nothing here is
@@ -29,6 +29,10 @@ Three authored layers and one derived:
 - **Policies** ([docs/policies/](docs/policies/)) — the opinionated layer, in
   five kinds: principles, standards, guidelines, patterns, and anti-patterns.
   Every policy is attributed to source and marked with where it applies.
+- **Exemplars** ([docs/exemplars/](docs/exemplars/)) — whole compilable source
+  trees, each showing a recurring situation as header, implementation, and
+  adjacent tests. An exemplar cites the policy and standard ids it
+  demonstrates rather than restating them.
 - **Configurations** ([docs/configurations/](docs/configurations/)) —
   per-project facts on three axes: language version, compiler, domain.
 - **Projections** — the compiled output: the policy body as seen through one
