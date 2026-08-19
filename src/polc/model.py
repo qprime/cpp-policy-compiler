@@ -7,14 +7,32 @@ KINDS = ("principle", "standard", "guideline", "pattern", "anti-pattern")
 AXES = ("language_version", "compiler", "domain")
 LANGUAGE_VERSIONS = ("14", "17", "20", "23")
 COMPILERS = ("gcc", "clang")
-STANDARD_DOCUMENTS = (
-    (
+ENFORCERS = ("compiler", "clang-format", "clang-tidy", "build", "review")
+
+
+@dataclass(frozen=True)
+class Destination:
+    slug: str
+    title: str
+    read_when: str
+    groups: tuple[str, ...] = ()
+    before_topics: bool = False
+
+
+DESTINATIONS = (
+    Destination(
         "standard",
         "Coding standard",
         "writing any file — the mechanical rules a formatter or a compiler enforces",
         ("files-and-layout", "names", "layout-of-the-line", "comments"),
+        before_topics=True,
     ),
-    (
+    Destination(
+        "exemplars",
+        "Exemplars",
+        "reaching for a whole compilable example of a recurring situation",
+    ),
+    Destination(
         "project-setup",
         "Project setup",
         "configuring the toolchain — language standard, warning set, formatter, "
@@ -22,13 +40,9 @@ STANDARD_DOCUMENTS = (
         ("toolchain",),
     ),
 )
-STANDARD_GROUPS = tuple(
-    group for _, _, _, groups in STANDARD_DOCUMENTS for group in groups
-)
-ENFORCERS = ("compiler", "clang-format", "clang-tidy", "build", "review")
-RESERVED_SLUGS = ("index", "provenance", "exemplars") + tuple(
-    slug for slug, _, _, _ in STANDARD_DOCUMENTS
-)
+STANDARD_DOCUMENTS = tuple(d for d in DESTINATIONS if d.groups)
+STANDARD_GROUPS = tuple(g for d in DESTINATIONS for g in d.groups)
+RESERVED_SLUGS = ("index", "provenance", "skill") + tuple(d.slug for d in DESTINATIONS)
 
 
 class PolcError(Exception):

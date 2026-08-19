@@ -4,6 +4,7 @@ import argparse
 import sys
 from pathlib import Path
 
+from . import adapters
 from .config import load_configuration
 from .corpus import load_corpus
 from .exemplars import load_exemplars
@@ -16,7 +17,11 @@ from .validate import validate
 
 
 def _build_projection(
-    config_path: Path, policies_dir: Path, standard_dir: Path, exemplars_dir: Path
+    config_path: Path,
+    policies_dir: Path,
+    standard_dir: Path,
+    exemplars_dir: Path,
+    adapter: str | None,
 ) -> tuple[Projection, list[Exclusion], Configuration, list[Exemplar]]:
     errors: list[str] = []
     corpus = topics = config = standard = standard_topic_ids = exemplars = None
@@ -55,16 +60,25 @@ def _build_projection(
     included_standard, standard_exclusions = select_standard(standard, config)
     admitted, exemplar_exclusions = select_exemplars(exemplars, config)
     all_exclusions = exclusions + standard_exclusions + exemplar_exclusions
-    return (
-        render(topics, config, included, included_standard, admitted, all_exclusions),
-        all_exclusions,
+    projection = render(
+        topics,
         config,
+        included,
+        included_standard,
         admitted,
+        all_exclusions,
+        entry_name=adapters.entry_name(adapter),
     )
+    if not projection.topic_documents:
+        raise PolcError(
+            ["every topic omitted: the configuration excludes the whole policy corpus"]
+        )
+    projection = adapters.apply(adapter, projection, config)
+    return projection, all_exclusions, config, admitted
 
 
 def _report(projection: Projection, exclusions: list[Exclusion]) -> None:
-    print(f"index.md: {len(projection.entry)} chars")
+    print(f"{projection.entry_name}: {len(projection.entry)} chars")
     for slug in sorted(projection.topic_documents):
         print(f"{slug}.md: {len(projection.topic_documents[slug])} chars")
     for slug, text in projection.standard_documents.items():
@@ -100,11 +114,16 @@ def main(argv: list[str] | None = None) -> int:
         sub.add_argument("--exemplars", type=Path, default=Path("docs/exemplars"))
         if name == "build":
             sub.add_argument("--out", required=True, type=Path)
+            sub.add_argument("--adapter", choices=adapters.ADAPTERS)
     args = parser.parse_args(argv)
 
     try:
         projection, exclusions, _, admitted = _build_projection(
-            args.config, args.policies, args.standard, args.exemplars
+            args.config,
+            args.policies,
+            args.standard,
+            args.exemplars,
+            getattr(args, "adapter", None),
         )
         if args.command == "build":
             write(projection, admitted, args.out)

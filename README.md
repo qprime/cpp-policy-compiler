@@ -39,9 +39,18 @@ Five authored layers and one derived:
   demonstrates rather than restating them.
 - **Configurations** ([docs/configurations/](docs/configurations/)) —
   per-project facts on three axes: language version, compiler, domain.
-- **Projections** — the compiled output: the policy body as seen through one
-  configuration, rendered as a small always-loaded entry document plus topical
-  documents. Regenerable from the corpus; regeneration overwrites hand edits.
+- **Projections** — the compiled output: the corpus as seen through one
+  configuration. An entry document carries the principles, a legend for the
+  `MUST` / `SHOULD` / `THIS WAY` / `NEVER` marks, and a map routing to every
+  other document — the coding standard, one document per topic, the exemplars
+  with their source trees, and project setup. Every rendered document declares
+  itself generated; regeneration overwrites hand edits.
+
+A target project takes a projection by pointing its own instructions at the
+entry document. `polc build --adapter claude-code` names that document
+`SKILL.md` and prepends skill frontmatter instead, so the output directory
+drops into `.claude/skills/` as-is. Nothing polc emits executes in the target
+project.
 
 
 ## Design commitments
