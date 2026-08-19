@@ -6,6 +6,18 @@ from pathlib import Path
 from .model import PolcError, Topic
 
 POLICY_ID = re.compile(r"POL-\d{4}(?!\d)")
+STANDARD_ENTRY_LINK = re.compile(r"\[(STD-\d{4})\]\(")
+
+
+def parse_standard_topics(path: Path) -> list[str]:
+    try:
+        text = path.read_text(encoding="utf-8")
+    except OSError as exc:
+        raise PolcError([f"{path}: cannot read standard topics: {exc}"]) from exc
+    ids = STANDARD_ENTRY_LINK.findall(text)
+    if not ids:
+        raise PolcError([f"{path.name}: no rows carry an entry link"])
+    return ids
 
 
 def _build_topic(

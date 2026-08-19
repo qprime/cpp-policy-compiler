@@ -84,8 +84,8 @@ selectively and needs both.
 
 ### Structural invariants
 
-Asserted by the format. No compiler enforces them yet — the loader and the two
-render targets are unbuilt.
+Checked by `polc check`. A violation is an error naming the file, and every
+violation across the layer is reported in one run.
 
 - `id` is unique across the standard and matches the filename prefix
 - `group` is one of the five
@@ -100,4 +100,4 @@ render targets are unbuilt.
 fact currently names the mechanism in prose, which nothing validates — a policy can
 name a warning set the standard stopped having. An `enforces` or `relies_on` key
 holding `STD-NNNN` would make the reference checkable the way `replacement` already
-is. It waits on the loader, since there is nothing to resolve against yet.
+is. The loader makes it possible; whether to take it is undecided.

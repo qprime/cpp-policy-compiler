@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from .model import Configuration, Exclusion, Policy, PolcError
+from .model import Configuration, Exclusion, Policy, PolcError, StandardEntry
 
 
 def _axis_value(config: Configuration, axis: str) -> str:
@@ -11,24 +11,30 @@ def _axis_value(config: Configuration, axis: str) -> str:
     }[axis]
 
 
+def excluding_axis(
+    applicability: dict[str, tuple[str, ...]], config: Configuration
+) -> str | None:
+    return next(
+        (
+            axis
+            for axis in sorted(applicability)
+            if _axis_value(config, axis) not in applicability[axis]
+        ),
+        None,
+    )
+
+
 def select(
     corpus: list[Policy], config: Configuration
 ) -> tuple[list[Policy], list[Exclusion]]:
     included: list[Policy] = []
     exclusions: list[Exclusion] = []
     for policy in corpus:
-        excluding_axis = next(
-            (
-                axis
-                for axis in sorted(policy.applicability)
-                if _axis_value(config, axis) not in policy.applicability[axis]
-            ),
-            None,
-        )
-        if excluding_axis is None:
+        axis = excluding_axis(policy.applicability, config)
+        if axis is None:
             included.append(policy)
         else:
-            exclusions.append(Exclusion(policy.id, excluding_axis))
+            exclusions.append(Exclusion(policy.id, axis))
 
     by_id = {p.id: p for p in corpus}
     included_ids = {p.id for p in included}
@@ -44,4 +50,18 @@ def select(
     ]
     if errors:
         raise PolcError(errors)
+    return included, exclusions
+
+
+def select_standard(
+    standard: list[StandardEntry], config: Configuration
+) -> tuple[list[StandardEntry], list[Exclusion]]:
+    included: list[StandardEntry] = []
+    exclusions: list[Exclusion] = []
+    for entry in standard:
+        axis = excluding_axis(entry.applicability, config)
+        if axis is None:
+            included.append(entry)
+        else:
+            exclusions.append(Exclusion(entry.id, axis))
     return included, exclusions

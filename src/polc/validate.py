@@ -5,14 +5,35 @@ import re
 from .model import (
     AXES,
     COMPILERS,
+    ENFORCERS,
     KINDS,
     LANGUAGE_VERSIONS,
+    RESERVED_SLUGS,
+    STANDARD_GROUPS,
     Configuration,
     Policy,
+    StandardEntry,
     Topic,
 )
 
 CONFIG_LANGUAGE_VERSIONS = (14, 17, 20, 23)
+STANDARD_TOPICS = "STANDARD-TOPICS.md"
+
+
+def _validate_applicability(
+    origin: str, applicability: dict[str, tuple[str, ...]], errors: list[str]
+) -> None:
+    for axis, values in applicability.items():
+        if axis not in AXES:
+            errors.append(f"{origin}: unknown applicability axis '{axis}'")
+        elif axis == "language_version":
+            for value in values:
+                if value not in LANGUAGE_VERSIONS:
+                    errors.append(f"{origin}: illegal language_version mark '{value}'")
+        elif axis == "compiler":
+            for value in values:
+                if value not in COMPILERS:
+                    errors.append(f"{origin}: illegal compiler mark '{value}'")
 
 
 def _validate_policies(corpus: list[Policy], by_id: dict[str, Policy], errors: list[str]) -> None:
@@ -43,17 +64,7 @@ def _validate_policies(corpus: list[Policy], by_id: dict[str, Policy], errors: l
         for target in policy.replacement:
             if target not in by_id:
                 errors.append(f"{origin}: replacement {target} does not resolve")
-        for axis, values in policy.applicability.items():
-            if axis not in AXES:
-                errors.append(f"{origin}: unknown applicability axis '{axis}'")
-            elif axis == "language_version":
-                for value in values:
-                    if value not in LANGUAGE_VERSIONS:
-                        errors.append(f"{origin}: illegal language_version mark '{value}'")
-            elif axis == "compiler":
-                for value in values:
-                    if value not in COMPILERS:
-                        errors.append(f"{origin}: illegal compiler mark '{value}'")
+        _validate_applicability(origin, policy.applicability, errors)
 
     precedences = sorted(
         p.precedence for p in corpus if p.kind == "principle" and p.precedence is not None
@@ -76,6 +87,10 @@ def _validate_topics(
             )
         else:
             slugs[topic.slug] = topic.name
+        if topic.slug in RESERVED_SLUGS:
+            errors.append(
+                f"topic '{topic.name}': slug '{topic.slug}' collides with a rendered document"
+            )
         for member in topic.members:
             if member in membership:
                 if membership[member] == topic.name:
@@ -103,6 +118,47 @@ def _validate_topics(
                     "which is always loaded and has no home topic"
                 )
     return membership
+
+
+def _validate_standard(
+    standard: list[StandardEntry], topic_ids: list[str], errors: list[str]
+) -> None:
+    seen: dict[str, StandardEntry] = {}
+    for entry in standard:
+        if entry.id in seen:
+            errors.append(
+                f"{entry.path.name}: duplicate id {entry.id} "
+                f"(also in {seen[entry.id].path.name})"
+            )
+        else:
+            seen[entry.id] = entry
+
+    for entry in standard:
+        origin = entry.path.name
+        if not origin.startswith(entry.id + "-"):
+            errors.append(f"{origin}: id {entry.id} does not match the filename prefix")
+        if entry.group not in STANDARD_GROUPS:
+            errors.append(
+                f"{origin}: group '{entry.group}' is not one of {', '.join(STANDARD_GROUPS)}"
+            )
+        if entry.enforced_by not in ENFORCERS:
+            errors.append(
+                f"{origin}: enforced_by '{entry.enforced_by}' is not one of "
+                f"{', '.join(ENFORCERS)}"
+            )
+        if not entry.attribution:
+            errors.append(f"{origin}: attribution is required and non-empty")
+        _validate_applicability(origin, entry.applicability, errors)
+
+    placed: set[str] = set()
+    for entry_id in topic_ids:
+        if entry_id in placed:
+            errors.append(f"{STANDARD_TOPICS}: {entry_id} is placed in more than one row")
+        placed.add(entry_id)
+    for entry_id in sorted(placed - seen.keys()):
+        errors.append(f"{STANDARD_TOPICS}: {entry_id} does not resolve to an entry")
+    for entry_id in sorted(seen.keys() - placed):
+        errors.append(f"{entry_id}: no linked row in {STANDARD_TOPICS}")
 
 
 def _validate_anti_pattern_adjacency(
@@ -145,12 +201,17 @@ def _validate_configuration(config: Configuration, errors: list[str]) -> None:
 
 
 def validate(
-    corpus: list[Policy], topics: list[Topic], config: Configuration
+    corpus: list[Policy],
+    topics: list[Topic],
+    config: Configuration,
+    standard: list[StandardEntry],
+    standard_topic_ids: list[str],
 ) -> list[str]:
     errors: list[str] = []
     by_id = {p.id: p for p in corpus}
 
     _validate_policies(corpus, by_id, errors)
+    _validate_standard(standard, standard_topic_ids, errors)
     membership = _validate_topics(topics, by_id, errors)
     for policy in corpus:
         if policy.kind != "principle" and policy.id not in membership:

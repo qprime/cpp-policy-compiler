@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from pathlib import Path
 
-from .corpus import parse_frontmatter
+from .frontmatter import parse_frontmatter, required_str
 from .model import Configuration, PolcError
 
 
@@ -10,13 +10,6 @@ def _required_int(value: object, origin: str, key: str, errors: list[str]) -> in
     if isinstance(value, bool) or not isinstance(value, int):
         errors.append(f"{origin}: '{key}' must be an integer")
         return 0
-    return value
-
-
-def _required_str(value: object, origin: str, key: str, errors: list[str]) -> str:
-    if not isinstance(value, str) or not value:
-        errors.append(f"{origin}: '{key}' must be a non-empty string")
-        return ""
     return value
 
 
@@ -28,12 +21,12 @@ def load_configuration(path: Path) -> Configuration:
     frontmatter, _ = parse_frontmatter(text, path.name)
 
     errors: list[str] = []
-    name = _required_str(frontmatter.get("name"), path.name, "name", errors)
+    name = required_str(frontmatter.get("name"), path.name, "name", errors)
     language_version = _required_int(
         frontmatter.get("language_version"), path.name, "language_version", errors
     )
-    compiler = _required_str(frontmatter.get("compiler"), path.name, "compiler", errors)
-    domain = _required_str(frontmatter.get("domain"), path.name, "domain", errors)
+    compiler = required_str(frontmatter.get("compiler"), path.name, "compiler", errors)
+    domain = required_str(frontmatter.get("domain"), path.name, "domain", errors)
 
     if errors:
         raise PolcError(errors)

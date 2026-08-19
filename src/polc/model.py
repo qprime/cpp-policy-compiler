@@ -7,6 +7,21 @@ KINDS = ("principle", "standard", "guideline", "pattern", "anti-pattern")
 AXES = ("language_version", "compiler", "domain")
 LANGUAGE_VERSIONS = ("14", "17", "20", "23")
 COMPILERS = ("gcc", "clang")
+STANDARD_DOCUMENTS = (
+    (
+        "standard",
+        "Coding standard",
+        ("files-and-layout", "names", "layout-of-the-line", "comments"),
+    ),
+    ("project-setup", "Project setup", ("toolchain",)),
+)
+STANDARD_GROUPS = tuple(
+    group for _, _, groups in STANDARD_DOCUMENTS for group in groups
+)
+ENFORCERS = ("compiler", "clang-format", "clang-tidy", "build", "review")
+RESERVED_SLUGS = ("index", "provenance") + tuple(
+    slug for slug, _, _ in STANDARD_DOCUMENTS
+)
 
 
 class PolcError(Exception):
@@ -36,6 +51,18 @@ class Policy:
 
 
 @dataclass(frozen=True)
+class StandardEntry:
+    id: str
+    group: str
+    enforced_by: str
+    statement: str
+    body: str
+    attribution: tuple[Attribution, ...]
+    path: Path
+    applicability: dict[str, tuple[str, ...]] = field(default_factory=dict)
+
+
+@dataclass(frozen=True)
 class Topic:
     name: str
     slug: str
@@ -54,5 +81,5 @@ class Configuration:
 
 @dataclass(frozen=True)
 class Exclusion:
-    policy_id: str
+    id: str
     axis: str
