@@ -66,7 +66,7 @@ new, so a row landing here came out of there.
 | Static analysis check families | `bugprone-*`, `cert-*`, `cppcoreguidelines-*`, `performance-*`, `readability-*` | additions | [STD-0026](../standard/STD-0026-static-analysis-check-families.md) |
 | Formatter configuration | clang-format, Google baseline, indent 4, column 100 | additions | [STD-0027](../standard/STD-0027-formatter-configuration.md) |
 | Build system | CMake by default | additions | [STD-0028](../standard/STD-0028-build-system.md) |
-| Test framework | Catch2, GoogleTest, or doctest, one per project | conventions.md Testing | [STD-0029](../standard/STD-0029-test-framework.md) |
+| Test framework | Catch2, one per project, declared in the build | narrows conventions.md Testing, which admits three | [STD-0029](../standard/STD-0029-test-framework.md) |
 
 ## Settled
 

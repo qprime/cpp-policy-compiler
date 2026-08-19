@@ -83,7 +83,8 @@ not allocate on one input, and the test name says exactly that.
 
 Every exemplar inhabits one device-sampling domain, so a reader moving between them
 carries the vocabulary rather than relearning it. Project name is `sampler`. Layers
-are `core`, `device`, `wire`, and `ffi`.
+are `core`, `device`, `wire`, and `ffi`. Tests are written in Catch2, as
+[STD-0029](../standard/STD-0029-test-framework.md) fixes it.
 
 ### Canonical types
 
