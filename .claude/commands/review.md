@@ -24,9 +24,9 @@ You find real problems. You don't bikeshed.
 Figure out what to review based on $ARGUMENTS and conversation context:
 
 1. **`full`** — Full review of the entire codebase. Ignore `last_review_commit`.
-2. **Issue reference** — find associated commits/PR via the project's issue tracker. Review all changed files in full.
+2. **Issue reference** — find associated commits/PR via the project's issue tracker. Review all changed files in full. Record the issue number; the report gets posted there (see Posting the Report).
 3. **File paths** — review those files in full
-4. **Spec or issue description text** — review as a spec (see Spec Triage below)
+4. **Spec or issue description text** — review as a spec (see Spec Triage below). If the text came from a GitHub issue, record the issue number; the report gets posted there (see Posting the Report).
 5. **No arguments, dirty working tree** — review local changes
 6. **No arguments, clean working tree** — use `last_review_commit` for change-aware review:
    - Run `git diff --name-only <last_review_commit>..HEAD`
@@ -145,6 +145,21 @@ Triage depends on what you're reviewing. Code and specs have different deferral 
 ## Proposed Spec Edits
 [Exact edits for user approval]
 ```
+
+## Posting the Report
+
+Whenever the review scope came from a GitHub issue — a code review of an issue's
+commits, or a spec review of an issue's description — post the finished report to
+that issue with `gh issue comment <number> --body-file <path>`. Write the report to
+a file first; do not pass it inline. Post the report verbatim, including the
+Checks Performed section and the verdict.
+
+Post after the self-critique pass, and post once. If the same issue is reviewed
+again later, that is a new comment, not an edit of the old one — the review
+history stays readable in order.
+
+Reviews scoped by file path, by `full`, or by local diff are conversation-only.
+There is no issue to attach them to; don't invent one.
 
 ## When Review Leads to Changes
 
