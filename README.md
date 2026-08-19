@@ -1,7 +1,8 @@
 # cpp-policy-compiler
+One codebase, one reasoning mind. Developers express intent; the model generates source. The project reads as though one experienced engineer made its decisions: consistent standards, conventions, and judgment at every boundary.
 
-A body of attributed C++ engineering policy, compiled into guidance documents
-for LLM-driven projects.
+This project contains a body of attributed C++ engineering policy, compiled into guidance documents
+for LLM-driven projects.  These documents are intended to be imported into and existing or new LLM-assisted software project.
 
 ## Why
 
