@@ -13,7 +13,7 @@ def _required_int(value: object, origin: str, key: str, errors: list[str]) -> in
     return value
 
 
-def load_configuration(path: Path) -> Configuration:
+def load_configuration(path: Path) -> tuple[Configuration, str]:
     try:
         text = path.read_text(encoding="utf-8")
     except OSError as exc:
@@ -30,4 +30,4 @@ def load_configuration(path: Path) -> Configuration:
 
     if errors:
         raise PolcError(errors)
-    return Configuration(name, language_version, compiler, domain)
+    return Configuration(name, language_version, compiler, domain), text

@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import hashlib
 from pathlib import Path
 
 from .frontmatter import (
@@ -66,6 +67,27 @@ def _parse_policy(path: Path) -> Policy:
         applicability=applicability,
         replacement=replacement,
     )
+
+
+def fingerprint(policies_dir: Path, standard_dir: Path, exemplars_dir: Path) -> str:
+    contributions: list[tuple[str, Path]] = []
+    roots = (
+        ("policies", policies_dir),
+        ("standard", standard_dir),
+        ("exemplars", exemplars_dir),
+    )
+    for label, root in roots:
+        for path in root.rglob("*"):
+            if path.is_file():
+                contributions.append(
+                    (f"{label}/{path.relative_to(root).as_posix()}", path)
+                )
+    digest = hashlib.sha256()
+    for key, path in sorted(contributions):
+        digest.update(key.encode("utf-8"))
+        digest.update(b"\0")
+        digest.update(path.read_bytes())
+    return f"sha256:{digest.hexdigest()}"
 
 
 def load_corpus(policies_dir: Path) -> list[Policy]:

@@ -312,11 +312,7 @@ def validate(
 
 
 def _emitted_paths(projection: Projection, admitted: list[Exemplar]) -> set[str]:
-    paths = {projection.entry_name, "provenance.json"}
-    for slug in (*projection.topic_documents, *projection.standard_documents):
-        paths.add(f"{slug}.md")
-    if projection.exemplars is not None:
-        paths.add("exemplars.md")
+    paths = set(projection.documents()) | {"provenance.json"}
     for exemplar in admitted:
         root = f"exemplars/{exemplar.directory.name}"
         paths.add(f"{root}/")
@@ -330,16 +326,9 @@ def _emitted_paths(projection: Projection, admitted: list[Exemplar]) -> set[str]
 
 def validate_links(projection: Projection, admitted: list[Exemplar]) -> list[str]:
     emitted = _emitted_paths(projection, admitted)
-    documents = {projection.entry_name: projection.entry}
-    for slug, text in projection.topic_documents.items():
-        documents[f"{slug}.md"] = text
-    for slug, text in projection.standard_documents.items():
-        documents[f"{slug}.md"] = text
-    if projection.exemplars is not None:
-        documents["exemplars.md"] = projection.exemplars
 
     errors: list[str] = []
-    for name, text in documents.items():
+    for name, text in projection.documents().items():
         for link in scan_links(text):
             if not link.path or URL_SCHEME.match(link.path):
                 continue

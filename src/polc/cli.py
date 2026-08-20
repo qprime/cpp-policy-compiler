@@ -2,14 +2,15 @@ from __future__ import annotations
 
 import argparse
 import sys
+from importlib.metadata import PackageNotFoundError, version
 from pathlib import Path
 
 from . import adapters
 from .config import load_configuration
-from .corpus import load_corpus
+from .corpus import fingerprint, load_corpus
 from .exemplars import load_exemplars
 from .manifest import parse_manifest, parse_standard_topics
-from .model import Configuration, Exclusion, Exemplar, PolcError
+from .model import Configuration, Exclusion, Exemplar, Identity, PolcError
 from .render import Projection, render, write
 from .select import select, select_exemplars, select_standard
 from .standard import load_standard
@@ -25,6 +26,7 @@ def _build_projection(
 ) -> tuple[Projection, list[Exclusion], Configuration, list[Exemplar]]:
     errors: list[str] = []
     corpus = topics = config = standard = standard_topic_ids = exemplars = None
+    configuration_source = None
     try:
         corpus = load_corpus(policies_dir)
     except PolcError as exc:
@@ -46,7 +48,7 @@ def _build_projection(
     except PolcError as exc:
         errors.extend(exc.errors)
     try:
-        config = load_configuration(config_path)
+        config, configuration_source = load_configuration(config_path)
     except PolcError as exc:
         errors.extend(exc.errors)
     if errors:
@@ -60,6 +62,21 @@ def _build_projection(
     included_standard, standard_exclusions = select_standard(standard, config)
     admitted, exemplar_exclusions = select_exemplars(exemplars, config)
     all_exclusions = exclusions + standard_exclusions + exemplar_exclusions
+    try:
+        polc_version = version("polc")
+    except PackageNotFoundError as exc:
+        raise PolcError(
+            [
+                "distribution 'polc' is not installed, so its version cannot be "
+                "recorded in the projection; install it (uv run polc, pip install -e .)"
+            ]
+        ) from exc
+    identity = Identity(
+        polc_version=polc_version,
+        corpus_fingerprint=fingerprint(policies_dir, standard_dir, exemplars_dir),
+        configuration_source=configuration_source,
+        adapter=adapter,
+    )
     projection = render(
         topics,
         config,
@@ -68,6 +85,7 @@ def _build_projection(
         admitted,
         all_exclusions,
         entry_name=adapters.entry_name(adapter),
+        identity=identity,
     )
     if not projection.topic_documents:
         raise PolcError(
@@ -88,6 +106,7 @@ def _report(projection: Projection, exclusions: list[Exclusion]) -> None:
         print(f"{slug}.md: {len(text)} chars")
     if projection.exemplars is not None:
         print(f"exemplars.md: {len(projection.exemplars)} chars")
+    print(f"configuration.md: {len(projection.identity.configuration_source)} chars")
     print(f"provenance.json: {len(projection.sidecar)} chars")
     for exclusion in exclusions:
         print(f"excluded {exclusion.id} ({exclusion.axis})")

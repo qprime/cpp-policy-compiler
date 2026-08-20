@@ -57,23 +57,33 @@ frontmatter, so the output directory is a working skill as written. Nothing
 polc emits executes in the target project — the output is text and a map.
 
 Both invocations own their output directory. Regeneration overwrites hand
-edits, and every rendered document says so in a banner on its first line.
+edits, and every rendered document says so in a banner on its first line. The
+copied configuration carries no banner, since it is a verbatim copy rather than
+a rendered document.
 
 ## What a projection contains
 
 One entry document plus the documents it routes to.
 
 `index.md` (or `SKILL.md`) is the always-loaded part: the configuration's three
-axes, the principles, a legend defining the `MUST` / `SHOULD` / `THIS WAY` /
+axes, the polc version and corpus fingerprint the projection was built from,
+the principles, a legend defining the `MUST` / `SHOULD` / `THIS WAY` /
 `NEVER` marks that head every rule, and a map. The map is the routing
 mechanism — one line per document, each saying when to read it. The model
 reads the entry document, matches the situation in front of it to a line, and
 opens that one document.
 
 The map covers the coding standard, one document per topic, the exemplars, and
-project setup. Alongside them sits `exemplars/`, the copied source trees, and
-`provenance.json`, a machine-readable index from every emitted id back to its
+project setup. Alongside them sits `exemplars/`, the copied source trees;
+`configuration.md`, a verbatim copy of the configuration the projection was
+built from; and `provenance.json`, which holds a `projection` block naming the
+polc version, a SHA-256 fingerprint of the corpus, the configuration, and the
+adapter, and an `entries` block indexing every emitted id back to its
 attribution and source file.
+
+The fingerprint covers every file under the policies, standard, and exemplars
+directories, so a projection in a target repository can be compared against a
+fresh build by reading one line.
 
 ## How it's organized
 

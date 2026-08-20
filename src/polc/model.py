@@ -42,7 +42,9 @@ DESTINATIONS = (
 )
 STANDARD_DOCUMENTS = tuple(d for d in DESTINATIONS if d.groups)
 STANDARD_GROUPS = tuple(g for d in DESTINATIONS for g in d.groups)
-RESERVED_SLUGS = ("index", "provenance", "skill") + tuple(d.slug for d in DESTINATIONS)
+RESERVED_SLUGS = ("index", "provenance", "skill", "configuration") + tuple(
+    d.slug for d in DESTINATIONS
+)
 
 
 class PolcError(Exception):
@@ -115,3 +117,11 @@ class Configuration:
 class Exclusion:
     id: str
     axis: str
+
+
+@dataclass(frozen=True)
+class Identity:
+    polc_version: str
+    corpus_fingerprint: str
+    configuration_source: str
+    adapter: str | None
