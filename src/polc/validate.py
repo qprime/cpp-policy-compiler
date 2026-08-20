@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import re
 
+from .links import code_mask, scan_links
 from .model import (
     AXES,
     COMPILERS,
@@ -16,10 +17,12 @@ from .model import (
     StandardEntry,
     Topic,
 )
+from .render import Projection
 
 CONFIG_LANGUAGE_VERSIONS = (14, 17, 20, 23)
 STANDARD_TOPICS = "STANDARD-TOPICS.md"
 DEMONSTRATED_ID = re.compile(r"(?:POL|STD)-\d{4}")
+URL_SCHEME = re.compile(r"[a-z][a-z0-9+.-]*:|//", re.IGNORECASE)
 
 
 def _validate_applicability(
@@ -230,15 +233,15 @@ def _validate_neighbours(origin: str, exemplar: Exemplar, errors: list[str]) -> 
 
 
 def _validate_body_headings(origin: str, body: str, errors: list[str]) -> None:
-    fenced = False
+    mask = code_mask(body)
+    offset = 0
     for line in body.split("\n"):
-        if line.startswith("```"):
-            fenced = not fenced
-        elif not fenced and re.match(r"#{1,2} ", line):
+        if re.match(r"#{1,2} ", line) and not mask[offset]:
             errors.append(
                 f"{origin}: body heading '{line.strip()}' sits at the level the "
                 "statement renders into; use '###' or deeper"
             )
+        offset += len(line) + 1
 
 
 def _validate_exemplars(
@@ -305,4 +308,43 @@ def validate(
             errors.append(f"{policy.id}: not a member of any topic")
     _validate_anti_pattern_adjacency(corpus, by_id, membership, errors)
     _validate_configuration(config, errors)
+    return errors
+
+
+def _emitted_paths(projection: Projection, admitted: list[Exemplar]) -> set[str]:
+    paths = {projection.entry_name, "provenance.json"}
+    for slug in (*projection.topic_documents, *projection.standard_documents):
+        paths.add(f"{slug}.md")
+    if projection.exemplars is not None:
+        paths.add("exemplars.md")
+    for exemplar in admitted:
+        root = f"exemplars/{exemplar.directory.name}"
+        paths.add(f"{root}/")
+        for source in exemplar.sources:
+            paths.add(f"{root}/{source.as_posix()}")
+            for parent in source.parents:
+                if parent.as_posix() != ".":
+                    paths.add(f"{root}/{parent.as_posix()}/")
+    return paths
+
+
+def validate_links(projection: Projection, admitted: list[Exemplar]) -> list[str]:
+    emitted = _emitted_paths(projection, admitted)
+    documents = {projection.entry_name: projection.entry}
+    for slug, text in projection.topic_documents.items():
+        documents[f"{slug}.md"] = text
+    for slug, text in projection.standard_documents.items():
+        documents[f"{slug}.md"] = text
+    if projection.exemplars is not None:
+        documents["exemplars.md"] = projection.exemplars
+
+    errors: list[str] = []
+    for name, text in documents.items():
+        for link in scan_links(text):
+            if not link.path or URL_SCHEME.match(link.path):
+                continue
+            if link.path not in emitted and f"{link.path}/" not in emitted:
+                errors.append(
+                    f"{name}: link target '{link.path}' resolves to no emitted path"
+                )
     return errors

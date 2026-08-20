@@ -13,7 +13,7 @@ from .model import Configuration, Exclusion, Exemplar, PolcError
 from .render import Projection, render, write
 from .select import select, select_exemplars, select_standard
 from .standard import load_standard
-from .validate import validate
+from .validate import validate, validate_links
 
 
 def _build_projection(
@@ -74,6 +74,9 @@ def _build_projection(
             ["every topic omitted: the configuration excludes the whole policy corpus"]
         )
     projection = adapters.apply(adapter, projection, config)
+    errors = validate_links(projection, admitted)
+    if errors:
+        raise PolcError(errors)
     return projection, all_exclusions, config, admitted
 
 
@@ -94,7 +97,7 @@ def _report(projection: Projection, exclusions: list[Exclusion]) -> None:
         print(f"omitted {slug}.md: every entry excluded")
     if projection.exemplars is None:
         print("omitted exemplars.md: every exemplar excluded")
-    for line in projection.dropped_cross_references:
+    for line in projection.dropped_references:
         print(f"dropped {line}")
 
 
