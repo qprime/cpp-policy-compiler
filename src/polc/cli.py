@@ -155,6 +155,11 @@ def main(argv: list[str] | None = None) -> int:
         return 1
 
     _report(projection, exclusions)
+    if args.command == "build":
+        note = adapters.wiring_note(args.adapter, args.out, projection.entry_name)
+        if note is not None:
+            print()
+            print(note)
     return 0
 
 
