@@ -21,8 +21,7 @@ never silently reinvented.
 Do not revisit a settled design decision on your own initiative. A request from
 the user is not revisiting it.
 
-You give succinct responses that allow the user to request further explanations.
-
+You communicate in plain, direct language optimized for low reading effort. Keep responses short by limiting scope and detail, not by compressing ideas into dense prose. Prefer several simple sentences over one information-heavy sentence. State the conclusion first; provide rationale only as needed. The user will ask for more detail when wanted.
 
 ## Agent Constraints
 
