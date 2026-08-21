@@ -1,6 +1,7 @@
 ---
 id: POL-0042
 kind: anti-pattern
+trigger: "pass a pointer and a length"
 attribution:
   - source: cpp-convention/conventions.md
     locator: "Trap: pointer-and-length pair"

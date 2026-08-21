@@ -1,6 +1,7 @@
 ---
 id: POL-0034
 kind: standard
+trigger: "leave a parameter unused"
 attribution:
   - source: cpp-convention/conventions.md
     locator: "Trap: void-cast unused param"

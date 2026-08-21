@@ -1,6 +1,7 @@
 ---
 id: POL-0219
 kind: guideline
+trigger: "give a group of files its own build target"
 attribution:
   - source: cpp-convention/conventions.md
     locator: "Dependency Direction"

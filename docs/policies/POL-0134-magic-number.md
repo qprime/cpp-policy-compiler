@@ -1,6 +1,7 @@
 ---
 id: POL-0134
 kind: anti-pattern
+trigger: "write a numeric literal in a check or a computation"
 attribution:
   - source: cpp-convention/conventions.md
     locator: "Trap: magic number"

@@ -1,6 +1,7 @@
 ---
 id: POL-0096
 kind: standard
+trigger: "give a virtual function a default argument"
 attribution:
   - source: standard-practice
     locator: "virtual default arguments"

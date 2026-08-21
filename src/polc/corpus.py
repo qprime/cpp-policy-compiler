@@ -20,6 +20,7 @@ POLICY_KEYS = {
     "applicability",
     "attribution",
     "replacement",
+    "trigger",
 }
 
 
@@ -48,6 +49,11 @@ def _parse_policy(path: Path) -> Policy:
         if "replacement" in frontmatter
         else ()
     )
+    trigger = (
+        required_str(frontmatter["trigger"], path.name, "trigger", errors)
+        if "trigger" in frontmatter
+        else None
+    )
     try:
         statement, body = split_statement(markdown, path.name)
     except PolcError as exc:
@@ -66,6 +72,7 @@ def _parse_policy(path: Path) -> Policy:
         precedence=precedence,
         applicability=applicability,
         replacement=replacement,
+        trigger=trigger,
     )
 
 

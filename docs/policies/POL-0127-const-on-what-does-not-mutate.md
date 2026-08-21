@@ -1,6 +1,7 @@
 ---
 id: POL-0127
 kind: standard
+trigger: "declare a member function, or a parameter you only read"
 attribution:
   - source: cpp-convention/mechanisms.md
     locator: "6. Immutability"

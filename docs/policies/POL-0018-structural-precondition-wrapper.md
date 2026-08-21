@@ -1,6 +1,7 @@
 ---
 id: POL-0018
 kind: pattern
+trigger: "write a function with a structural precondition"
 attribution:
   - source: cpp-convention/conventions.md
     locator: "Pattern: wrapper type for preconditions"

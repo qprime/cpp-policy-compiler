@@ -1,6 +1,7 @@
 ---
 id: POL-0084
 kind: guideline
+trigger: "write a swap"
 attribution:
   - source: standard-practice
     locator: "swap"

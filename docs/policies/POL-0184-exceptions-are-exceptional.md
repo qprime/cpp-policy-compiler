@@ -1,6 +1,7 @@
 ---
 id: POL-0184
 kind: standard
+trigger: "throw an exception"
 attribution:
   - source: cpp-convention/conventions.md
     locator: "Divergences: [CG E.2], [CG I.10]"

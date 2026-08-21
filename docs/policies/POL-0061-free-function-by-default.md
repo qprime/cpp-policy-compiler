@@ -1,6 +1,7 @@
 ---
 id: POL-0061
 kind: pattern
+trigger: "decide whether a function is a member"
 attribution:
   - source: cpp-convention/conventions.md
     locator: "Pattern: free function by default"

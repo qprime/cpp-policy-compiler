@@ -1,6 +1,7 @@
 ---
 id: POL-0019
 kind: guideline
+trigger: "write a precondition no type can carry"
 attribution:
   - source: cpp-convention/conventions.md
     locator: "Divergences: [CG I.6], [CG I.8]"

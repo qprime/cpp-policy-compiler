@@ -1,6 +1,7 @@
 ---
 id: POL-0192
 kind: standard
+trigger: "write an exception specification"
 attribution:
   - source: cpp-convention/mechanisms.md
     locator: "13. Standard-specific bans"

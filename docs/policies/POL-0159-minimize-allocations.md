@@ -1,6 +1,7 @@
 ---
 id: POL-0159
 kind: guideline
+trigger: "allocate inside a loop"
 attribution:
   - source: standard-practice
     locator: "allocation cost"

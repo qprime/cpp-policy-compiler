@@ -1,6 +1,7 @@
 ---
 id: POL-0063
 kind: standard
+trigger: "declare a data member"
 attribution:
   - source: cpp-convention/conventions.md
     locator: "Pattern: value type with invariant"

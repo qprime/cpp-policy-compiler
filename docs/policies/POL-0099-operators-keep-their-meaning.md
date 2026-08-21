@@ -1,6 +1,7 @@
 ---
 id: POL-0099
 kind: standard
+trigger: "overload an operator"
 attribution:
   - source: standard-practice
     locator: "operator overloading"

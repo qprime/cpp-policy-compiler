@@ -1,6 +1,7 @@
 ---
 id: POL-0245
 kind: standard
+trigger: "write a test"
 attribution:
   - source: cpp-convention/conventions.md
     locator: "Testing"

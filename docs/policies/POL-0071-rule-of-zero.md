@@ -1,6 +1,7 @@
 ---
 id: POL-0071
 kind: pattern
+trigger: "declare a destructor, a copy, or a move operation"
 attribution:
   - source: cpp-convention/conventions.md
     locator: "Pattern: rule of zero"

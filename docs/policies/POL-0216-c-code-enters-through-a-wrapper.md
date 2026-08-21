@@ -1,6 +1,7 @@
 ---
 id: POL-0216
 kind: standard
+trigger: "call C code from C++"
 attribution:
   - source: cpp-convention/conventions.md
     locator: "FFI Conventions"

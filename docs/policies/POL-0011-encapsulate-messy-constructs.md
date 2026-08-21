@@ -1,6 +1,7 @@
 ---
 id: POL-0011
 kind: guideline
+trigger: "touch an OS handle, a C library object, or a bit-packed format"
 attribution:
   - source: cpp-convention/conventions.md
     locator: "Pattern: rule of zero"

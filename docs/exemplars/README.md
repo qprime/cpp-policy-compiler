@@ -38,8 +38,16 @@ frontmatter `id` is the citable thing.
 | Key | Presence | Meaning |
 |-----|----------|---------|
 | `id` | required | `EXM-NNNN`. Matches the directory prefix, unique across the layer. |
+| `situation` | required | The situation the tree answers, as a fragment completing *when you are about to*. Lowercase first character, no trailing period. |
 | `demonstrates` | required | A list of `POL-NNNN` and `STD-NNNN` ids, never empty. Every entry resolves to an existing policy or standard entry, and never to an anti-pattern. |
 | `applicability` | optional | Axis marks that constrain the exemplar out. Same axes and same value shape as a policy: `language_version`, `compiler`, `domain`. Absent entirely means universal. |
+
+`situation` is the lookup key. `exemplars.md` opens with one row per admitted
+exemplar, keyed by it, and the procedure in the entry document sends the reader
+there first. Where the H1 statement says what the tree is, `situation` says what
+question it answers, and the two are written separately for that reason. Two
+exemplars may carry the same `situation`: two trees can answer one situation
+differently, and both rows show.
 
 There is no `attribution`. An exemplar derives from the corpus rather than from
 source material, and `demonstrates` is its whole provenance. The key is rejected
@@ -47,7 +55,7 @@ rather than ignored if it appears.
 
 An anti-pattern is code not to write, so an exemplar demonstrating one would assert
 the reverse of the truth. Principles stay legal, and a cited principle links to
-`index.md`.
+`principles.md`.
 
 ### Body
 
@@ -155,13 +163,14 @@ design fixed ahead of the code.
 Enforced by `polc check`, which fails the build on any of them:
 
 - `id` is unique across the layer and matches the directory prefix
+- `situation` is present and non-empty
 - `demonstrates` is present, non-empty, and every entry resolves to an existing
   policy or standard entry, never to an anti-pattern
 - every exemplar has at least one `*_test.cpp` in its tree, and every non-test
   `<layer>/<name>.cpp` has a `<layer>/<name>_test.cpp` beside it and a declaring
   header at `include/<project>/<layer>/<name>.hpp` or `<layer>/<name>.hpp`
 - every `EXM-*` directory holds an `exemplar.md`, whose frontmatter carries no key
-  beyond `id`, `demonstrates`, and `applicability`
+  beyond `id`, `situation`, `demonstrates`, and `applicability`
 - no body heading sits at `#` or `##`, the levels the statement renders into
 
 The check runs from source to header and never the reverse, so EXM-0013's foreign C

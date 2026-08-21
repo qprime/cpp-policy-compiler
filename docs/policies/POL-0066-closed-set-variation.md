@@ -1,6 +1,7 @@
 ---
 id: POL-0066
 kind: pattern
+trigger: "represent a fixed set of alternatives"
 attribution:
   - source: cpp-convention/mechanisms.md
     locator: "2. Closed-set variation"

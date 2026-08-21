@@ -1,6 +1,7 @@
 ---
 id: POL-0240
 kind: standard
+trigger: "choose what a test targets"
 attribution:
   - source: cpp-convention/conventions.md
     locator: "Testing"

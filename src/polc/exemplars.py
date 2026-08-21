@@ -13,6 +13,7 @@ from .model import Exemplar, PolcError
 
 EXEMPLAR_KEYS = {
     "id",
+    "situation",
     "demonstrates",
     "applicability",
 }
@@ -32,6 +33,7 @@ def _parse_exemplar(path: Path) -> Exemplar:
         errors.append(f"{origin}: unknown frontmatter keys: {', '.join(unknown)}")
 
     exemplar_id = required_str(frontmatter.get("id"), origin, "id", errors)
+    situation = required_str(frontmatter.get("situation"), origin, "situation", errors)
     demonstrates = string_list(
         frontmatter.get("demonstrates"), origin, "demonstrates", errors
     )
@@ -57,6 +59,7 @@ def _parse_exemplar(path: Path) -> Exemplar:
     return Exemplar(
         id=exemplar_id,
         statement=statement,
+        situation=situation,
         body=body,
         demonstrates=demonstrates,
         directory=directory,

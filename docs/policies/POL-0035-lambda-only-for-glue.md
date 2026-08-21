@@ -1,6 +1,7 @@
 ---
 id: POL-0035
 kind: guideline
+trigger: "write a lambda"
 attribution:
   - source: testimony/coding-rules-2026-07.md
     locator: "Lambdas #1"

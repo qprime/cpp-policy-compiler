@@ -1,6 +1,7 @@
 ---
 id: POL-0025
 kind: standard
+trigger: "put data on a base class used as an interface"
 attribution:
   - source: cpp-convention/conventions.md
     locator: "Decision: is inheritance right"

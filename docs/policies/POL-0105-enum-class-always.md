@@ -1,6 +1,7 @@
 ---
 id: POL-0105
 kind: standard
+trigger: "declare an enumeration"
 attribution:
   - source: cpp-convention/mechanisms.md
     locator: "12. Enumerations"

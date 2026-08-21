@@ -1,6 +1,7 @@
 ---
 id: POL-0140
 kind: standard
+trigger: "write std::move"
 attribution:
   - source: standard-practice
     locator: "move semantics"

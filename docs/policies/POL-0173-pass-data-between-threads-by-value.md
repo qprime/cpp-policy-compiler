@@ -1,6 +1,7 @@
 ---
 id: POL-0173
 kind: standard
+trigger: "pass data to another thread"
 attribution:
   - source: cpp-convention/mechanisms.md
     locator: "10. Concurrency"

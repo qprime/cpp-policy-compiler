@@ -1,6 +1,7 @@
 ---
 id: POL-0022
 kind: guideline
+trigger: "declare a pointer parameter that must not be null"
 attribution:
   - source: cpp-convention/conventions.md
     locator: "Divergences: [CG I.12], [CG F.23]"

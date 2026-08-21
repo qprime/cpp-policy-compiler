@@ -1,6 +1,7 @@
 ---
 id: POL-0117
 kind: guideline
+trigger: "reach for a language feature where an abstraction exists"
 attribution:
   - source: standard-practice
     locator: "levels of abstraction"

@@ -1,6 +1,7 @@
 ---
 id: POL-0146
 kind: standard
+trigger: "write a loop over a whole container"
 attribution:
   - source: standard-practice
     locator: "loop selection"

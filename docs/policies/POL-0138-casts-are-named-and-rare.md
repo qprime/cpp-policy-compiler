@@ -1,6 +1,7 @@
 ---
 id: POL-0138
 kind: standard
+trigger: "write a cast"
 attribution:
   - source: standard-practice
     locator: "casting"

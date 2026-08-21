@@ -1,6 +1,7 @@
 ---
 id: POL-0162
 kind: standard
+trigger: "take a lock or do I/O on a deadline-bound path"
 applicability:
   domain: ["realtime"]
 attribution:

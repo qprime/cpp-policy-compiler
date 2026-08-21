@@ -1,6 +1,7 @@
 ---
 id: POL-0236
 kind: standard
+trigger: "convert units near the FFI seam"
 attribution:
   - source: cpp-convention/conventions.md
     locator: "FFI Conventions"

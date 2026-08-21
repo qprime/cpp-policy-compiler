@@ -1,6 +1,7 @@
 ---
 id: POL-0048
 kind: guideline
+trigger: "return a reference"
 attribution:
   - source: standard-practice
     locator: "reference returns"

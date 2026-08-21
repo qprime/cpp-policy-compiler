@@ -1,6 +1,7 @@
 ---
 id: POL-0131
 kind: guideline
+trigger: "write pointer arithmetic"
 attribution:
   - source: standard-practice
     locator: "pointer expressions"

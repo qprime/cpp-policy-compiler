@@ -1,6 +1,7 @@
 ---
 id: POL-0017
 kind: standard
+trigger: "declare a parameter or return type for a value the domain already names"
 attribution:
   - source: cpp-convention/conventions.md
     locator: "Decision: when a thing becomes a type"

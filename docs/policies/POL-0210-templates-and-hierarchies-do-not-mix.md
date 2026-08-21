@@ -1,6 +1,7 @@
 ---
 id: POL-0210
 kind: guideline
+trigger: "templatize a hierarchy, or store derived objects by value"
 attribution:
   - source: standard-practice
     locator: "templates and inheritance"

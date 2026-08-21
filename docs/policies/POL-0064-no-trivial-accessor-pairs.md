@@ -1,6 +1,7 @@
 ---
 id: POL-0064
 kind: guideline
+trigger: "write a getter and setter around a data member"
 attribution:
   - source: standard-practice
     locator: "accessor design"

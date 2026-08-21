@@ -1,6 +1,7 @@
 ---
 id: POL-0202
 kind: guideline
+trigger: "constrain on a syntactic accident two types share"
 attribution:
   - source: standard-practice
     locator: "tag types"

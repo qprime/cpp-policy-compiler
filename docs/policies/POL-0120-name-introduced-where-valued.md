@@ -1,6 +1,7 @@
 ---
 id: POL-0120
 kind: standard
+trigger: "declare a variable"
 attribution:
   - source: standard-practice
     locator: "declaration scope"

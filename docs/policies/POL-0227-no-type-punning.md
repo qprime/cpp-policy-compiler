@@ -1,6 +1,7 @@
 ---
 id: POL-0227
 kind: standard
+trigger: "reinterpret an object's bytes"
 attribution:
   - source: standard-practice
     locator: "type punning"

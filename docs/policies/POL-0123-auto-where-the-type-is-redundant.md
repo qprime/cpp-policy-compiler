@@ -1,6 +1,7 @@
 ---
 id: POL-0123
 kind: standard
+trigger: "write auto"
 attribution:
   - source: testimony/coding-rules-2026-07.md
     locator: "auto #1"

@@ -1,6 +1,7 @@
 ---
 id: POL-0161
 kind: standard
+trigger: "allocate on a deadline-bound path"
 applicability:
   domain: ["realtime"]
 attribution:

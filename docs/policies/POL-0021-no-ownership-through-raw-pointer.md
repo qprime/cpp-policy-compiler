@@ -1,6 +1,7 @@
 ---
 id: POL-0021
 kind: standard
+trigger: "hand an allocation to another function, or return one"
 attribution:
   - source: cpp-convention/conventions.md
     locator: "Pattern: ownership decision"

@@ -1,5 +1,6 @@
 ---
 id: EXM-0012
+situation: write a path that runs inside a deadline
 demonstrates:
   - POL-0023
   - POL-0028

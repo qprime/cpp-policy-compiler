@@ -1,6 +1,7 @@
 ---
 id: POL-0114
 kind: guideline
+trigger: "write a smart pointer of your own"
 attribution:
   - source: cpp-convention/mechanisms.md
     locator: "3. Ownership"

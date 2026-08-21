@@ -1,6 +1,7 @@
 ---
 id: POL-0091
 kind: guideline
+trigger: "write a constructor for an abstract class"
 attribution:
   - source: standard-practice
     locator: "abstract class construction"

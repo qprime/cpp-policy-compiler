@@ -1,6 +1,7 @@
 ---
 id: POL-0062
 kind: standard
+trigger: "define a type and declare a variable of it in one statement"
 attribution:
   - source: standard-practice
     locator: "type definitions"

@@ -1,6 +1,7 @@
 ---
 id: POL-0200
 kind: standard
+trigger: "write a concept"
 attribution:
   - source: standard-practice
     locator: "concept design"

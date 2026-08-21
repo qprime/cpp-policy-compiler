@@ -1,6 +1,7 @@
 ---
 id: POL-0014
 kind: standard
+trigger: "write a function that reaches for global state"
 attribution:
   - source: cpp-convention/conventions.md
     locator: "Values #6"

@@ -1,6 +1,7 @@
 ---
 id: POL-0047
 kind: standard
+trigger: "return a pointer or reference to a local"
 attribution:
   - source: cpp-convention/conventions.md
     locator: "Decision: how to pass a parameter"

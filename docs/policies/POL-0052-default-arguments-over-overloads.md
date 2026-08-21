@@ -1,6 +1,7 @@
 ---
 id: POL-0052
 kind: guideline
+trigger: "add an overload that only fills in an argument"
 attribution:
   - source: standard-practice
     locator: "default arguments"

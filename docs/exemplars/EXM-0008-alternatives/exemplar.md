@@ -1,5 +1,6 @@
 ---
 id: EXM-0008
+situation: dispatch over a closed set of alternatives
 demonstrates:
   - POL-0035
   - POL-0057

@@ -1,6 +1,7 @@
 ---
 id: POL-0247
 kind: standard
+trigger: "finish a test suite for a behaviour"
 attribution:
   - source: cpp-convention/conventions.md
     locator: "Testing"

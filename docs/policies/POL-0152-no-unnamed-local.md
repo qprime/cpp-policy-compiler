@@ -1,6 +1,7 @@
 ---
 id: POL-0152
 kind: standard
+trigger: "declare an object for its lifetime alone, or discard a result"
 attribution:
   - source: standard-practice
     locator: "unnamed objects"

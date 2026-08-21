@@ -1,6 +1,7 @@
 ---
 id: POL-0180
 kind: standard
+trigger: "write a lambda that is a coroutine"
 applicability:
   language_version: ["20", "23"]
 attribution:

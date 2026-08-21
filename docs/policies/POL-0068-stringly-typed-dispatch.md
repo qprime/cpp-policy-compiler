@@ -1,6 +1,7 @@
 ---
 id: POL-0068
 kind: anti-pattern
+trigger: "write a kind field with optional payload members"
 attribution:
   - source: cpp-convention/conventions.md
     locator: "Trap: stringly-typed dispatch"

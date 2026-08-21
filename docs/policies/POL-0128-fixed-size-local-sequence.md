@@ -1,6 +1,7 @@
 ---
 id: POL-0128
 kind: standard
+trigger: "declare a sequence of elements"
 attribution:
   - source: standard-practice
     locator: "array types"

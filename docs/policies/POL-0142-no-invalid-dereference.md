@@ -1,6 +1,7 @@
 ---
 id: POL-0142
 kind: standard
+trigger: "dereference a pointer or an iterator"
 attribution:
   - source: standard-practice
     locator: "pointer validity"

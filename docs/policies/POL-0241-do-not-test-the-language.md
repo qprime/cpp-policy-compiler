@@ -1,6 +1,7 @@
 ---
 id: POL-0241
 kind: standard
+trigger: "test the language or the standard library"
 attribution:
   - source: cpp-convention/conventions.md
     locator: "Testing"

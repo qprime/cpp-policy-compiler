@@ -1,6 +1,7 @@
 ---
 id: POL-0156
 kind: standard
+trigger: "make code faster"
 attribution:
   - source: cpp-convention/conventions.md
     locator: "Tooling Commitments"

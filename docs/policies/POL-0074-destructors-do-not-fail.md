@@ -1,6 +1,7 @@
 ---
 id: POL-0074
 kind: standard
+trigger: "write a destructor, a deallocation, a swap, or an exception copy"
 attribution:
   - source: standard-practice
     locator: "destructor exception safety"

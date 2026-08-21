@@ -1,6 +1,7 @@
 ---
 id: POL-0078
 kind: standard
+trigger: "declare an assignment operator"
 attribution:
   - source: standard-practice
     locator: "assignment operator conventions"

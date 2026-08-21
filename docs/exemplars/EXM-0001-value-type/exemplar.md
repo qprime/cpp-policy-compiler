@@ -1,5 +1,6 @@
 ---
 id: EXM-0001
+situation: write a validated scalar value type
 demonstrates:
   - POL-0058
   - POL-0059

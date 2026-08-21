@@ -1,6 +1,7 @@
 ---
 id: POL-0124
 kind: anti-pattern
+trigger: "write auto on every declaration"
 attribution:
   - source: cpp-convention/conventions.md
     locator: "Trap: auto by default"

@@ -1,6 +1,7 @@
 ---
 id: POL-0113
 kind: guideline
+trigger: "let two shared owners refer to each other"
 attribution:
   - source: standard-practice
     locator: "reference cycles"

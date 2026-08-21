@@ -1,6 +1,7 @@
 ---
 id: POL-0070
 kind: standard
+trigger: "declare a const or reference data member"
 attribution:
   - source: standard-practice
     locator: "assignable members"

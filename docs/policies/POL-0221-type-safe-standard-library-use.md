@@ -1,6 +1,7 @@
 ---
 id: POL-0221
 kind: guideline
+trigger: "assemble an iterator pair, a raw index, or a printf call"
 attribution:
   - source: cpp-convention/mechanisms.md
     locator: "11. Strings and formatting"

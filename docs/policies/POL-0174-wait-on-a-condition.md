@@ -1,6 +1,7 @@
 ---
 id: POL-0174
 kind: standard
+trigger: "wait on a condition variable"
 attribution:
   - source: cpp-convention/mechanisms.md
     locator: "10. Concurrency"

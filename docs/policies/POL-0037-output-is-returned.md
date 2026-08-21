@@ -1,6 +1,7 @@
 ---
 id: POL-0037
 kind: standard
+trigger: "return more than one value, or write an out parameter"
 attribution:
   - source: cpp-convention/conventions.md
     locator: "Decision: how to pass a parameter"

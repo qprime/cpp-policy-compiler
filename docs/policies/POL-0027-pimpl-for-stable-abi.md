@@ -1,6 +1,7 @@
 ---
 id: POL-0027
 kind: guideline
+trigger: "hide an implementation behind a pointer"
 attribution:
   - source: standard-practice
     locator: "ABI stability"

@@ -1,6 +1,7 @@
 ---
 id: POL-0148
 kind: standard
+trigger: "declare or modify a loop variable"
 attribution:
   - source: standard-practice
     locator: "loop variables"

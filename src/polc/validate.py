@@ -41,6 +41,30 @@ def _validate_applicability(
                     errors.append(f"{origin}: illegal compiler mark '{value}'")
 
 
+def _validate_trigger(origin: str, policy: Policy, errors: list[str]) -> None:
+    if policy.trigger is None:
+        return
+    if policy.kind == "principle":
+        errors.append(
+            f"{origin}: trigger appears on a principle, which has no topic document "
+            "to hold the row"
+        )
+    trigger = policy.trigger.strip()
+    if not trigger:
+        errors.append(f"{origin}: 'trigger' must be a non-empty string")
+        return
+    if trigger.endswith("."):
+        errors.append(
+            f"{origin}: trigger ends with a period; it is a fragment completing "
+            "'when you are about to'"
+        )
+    if trigger[0].isupper():
+        errors.append(
+            f"{origin}: trigger opens with a capital; it is a fragment completing "
+            "'when you are about to'"
+        )
+
+
 def _validate_policies(corpus: list[Policy], by_id: dict[str, Policy], errors: list[str]) -> None:
     seen: dict[str, Policy] = {}
     for policy in corpus:
@@ -69,6 +93,7 @@ def _validate_policies(corpus: list[Policy], by_id: dict[str, Policy], errors: l
         for target in policy.replacement:
             if target not in by_id:
                 errors.append(f"{origin}: replacement {target} does not resolve")
+        _validate_trigger(origin, policy, errors)
         _validate_applicability(origin, policy.applicability, errors)
 
     precedences = sorted(
@@ -266,6 +291,8 @@ def _validate_exemplars(
             errors.append(
                 f"{origin}: id {exemplar.id} does not match the directory prefix"
             )
+        if not exemplar.situation.strip():
+            errors.append(f"{origin}: 'situation' must be a non-empty string")
         _validate_demonstrates(origin, exemplar, by_id, standard_by_id, errors)
         _validate_applicability(origin, exemplar.applicability, errors)
         _validate_body_headings(origin, exemplar.body, errors)

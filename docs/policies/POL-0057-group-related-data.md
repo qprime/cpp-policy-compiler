@@ -1,6 +1,7 @@
 ---
 id: POL-0057
 kind: guideline
+trigger: "pass or return several values that always travel together"
 attribution:
   - source: standard-practice
     locator: "aggregating data"

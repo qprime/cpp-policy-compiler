@@ -1,6 +1,7 @@
 ---
 id: POL-0039
 kind: standard
+trigger: "take a parameter you will forward"
 attribution:
   - source: cpp-convention/conventions.md
     locator: "Decision: how to pass a parameter"

@@ -1,5 +1,6 @@
 ---
 id: EXM-0006
+situation: turn bytes from outside the program into a validated value or a named failure
 demonstrates:
   - POL-0005
   - POL-0041

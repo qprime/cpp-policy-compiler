@@ -1,6 +1,7 @@
 ---
 id: POL-0139
 kind: guideline
+trigger: "write an index into a loop"
 attribution:
   - source: standard-practice
     locator: "bounds safety"

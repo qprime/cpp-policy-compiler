@@ -1,6 +1,7 @@
 ---
 id: POL-0201
 kind: standard
+trigger: "write a constraint and its negation as two overloads"
 attribution:
   - source: standard-practice
     locator: "constraint design"

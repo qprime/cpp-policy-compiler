@@ -1,6 +1,7 @@
 ---
 id: POL-0058
 kind: pattern
+trigger: "write a type whose values are not all valid"
 attribution:
   - source: cpp-convention/conventions.md
     locator: "Pattern: value type with invariant"

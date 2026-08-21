@@ -1,6 +1,7 @@
 ---
 id: POL-0153
 kind: guideline
+trigger: "write an empty statement"
 attribution:
   - source: standard-practice
     locator: "empty statements"

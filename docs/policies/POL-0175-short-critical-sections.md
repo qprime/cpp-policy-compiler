@@ -1,6 +1,7 @@
 ---
 id: POL-0175
 kind: guideline
+trigger: "do work while holding a lock"
 attribution:
   - source: cpp-convention/mechanisms.md
     locator: "10. Concurrency"

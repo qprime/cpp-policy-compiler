@@ -1,6 +1,7 @@
 ---
 id: POL-0237
 kind: standard
+trigger: "pass ownership across the boundary"
 attribution:
   - source: cpp-convention/conventions.md
     locator: "FFI Conventions"

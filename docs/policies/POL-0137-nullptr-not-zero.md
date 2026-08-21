@@ -1,6 +1,7 @@
 ---
 id: POL-0137
 kind: standard
+trigger: "write NULL or 0 for a pointer"
 attribution:
   - source: cpp-convention/mechanisms.md
     locator: "13. Standard-specific bans"

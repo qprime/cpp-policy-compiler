@@ -1,6 +1,7 @@
 ---
 id: POL-0049
 kind: standard
+trigger: "return an rvalue reference, or move a local on the way out"
 attribution:
   - source: standard-practice
     locator: "return value optimization"

@@ -1,6 +1,7 @@
 ---
 id: POL-0026
 kind: standard
+trigger: "expose an interface across a compiler or language boundary"
 attribution:
   - source: cpp-convention/conventions.md
     locator: "FFI Conventions"

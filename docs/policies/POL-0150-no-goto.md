@@ -1,6 +1,7 @@
 ---
 id: POL-0150
 kind: standard
+trigger: "write goto"
 attribution:
   - source: standard-practice
     locator: "unstructured control flow"

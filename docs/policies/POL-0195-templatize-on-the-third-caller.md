@@ -1,6 +1,7 @@
 ---
 id: POL-0195
 kind: standard
+trigger: "write a template"
 attribution:
   - source: cpp-convention/conventions.md
     locator: "Trap: premature template"

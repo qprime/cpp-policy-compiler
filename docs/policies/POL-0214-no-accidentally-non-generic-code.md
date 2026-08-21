@@ -1,6 +1,7 @@
 ---
 id: POL-0214
 kind: guideline
+trigger: "write a template used with one type"
 attribution:
   - source: standard-practice
     locator: "genericity"

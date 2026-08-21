@@ -1,6 +1,7 @@
 ---
 id: POL-0205
 kind: guideline
+trigger: "write a class template whose arguments should be deduced"
 attribution:
   - source: cpp-convention/mechanisms.md
     locator: "9. Generic code"

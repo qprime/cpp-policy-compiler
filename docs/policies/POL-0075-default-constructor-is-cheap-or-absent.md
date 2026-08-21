@@ -1,6 +1,7 @@
 ---
 id: POL-0075
 kind: guideline
+trigger: "write a default constructor"
 attribution:
   - source: standard-practice
     locator: "default construction"

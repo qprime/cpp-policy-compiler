@@ -1,6 +1,7 @@
 ---
 id: POL-0067
 kind: anti-pattern
+trigger: "write a class hierarchy for a fixed set of alternatives"
 attribution:
   - source: cpp-convention/conventions.md
     locator: "Trap: inheritance for variation"

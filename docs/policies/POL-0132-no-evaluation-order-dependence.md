@@ -1,6 +1,7 @@
 ---
 id: POL-0132
 kind: standard
+trigger: "write an expression whose subexpressions have side effects"
 attribution:
   - source: standard-practice
     locator: "evaluation order"

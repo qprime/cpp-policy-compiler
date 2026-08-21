@@ -1,6 +1,7 @@
 ---
 id: POL-0163
 kind: standard
+trigger: "write a type that will be reached from more than one thread"
 attribution:
   - source: cpp-convention/mechanisms.md
     locator: "10. Concurrency"

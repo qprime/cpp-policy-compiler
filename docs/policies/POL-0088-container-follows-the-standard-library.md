@@ -1,6 +1,7 @@
 ---
 id: POL-0088
 kind: pattern
+trigger: "write a container"
 attribution:
   - source: standard-practice
     locator: "container requirements"

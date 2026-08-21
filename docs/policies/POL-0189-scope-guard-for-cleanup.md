@@ -1,6 +1,7 @@
 ---
 id: POL-0189
 kind: guideline
+trigger: "write cleanup that must run on every path"
 attribution:
   - source: standard-practice
     locator: "scope guards"

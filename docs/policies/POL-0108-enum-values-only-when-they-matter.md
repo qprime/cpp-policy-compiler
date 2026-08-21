@@ -1,6 +1,7 @@
 ---
 id: POL-0108
 kind: guideline
+trigger: "give an enumeration an underlying type or explicit enumerator values"
 attribution:
   - source: standard-practice
     locator: "enumeration representation"

@@ -1,6 +1,7 @@
 ---
 id: POL-0112
 kind: guideline
+trigger: "overload an allocation function"
 attribution:
   - source: standard-practice
     locator: "allocation overloads"

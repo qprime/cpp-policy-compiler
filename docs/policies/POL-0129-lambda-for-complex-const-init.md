@@ -1,6 +1,7 @@
 ---
 id: POL-0129
 kind: guideline
+trigger: "compute a const value in several steps"
 attribution:
   - source: standard-practice
     locator: "complex initialization"

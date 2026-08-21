@@ -1,6 +1,7 @@
 ---
 id: POL-0213
 kind: standard
+trigger: "compute a type or a value at compile time"
 attribution:
   - source: cpp-convention/mechanisms.md
     locator: "9. Generic code"

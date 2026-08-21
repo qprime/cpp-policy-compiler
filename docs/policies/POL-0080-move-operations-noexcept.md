@@ -1,6 +1,7 @@
 ---
 id: POL-0080
 kind: standard
+trigger: "declare a move constructor or move assignment operator"
 attribution:
   - source: cpp-convention/mechanisms.md
     locator: "8. Special members and value semantics"

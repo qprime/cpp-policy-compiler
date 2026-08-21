@@ -1,6 +1,7 @@
 ---
 id: POL-0012
 kind: standard
+trigger: "add or change a tool in the build"
 attribution:
   - source: cpp-convention/conventions.md
     locator: "Tooling Commitments"

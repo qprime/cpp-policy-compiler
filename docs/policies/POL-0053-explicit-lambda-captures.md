@@ -1,6 +1,7 @@
 ---
 id: POL-0053
 kind: standard
+trigger: "write a lambda capture list"
 attribution:
   - source: testimony/coding-rules-2026-07.md
     locator: "Lambdas #2"

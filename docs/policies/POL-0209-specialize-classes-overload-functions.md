@@ -1,6 +1,7 @@
 ---
 id: POL-0209
 kind: standard
+trigger: "specialize or overload a template"
 attribution:
   - source: standard-practice
     locator: "specialization"

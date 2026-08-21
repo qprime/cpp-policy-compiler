@@ -1,6 +1,7 @@
 ---
 id: POL-0100
 kind: standard
+trigger: "declare a symmetric binary operator"
 attribution:
   - source: standard-practice
     locator: "operator placement"

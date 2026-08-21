@@ -1,6 +1,7 @@
 ---
 id: POL-0015
 kind: standard
+trigger: "declare a global variable"
 attribution:
   - source: standard-practice
     locator: "global state"

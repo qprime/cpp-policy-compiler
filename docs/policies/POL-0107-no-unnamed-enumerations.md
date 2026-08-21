@@ -1,6 +1,7 @@
 ---
 id: POL-0107
 kind: standard
+trigger: "declare an unnamed enumeration"
 attribution:
   - source: standard-practice
     locator: "enumeration declarations"

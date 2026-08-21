@@ -1,6 +1,7 @@
 ---
 id: POL-0095
 kind: guideline
+trigger: "mark a class final"
 attribution:
   - source: standard-practice
     locator: "final"

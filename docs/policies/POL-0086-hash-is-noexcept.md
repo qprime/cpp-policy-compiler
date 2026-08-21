@@ -1,6 +1,7 @@
 ---
 id: POL-0086
 kind: standard
+trigger: "specialize std::hash"
 attribution:
   - source: standard-practice
     locator: "hashing"

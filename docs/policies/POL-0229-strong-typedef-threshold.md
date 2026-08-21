@@ -1,6 +1,7 @@
 ---
 id: POL-0229
 kind: standard
+trigger: "represent a quantity that has a unit"
 attribution:
   - source: cpp-convention/conventions.md
     locator: "Decision: when a thing becomes a type"

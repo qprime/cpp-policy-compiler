@@ -1,6 +1,7 @@
 ---
 id: POL-0171
 kind: standard
+trigger: "call code you do not control while holding a lock"
 attribution:
   - source: cpp-convention/mechanisms.md
     locator: "10. Concurrency"

@@ -1,6 +1,7 @@
 ---
 id: POL-0181
 kind: standard
+trigger: "hold a lock across a co_await"
 applicability:
   language_version: ["20", "23"]
 attribution:

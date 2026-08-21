@@ -1,6 +1,7 @@
 ---
 id: POL-0041
 kind: pattern
+trigger: "pass a sequence of elements"
 attribution:
   - source: cpp-convention/mechanisms.md
     locator: "4. Sequences"

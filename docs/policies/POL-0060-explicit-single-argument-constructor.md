@@ -1,6 +1,7 @@
 ---
 id: POL-0060
 kind: standard
+trigger: "declare a constructor that takes one argument"
 attribution:
   - source: cpp-convention/conventions.md
     locator: "Pattern: value type with invariant"

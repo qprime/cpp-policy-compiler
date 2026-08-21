@@ -1,6 +1,7 @@
 ---
 id: POL-0036
 kind: standard
+trigger: "choose how a parameter is passed"
 attribution:
   - source: cpp-convention/conventions.md
     locator: "Decision: how to pass a parameter"

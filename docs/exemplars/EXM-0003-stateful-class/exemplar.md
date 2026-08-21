@@ -1,5 +1,6 @@
 ---
 id: EXM-0003
+situation: write a class that holds state and has no collaborators
 demonstrates:
   - POL-0058
   - POL-0063

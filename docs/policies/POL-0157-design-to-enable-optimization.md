@@ -1,6 +1,7 @@
 ---
 id: POL-0157
 kind: guideline
+trigger: "add an indirection on a measured hot path"
 attribution:
   - source: standard-practice
     locator: "designing for optimization"

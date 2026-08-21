@@ -1,5 +1,6 @@
 ---
 id: EXM-0005
+situation: write a class that receives collaborators it does not own
 demonstrates:
   - POL-0014
   - POL-0016

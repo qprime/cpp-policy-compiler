@@ -1,6 +1,7 @@
 ---
 id: POL-0218
 kind: standard
+trigger: "add an include or a library dependency"
 attribution:
   - source: cpp-convention/conventions.md
     locator: "Dependency Direction"

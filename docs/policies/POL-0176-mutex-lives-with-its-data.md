@@ -1,6 +1,7 @@
 ---
 id: POL-0176
 kind: pattern
+trigger: "declare a mutex"
 attribution:
   - source: cpp-convention/mechanisms.md
     locator: "10. Concurrency"

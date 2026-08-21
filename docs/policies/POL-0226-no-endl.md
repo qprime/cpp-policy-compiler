@@ -1,6 +1,7 @@
 ---
 id: POL-0226
 kind: standard
+trigger: "end a line of output"
 attribution:
   - source: standard-practice
     locator: "stream flushing"

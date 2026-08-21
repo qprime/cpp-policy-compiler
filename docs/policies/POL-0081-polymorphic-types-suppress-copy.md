@@ -1,6 +1,7 @@
 ---
 id: POL-0081
 kind: standard
+trigger: "give a polymorphic class copy or move operations"
 attribution:
   - source: standard-practice
     locator: "polymorphic copying"

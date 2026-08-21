@@ -1,6 +1,7 @@
 ---
 id: POL-0121
 kind: standard
+trigger: "reuse a name, or a variable, for a second purpose"
 attribution:
   - source: standard-practice
     locator: "variable reuse"

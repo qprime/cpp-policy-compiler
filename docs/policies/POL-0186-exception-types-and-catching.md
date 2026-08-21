@@ -1,6 +1,7 @@
 ---
 id: POL-0186
 kind: standard
+trigger: "throw or catch"
 attribution:
   - source: cpp-convention/conventions.md
     locator: "Pattern: failure mechanism"

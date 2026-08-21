@@ -1,6 +1,7 @@
 ---
 id: POL-0166
 kind: standard
+trigger: "start a thread to mutate state"
 attribution:
   - source: cpp-convention/mechanisms.md
     locator: "10. Concurrency"

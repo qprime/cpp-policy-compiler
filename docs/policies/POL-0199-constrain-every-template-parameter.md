@@ -1,6 +1,7 @@
 ---
 id: POL-0199
 kind: standard
+trigger: "declare a template parameter"
 attribution:
   - source: cpp-convention/mechanisms.md
     locator: "9. Generic code"

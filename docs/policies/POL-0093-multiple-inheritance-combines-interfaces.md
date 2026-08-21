@@ -1,6 +1,7 @@
 ---
 id: POL-0093
 kind: guideline
+trigger: "inherit from more than one base"
 attribution:
   - source: standard-practice
     locator: "multiple inheritance"

@@ -1,6 +1,7 @@
 ---
 id: POL-0172
 kind: standard
+trigger: "start a thread"
 attribution:
   - source: cpp-convention/mechanisms.md
     locator: "10. Concurrency"

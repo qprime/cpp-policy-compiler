@@ -1,6 +1,7 @@
 ---
 id: POL-0239
 kind: standard
+trigger: "choose the layer a wrapper type lives in"
 attribution:
   - source: cpp-convention/conventions.md
     locator: "Dependency Direction"

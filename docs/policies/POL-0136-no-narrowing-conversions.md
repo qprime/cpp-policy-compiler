@@ -1,6 +1,7 @@
 ---
 id: POL-0136
 kind: standard
+trigger: "assign a value to a narrower type"
 attribution:
   - source: standard-practice
     locator: "arithmetic conversions"

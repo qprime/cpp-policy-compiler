@@ -1,6 +1,7 @@
 ---
 id: POL-0059
 kind: standard
+trigger: "write a constructor body"
 attribution:
   - source: cpp-convention/conventions.md
     locator: "Pattern: value type with invariant"

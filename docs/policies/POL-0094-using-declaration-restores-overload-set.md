@@ -1,6 +1,7 @@
 ---
 id: POL-0094
 kind: standard
+trigger: "overload an inherited name in a derived class"
 attribution:
   - source: standard-practice
     locator: "name hiding"

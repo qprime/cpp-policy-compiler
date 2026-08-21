@@ -1,6 +1,7 @@
 ---
 id: POL-0116
 kind: anti-pattern
+trigger: "reach for a shared_ptr"
 attribution:
   - source: cpp-convention/conventions.md
     locator: "Trap: reflexive shared_ptr"

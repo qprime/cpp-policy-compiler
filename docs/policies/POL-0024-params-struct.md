@@ -1,6 +1,7 @@
 ---
 id: POL-0024
 kind: pattern
+trigger: "pass more than four parameters, or two adjacent of the same type"
 attribution:
   - source: cpp-convention/conventions.md
     locator: "Pattern: params struct"

@@ -1,6 +1,7 @@
 ---
 id: POL-0238
 kind: standard
+trigger: "define a structure both sides of the boundary read"
 attribution:
   - source: cpp-convention/conventions.md
     locator: "FFI Conventions"

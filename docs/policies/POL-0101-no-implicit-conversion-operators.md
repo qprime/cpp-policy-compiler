@@ -1,6 +1,7 @@
 ---
 id: POL-0101
 kind: standard
+trigger: "write a conversion operator, or overload unary address-of"
 attribution:
   - source: standard-practice
     locator: "conversion operators"

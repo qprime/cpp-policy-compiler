@@ -1,6 +1,7 @@
 ---
 id: POL-0102
 kind: guideline
+trigger: "call a function a caller may substitute"
 attribution:
   - source: standard-practice
     locator: "customization points"

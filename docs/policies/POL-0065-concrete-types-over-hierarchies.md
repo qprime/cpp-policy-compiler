@@ -1,6 +1,7 @@
 ---
 id: POL-0065
 kind: standard
+trigger: "choose between a concrete type and a class hierarchy"
 attribution:
   - source: cpp-convention/conventions.md
     locator: "Decision: is inheritance right"

@@ -1,6 +1,7 @@
 ---
 id: POL-0179
 kind: standard
+trigger: "declare a coroutine parameter"
 applicability:
   language_version: ["20", "23"]
 attribution:

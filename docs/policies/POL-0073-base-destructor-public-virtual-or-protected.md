@@ -1,6 +1,7 @@
 ---
 id: POL-0073
 kind: standard
+trigger: "declare the destructor of a base class"
 attribution:
   - source: cpp-convention/conventions.md
     locator: "Decision: is inheritance right"

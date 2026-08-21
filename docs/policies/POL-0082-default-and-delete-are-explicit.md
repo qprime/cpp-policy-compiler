@@ -1,6 +1,7 @@
 ---
 id: POL-0082
 kind: standard
+trigger: "write a special member the compiler would write, or remove one"
 attribution:
   - source: cpp-convention/mechanisms.md
     locator: "8. Special members and value semantics"

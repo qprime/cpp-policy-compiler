@@ -1,6 +1,7 @@
 ---
 id: POL-0109
 kind: pattern
+trigger: "acquire a resource"
 attribution:
   - source: standard-practice
     locator: "RAII"

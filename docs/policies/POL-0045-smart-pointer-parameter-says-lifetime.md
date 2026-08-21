@@ -1,6 +1,7 @@
 ---
 id: POL-0045
 kind: standard
+trigger: "declare a smart pointer parameter"
 attribution:
   - source: standard-practice
     locator: "smart pointer parameters"

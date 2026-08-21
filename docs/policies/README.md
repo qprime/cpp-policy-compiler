@@ -45,6 +45,7 @@ already written. The slug in the filename is a human convenience; frontmatter
 | `applicability` | optional | Axis marks that constrain the policy out. Axes are `language_version`, `compiler`, `domain`. Absent entirely means universal. |
 | `attribution` | required | A list, never empty. Each entry carries `source` and `locator`, plus optional `upstream` for external citations by identity, such as Core Guidelines rule ids. `source` is a path under `docs/source/` with `locator` naming the place in it, or the literal `standard-practice` for a rule that is settled C++ practice rather than a position this corpus took, with `locator` naming the area. One entry per distinct location, never merged. An entry with no `upstream` means the rule originates in this corpus. |
 | `replacement` | anti-patterns only | List of ids where the replacement guidance lives. Every entry resolves to an existing policy. |
+| `trigger` | optional, never on a principle | The construct that sends a reader to this policy, as a fragment completing *when you are about to*. Lowercase first character, no trailing period. Earns the policy a row in its topic document's trigger table. |
 
 ```yaml
 ---
@@ -96,6 +97,8 @@ checks them.
   on no other kind
 - `replacement` appears only on anti-patterns, and every entry resolves to an
   existing id
+- `trigger`, where present, is a lowercase fragment with no trailing period, and
+  appears on no principle
 - every non-principle policy is a member of exactly one topic in
   [TOPICS.md](TOPICS.md)
 - every anti-pattern shares a topic with at least one non-principle replacement

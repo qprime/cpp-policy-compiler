@@ -1,6 +1,7 @@
 ---
 id: POL-0023
 kind: standard
+trigger: "declare an object at namespace scope"
 attribution:
   - source: standard-practice
     locator: "static initialization order"

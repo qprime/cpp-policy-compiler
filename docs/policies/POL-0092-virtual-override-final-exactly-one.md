@@ -1,6 +1,7 @@
 ---
 id: POL-0092
 kind: standard
+trigger: "declare a virtual function or an override"
 attribution:
   - source: cpp-convention/conventions.md
     locator: "Decision: is inheritance right"

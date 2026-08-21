@@ -1,6 +1,7 @@
 ---
 id: POL-0223
 kind: standard
+trigger: "hold characters, or refer to characters you do not own"
 attribution:
   - source: cpp-convention/mechanisms.md
     locator: "11. Strings and formatting"

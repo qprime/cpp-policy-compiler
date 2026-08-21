@@ -1,6 +1,7 @@
 ---
 id: POL-0044
 kind: pattern
+trigger: "decide what type holds an object you allocate"
 attribution:
   - source: cpp-convention/conventions.md
     locator: "Pattern: ownership decision"

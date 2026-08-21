@@ -1,6 +1,7 @@
 ---
 id: POL-0144
 kind: standard
+trigger: "end a switch arm"
 attribution:
   - source: standard-practice
     locator: "switch fallthrough"

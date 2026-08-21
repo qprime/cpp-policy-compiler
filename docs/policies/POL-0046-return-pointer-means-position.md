@@ -1,6 +1,7 @@
 ---
 id: POL-0046
 kind: guideline
+trigger: "return a raw pointer"
 attribution:
   - source: standard-practice
     locator: "returning positions"

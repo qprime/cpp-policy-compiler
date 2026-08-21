@@ -59,19 +59,36 @@ polc emits executes in the target project — the output is text and a map.
 Both invocations own their output directory. Regeneration overwrites hand
 edits, and every rendered document says so in a banner on its first line. The
 copied configuration carries no banner, since it is a verbatim copy rather than
-a rendered document.
+a rendered document. `layers.md` and `invariants.md` carry no banner either:
+polc seeds them once with a note saying what the project writes there, and
+after that leaves whatever it finds in place.
 
 ## What a projection contains
 
 One entry document plus the documents it routes to.
 
-`index.md` (or `SKILL.md`) is the always-loaded part: the configuration's three
-axes, the polc version and corpus fingerprint the projection was built from,
-the principles, a legend defining the `MUST` / `SHOULD` / `THIS WAY` /
-`NEVER` marks that head every rule, and a map. The map is the routing
-mechanism — one line per document, each saying when to read it. The model
-reads the entry document, matches the situation in front of it to a line, and
-opens that one document.
+`index.md` (or `SKILL.md`) is a pointer file: the configuration's three axes,
+the polc version and corpus fingerprint the projection was built from, a
+four-step procedure, and a map. The procedure fixes the order of operations —
+take the shape from the nearest exemplar, check each construct you write
+against a trigger table, read the layer semantics, read the subsystem
+invariants. The map is the routing mechanism the second step uses: one line per
+document, each saying when to read it. The model reads the entry document,
+matches the situation in front of it to a line, and opens that one document.
+
+Each lookup the procedure names is a table rather than a judgment call.
+`exemplars.md` opens with one row per exemplar keyed by the situation it
+answers, and each topic document opens with one row per rule keyed by the
+construct you are about to write. `principles.md` is where the second step
+lands when no trigger row matches: the principles, which apply to every
+decision rather than to a situation, and a legend defining the `MUST` /
+`SHOULD` / `THIS WAY` / `NEVER` marks that head every rule. The map does not
+route to it.
+
+Steps three and four land in `layers.md` and `invariants.md`, the two documents
+the project writes itself. polc seeds each once and never overwrites it, because
+what the layers are and what each subsystem guarantees are facts about the
+target project rather than about the corpus.
 
 The map covers the coding standard, one document per topic, the exemplars, and
 project setup. Alongside them sits `exemplars/`, the copied source trees;
@@ -126,7 +143,7 @@ Five authored layers and one derived:
 
 ## Status
 
-Early, and under active design. The corpus holds 249 policies, 29 standard
+Early, and under active design. The corpus holds 247 policies, 29 standard
 entries, and 14 exemplars, and two configurations are authored. The compiler
 validates and renders both end to end.
 

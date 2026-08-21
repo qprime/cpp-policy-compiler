@@ -1,6 +1,7 @@
 ---
 id: POL-0118
 kind: standard
+trigger: "write logic that would have to change in two places"
 attribution:
   - source: cpp-convention/conventions.md
     locator: "Trap: parallel near-duplicates"

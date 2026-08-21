@@ -1,6 +1,7 @@
 ---
 id: POL-0077
 kind: guideline
+trigger: "write two constructors that share work"
 attribution:
   - source: standard-practice
     locator: "constructor delegation"

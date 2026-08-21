@@ -1,6 +1,7 @@
 ---
 id: POL-0187
 kind: standard
+trigger: "catch an exception"
 attribution:
   - source: cpp-convention/conventions.md
     locator: "Trap: mid-stack exception translation"

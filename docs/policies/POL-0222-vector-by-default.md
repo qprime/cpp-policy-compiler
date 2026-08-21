@@ -1,6 +1,7 @@
 ---
 id: POL-0222
 kind: standard
+trigger: "choose a container"
 attribution:
   - source: standard-practice
     locator: "container selection"

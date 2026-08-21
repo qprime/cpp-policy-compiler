@@ -1,6 +1,7 @@
 ---
 id: POL-0051
 kind: standard
+trigger: "return a const value"
 attribution:
   - source: standard-practice
     locator: "const-qualified returns"

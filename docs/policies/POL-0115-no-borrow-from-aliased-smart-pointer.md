@@ -1,6 +1,7 @@
 ---
 id: POL-0115
 kind: standard
+trigger: "take a pointer or reference out of a smart pointer"
 attribution:
   - source: standard-practice
     locator: "aliased smart pointers"

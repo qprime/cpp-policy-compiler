@@ -1,6 +1,7 @@
 ---
 id: POL-0103
 kind: guideline
+trigger: "write a lambda that must handle several types"
 attribution:
   - source: standard-practice
     locator: "generic lambdas"

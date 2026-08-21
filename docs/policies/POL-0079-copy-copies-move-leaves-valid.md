@@ -1,6 +1,7 @@
 ---
 id: POL-0079
 kind: standard
+trigger: "write a copy or move assignment operator"
 attribution:
   - source: standard-practice
     locator: "copy and move semantics"

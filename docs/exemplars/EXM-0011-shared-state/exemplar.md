@@ -1,5 +1,6 @@
 ---
 id: EXM-0011
+situation: share one mutable value between threads that own none of it
 demonstrates:
   - POL-0053
   - POL-0126

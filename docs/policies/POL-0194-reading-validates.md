@@ -1,6 +1,7 @@
 ---
 id: POL-0194
 kind: standard
+trigger: "read data from outside the program"
 attribution:
   - source: cpp-convention/conventions.md
     locator: "Values #5"

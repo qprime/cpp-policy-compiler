@@ -1,6 +1,7 @@
 ---
 id: POL-0135
 kind: standard
+trigger: "do arithmetic on an unsigned type"
 attribution:
   - source: cpp-convention/conventions.md
     locator: "Divergences: [CG ES.107]"

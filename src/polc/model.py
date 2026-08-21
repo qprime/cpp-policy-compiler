@@ -42,7 +42,15 @@ DESTINATIONS = (
 )
 STANDARD_DOCUMENTS = tuple(d for d in DESTINATIONS if d.groups)
 STANDARD_GROUPS = tuple(g for d in DESTINATIONS for g in d.groups)
-RESERVED_SLUGS = ("index", "provenance", "skill", "configuration") + tuple(
+RESERVED_SLUGS = (
+    "index",
+    "principles",
+    "provenance",
+    "skill",
+    "configuration",
+    "layers",
+    "invariants",
+) + tuple(
     d.slug for d in DESTINATIONS
 )
 
@@ -71,6 +79,7 @@ class Policy:
     precedence: int | None = None
     applicability: dict[str, tuple[str, ...]] = field(default_factory=dict)
     replacement: tuple[str, ...] = ()
+    trigger: str | None = None
 
 
 @dataclass(frozen=True)
@@ -89,6 +98,7 @@ class StandardEntry:
 class Exemplar:
     id: str
     statement: str
+    situation: str
     body: str
     demonstrates: tuple[str, ...]
     directory: Path

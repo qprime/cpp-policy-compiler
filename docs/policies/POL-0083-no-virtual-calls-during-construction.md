@@ -1,6 +1,7 @@
 ---
 id: POL-0083
 kind: standard
+trigger: "call a virtual function from a constructor or destructor"
 attribution:
   - source: cpp-convention/conventions.md
     locator: "Decision: is inheritance right"

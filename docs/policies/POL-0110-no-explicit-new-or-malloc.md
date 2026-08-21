@@ -1,6 +1,7 @@
 ---
 id: POL-0110
 kind: standard
+trigger: "write new, delete, malloc, or free"
 attribution:
   - source: cpp-convention/mechanisms.md
     locator: "3. Ownership"

@@ -9,7 +9,13 @@ Membership lists go under each *Read when* line, as a paragraph of policy ids.
 
 ## Rules
 
-Principles belong to no topic. They are index-level content, always loaded.
+Principles belong to no topic. They live in `principles.md`, which the map does
+not route to; the procedure in the entry document sends the reader there for
+what no trigger row matches.
+
+A `trigger:` names the construct whose row a policy earns in its topic
+document's table. Principles carry none, because they have no topic document to
+hold the row.
 
 Membership is single. A policy that matters in a second situation gets a
 `Cross-reference:` line there, never a second entry, because two entries are two

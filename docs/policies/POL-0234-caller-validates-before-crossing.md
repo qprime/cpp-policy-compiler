@@ -1,6 +1,7 @@
 ---
 id: POL-0234
 kind: standard
+trigger: "validate around an FFI call"
 attribution:
   - source: cpp-convention/conventions.md
     locator: "FFI Conventions"

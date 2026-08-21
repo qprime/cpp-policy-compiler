@@ -1,5 +1,6 @@
 ---
 id: EXM-0010
+situation: write a class that owns a thread and the shutdown that stops it
 demonstrates:
   - POL-0053
   - POL-0054

@@ -1,6 +1,7 @@
 ---
 id: POL-0145
 kind: guideline
+trigger: "write a default arm"
 attribution:
   - source: standard-practice
     locator: "switch default"

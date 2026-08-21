@@ -1,6 +1,7 @@
 ---
 id: POL-0164
 kind: anti-pattern
+trigger: "add a mutex member to a class"
 attribution:
   - source: cpp-convention/conventions.md
     locator: "Trap: cargo-culted mutex"

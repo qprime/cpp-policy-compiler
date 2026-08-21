@@ -1,5 +1,6 @@
 ---
 id: EXM-0004
+situation: write a type that owns one operating-system resource
 demonstrates:
   - POL-0009
   - POL-0028

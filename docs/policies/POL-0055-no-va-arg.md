@@ -1,6 +1,7 @@
 ---
 id: POL-0055
 kind: standard
+trigger: "write a function taking a variable number of arguments"
 attribution:
   - source: standard-practice
     locator: "variadic arguments"

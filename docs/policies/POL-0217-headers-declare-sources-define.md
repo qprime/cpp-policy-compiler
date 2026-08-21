@@ -1,6 +1,7 @@
 ---
 id: POL-0217
 kind: standard
+trigger: "put a definition in a header"
 attribution:
   - source: cpp-convention/conventions.md
     locator: "Pattern: module boundary"

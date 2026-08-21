@@ -1,6 +1,7 @@
 ---
 id: POL-0032
 kind: standard
+trigger: "write noexcept"
 attribution:
   - source: cpp-convention/conventions.md
     locator: "Trap: blanket noexcept"

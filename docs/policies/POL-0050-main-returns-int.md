@@ -1,6 +1,7 @@
 ---
 id: POL-0050
 kind: standard
+trigger: "write main"
 attribution:
   - source: standard-practice
     locator: "program entry point"

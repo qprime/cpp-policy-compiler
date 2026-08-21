@@ -1,6 +1,7 @@
 ---
 id: POL-0170
 kind: standard
+trigger: "acquire more than one mutex"
 attribution:
   - source: cpp-convention/mechanisms.md
     locator: "10. Concurrency"

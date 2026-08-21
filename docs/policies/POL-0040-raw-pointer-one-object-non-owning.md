@@ -1,6 +1,7 @@
 ---
 id: POL-0040
 kind: standard
+trigger: "declare a raw pointer"
 attribution:
   - source: cpp-convention/mechanisms.md
     locator: "3. Ownership"

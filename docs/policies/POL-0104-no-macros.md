@@ -1,6 +1,7 @@
 ---
 id: POL-0104
 kind: standard
+trigger: "write a macro"
 attribution:
   - source: standard-practice
     locator: "preprocessor use"

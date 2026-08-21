@@ -1,6 +1,7 @@
 ---
 id: POL-0043
 kind: guideline
+trigger: "take or store a C-style string"
 attribution:
   - source: cpp-convention/conventions.md
     locator: "FFI Conventions"

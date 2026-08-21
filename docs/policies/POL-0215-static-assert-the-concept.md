@@ -1,6 +1,7 @@
 ---
 id: POL-0215
 kind: standard
+trigger: "write a type that must satisfy a concept"
 attribution:
   - source: cpp-convention/mechanisms.md
     locator: "9. Generic code"

@@ -1,6 +1,7 @@
 ---
 id: POL-0029
 kind: pattern
+trigger: "write a block a comment would have to explain"
 attribution:
   - source: cpp-convention/conventions.md
     locator: "Pattern: named operation"

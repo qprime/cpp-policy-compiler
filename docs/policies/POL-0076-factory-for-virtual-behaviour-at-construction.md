@@ -1,6 +1,7 @@
 ---
 id: POL-0076
 kind: guideline
+trigger: "construct an object that needs a virtual step to finish"
 attribution:
   - source: standard-practice
     locator: "two-phase construction"

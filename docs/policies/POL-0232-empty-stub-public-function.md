@@ -1,6 +1,7 @@
 ---
 id: POL-0232
 kind: anti-pattern
+trigger: "return an empty value from a function you have not written yet"
 attribution:
   - source: cpp-convention/conventions.md
     locator: "Trap: empty-stub public function"

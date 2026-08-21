@@ -1,6 +1,7 @@
 ---
 id: POL-0233
 kind: standard
+trigger: "rename something as it crosses the language boundary"
 attribution:
   - source: cpp-convention/conventions.md
     locator: "FFI Conventions"

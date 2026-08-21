@@ -1,6 +1,7 @@
 ---
 id: POL-0235
 kind: standard
+trigger: "send an absent or NaN value across the boundary"
 attribution:
   - source: cpp-convention/conventions.md
     locator: "FFI Conventions"

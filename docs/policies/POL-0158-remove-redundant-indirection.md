@@ -1,6 +1,7 @@
 ---
 id: POL-0158
 kind: guideline
+trigger: "add an alias or an indirection"
 attribution:
   - source: standard-practice
     locator: "redundant indirection"

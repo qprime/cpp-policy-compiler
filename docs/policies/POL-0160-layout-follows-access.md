@@ -1,6 +1,7 @@
 ---
 id: POL-0160
 kind: guideline
+trigger: "change data layout for speed"
 attribution:
   - source: standard-practice
     locator: "data layout"

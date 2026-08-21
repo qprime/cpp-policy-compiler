@@ -1,6 +1,7 @@
 ---
 id: POL-0248
 kind: standard
+trigger: "choose a log level"
 attribution:
   - source: cpp-convention/conventions.md
     locator: "Logging"

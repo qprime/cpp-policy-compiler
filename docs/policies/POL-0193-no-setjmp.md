@@ -1,6 +1,7 @@
 ---
 id: POL-0193
 kind: standard
+trigger: "write setjmp or longjmp"
 attribution:
   - source: standard-practice
     locator: "non-local jumps"

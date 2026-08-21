@@ -1,6 +1,7 @@
 ---
 id: POL-0125
 kind: standard
+trigger: "declare an object without an initializer"
 attribution:
   - source: standard-practice
     locator: "initialization"

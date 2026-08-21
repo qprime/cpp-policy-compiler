@@ -1,6 +1,7 @@
 ---
 id: POL-0198
 kind: guideline
+trigger: "erase a type, or mix a generic layer with a polymorphic one"
 attribution:
   - source: standard-practice
     locator: "generic and object-oriented styles"

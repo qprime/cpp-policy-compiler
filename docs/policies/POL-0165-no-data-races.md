@@ -1,6 +1,7 @@
 ---
 id: POL-0165
 kind: standard
+trigger: "reach shared mutable state"
 attribution:
   - source: cpp-convention/mechanisms.md
     locator: "10. Concurrency"

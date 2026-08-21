@@ -1,6 +1,7 @@
 ---
 id: POL-0197
 kind: standard
+trigger: "write an expression template, or a DSL out of operator overloads"
 attribution:
   - source: standard-practice
     locator: "expression templates"

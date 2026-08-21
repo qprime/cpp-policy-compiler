@@ -100,6 +100,8 @@ def _build_projection(
 
 def _report(projection: Projection, exclusions: list[Exclusion]) -> None:
     print(f"{projection.entry_name}: {len(projection.entry)} chars")
+    if projection.principles is not None:
+        print(f"principles.md: {len(projection.principles)} chars")
     for slug in sorted(projection.topic_documents):
         print(f"{slug}.md: {len(projection.topic_documents[slug])} chars")
     for slug, text in projection.standard_documents.items():
@@ -116,6 +118,11 @@ def _report(projection: Projection, exclusions: list[Exclusion]) -> None:
         print(f"omitted {slug}.md: every entry excluded")
     if projection.exemplars is None:
         print("omitted exemplars.md: every exemplar excluded")
+    if projection.principles is None:
+        print("omitted principles.md: every principle excluded")
+    triggered, triggerable = projection.trigger_coverage
+    if triggered < triggerable:
+        print(f"{triggerable - triggered} of {triggerable} policies carry no trigger")
     for line in projection.dropped_references:
         print(f"dropped {line}")
 
@@ -139,6 +146,7 @@ def main(argv: list[str] | None = None) -> int:
             sub.add_argument("--adapter", choices=adapters.ADAPTERS)
     args = parser.parse_args(argv)
 
+    kept: tuple[str, ...] = ()
     try:
         projection, exclusions, _, admitted = _build_projection(
             args.config,
@@ -148,13 +156,15 @@ def main(argv: list[str] | None = None) -> int:
             getattr(args, "adapter", None),
         )
         if args.command == "build":
-            write(projection, admitted, args.out)
+            kept = write(projection, admitted, args.out)
     except PolcError as exc:
         for message in exc.errors:
             print(message, file=sys.stderr)
         return 1
 
     _report(projection, exclusions)
+    for name in kept:
+        print(f"kept {name}: present and not owned")
     if args.command == "build":
         note = adapters.wiring_note(args.adapter, args.out, projection.entry_name)
         if note is not None:

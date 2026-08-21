@@ -1,6 +1,7 @@
 ---
 id: POL-0147
 kind: guideline
+trigger: "choose between for and while"
 attribution:
   - source: standard-practice
     locator: "loop selection"

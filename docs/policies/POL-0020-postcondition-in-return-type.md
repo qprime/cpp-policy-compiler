@@ -1,6 +1,7 @@
 ---
 id: POL-0020
 kind: guideline
+trigger: "write a postcondition the caller relies on"
 attribution:
   - source: cpp-convention/conventions.md
     locator: "Pattern: wrapper type for preconditions"

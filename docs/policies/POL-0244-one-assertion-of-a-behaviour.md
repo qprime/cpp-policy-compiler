@@ -1,6 +1,7 @@
 ---
 id: POL-0244
 kind: standard
+trigger: "add a test file, or a second test for one behaviour"
 attribution:
   - source: cpp-convention/conventions.md
     locator: "Testing"

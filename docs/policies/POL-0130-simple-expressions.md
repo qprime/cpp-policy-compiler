@@ -1,6 +1,7 @@
 ---
 id: POL-0130
 kind: standard
+trigger: "write an expression that does more than one thing"
 attribution:
   - source: standard-practice
     locator: "expression complexity"

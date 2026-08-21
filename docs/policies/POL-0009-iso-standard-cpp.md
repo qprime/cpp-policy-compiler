@@ -1,6 +1,7 @@
 ---
 id: POL-0009
 kind: standard
+trigger: "use a compiler extension"
 attribution:
   - source: standard-practice
     locator: "language extensions"

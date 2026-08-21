@@ -1,6 +1,7 @@
 ---
 id: POL-0054
 kind: standard
+trigger: "write a lambda that outlives its scope"
 attribution:
   - source: testimony/coding-rules-2026-07.md
     locator: "Lambdas #3"

@@ -1,6 +1,7 @@
 ---
 id: POL-0242
 kind: standard
+trigger: "test an accessor that returns a member"
 attribution:
   - source: cpp-convention/conventions.md
     locator: "Testing"

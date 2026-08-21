@@ -1,6 +1,7 @@
 ---
 id: POL-0098
 kind: standard
+trigger: "cast a base reference down to a derived type"
 attribution:
   - source: standard-practice
     locator: "hierarchy navigation"

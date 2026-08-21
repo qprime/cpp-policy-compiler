@@ -1,6 +1,7 @@
 ---
 id: POL-0228
 kind: standard
+trigger: "write an error message"
 attribution:
   - source: cpp-convention/conventions.md
     locator: "Tier 1 #6"

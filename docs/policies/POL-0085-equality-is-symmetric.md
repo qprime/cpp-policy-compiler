@@ -1,6 +1,7 @@
 ---
 id: POL-0085
 kind: standard
+trigger: "declare an equality operator"
 attribution:
   - source: standard-practice
     locator: "comparison operators"

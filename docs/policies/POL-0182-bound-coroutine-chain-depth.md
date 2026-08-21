@@ -1,6 +1,7 @@
 ---
 id: POL-0182
 kind: guideline
+trigger: "chain more than two or three co_await hops"
 applicability:
   language_version: ["20", "23"]
 attribution:

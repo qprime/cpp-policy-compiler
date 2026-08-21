@@ -1,6 +1,7 @@
 ---
 id: POL-0191
 kind: standard
+trigger: "report failure through a global or a thread-local"
 attribution:
   - source: standard-practice
     locator: "error reporting"

@@ -1,6 +1,7 @@
 ---
 id: POL-0089
 kind: guideline
+trigger: "write a handle that stands in for one object"
 attribution:
   - source: standard-practice
     locator: "smart pointer interface"

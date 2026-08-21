@@ -1,6 +1,7 @@
 ---
 id: POL-0030
 kind: standard
+trigger: "declare a value or function computable at compile time"
 attribution:
   - source: cpp-convention/mechanisms.md
     locator: "6. Immutability"

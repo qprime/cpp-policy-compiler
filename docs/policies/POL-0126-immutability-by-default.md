@@ -1,6 +1,7 @@
 ---
 id: POL-0126
 kind: pattern
+trigger: "decide whether a declaration is const"
 attribution:
   - source: cpp-convention/conventions.md
     locator: "Pattern: immutability by default"

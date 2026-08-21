@@ -1,6 +1,7 @@
 ---
 id: POL-0212
 kind: standard
+trigger: "write a variadic template"
 attribution:
   - source: cpp-convention/mechanisms.md
     locator: "9. Generic code"

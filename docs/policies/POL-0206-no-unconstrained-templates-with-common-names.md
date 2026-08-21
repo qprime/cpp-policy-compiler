@@ -1,6 +1,7 @@
 ---
 id: POL-0206
 kind: standard
+trigger: "give a widely visible template an unconstrained parameter"
 attribution:
   - source: standard-practice
     locator: "overload set pollution"

@@ -1,6 +1,7 @@
 ---
 id: POL-0087
 kind: standard
+trigger: "copy an object with memcpy"
 attribution:
   - source: standard-practice
     locator: "object copying"

@@ -1,5 +1,6 @@
 ---
 id: EXM-0007
+situation: report a domain failure and a programmer error from the same code
 demonstrates:
   - POL-0013
   - POL-0019

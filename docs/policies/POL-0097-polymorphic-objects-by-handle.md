@@ -1,6 +1,7 @@
 ---
 id: POL-0097
 kind: standard
+trigger: "declare a variable, container element, or parameter of a polymorphic type"
 attribution:
   - source: standard-practice
     locator: "object slicing"

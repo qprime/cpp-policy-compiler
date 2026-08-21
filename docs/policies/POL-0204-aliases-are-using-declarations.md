@@ -1,6 +1,7 @@
 ---
 id: POL-0204
 kind: standard
+trigger: "declare a type alias"
 attribution:
   - source: standard-practice
     locator: "type aliases"

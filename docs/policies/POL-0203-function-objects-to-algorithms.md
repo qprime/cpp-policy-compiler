@@ -1,6 +1,7 @@
 ---
 id: POL-0203
 kind: guideline
+trigger: "pass an operation to an algorithm"
 attribution:
   - source: standard-practice
     locator: "callables"

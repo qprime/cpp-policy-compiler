@@ -1,6 +1,7 @@
 ---
 id: POL-0185
 kind: standard
+trigger: "throw while a resource is held"
 attribution:
   - source: standard-practice
     locator: "exception safety"

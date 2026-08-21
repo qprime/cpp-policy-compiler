@@ -1,6 +1,7 @@
 ---
 id: POL-0225
 kind: standard
+trigger: "emit a diagnostic from library code"
 attribution:
   - source: cpp-convention/conventions.md
     locator: "Logging"

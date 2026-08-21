@@ -1,6 +1,7 @@
 ---
 id: POL-0069
 kind: guideline
+trigger: "write a concrete value type"
 attribution:
   - source: standard-practice
     locator: "regular types"

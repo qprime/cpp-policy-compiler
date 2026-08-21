@@ -1,6 +1,7 @@
 ---
 id: POL-0211
 kind: guideline
+trigger: "expose a template across an ABI-stable interface"
 attribution:
   - source: cpp-convention/conventions.md
     locator: "FFI Conventions"

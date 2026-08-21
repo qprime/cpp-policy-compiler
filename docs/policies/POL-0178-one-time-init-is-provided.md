@@ -1,6 +1,7 @@
 ---
 id: POL-0178
 kind: standard
+trigger: "initialize something once"
 attribution:
   - source: cpp-convention/mechanisms.md
     locator: "10. Concurrency"

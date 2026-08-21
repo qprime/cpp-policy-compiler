@@ -1,6 +1,7 @@
 ---
 id: POL-0230
 kind: standard
+trigger: "write conversion and validation ceremony at the binding layer"
 attribution:
   - source: cpp-convention/conventions.md
     locator: "FFI Conventions"

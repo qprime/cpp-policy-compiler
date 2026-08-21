@@ -1,6 +1,7 @@
 ---
 id: POL-0133
 kind: standard
+trigger: "write a literal that carries meaning"
 attribution:
   - source: cpp-convention/conventions.md
     locator: "Trap: magic number"

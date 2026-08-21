@@ -1,6 +1,7 @@
 ---
 id: POL-0243
 kind: standard
+trigger: "write a round-trip test"
 attribution:
   - source: cpp-convention/conventions.md
     locator: "Testing"

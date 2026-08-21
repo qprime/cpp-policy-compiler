@@ -1,6 +1,7 @@
 ---
 id: POL-0072
 kind: pattern
+trigger: "write a type that owns a raw resource"
 attribution:
   - source: cpp-convention/conventions.md
     locator: "Pattern: rule of zero"

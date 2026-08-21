@@ -1,6 +1,7 @@
 ---
 id: POL-0183
 kind: pattern
+trigger: "decide how an operation reports that it failed"
 attribution:
   - source: cpp-convention/conventions.md
     locator: "Pattern: failure mechanism"

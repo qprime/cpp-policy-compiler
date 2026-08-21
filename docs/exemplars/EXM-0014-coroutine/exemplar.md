@@ -1,5 +1,6 @@
 ---
 id: EXM-0014
+situation: write a coroutine that suspends on a read and resumes with the value
 demonstrates:
   - POL-0071
   - POL-0072

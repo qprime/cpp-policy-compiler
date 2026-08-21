@@ -1,6 +1,7 @@
 ---
 id: POL-0143
 kind: standard
+trigger: "write an if/else chain over one value's alternatives"
 attribution:
   - source: cpp-convention/mechanisms.md
     locator: "2. Closed-set variation"

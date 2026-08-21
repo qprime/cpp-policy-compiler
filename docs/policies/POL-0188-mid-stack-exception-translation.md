@@ -1,6 +1,7 @@
 ---
 id: POL-0188
 kind: anti-pattern
+trigger: "catch and rethrow a different type"
 attribution:
   - source: cpp-convention/conventions.md
     locator: "Trap: mid-stack exception translation"

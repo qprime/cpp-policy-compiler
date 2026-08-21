@@ -1,6 +1,7 @@
 ---
 id: POL-0220
 kind: standard
+trigger: "add something to namespace std"
 attribution:
   - source: standard-practice
     locator: "namespace std"

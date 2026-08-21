@@ -1,6 +1,7 @@
 ---
 id: POL-0016
 kind: standard
+trigger: "reach for a singleton"
 attribution:
   - source: standard-practice
     locator: "singletons"

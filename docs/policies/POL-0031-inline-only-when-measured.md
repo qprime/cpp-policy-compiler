@@ -1,6 +1,7 @@
 ---
 id: POL-0031
 kind: guideline
+trigger: "write inline"
 attribution:
   - source: standard-practice
     locator: "inline linkage"

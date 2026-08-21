@@ -1,6 +1,7 @@
 ---
 id: POL-0155
 kind: standard
+trigger: "index or offset into a sequence"
 attribution:
   - source: standard-practice
     locator: "arithmetic ranges"

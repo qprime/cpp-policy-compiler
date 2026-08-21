@@ -1,6 +1,7 @@
 ---
 id: POL-0028
 kind: guideline
+trigger: "break one of these rules because correctness demands it"
 attribution:
   - source: standard-practice
     locator: "encapsulating unsafe code"

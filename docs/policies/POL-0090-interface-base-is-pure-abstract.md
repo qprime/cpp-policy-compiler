@@ -1,6 +1,7 @@
 ---
 id: POL-0090
 kind: standard
+trigger: "write a base class that exists to be an interface"
 attribution:
   - source: cpp-convention/conventions.md
     locator: "Decision: is inheritance right"

@@ -1,6 +1,7 @@
 ---
 id: POL-0010
 kind: guideline
+trigger: "trade clarity for speed or space"
 attribution:
   - source: standard-practice
     locator: "avoidable work"

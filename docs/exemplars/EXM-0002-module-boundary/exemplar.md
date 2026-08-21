@@ -1,5 +1,6 @@
 ---
 id: EXM-0002
+situation: lay out a module's public header, its internal header, and the layer it depends on
 demonstrates:
   - POL-0014
   - POL-0017

@@ -1,6 +1,7 @@
 ---
 id: POL-0141
 kind: standard
+trigger: "compare two pointers"
 attribution:
   - source: standard-practice
     locator: "pointer comparison"

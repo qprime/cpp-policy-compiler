@@ -1,6 +1,7 @@
 ---
 id: POL-0231
 kind: standard
+trigger: "leave a public function unimplemented"
 attribution:
   - source: cpp-convention/conventions.md
     locator: "Trap: empty-stub public function"

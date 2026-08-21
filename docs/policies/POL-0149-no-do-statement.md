@@ -1,6 +1,7 @@
 ---
 id: POL-0149
 kind: guideline
+trigger: "write a do-statement"
 attribution:
   - source: standard-practice
     locator: "loop forms"

@@ -1,6 +1,7 @@
 ---
 id: POL-0177
 kind: standard
+trigger: "write lock-free code"
 attribution:
   - source: standard-practice
     locator: "lock-free programming"

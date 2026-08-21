@@ -1,6 +1,7 @@
 ---
 id: POL-0169
 kind: standard
+trigger: "lock a mutex"
 attribution:
   - source: cpp-convention/mechanisms.md
     locator: "10. Concurrency"

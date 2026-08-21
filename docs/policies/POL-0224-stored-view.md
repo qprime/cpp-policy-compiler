@@ -1,6 +1,7 @@
 ---
 id: POL-0224
 kind: anti-pattern
+trigger: "store a span or a string_view as a member"
 attribution:
   - source: cpp-convention/mechanisms.md
     locator: "4. Sequences"

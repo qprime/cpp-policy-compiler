@@ -1,6 +1,7 @@
 ---
 id: POL-0056
 kind: guideline
+trigger: "nest a function body inside a validity check"
 attribution:
   - source: cpp-convention/conventions.md
     locator: "Pattern: named operation"

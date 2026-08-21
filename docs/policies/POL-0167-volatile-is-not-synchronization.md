@@ -1,6 +1,7 @@
 ---
 id: POL-0167
 kind: standard
+trigger: "write volatile"
 attribution:
   - source: cpp-convention/mechanisms.md
     locator: "10. Concurrency"

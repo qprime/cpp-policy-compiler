@@ -1,6 +1,7 @@
 ---
 id: POL-0246
 kind: standard
+trigger: "write code that produces structured output"
 attribution:
   - source: cpp-convention/conventions.md
     locator: "Testing"

@@ -1,6 +1,7 @@
 ---
 id: POL-0196
 kind: anti-pattern
+trigger: "reach for a template parameter list"
 attribution:
   - source: cpp-convention/conventions.md
     locator: "Trap: premature template"

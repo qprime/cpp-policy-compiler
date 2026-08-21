@@ -1,5 +1,6 @@
 ---
 id: EXM-0013
+situation: wrap a C API so that no caller names its symbols
 demonstrates:
   - POL-0026
   - POL-0028

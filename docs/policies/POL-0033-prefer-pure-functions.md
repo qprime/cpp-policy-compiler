@@ -1,6 +1,7 @@
 ---
 id: POL-0033
 kind: guideline
+trigger: "write a function that reads state its arguments do not name"
 attribution:
   - source: cpp-convention/conventions.md
     locator: "Pattern: named operation"

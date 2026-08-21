@@ -1,6 +1,7 @@
 ---
 id: POL-0119
 kind: anti-pattern
+trigger: "write a function that shares most of its body with another"
 attribution:
   - source: cpp-convention/conventions.md
     locator: "Trap: parallel near-duplicates"

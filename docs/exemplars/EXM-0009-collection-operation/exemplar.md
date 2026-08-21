@@ -1,5 +1,6 @@
 ---
 id: EXM-0009
+situation: filter and reduce a collection where an empty result is not an error
 demonstrates:
   - POL-0013
   - POL-0033

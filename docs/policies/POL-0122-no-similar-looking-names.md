@@ -1,6 +1,7 @@
 ---
 id: POL-0122
 kind: guideline
+trigger: "introduce a name close to one already in scope"
 attribution:
   - source: standard-practice
     locator: "name distinguishability"

@@ -1,6 +1,7 @@
 ---
 id: POL-0154
 kind: standard
+trigger: "compare a bool to true or false"
 attribution:
   - source: standard-practice
     locator: "boolean conditions"

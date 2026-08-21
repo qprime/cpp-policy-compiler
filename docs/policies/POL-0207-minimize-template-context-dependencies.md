@@ -1,6 +1,7 @@
 ---
 id: POL-0207
 kind: standard
+trigger: "name something inside a template that its parameters do not carry"
 attribution:
   - source: standard-practice
     locator: "template name lookup"

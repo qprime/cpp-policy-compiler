@@ -1,6 +1,7 @@
 ---
 id: POL-0013
 kind: guideline
+trigger: "write a routine the standard library already provides"
 attribution:
   - source: standard-practice
     locator: "library preference"

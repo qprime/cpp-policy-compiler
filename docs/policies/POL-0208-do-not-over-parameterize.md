@@ -1,6 +1,7 @@
 ---
 id: POL-0208
 kind: guideline
+trigger: "write a member that does not use its class template's parameter"
 attribution:
   - source: standard-practice
     locator: "template instantiation cost"

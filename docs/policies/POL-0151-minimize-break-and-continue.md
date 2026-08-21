@@ -1,6 +1,7 @@
 ---
 id: POL-0151
 kind: guideline
+trigger: "write a loop that breaks out of its body"
 attribution:
   - source: standard-practice
     locator: "loop exits"

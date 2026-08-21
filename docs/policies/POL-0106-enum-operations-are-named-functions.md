@@ -1,6 +1,7 @@
 ---
 id: POL-0106
 kind: guideline
+trigger: "add an operation to an enumeration"
 attribution:
   - source: standard-practice
     locator: "enumeration interfaces"

@@ -1,6 +1,7 @@
 ---
 id: POL-0111
 kind: standard
+trigger: "construct an owned heap object"
 attribution:
   - source: cpp-convention/mechanisms.md
     locator: "3. Ownership"

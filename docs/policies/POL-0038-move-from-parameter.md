@@ -1,6 +1,7 @@
 ---
 id: POL-0038
 kind: standard
+trigger: "take a parameter you will move from"
 attribution:
   - source: cpp-convention/conventions.md
     locator: "Decision: how to pass a parameter"

@@ -1,6 +1,7 @@
 ---
 id: POL-0190
 kind: standard
+trigger: "write the top-level header of a module compiled without exceptions"
 attribution:
   - source: cpp-convention/mechanisms.md
     locator: "5. Failure"
