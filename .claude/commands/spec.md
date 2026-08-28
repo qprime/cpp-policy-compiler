@@ -8,15 +8,19 @@ Draft a GitHub issue implementation specification for: $ARGUMENTS
 
 ## Process
 
-1. **Research first.** Before drafting, read: (a) every file named in the feature request, (b) the implementation files of any named subsystem, (c) all invariant files that govern the affected code paths, and (d) existing tests covering those paths. List what you read in a short "Context loaded" block before drafting. Understand what exists before proposing changes.
+1. **Research first.** Before drafting, read: (a) every file named in the feature request, (b) the implementation files of any named subsystem, (c) `CLAUDE.md` and whatever its Look-Up Map points to for the affected code paths, and (d) existing tests covering those paths. List what you read in a short "Context loaded" block before drafting.
 
-2. **Draft the spec** using the section template below. Every section is required unless explicitly marked optional. Omit a section only if it genuinely does not apply.
+2. **Draft the spec** using the section template below. Write the sections in order. Omit an optional section when it does not apply.
 
 3. **Check for a smaller change.** Before finalizing, ask: could a narrower scope — fewer files, fewer moving parts, less ceremony — achieve the same goal? If yes, redraft around that. Spec size should match change size. This is about scope, not about removing structure that serves invariants, type safety, or tests.
 
-4. **Resolve, don't flag.** Settle every uncertainty before the draft goes out: verify it against the code, cut the claim, or narrow the spec so it no longer rests on the guess. If a question genuinely gates the draft and only the user can answer it, ask it as a direct question *before* presenting — never as a flag attached to a finished draft. The draft you present carries no open items and no scope beyond what was asked; anything extra is a one-line proposal, not drafted content.
+4. **Resolve, don't flag.** Settle every uncertainty before you draft: verify it against the code, cut the claim, or narrow the spec so it no longer rests on the guess. Where a question gates the draft and only the user can answer it, ask before you draft — never after.
 
-5. **Present the draft** to the user for review before creating the issue.
+   IMPORTANT: your message ends with the last section of the spec. No closing summary, no questions, no caveats, no next steps.
+
+5. **Present the draft** in the chat and stop. Create the issue only when the user
+   tells you to, then report the number. Never run `gh issue create` off an
+   approval you inferred — the user often wants to work the draft locally first.
 
 ---
 
@@ -36,7 +40,7 @@ Start with an action verb. Describe what the change *does*, not what's missing o
 Why this matters. Concrete pain points — user-facing or developer-facing. Not hypothetical benefits.
 
 ### Existing Architecture
-What exists today that this change touches. Reference specific files and line numbers. Include function signatures, data flow, and relevant patterns. This section grounds the implementation in reality — do not skip it.
+What exists today that this change touches. Reference specific files and line numbers. Include function signatures, data flow, and relevant patterns.
 
 ### Design
 The technical approach:
@@ -63,7 +67,7 @@ Use a per-file change table when touching 3+ files:
 | `path/to/file` | Description of change |
 
 ### Invariants
-Which invariant files apply to this change. For each:
+Which invariants apply to this change. For each:
 - Invariant ID and name
 - Whether this change complies or requires a documented exception
 
@@ -98,12 +102,4 @@ Related issues, prerequisites, or things this supersedes.
 
 ## Quality Checks
 
-Before presenting the draft, verify — run these silently, fix failures, don't report the checklist:
-
-- [ ] Every file referenced actually exists (or is explicitly marked as new)
-- [ ] Line numbers are current (not stale)
-- [ ] Function signatures match the actual codebase
-- [ ] Invariant IDs are real
-- [ ] No section is vague hand-waving
-- [ ] Every "What NOT to do" bullet meets the bar; no bullet restates a positive rule from Design/Implementation
-- [ ] Test cases have names, not just descriptions
+Before presenting the draft, resolve every reference against the current codebase: file paths, line numbers, function signatures, invariant IDs. Mark a file as new where it does not exist yet. Run this silently and fix what fails — do not report the check.

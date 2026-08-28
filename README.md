@@ -131,6 +131,10 @@ Five authored layers and one derived:
 - **Projections** — the compiled output, described above. Regenerable from the
   corpus, and not meant to be edited.
 
+[docs/conventions/](docs/conventions/) is not one of these layers. It holds house
+rules for writing the compiler and this repository's own documents. `polc` never
+reads it, and nothing in it reaches a projection.
+
 ## Design commitments
 
 - The compile step is pure code. No LLM runs at compile time; the LLM assists
