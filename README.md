@@ -1,29 +1,18 @@
 # cpp-policy-compiler
 
-One codebase, one reasoning mind. Developers express intent; the model
-generates source. The project reads as though one experienced engineer made its
-decisions: consistent standards, conventions, and judgment at every boundary.
+An LLM can generate C++ that compiles and passes tests while still making different engineering decisions from file to file. `cpp-policy-compiler` provides a way to record those decisions once and put the relevant subset in the model’s context before it writes code.
 
-This is a curated body of attributed C++ engineering policy, compiled into the
-guidance documents an LLM reads before it writes code. It is for anyone running
-an LLM-assisted C++ project who wants the model's output to be opinionated in a
-specific, recorded way rather than in whatever way its training happened to
-leave it.
+The repository contains an attributed corpus of C++ engineering policies, coding standards, and complete exemplars. The compiler selects the material appropriate to a particular language version, compiler, and application domain, then emits a set of guidance documents for an LLM-assisted project.
+
+The goal is consistent engineering judgment rather than merely consistent formatting. Generated code should look as though the same experienced engineer made its decisions about ownership, errors, interfaces, concurrency, and other recurring concerns.
 
 ## Why
 
-When an LLM generates C++, its training is fixed; the only lever you hold at
-generation time is what is in its context. Whatever judgment is not in context
-can only be tested-in afterward, through review and repair. This project takes
-the opposite approach: hold a curated corpus of engineering judgment, and
-compile it into project-specific guidance that sits in front of the model
-before it writes a line.
+A model’s training is fixed at generation time, but the context supplied to it is under the project’s control. If an engineering decision is absent from that context, the model must rely on its general training, and any disagreement may only be discovered later through review, static analysis, or testing.
 
-The target is reasoning consistency, not style consistency. Each policy
-resolves a decision — in this situation, we do this, because — so the model
-inherits the decision rather than making its own. When generated code needs
-correcting, the durable fix is an amendment to the corpus, not just to the
-file.
+This project treats that context as a compiled project artifact. Each policy records a decision, the circumstances in which it applies, and the source or reasoning behind it. A project configuration selects the applicable policies and exemplars, and `polc` turns them into documents organized for model retrieval.
+
+When generated code exposes a missing or poorly stated rule, the lasting correction can be made in the corpus and propagated into future projections. The individual file is repaired, but the guidance that produced it improves as well.
 
 ## Quickstart
 
