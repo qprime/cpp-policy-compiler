@@ -1,10 +1,10 @@
 # cpp-policy-compiler
 
-An LLM can generate C++ that compiles and passes tests while still making different engineering decisions from file to file. `cpp-policy-compiler` provides a way to record those decisions once and put the relevant subset in the model’s context before it writes code.
+`cpp-policy-compiler` is an opinionated, configurable policy compiler for C++ projects. It records engineering decisions once, selects the subset that applies to a project's language version, compiler, and domain, and puts that guidance in an LLM's context before it writes code.
 
-The repository contains an attributed corpus of C++ engineering policies, coding standards, and complete exemplars. The compiler selects the material appropriate to a particular language version, compiler, and application domain, then emits a set of guidance documents for an LLM-assisted project.
+The repository combines attributed source material with authored C++ policies, coding standards, and complete exemplars. `polc` compiles those inputs into a project-specific guidance projection: a set of documents and source trees organized for an LLM-assisted project.
 
-The goal is consistent engineering judgment rather than merely consistent formatting. Generated code should look as though the same experienced engineer made its decisions about ownership, errors, interfaces, concurrency, and other recurring concerns.
+The goal is consistent engineering judgment rather than merely consistent formatting. Generated code should reflect the same decisions about ownership, errors, interfaces, concurrency, and other recurring concerns across a project, while remaining traceable to their source or stated rationale.
 
 ## Why
 
