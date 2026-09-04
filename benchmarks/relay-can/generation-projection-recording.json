@@ -1,0 +1,620 @@
+{
+  "version": 1,
+  "command": [
+    "codex",
+    "exec",
+    "--ephemeral",
+    "--approve-for-me",
+    "-C",
+    "/home/squinlan/Code/relay-can-generation",
+    "-o",
+    "/home/squinlan/Code/cpp-policy-compiler/benchmarks/relay-can/recordings/generation-projection-final.txt",
+    "Read /tmp/relay-issue-28.md and implement the issue completely in this repository. Before writing or changing any C++, read /tmp/relay-can-generation-policy/index.md and follow its routing instructions for each relevant decision. Obey repository instructions. Run appropriate tests and checks. Commit the completed implementation. Do not inspect /home/squinlan/Code/cpp-policy-compiler/benchmarks/relay-can or the baseline worktree. Work independently."
+  ],
+  "exit_code": 0,
+  "final_digest": "decb6b3569dc05f1a99ea0a3b72ea746d4be48b518feb1d24f4134358945b0e6",
+  "quiet_period_ms": 1500,
+  "root": "/home/squinlan/Code/relay-can-generation",
+  "timeline": [
+    {
+      "label": "original",
+      "elapsed_ms": 19,
+      "digest": "4b824efdedc6e37af48b6105829c386ffd30210e1c91481aba5db649bfb82f9b"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 129378,
+      "digest": "f5fd20737306f8dd1c5e88e52918c85afaa01d3012d04fb6d4d54b1649411ab8"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 189093,
+      "digest": "f198708f7e75e18ed7e22d1339abac76535988fbe47d1a2be38d1912207d7a43"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 203475,
+      "digest": "5675a91df7496b48df86f55f8ff596a4b1c24d7baba1ac31eeea48998841cd45"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 222212,
+      "digest": "8814daa2aa37bd139e7ca62384ba21936e23435e6142d9dbde9b10eba3583866"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 229313,
+      "digest": "3930bd006fb395a111554e8852877aa40ee1ec9b8d146c3b1288085d650b1528"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 242420,
+      "digest": "7672b39638c5834bfea6f5530fa7a643d8d040af87654ab6a367c3f9bd99cffc"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 283490,
+      "digest": "f9b82289cefb4ef6faa3cff4ac11f81353093cb65587321024030e5e93c7775e"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 306305,
+      "digest": "cc69a596a2f4d840f2d8916116969a14aa6ba1937a918f6b93bf65719a8df888"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 318211,
+      "digest": "4ad2f40992af497e5243208f1d7362dbe3f531890832b7651a42e45ea3e42ba7"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 324958,
+      "digest": "117f45a4d8480fc3e2b3c3297ee48461b9f30448f106ebbbbc93f09e4d8995bc"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 343082,
+      "digest": "26a9c1fd281f650ebec6a19c0c6100ffe412b4a8eb63c8a666468379954d3b2d"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 346659,
+      "digest": "5f79fba6a6e45b7b7ef1e85fcad1a254c39c756ba742a8d577c0cfa71c5ab8c9"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 350972,
+      "digest": "65741dd69fa9851bc2f0016092493a5387db7484bc19fe88317a10ce5595283d"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 354230,
+      "digest": "335dd562f6532bfe549bdc04b58f72f9958f4f0bd0bbb7a4661f1ad47473213e"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 363454,
+      "digest": "dd5329f055f552d35b48934de95452bb3893aec08066457def67dd4ca9604ecb"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 419525,
+      "digest": "7aa687ca0087d410d3001e8df4ec9bd70844a8c1b48532425b5434b819139538"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 425235,
+      "digest": "e717b3121b331ddd7fe92faed423e8b57fad2837fdca076151bf92a27e05fb56"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 431647,
+      "digest": "be4c55851aed42f5f00dd532acc5ded7938eb3a78d9fae65f4e29f805103d061"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 437190,
+      "digest": "86f285d8895e5dd5544e70f51114ccb597199ca16d8777176f6c79f2fe42d6b5"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 444198,
+      "digest": "5a1421e5eaa1bbdc1695408bbdbb4a8300f9ca79d70536443d190fc2fab87795"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 456445,
+      "digest": "a96fcadd7b3543c09b4c6739c74c0ed97a21818d80506275979d1212698611d2"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 461406,
+      "digest": "5b92e356c918bdd724da9f295529ce9cd94c2b25b3a3b11d30379449abf50231"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 465029,
+      "digest": "482148ce2b1391bd4059f61f7eb0c67d4eea0c65bca9fdb58fadf4d1d487caf3"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 504965,
+      "digest": "bf08d05598a7e26d6f0682189b8ee83b7bf9f75aef3ad978a86e74974d710bab"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 509699,
+      "digest": "eb9dfcca2bcd3a9e98c1b6db2d5b4f53de7ef97bcf85fe25341289df7078947d"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 515375,
+      "digest": "918c148d59a4fa2c7882841cb3c10cd41ec9868eae4b562d0ff3472980691ecf"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 518824,
+      "digest": "95c3b583bff93673882ac6a803ea5ad57e6c9cf2d2f2d2fa8603503c4b0085a2"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 522290,
+      "digest": "1b04a86be82458cf5e3551d4157193dc60ab3bd1b2ad022a2273166240eb901c"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 525754,
+      "digest": "83ee498157a5c0edbc01549da473bd080a200c049ed3b0d01dc864144ebda77b"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 530350,
+      "digest": "23b35cf9b6f98c9b680ac0da9aadfee975c1c327b4394f4b423d4882e4f154c1"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 536587,
+      "digest": "7366eeb967616aa9242e8f5b8cf44cf6a0b5b11166c902caebbb8789b762edc1"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 542910,
+      "digest": "2bc91b7c1a0d5a88ffc16b216121508e4616ace933e831dbd58cfa1df1b6af82"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 549035,
+      "digest": "31007ad6372e8745c2706e7523266bcc9122d2e828780ab7d61aee79d061bdf2"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 553762,
+      "digest": "0a14c8bfabb1ccb3b2a8df0cc90884011a92e2b833dcf1e8dfb5e1ea37041e7c"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 559825,
+      "digest": "a3abe2dfda7058655525e2c3a0e83190d683b7a625965c88b220e97831d5cd22"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 562153,
+      "digest": "338df9ddbb969bb6d2d223ee027e78d9800167d217248daf105fed2851b777e6"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 594050,
+      "digest": "a0c084d079374b3f03f75cf06f300b7235ab774a5e5ba4d79cca89a0ed8faaaf"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 608104,
+      "digest": "feee53163ae9df94bea6e1acffdad91ffef9034b7ff124a34364de652aa25597"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 613311,
+      "digest": "8a46aed3bd541e7d9533207babe86d528b1eef21f21782f8c120f8f986ce3cb4"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 617216,
+      "digest": "9d71ac741e3ddf1e9b74765046e95056af46577832a7b24813b2d60facf4ed26"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 621616,
+      "digest": "44e84feb8a879c09b6c2b62f07bc73146ec7f36d037caa6dfb584889cbf9d169"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 626637,
+      "digest": "caa82325237486a8aa3a6af385a6b7d34b9042acbf08fa6e9ef2520657ee07e7"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 632940,
+      "digest": "c7d922b8e7d24ce7ec814d9733d01dac6b127b17eeca748c42727d490ebfd463"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 638577,
+      "digest": "3c88708a92a748f950dde490e0b4e7f472b82d2fc1c167cdef8853763491f8f9"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 646128,
+      "digest": "f4dd275a2763d41d1996d644bd66db31f8d145c549e8c9f1a2df40395a4059cc"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 651732,
+      "digest": "a90165708935c27aecc0744a5833992e0940e346b056a23bf4142f87dd71f574"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 656389,
+      "digest": "7784b599558f5ffc72012464433d8de6b00437428333ab69be70dcb80e255541"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 661242,
+      "digest": "25eafdb43112ad89f9c49853690cc92d39128373074bef83cc01a084582d8423"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 666282,
+      "digest": "a075c2008691d8cd6ff07ad0a8ba5e0a5fc02abcd9a305c263e8fe9e81534bc1"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 673963,
+      "digest": "e9d175004fb29f21eec4cd6d524fd10b5ec09bab035e072db45692ec6c68320d"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 684549,
+      "digest": "91b82fa85306410911b8d4745ef3dce7c375b915e49a0f18d6cc58bfac138def"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 731597,
+      "digest": "15ac9780ff43103611ce8d02fb6f52fad970f34b40b4c558f1b7e6846949d042"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 741527,
+      "digest": "c0ba3472057cf14fdc368ea7e49f7bcf23ae46b423066eb7d6a07f0569a67663"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 757800,
+      "digest": "99d7b36be34148f2809c05a78d9ee8cc68cf0d3a263b8ab146c0435636442d34"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 764534,
+      "digest": "31be2bea38363860517a0092a834a3d9bafc4efcad8a22b24cad574d68bf73f1"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 771090,
+      "digest": "c2a331352d65a830b3435b0efc5f01dab03df85b5cee6c4fa80f233ddb87c324"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 776687,
+      "digest": "ca56f4796bec1dd0b5becb94e5611c66dfde65996e66ecfeb004d42bc3002564"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 784327,
+      "digest": "318b752a2b2c6ee1005886a7f2b18fe3c2b48bf7dd4830b0e2be2b333ebe7c8a"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 790071,
+      "digest": "84d177281dadf6246ca892574bb3190987e7c11f336ffa459f4ddd73e6b5a8af"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 792960,
+      "digest": "21ed202fde65ea33493ccb753899ebba9980c6e6c493e0f5e4d89724b510a3d0"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 797178,
+      "digest": "134cd6d8f2637764ce90fddd2540c7f7275c0210bb597493849fd08279c755a9"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 804998,
+      "digest": "160d9cedd72c1ee7d37a81caef9a45d599635387808703eab8a1d714dcf4d6ee"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 810679,
+      "digest": "67a69cad3dfe4ad17af922fc4ca2d05d192601aff53285cba2ca24511d4ddd73"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 821315,
+      "digest": "1712bdd92bfcbc7ea47123abf7ee230bf4b8503571e3b651604d1bade96b83d1"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 846887,
+      "digest": "8a971d3571c2de8c756e1146f2b63d6b182cc6877bf967088dc3ffcc6c023bde"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 856130,
+      "digest": "cd9671fcaefbdeb851fabd3d9bcd8e431925ebab87c2db8a958e1a3c57124e6d"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 881694,
+      "digest": "8920e1ab95fc425b70ea242a3fa2940e1d41c2873b87a6b4644fe0a7e2725ed2"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 896782,
+      "digest": "0403cdeebc5e3cfbd1160b6afe9b90c9546e6281f98afc0af69127945d4c0af0"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 909303,
+      "digest": "927e04a661853f7133b974c0cb97802d12335f382992170fc06b165edbc960af"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 926770,
+      "digest": "f28ab0fc5f9db1a4dd070115be51d0c8dae1e5b430b5a49471587ee5db48c588"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 931747,
+      "digest": "3132a435ca294784bd472e24518057e338dde15460379eca01f46948a6a79f28"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 936787,
+      "digest": "cee8d11e1f49249c22f9dadabc945bb7bc926072513d56754afdfcf71be52c4f"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 939694,
+      "digest": "dfb20d65c9e4ed8519594b47c20c13a96e7f2394f4cb9cf853dd2fc506f0c0e8"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 946489,
+      "digest": "2eb40cad59e28434d087b755a06765bd77d9636a83458fc99763f7805dbe8d2c"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 953582,
+      "digest": "11c8f433f8355c8fd6db0777a588aea4062b675b8943856b9469af4e7093d36b"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 961673,
+      "digest": "c57f014e5423da0a7d2552d25d172d7305433144549d9e03b825acc5ce4ef17e"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 967473,
+      "digest": "12ee5932941f27146ad9c468ed8e5e7e3caa390f5de847e74ab0ca05e341b636"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 981107,
+      "digest": "e6d1ad4172bdc5a2606beb3963d2ffe5012423e3d5321e9d9ff92bd2928e02fb"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 986106,
+      "digest": "a19587f8fcff3815d555dff2d3bd07c434c30db32f1b9921788ac474b980118c"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 998017,
+      "digest": "64276a316363f341c1d081ec54c38b16b9d4e2fe6e2a25a02151bd370039027a"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 1008413,
+      "digest": "9bc7bb936f5da98105656cb926ee01c416be482efa84e68a43a269a75c5195de"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 1013803,
+      "digest": "f00528b95aec7e9f5cf07db9367a278d6dcc23e0bddc5f6b85f874ba0d981b8d"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 1020843,
+      "digest": "15c946a1b13acb2973db7bdd76d42a648a4739c9fe91e8ae0baa009519090892"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 1028319,
+      "digest": "ca4299a319f90ae014e71b1027c6f9378b6c7d3d0fb71f75d5036f00a3318ab5"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 1030725,
+      "digest": "65e74f296dec40ea7163c303c22123d40bd89e4ce9a638b95abd280bb1a527a2"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 1106334,
+      "digest": "84c80d474e41dec4e8ed91c810ac8ffab29168a71199fe73bc7a8305759dc42f"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 1119823,
+      "digest": "7aedbe73ba12bb890cdd10fceb9cb9ff2c50f23de3cec808f3720ad93683cdea"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 1129552,
+      "digest": "a958302424a4e7e4cc5753c556c0e77b4185dbe8d911aaef694cf3399e787d3a"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 1150692,
+      "digest": "1877ee8a1f588ff2aaad06551a9ae9fecebcc1540f37469633b5e5659a59f443"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 1174915,
+      "digest": "0f9401a7e98d4231ebf16c976f2717f1cd84c2abc8700c538fc1281223b2114f"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 1197646,
+      "digest": "9abc4101aeb315f67ccc4bbd879cba42670574beadab6ef09762c48ed3a5e4c4"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 1205988,
+      "digest": "be74272648886631edfdc10e424264feba10615d606d05777eebbbef3d125cab"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 1251510,
+      "digest": "98733508c358f3fb73ef3c00358e1e773ee52d18dad7edf5e43f92fc500a2d18"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 1261438,
+      "digest": "7a6b955bff1d706696a933f0bb47b27fb1341a5b628ba067541d37810de33ff4"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 1272329,
+      "digest": "c70c3162de76c72adb994824d683278b64ad2ad3c2b76073c2e48e4b2f1579de"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 1285962,
+      "digest": "879295032b147a017d7ccb6f5bf8e230c127a5647b154a9fb2038ef226943f33"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 1294367,
+      "digest": "864feeb5a73c7f77b35691f0e32816fb918f06be18c54b3449ee3172168c28ca"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 1317942,
+      "digest": "c4efb949e2a7dc16079ef1a68b8e57aa82f18cb21d4be6d44d1aa6a56b75b001"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 1339446,
+      "digest": "87e3a60ea4939c7378b8eef33546ce947a0ececbf4659420fee7dcc448c2a297"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 1355334,
+      "digest": "c9b21980426b620b7c3340c5718d2a0af28c37749910dd7f9745db760a3e734e"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 1370199,
+      "digest": "cf391028765c671c34bec05b9815f8f45654593e45522791d62643ba63115291"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 1380600,
+      "digest": "e6b882f9892512180524ecc5fcb04b529913b0377ed5cd48329bbac7c1174658"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 1384229,
+      "digest": "3070312fd9b762158321b643972e30989fd23ac1fe963c4f465257a67381f289"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 1388134,
+      "digest": "f516f20460169414005ca5dbcad37002874f3eba86b58909c64942112e2877b9"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 1390717,
+      "digest": "a34768205c7d1745a770ac9c8c9730f8714d6ffacdd17e4c56d8cf785b14caaa"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 1395317,
+      "digest": "86a643a24e4c89cf148f656183174c8cfb4ca4b5d088605562f02a528b4a1441"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 1401655,
+      "digest": "ee25bcef464e26ca4098135779b8b748a1dc5007a276f6896a7eaf7360aa461d"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 1407730,
+      "digest": "0d5de67c14f2f0e0e39b7ff87e27df6770daa7681da3495ed497f372c4d7507e"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 1411016,
+      "digest": "3b723b24b28c5709cd8e7bdd50461785aada7fdf2b932d77093c8923e399da53"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 1415710,
+      "digest": "0b13daf2b7e8cbb98261935a5a453f49f8bfde0ec7c6d315f8cdb52e0dc27305"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 1419391,
+      "digest": "a1fde4675b31a53a4a9a0f343085e14a9d64243dafad39450ca11e82e8387ec9"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 1422673,
+      "digest": "d260336e5bd0f5f43ba577bc0e9f4035257f9ff72a2435a7049932f74afcf754"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 1429098,
+      "digest": "ba34448518052a3554803f80cc731ce59f50b62a4c480e10a99f02a804e9be59"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 1434796,
+      "digest": "f94abbd024cfc335affaa531418a6f56ee0ab9a79d154e3007b294e2c8c170d9"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 1440925,
+      "digest": "51358ff98dd1d785e174abe676a358240ec1a506b780753a1d6c152dca4321af"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 1457224,
+      "digest": "2af9c37e71c6f85719467dfe43cbfc40c72ccc0eb8c873f44e04a6302e608b50"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 1520123,
+      "digest": "be0e2fe87eeb5dd06c155a2d946355d800566a27905e9f9aecc5c93a13f4c9c5"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 1574955,
+      "digest": "01c85f739e33ae761128c060ac013a0d7396064dca324bc35535d918f9ae8c48"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 1577363,
+      "digest": "decb6b3569dc05f1a99ea0a3b72ea746d4be48b518feb1d24f4134358945b0e6"
+    }
+  ]
+}

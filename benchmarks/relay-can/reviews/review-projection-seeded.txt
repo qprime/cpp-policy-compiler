@@ -1,0 +1,51 @@
+Found three actionable correctness defects; two affect both snapshots.
+
+1. Snapshot C and D — High — [host/src/can_transport.cpp:67](/tmp/relay-can-review-c/host/src/can_transport.cpp:67)
+
+   Host CAN arbitration depends on coroutine arrival order. `poll()` immediately selects an active frame from whatever has reached `pending_` at that moment (lines 81–103). A logically simultaneous lower-ID frame emitted afterward cannot participate and cannot preempt the incorrectly selected frame. This violates deterministic simultaneous arbitration and `POL-0007`.
+
+   Observable consequence: changing coroutine scheduling or PLC declaration order can reverse frame order, alter completion scans, and change a `PRECEDES` verdict relative to the Python simulation.
+
+   Minimal reproducer:
+
+   1. Emit ID `0x300` with `ready_ms = 0`.
+   2. Call `poll(any_plc, SimClock{elapsed_ms=0})`; ID `0x300` becomes active.
+   3. Emit ID `0x080` with the same `ready_ms = 0`.
+   4. Poll beyond both completion times.
+   5. ID `0x300` completes first, although standard arbitration requires `0x080` to win.
+
+2. Snapshot C and D — High — [host/src/can_transport.cpp:105](/tmp/relay-can-review-c/host/src/can_transport.cpp:105)
+
+   Completed deliveries are returned without comparing each delivery’s `completion_ps` with the polling consumer’s clock. Another, faster PLC can settle the shared bus far into simulated time and populate `deliveries_`; a slower consumer then receives those future frames immediately. This violates the requirement that a frame becomes visible only at the consumer’s first scan top at or after completion.
+
+   Observable consequence: with independently progressing PLC clocks, a consumer can observe a CAN signal before its frame has completed in that consumer’s simulated time, producing optimistic temporal verdicts.
+
+   Minimal reproducer:
+
+   1. Emit a frame at `ready_ms = 0` for consumer PLC B.
+   2. Have PLC A call `poll(A, elapsed_ms=100)`, completing the frame and queuing B’s delivery.
+   3. Call `poll(B, elapsed_ms=0)`.
+   4. B receives the frame despite its positive completion time being later than B’s scan top.
+
+3. Snapshot D — Medium — [specs/can_contention_good.yaml:11](/tmp/relay-can-review-d/specs/can_contention_good.yaml:11)
+
+   The required “good priority” scenario assigns the deadline-critical signal ID `0x300` and the background signal ID `0x080`. It is therefore identical to the bad-priority scenario apart from `System.name`, contradicting its committed all-pass expectation.
+
+   Observable consequence: regenerating the scenario yields a failing `PRECEDES` assertion with a 50 ms gap instead of the committed passing 20 ms gap. The required good/bad comparison no longer demonstrates that swapping IDs changes the verdict.
+
+   Minimal reproducer:
+
+   ```bash
+   cd /tmp/relay-can-review-d
+   PYTHONDONTWRITEBYTECODE=1 python -B - <<'PY'
+   from pathlib import Path
+   from tools.expectations import build_expectations
+   a = build_expectations(Path("specs/can_contention_good.yaml"))
+   print([(x["passed"], x["observed_gap_ms"]) for x in a["assertions"]])
+   PY
+   ```
+
+   The `PRECEDES` entry prints `(False, 50.0)`. Assigning `critical_ready` ID `0x080` and `background_ready` ID `0x300` restores the intended good case.
+
+Snapshot C: 2 findings  
+Snapshot D: 3 findings

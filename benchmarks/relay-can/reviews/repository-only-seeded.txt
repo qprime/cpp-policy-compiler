@@ -1,0 +1,7 @@
+- Snapshot D — High — [specs/can_contention_good.yaml](/tmp/relay-can-review-d/specs/can_contention_good.yaml:11): The deadline-critical frame uses ID `0x300`, while the background frame uses higher-priority ID `0x080`. Thus the nominal “good” scenario is identical in priority assignment to the bad scenario. Its `PRECEDES` assertion fails with a 50 ms gap instead of passing within 30 ms, contradicting its committed expectation artifact.
+  - Minimal reproducer: from `/tmp/relay-can-review-d`, run `PYTHONDONTWRITEBYTECODE=1 python3 -B -m tools.expectations specs/can_contention_good.yaml`. Observe `"passed": false` for `PRECEDES(critical_ready, critical_visible, within: 30ms)`.
+
+No actionable correctness defects found in snapshot C.
+
+Snapshot C: 0 findings  
+Snapshot D: 1 finding

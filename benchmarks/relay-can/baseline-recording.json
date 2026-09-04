@@ -1,0 +1,735 @@
+{
+  "version": 1,
+  "command": [
+    "codex",
+    "exec",
+    "--ephemeral",
+    "--approve-for-me",
+    "-C",
+    "/home/squinlan/Code/relay-can-baseline",
+    "-o",
+    "/home/squinlan/Code/cpp-policy-compiler/benchmarks/relay-can/recordings/baseline-final.txt",
+    "Read /tmp/relay-issue-28.md and implement Relay issue #28 completely. Follow every repository instruction. Run all required Python and C++ checks, repair failures, and commit the completed implementation on the current branch. Do not use or inspect /home/squinlan/Code/cpp-policy-compiler or any compiled policy projection; this is the baseline arm of a controlled experiment."
+  ],
+  "exit_code": 0,
+  "final_digest": "9a35972a23ab69e98d63d2cd2514c29699ae9d286194654aa2aaa09c00021c04",
+  "quiet_period_ms": 1500,
+  "root": "/home/squinlan/Code/relay-can-baseline",
+  "timeline": [
+    {
+      "label": "original",
+      "elapsed_ms": 19,
+      "digest": "4b824efdedc6e37af48b6105829c386ffd30210e1c91481aba5db649bfb82f9b"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 113361,
+      "digest": "394fc5ff40b31b0fb39e7e987c709cd44fe1693c05e8d9c9ca121a45572f5a92"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 156238,
+      "digest": "764b3ba84838af2d90941cba46e5e94ed4e1e73e4f1e0416c8b7e484aa7164d1"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 176494,
+      "digest": "fc1e33dd3075810f7c41de913599e36de59b395ff9935af814ecbf92a99dde19"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 193560,
+      "digest": "8390076abd06f7bef779fb2756bc61a765b177e991639a2fa0e87c76aa8d1c6e"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 230790,
+      "digest": "5342c9013e028a7d55954cda585641856bf48bbb179d2d831e8ec4e456857913"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 236561,
+      "digest": "edbdd77a2c00db659bc22cea7345232fbd62bd814dfbf7d5a9653a184c2b5274"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 245629,
+      "digest": "7801274952d81f0992a7da77988339c9ba9c76341db1ca35b2311dc3b1b66d45"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 250862,
+      "digest": "95874839d054a3cdcae2d085e3fb62630516ea55929e7a0f0861b9bbafd09cc9"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 322815,
+      "digest": "332894983b8f4a3d53ae1b78226ff29371d963287d033b08d0bcafc611dd6269"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 350204,
+      "digest": "d73c2a151b37cc9888035667ff2a228d5b220477f3709484b935dab798e7ae8f"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 359331,
+      "digest": "305e4ab1d7d1786ca9ed79b7449f09ae6ba1b86291a2e1a23ea0cb766e1fd021"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 365519,
+      "digest": "528ea157c7124080d2fa2a274f0ae0eac5632e9947d6d9749320ffdb2fc7841d"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 377643,
+      "digest": "c4395e4fe0e392e646eb4f0f46ac6df464a70734ddcc7bc404eee5a9b2da40a1"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 399099,
+      "digest": "a4b68645aa973a16e2fdf784e04df006593fc8cdd580aead25a80586e2ee886a"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 405050,
+      "digest": "f08bc92e9635573a82c0e5a4d3538be835f6f1200814baa96865bcc48e94b830"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 420697,
+      "digest": "5b71d040b5fcbab17432daa77d60a823742b7a510b4eda18b4970a00a87dc847"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 424906,
+      "digest": "c28ac885ab44dfdbfbf65531aa757002b6bc3563bb16b52a958f9f43221c8eff"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 471706,
+      "digest": "0c8c9a8c9b3ee949919e2602b02414c52842db828fe0821b447ace2b37e77e3d"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 495838,
+      "digest": "decee77020f4a391526f958cb6c75babc5e71b63448a03a7ae714d72a1ea18b6"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 505636,
+      "digest": "a2d564907be25c99cd56b034df6647bd9e4febfc85c21126d18aaf12051c0e93"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 526627,
+      "digest": "be6237eb014c823a74b8c33625b9e1dbc38248d601891458727ffaa977c077b9"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 530399,
+      "digest": "baee44a405b276f3c24ad212f117b9095d3b0f1aca5e493f950d812ddecd9e93"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 533952,
+      "digest": "656df373267a9b85d4be45b2ae023cd5a0f7b3a222bad1dba44116d8d29af14a"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 541103,
+      "digest": "a88ad905ce6828177d4e2a538f732bacb8d135eeb2cc97f99ddec347fd8e35a0"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 547954,
+      "digest": "029b0b9e56651439ba761a3d1d96e1fb7de9ceb30ca80185d743f9adc30776d9"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 551468,
+      "digest": "7dbc338c8a126c3c9c648763268d6ba39e7ed61c8d05586a43e3e9acefb9849c"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 554985,
+      "digest": "2ee53cf73a7619672535815b21d22f5330349857d4dcdd9215a780b40b5c6f15"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 558365,
+      "digest": "b110c1e230971c5cae04f71d2ff88c88a1b6186f5f59811e972d26965269d966"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 562893,
+      "digest": "ca296312ff3486ba8de639bf50dfb54e1688cb79b65600b5650d12b17add020e"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 570751,
+      "digest": "c4776318ae50a2c703b7bdfe511be95560e3251620f7a42b269fb6fb8e3bfab4"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 575647,
+      "digest": "e6e2097cfd4389ec0e393c1d4fec71d16e351cd6c97058bb8a729f300f43fc05"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 579777,
+      "digest": "756d919903ee32bad48349da4cbdcefa73b02d005ae6dd6f8f311957bc359f8b"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 583320,
+      "digest": "0898c79d5242713c0f6ea04292ab3a9844c435ce3d7fe1031aaed52751f319e3"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 589336,
+      "digest": "2e17c45c274e447d4aaee3cb64f5a06d71fd072b707b0aad95d5398649372f15"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 594950,
+      "digest": "54409c2ca6f445875d6b269585f4aa4b4da28d12dd07d19051e4ec227a5d113b"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 598357,
+      "digest": "b2c982de1d86a66ac178a618ae2be8ceda0f13b05f471c002be6d92b2fd4e82c"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 602063,
+      "digest": "f94acf52cffc0f3e2e84b825a7b02b5db12eee19c0b61ead5a4ca31fcbb0fbdf"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 605523,
+      "digest": "da01973f2895db097b755fd209aabecc250c37e837aba61486a8a6858eea9f65"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 610082,
+      "digest": "b8cd48c542483f2e285b761a58c09e128d02df11a5034fb54b84b3664822c7cb"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 616556,
+      "digest": "743b10ffedb45f8cabdd69cd4ee52b0c3cec2250c624a5dc35517241e49c6062"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 622798,
+      "digest": "ad19fb4b7e749f7bff3f5378e4869cc13e32d711ad66c6128277b47057a028b1"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 626453,
+      "digest": "11f9198e60da255c779f2fcf8d30e1eea47a7955cf66155bdac2cc0d36ac4a67"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 663527,
+      "digest": "f194478d4ae79ed36804ff54ec37cd4d7dcb6d5d32f7ed01e5e130d3e4230c72"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 668296,
+      "digest": "cb6b75d7964a54c2bf3af8121f21cc72a0df680451c99628245076e9c5b199a8"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 675670,
+      "digest": "77c577b61e32f41c18128109400f2ef31a46cd03a58acae8da4fc2712dc6fc9a"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 680258,
+      "digest": "1f3596391d6a75e01ff37c67445b2b42fb141f38af4611ab5f458d930dd25176"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 686218,
+      "digest": "54ffbb194a3c434dbee185ff0e198db8fe5c155222aae4a6baa5747a4c332a5c"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 690476,
+      "digest": "291d2b4a79bc8ae5e2101a4642ee6ffe5ddc37286038828c73c9e1cd0c28b07f"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 695268,
+      "digest": "ded4fc8f993b54079a795f582fcc6f9929e61ddc2a4f64b1aedb55e998efd038"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 726344,
+      "digest": "399fecea4ad34a6a352f6af41bc626696334cd815c61649d7a8d345239771456"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 731961,
+      "digest": "9ccc2d81e7f47fffafc7dc27c448f6281f9ca446e9dbb4fee8d2e118db7dffff"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 743116,
+      "digest": "26b0418316ba374f09c87851f260c9dcaa03f529d1b5c3856a292d60c5a5fca9"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 749292,
+      "digest": "fbe0a1d30a18917a354bd07db99734e927c9f56c6d5ada300b98112256125435"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 805642,
+      "digest": "80e739300ff110974e04dd8a265fa99fc0c47329406c4bb43cb57802b582c031"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 822844,
+      "digest": "f710107e10d4ce0a5075e1de6edce7e76c3c3e3629e8d11d72559926724e8c20"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 828149,
+      "digest": "0bcd0ddfe11f95c93ddc5b81fe6c04a7a816c6c82f1b8765b82717abb6e1a1c8"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 853119,
+      "digest": "4323325d842e4fe6d767ecfd8bb78ed052e258de07835525627a77a0c7f65b51"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 866417,
+      "digest": "8def84afd99bf65e1bf430462aa6631f7b435e59e8f85b9979180596e9619bb4"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 873677,
+      "digest": "5e319fa9df22e11d5fe9c5b1f4a8040435d09b0226ac5d28011d4b8ba9a956e3"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 899186,
+      "digest": "d0e5cbe039c90ed4f79ec52f0c5a89fe7dfc315721752b0bd6b6adcafe65cff9"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 915931,
+      "digest": "243d4bc1ab9e963da3dcd4ec910b9e4b8ff0eb485aa46db665655a26b7aacd5b"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 920351,
+      "digest": "91102062a1369995ec7933f0b583ea34bedc35bdcdeb0311b5eb48ed0a463976"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 922752,
+      "digest": "7e8eda987ed77f14ccc3c5269f115b835e7be607f4d330f7da737dd962d5eed6"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 927042,
+      "digest": "4273d00b3f11e43c4e3b47aeb44b1bc59aecca711367708f7242401976b5b589"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 929899,
+      "digest": "e2d2ddf7510961d05dc32a8a9f6ddd6466093dcb68d80ea84afce25a484ac711"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 936999,
+      "digest": "86e256006beb104b2b360626082dda1b74859e89ede7f408365da18dc13c13a6"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 941133,
+      "digest": "e9a4ffb5e9a9953ac6cd8181f02a323b05567afec5b0cfd12c876f6fbb85830a"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 943531,
+      "digest": "cfbe408bf0e0f0814aed8b63467a4c213f1394ef72c11b949c1efe6cb3053cf0"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 947927,
+      "digest": "355a432ca35d2a7bb99ff075d86fda53fb7ceb427d8e5a9b80a966e4af065be7"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 954090,
+      "digest": "28eeaf11c93fe352f87a29ca6d3e401088e45117106d12a5a4b2cefe89504fd0"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 960579,
+      "digest": "1f6226920039a056f173097aff9a849ed8da476f9a0208e5108c1283b8cb7a5e"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 964765,
+      "digest": "71789243276cc3d1fa7457a0f15ccf9cb8cc7197a96c037c2b8fa22aa3e6d352"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 969833,
+      "digest": "c4ad2f1a71ee9eb4d3485039f47bd6612987a24cdad60428d914dd371bf0d53b"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 972915,
+      "digest": "3e6a60185d8184134121a5aaaab94965d362413a3ea240bd19338a8ab07a35de"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 979285,
+      "digest": "bd8bc5c4e139eb8f1f711d7183ba874933a9aba73d5029df43214880e3321529"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 986224,
+      "digest": "c0bf049cbf4c029ba53c2665f5cab09aaa0d4f06b523b4d389e737cf3a374f2c"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 997713,
+      "digest": "3697ccfbac6a750bed8c04e2b0098800a6e66d2ba896d483ddc57f500303abfe"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 1036396,
+      "digest": "8ce1819cd81a9899ce78526cab27f0977ab29de6653d4dae8469a7ae6d2e5153"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 1046570,
+      "digest": "1ad2dbe2b086f926de021ba87661ccf1cd58f8b5a9629a78931d2939b1e3243e"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 1056725,
+      "digest": "6b63179c4c0bf68531ab1deaca6638cc56b8b70bc22e62af5d8cce53025d75a4"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 1062876,
+      "digest": "d71e2251f9967f6e2682422c43c6ed26db352fcec4c1bb5420fac1b494d70eb4"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 1068614,
+      "digest": "4654779d7e7508e3b6571f1cde5a82b766022dd09d2a271a31b7109278e07296"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 1072650,
+      "digest": "3674fafe46e94730c1d7007047b18e7a4f483691e9bcbc90a0a70d885e2321e6"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 1079104,
+      "digest": "aeca3a687d13dc53e5bbde78b22336d3d3069486971c23ff618146a27475da02"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 1086831,
+      "digest": "8892db6bc319cca000473314f32b54aaaaed6e2a192b490fb8414064e2a1fa59"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 1089669,
+      "digest": "78cd92c1dac8627876d9d5a43f0a61e96b5b970a6bfd79360632ce8432320f1c"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 1092543,
+      "digest": "59aa9190c51d3adf252314f150bc4d089992712152dbbe452bdde0318a13ee4d"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 1097603,
+      "digest": "139d22122facc24a705dfd892737531f4bfe1a5a3527c123e74ce7b434b3a74f"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 1100173,
+      "digest": "3926702ecb505c9cb14611d36f0398682c747b28f01a3da937ff4c2d9e04ce04"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 1104321,
+      "digest": "9ef84863ae2145c8e1cffae505818525dfb648d3b4c2967f9a710b9503c9fb3e"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 1109122,
+      "digest": "d6979f765c1d66221c440825b0c716a7d47ef4b7377b93d39de71b4d9ae2dc0f"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 1111412,
+      "digest": "fea22e406eb3993a8ede12d965e0f6e3cfab68d7d55c9923641bc8e9d913dc65"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 1115930,
+      "digest": "3a2277cd78b39d7eac11fd4a3e87d2b337afc0b5cf61480d953a5c5e268d9ca7"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 1119663,
+      "digest": "70f88c11cc98d81ac6a087399e523a22f1a17a2785136a13f17dc97e1f62f9b5"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 1122757,
+      "digest": "50e51036d6fb6de43e6ffc8a540810e449d2bfe08183a3e8bf70f8c2ae236856"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 1125159,
+      "digest": "6d37afba25d8f8466f31be7e2c7bd4513d33a13e1d03d02a803521c6aad500ab"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 1164921,
+      "digest": "1f5bf08bd1d550a101bf3fa56940d3cc33127e69deed53fee2ae4ca2f57fece0"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 1184233,
+      "digest": "4f233000c3c6298aeaf9fa876b7f31b979ce083fb3be73bef7e58a8c98334e5f"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 1242983,
+      "digest": "8817a09c26f8a594b1507e37b3245385fee1cd111428302c6ccbc7f049244fd3"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 1256341,
+      "digest": "9325c67e2b4b11f3fa42fc227c0436efc04d43180ff35ccb1c349cde5ae75485"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 1263431,
+      "digest": "6fc3ff59a81309d78de068c6c0b8b9fda110d8caee6fac41fb8f288a6b96aa25"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 1271204,
+      "digest": "4f48dfc17a9724b602fd22c3d93288a674c25f2f7599a5c0d913b5a4366f6025"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 1278126,
+      "digest": "bab0e4ba91100af8c2e363be650921be1b9659a32286c78e0a4b5d2a5433e121"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 1280531,
+      "digest": "d280fc3f0ead0c2f62a8588fcebbaa3bf3f2ab45dba3a5ae7d65c228bf6ec068"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 1291546,
+      "digest": "bb417d1e8f4fdf28a9c1f380ee6a8c03f5f04b050c5fa42b36f449c0edbc7fe5"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 1328318,
+      "digest": "f5a475426cde8479245828dd524103e8728bbf57213cb115ea38e23848a89582"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 1346807,
+      "digest": "5858484d5e76d43b43d545fc3712ac77fc91e34e255f46477d12d788da7ea8ca"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 1373386,
+      "digest": "1a3f5145c100b332fcf5685fcd06ba8b03fa3d4148455297e9a57fd3c9fce251"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 1383651,
+      "digest": "639336c13fda86c24f8c8256ebd2cbb118469904f44b0fbe14a6564c10acff17"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 1391298,
+      "digest": "bcceb61495c8fbdc1b33ab5361e39b87361e8e0b4e8528af6fed335f5d6f53a5"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 1406100,
+      "digest": "df39c87f98ef537a0e7cf4fc8c6e65639687aca43d0b25fe16f95decbe6f18db"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 1420951,
+      "digest": "e0f38b7a3cc3ca80539800cabb6aab3b2264b1d21ecdefe055ec869fd314aef5"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 1490340,
+      "digest": "a4460dd61a246cf89e1f371101b83d805fcba5438bdfaedb8af08ae038c3102f"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 1496263,
+      "digest": "7484ffee6f5b4d97045a849effbd6084bcc7294f27e9089715054ae114b41080"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 1501376,
+      "digest": "398c96c5e7e5b3c191ef378277cd33a6eb01cdc922183146f225c1b09af39533"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 1506917,
+      "digest": "524b1c07b319a103de85afdc37a42c4470789097236c1048f8a3f1abe16567e8"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 1513235,
+      "digest": "3483d5b5fafb3af3d893d19e0f0eedbd64d207d92d98d83e4515c26bb14dc38f"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 1516819,
+      "digest": "5a91d86d10ed69bb389b291f8b135eb36434d4d138a68552e2c1877948fa68f0"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 1523303,
+      "digest": "74c5fff6317a1e906694f19366e167285af570eb9b7d9a1a21fae82c599eeddd"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 1526548,
+      "digest": "095e3af8446d7395ac8859bfec0b7b6327e4d2e489a40a86cd1240020eb5a0e9"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 1531222,
+      "digest": "af97e42628c0d5fd5df6cbac18edf432ca54c7e2fa0bfbe835bf607782f22c6a"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 1534581,
+      "digest": "207697484eba538aab976d99c196d2add1b95cb3fae34fb8ba0c4d3f024157ea"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 1538188,
+      "digest": "07a1036937fc673c7379e69012e53d57cd5e4675cc33f73ab4236b197784bd48"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 1544640,
+      "digest": "511e35bec5d4fd510f6b28dd8379f4e5141a620e45fd7d9cf2d7f5a8904560da"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 1550358,
+      "digest": "aae4e050a573c60b0f020aa685e7710dba3a6f9514e1eda139251cf8d3a8bfb9"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 1552899,
+      "digest": "4ff62ba8c23f5380e9289f32b50fe54b294089dc168836bbb50a876dea721c5a"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 1556629,
+      "digest": "e459c60e52f30e49064f35adeedd1f62c768a77ebb8606b306088f23ddd9729c"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 1565600,
+      "digest": "7bb2005ccfd1722f54b5c4a821b56cc7decff98176796d23cb3ac3da87e92e1d"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 1567995,
+      "digest": "ce27501d9bbec208ebb7f5171e7ab2c4b5d8a88450fb81d6b18d870a9b45c6fd"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 1589051,
+      "digest": "435c5730a3239ca440e9d9a47515bbae6a5bccb6e425248f35f43b892fe518b8"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 1621340,
+      "digest": "6b0483eeb45403d7f3c7c45c31bf2dbf7271e5a6b7743718205eac531818fcb8"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 1678265,
+      "digest": "8dbe411062851e546b660bcaa0a76487d2194274e301821e5be2a71705194e63"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 1691052,
+      "digest": "54b40b43fc34f723ee0f1cbabc252da84c9d98a58d04642f53d37ce2e4ca40b3"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 1708421,
+      "digest": "d8ea9ad60476d136102482c052c096e1fddec720736aa919d53a2116e3642187"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 1724521,
+      "digest": "f8cfb19beed5e347669973e77f9d90b311573182a3cc3fabbe70a53b0ef8982c"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 1735659,
+      "digest": "1c693ff3e83417bcea8a082c9e34a006d4d2c4d17e9a2e8f13159392b1f8ebaa"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 1739519,
+      "digest": "bcaa6273370fa909ca99bcaaf8a0831171bfd56d3d22b1f293ecc86300d1c5b2"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 1745253,
+      "digest": "c033068096356a5e06b937d145bdd975b5c508fb6585414e53bd4517861d9d83"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 1750598,
+      "digest": "7ebf5cc279b63d1710b588880774e3accf8f66c31c124dfd91f15612274ec850"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 1763540,
+      "digest": "026554256978e8a31ca604350911eea7d1d9a87f8e4dc010835270910b63a3e6"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 1823512,
+      "digest": "1a98d135c1b1c03a5e16e59c0782b5d8747b2715ddac3ed919c2b19afcc7e744"
+    },
+    {
+      "label": "quiet",
+      "elapsed_ms": 1825911,
+      "digest": "9a35972a23ab69e98d63d2cd2514c29699ae9d286194654aa2aaa09c00021c04"
+    }
+  ]
+}

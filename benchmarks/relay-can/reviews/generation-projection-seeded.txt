@@ -1,0 +1,8 @@
+- Snapshot C — High — `host/src/can_transport.cpp:67`: `poll()` begins arbitration immediately from the frames currently queued. Because each PLC calls `poll()` before emitting during its own coroutine scan (`host/src/scan_executor.cpp:148-178`), the first producer’s frame can begin transmission before another producer emits a frame with the same logical `ready_ms`. Consequently, coroutine/System PLC order can override CAN-ID priority, changing completion times and temporal verdicts. Minimal reproducer: at `SimClock{0}`, call `emit(high_id_frame)`, `poll(any_plc, clock)`—which activates it—then `emit(low_id_frame)` and poll at later scan tops. The high-ID frame transmits first despite both frames having `ready_ms == 0`; reversing the producer execution order reverses the result.
+
+- Snapshot D — High — `host/src/can_transport.cpp:67`: same premature-arbitration defect and reproducer as snapshot C.
+
+- Snapshot D — Medium — `specs/can_contention_good.yaml:11`: the “good priority” scenario assigns the deadline-critical frame ID `0x300` and the background frame `0x080`, contradicting its committed passing expectation artifact. Observable consequence: the named `PRECEDES` assertion fails with a 50 ms gap rather than passing with the recorded 20 ms gap. Minimal reproducer: from snapshot D run `python -m tools.expectations specs/can_contention_good.yaml --max-scans 100`; it reports `passed: false` and `observed_gap_ms: 50.0` for the 30 ms budget.
+
+Snapshot C: 1 finding  
+Snapshot D: 2 findings

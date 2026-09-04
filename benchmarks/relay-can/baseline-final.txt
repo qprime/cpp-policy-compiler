@@ -1,0 +1,22 @@
+Implemented Relay issue #28 completely and committed it.
+
+Highlights:
+
+- Added deterministic CAN codec, arbitration scheduler, and transports in Python and C++.
+- Extracted communication strategies into self-registering `tag`, `address`, and `can` modules.
+- Migrated generated ST to one `_send_<signal>` publication per signal.
+- Added transport descriptors, CAN bindings, validation, trace metadata, and report rendering.
+- Added good/bad CAN contention scenarios and expectation artifacts.
+- Added Python and C++ CAN golden-vector and scheduler coverage.
+- Updated documentation and existing tests.
+
+Validation:
+
+- Python: `614 passed`
+- C++: `143 passed`
+- Ruff: passed
+- Pyright: `0 errors, 0 warnings`
+- Good-priority CAN scenario passes end to end in both runtimes.
+- Working tree is clean.
+
+Commit: `26142a6 Implement deterministic CAN communication (#28)`

@@ -1,0 +1,24 @@
+Implemented and committed issue #28.
+
+Key results:
+
+- Added deterministic CAN broadcast/arbitration to Python and C++ runtimes.
+- Added matching CRC-15/CAN encoding and bit stuffing.
+- Migrated all strategies to one `_send_<signal>` publication.
+- Added strategy-neutral transport configuration and CAN bindings.
+- Added CAN timing metadata and report rendering.
+- Added good/bad contention scenarios and expectation artifacts.
+- Updated validation, documentation, goldens, and regression tests.
+
+Verification passed:
+
+- Python tests and focused post-fix integration suite
+- C++ warning-clean build
+- CTest: 143 tests passed
+- Ruff
+- Pyright
+- `git diff --check`
+
+Commit: `60a974a Implement deterministic CAN communication (#28)`
+
+The required GitHub issue comment was not posted because external publication approval was denied.
