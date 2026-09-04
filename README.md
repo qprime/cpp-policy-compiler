@@ -141,6 +141,10 @@ reads it, and nothing in it reaches a projection.
 - The projection ships no retrieval logic. The model is the retriever; what
   ships is text and a map.
 
+The [project harness design](https://github.com/qprime/cpp-policy-compiler/issues/17)
+describes the next boundary: a target-owned overlay, separate generation and review
+projections, and coordinated text and tool distribution.
+
 ## Status
 
 Early, and under active design. The corpus holds 247 policies, 29 standard
