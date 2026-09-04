@@ -1,0 +1,14 @@
+[
+  {
+    "id": "F1",
+    "path": "seeded.cpp",
+    "line": 9,
+    "evidence": "POL-0049: return std::move(result) defeats NRVO; use return result"
+  },
+  {
+    "id": "F2",
+    "path": "seeded.cpp",
+    "line": 14,
+    "evidence": "POL-0137: return 0 is an integer null pointer constant; use nullptr"
+  }
+]

@@ -9,10 +9,12 @@ from . import adapters
 from .config import load_configuration
 from .corpus import fingerprint, load_corpus
 from .exemplars import load_exemplars
+from .evaluation import evaluate, write_result
 from .manifest import parse_manifest, parse_standard_topics
 from .model import Configuration, Exclusion, Exemplar, Identity, PolcError
 from .render import Projection, render, write
 from .select import select, select_exemplars, select_standard
+from .snapshot import record
 from .standard import load_standard
 from .validate import validate, validate_links
 
@@ -144,7 +146,50 @@ def main(argv: list[str] | None = None) -> int:
         if name == "build":
             sub.add_argument("--out", required=True, type=Path)
             sub.add_argument("--adapter", choices=adapters.ADAPTERS)
+    eval_parser = subparsers.add_parser(
+        "eval", help="run opt-in correctness evaluation"
+    )
+    eval_subparsers = eval_parser.add_subparsers(dest="eval_command", required=True)
+    run_parser = eval_subparsers.add_parser(
+        "run", help="evaluate a benchmark manifest"
+    )
+    run_parser.add_argument("manifest", type=Path)
+    run_parser.add_argument("--out", required=True, type=Path)
+    record_parser = eval_subparsers.add_parser(
+        "record", help="record coherent file states while a command runs"
+    )
+    record_parser.add_argument("--root", required=True, type=Path)
+    record_parser.add_argument("--path", action="append", required=True)
+    record_parser.add_argument("--out", required=True, type=Path)
+    record_parser.add_argument("--quiet-period-ms", type=int, default=500)
+    record_parser.add_argument("command_args", nargs=argparse.REMAINDER)
     args = parser.parse_args(argv)
+
+    if args.command == "eval":
+        try:
+            if args.eval_command == "run":
+                result = evaluate(args.manifest)
+                write_result(result, args.out)
+                print(args.out)
+            else:
+                command = tuple(args.command_args)
+                if command and command[0] == "--":
+                    command = command[1:]
+                manifest = record(
+                    args.root,
+                    tuple(args.path),
+                    args.out,
+                    command,
+                    args.quiet_period_ms,
+                )
+                print(args.out / "recording.json")
+                if manifest["exit_code"] != 0:
+                    return int(manifest["exit_code"])
+        except PolcError as exc:
+            for message in exc.errors:
+                print(message, file=sys.stderr)
+            return 1
+        return 0
 
     kept: tuple[str, ...] = ()
     try:

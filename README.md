@@ -31,6 +31,13 @@ source trees. `polc check` takes the same arguments minus `--out`, validates
 and renders, and writes nothing; use it to see what a configuration would emit,
 or in CI to catch a corpus that no longer compiles.
 
+Correctness experiments are opt-in and separate from projection builds. `polc
+eval run <manifest> --out <result>` scores a recorded generation or review
+benchmark, while `polc eval record` captures coherent file states around an
+explicit command. Normal consumer projects run neither; the tooling exists to
+measure whether the `polc` harness works. The benchmark format and initial
+experiment live under [`benchmarks/`](benchmarks/).
+
 Point your project's own instructions at `index.md` and the model routes itself
 from there. For Claude Code, skip that step:
 

@@ -1,0 +1,20 @@
+[
+  {
+    "id": "GENERAL",
+    "path": "seeded.cpp",
+    "line": 9,
+    "evidence": "return std::move(result) on a local automatic variable defeats NRVO; use return result instead"
+  },
+  {
+    "id": "GENERAL",
+    "path": "seeded.cpp",
+    "line": 14,
+    "evidence": "return 0 uses an integer null pointer constant instead of nullptr"
+  },
+  {
+    "id": "GENERAL",
+    "path": "seeded.cpp",
+    "line": 20,
+    "evidence": "notify invokes an arbitrary callback while lock_guard still owns the mutex"
+  }
+]

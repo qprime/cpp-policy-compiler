@@ -1,0 +1,30 @@
+version: 1
+name: seeded-review-defects
+kind: review
+source: live-agent-run
+model: claude-sonnet-5
+observed_at: "2026-09-04"
+prompt: >-
+  Review seeded.cpp for C++ correctness and engineering defects. Do not edit
+  files. Return only findings supported by the file.
+watched_paths: [seeded.cpp]
+requirements: []
+expected_findings:
+  - id: POL-0049
+    path: seeded.cpp
+    line: 9
+    evidence: A named local is returned through std::move.
+  - id: POL-0137
+    path: seeded.cpp
+    line: 14
+    evidence: A null pointer is represented by integer zero.
+  - id: POL-0171
+    path: seeded.cpp
+    line: 20
+    line_end: 22
+    evidence: An unknown callback executes while the mutex is held.
+variants:
+  - name: baseline
+    findings: findings-baseline.json
+  - name: generation-projection
+    findings: findings-generation-projection.json

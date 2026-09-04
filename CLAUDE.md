@@ -29,6 +29,7 @@ The compiler is Python. Everything it compiles targets C++.
 | Python conventions | [docs/conventions/python.md](docs/conventions/python.md) | Patterns and traps for the compiler source | Writing anything under `src/` |
 | Markdown conventions | [docs/conventions/markdown.md](docs/conventions/markdown.md) | Formatting for root documents and specs. Corpus documents follow their own layer's on-disk format instead. | Authoring a root document or a spec |
 | Review log | [REVIEW-NOTES.md](REVIEW-NOTES.md) | Durable findings not yet ready to become corpus or code changes | Recording a review result with no immediate change |
+| Correctness benchmarks | [benchmarks/](benchmarks/) | Opt-in generation and review experiments, fixtures, and results | Measuring whether a compiled harness changes agent behavior |
 | Specs | GitHub issues on `qprime/cpp-policy-compiler` | Implementation specs and the work loop | Every change large enough to spec |
 
 ## Capabilities

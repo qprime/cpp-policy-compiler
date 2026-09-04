@@ -1,0 +1,38 @@
+version: 1
+name: first-write-return-and-null-shape
+kind: generation
+source: live-agent-run
+model: claude-sonnet-5
+observed_at: "2026-09-04"
+prompt: >-
+  Edit sample.cpp. Add a Result type and a make_result function that builds one
+  named local Result and returns it. Change find_value so it returns null when
+  found is false and a pointer to a persistent integer otherwise. Complete the
+  implementation; do not only describe it.
+watched_paths: [sample.cpp]
+requirements:
+  - id: BUILD
+    severity: hard
+    check: command
+    command: [python3, check.py]
+  - id: POL-0049
+    severity: correctness
+    check: not-contains
+    path: sample.cpp
+    pattern: 'return std::move\('
+  - id: POL-0137
+    severity: correctness
+    check: not-contains
+    path: sample.cpp
+    pattern: 'return 0;'
+variants:
+  - name: baseline
+    states:
+      - {label: T0, root: states/original}
+      - {label: T1, root: states/live-baseline}
+      - {label: final, root: states/live-baseline}
+  - name: full-generation-projection
+    states:
+      - {label: T0, root: states/original}
+      - {label: T1, root: states/live-generation-projection}
+      - {label: final, root: states/live-generation-projection}
