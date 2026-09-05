@@ -7,16 +7,19 @@ attribution:
     locator: "FFI Conventions"
 ---
 
-# The calling side validates before crossing; the callee asserts and trusts
+# An FFI entry point validates unless a single trusted wrapper established the contract
 
-Whoever holds the untrusted input checks it before the call. The callee may `assert`
-cheaply for a contract it cannot state in the signature, and does not re-validate
-defensively.
+The side where untrusted input enters validates it before constructing trusted domain
+values. A public C ABI entry point cannot assume every foreign caller used the
+preferred wrapper, so it validates before dereferencing or converting. Only an
+internal seam with one enforced, trusted caller may assert an already-established
+contract instead of implementing the same validation twice.
 
 ```cpp
 extern "C" int plan_pocket_c(const double* xy, std::size_t count, double step_over_mm) {
-    assert(xy != nullptr);
-    assert(step_over_mm > 0.0);           // cheap, and states the contract
+    if (xy == nullptr || step_over_mm <= 0.0) {
+        return kInvalidArgument;
+    }
     ...
 }
 ```
@@ -28,6 +31,7 @@ def plan_pocket(points: list[Vec2], step_over_mm: float) -> Paths:
     return _proj.plan_pocket(points, step_over_mm)
 ```
 
-Validating on both sides means two implementations of one rule, and the day they
-disagree the boundary rejects input the caller believes it cleared. Putting the check
-where the untrusted value arrives keeps one answer to *what is valid*.
+Avoid two independent definitions of validity: put the rule in a shared schema or
+one boundary constructor where possible. Validation is still required at every
+independently callable trust boundary; an assertion compiled out of a C entry point
+is not input validation.

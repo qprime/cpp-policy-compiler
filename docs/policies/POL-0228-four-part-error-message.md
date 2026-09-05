@@ -7,11 +7,14 @@ attribution:
     locator: "Tier 1 #6"
 ---
 
-# Every error message carries four parts
+# An input error names the operation, subject, constraint, and safe actual value
 
-What failed, what field, what constraint, and the actual value — in that order, in
-one sentence. This holds for an exception, a result payload, a log line, and a
-structured warning alike.
+For rejected input, state what failed, which field, the constraint, and a safe,
+bounded representation of the actual value—in that order, in one sentence. Omit
+the value or redact it when it contains a credential, personal data, unbounded
+payload, or other information the diagnostic channel must not expose. Failures
+without a field or actual value state the applicable context instead of inventing
+one.
 
 ```cpp
 throw std::invalid_argument("SheetConfig: width_mm must be > 0, got -3.5");

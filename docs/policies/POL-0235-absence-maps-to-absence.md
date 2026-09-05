@@ -7,11 +7,12 @@ attribution:
     locator: "FFI Conventions"
 ---
 
-# Absence crosses as absence; NaN never crosses
+# Absence crosses as absence; NaN is never an absence sentinel
 
 `std::optional<T>` maps to `Optional[T]` and `std::nullopt` maps to `None`. An empty
-collection means an empty collection, never a failure. A NaN reaching the seam is a
-defect to investigate, not a value to translate.
+collection means an empty collection, never a failure. Do not translate absence to
+NaN. A NaN may cross only when it is a legitimate value in the documented numeric
+domain; otherwise reject it at the boundary as invalid input or arithmetic output.
 
 ```cpp
 m.def("find_tool", [](const ToolTable& table, int slot) -> std::optional<Tool> {
@@ -21,6 +22,5 @@ m.def("find_tool", [](const ToolTable& table, int slot) -> std::optional<Tool> {
 
 Each language already has a way to say *nothing here*, so re-encoding absence into a
 sentinel at the seam invents a third convention both sides then have to know. NaN is
-the worst of those sentinels: it means *invalid number*, so letting it cross makes a
-real arithmetic bug indistinguishable from an intentional absence, on the far side of
-the boundary from where it happened.
+an especially poor sentinel because it makes an arithmetic result indistinguishable
+from intentional absence, on the far side of where it happened.

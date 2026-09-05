@@ -8,11 +8,11 @@ attribution:
     upstream: ["CG E.14", "CG E.15", "CG E.31"]
 ---
 
-# Throw a purpose-designed type by value; catch by `const&`, most-derived first
+# Throw a purpose-appropriate type by value; catch by `const&`, most-derived first
 
-Define an exception type for the failure, deriving from `std::exception` or a
-project base. Never throw a built-in or a `std::string`. Order `catch` clauses from
-most derived to least.
+Use an appropriate standard exception or define a project exception deriving from
+`std::exception` or a project base when callers need that distinction. Never throw
+a built-in or a `std::string`. Order `catch` clauses from most derived to least.
 
 ```cpp
 class ToolTableError : public std::runtime_error {

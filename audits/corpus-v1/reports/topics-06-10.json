@@ -1,6 +1,1699 @@
 {
   "schema_version": 1,
   "slice": "topics-06-10",
-  "status": "pending",
-  "records": []
+  "status": "complete",
+  "records": [
+    {
+      "id": "POL-0011",
+      "disposition": "keep",
+      "dimensions": {
+        "technical_truth": {
+          "status": "reviewed"
+        },
+        "strength": {
+          "status": "reviewed"
+        },
+        "scope": {
+          "status": "reviewed"
+        },
+        "decision_clarity": {
+          "status": "reviewed"
+        },
+        "generation_routing": {
+          "status": "reviewed"
+        },
+        "review_routing": {
+          "status": "reviewed"
+        },
+        "consistency": {
+          "status": "reviewed"
+        },
+        "attribution": {
+          "status": "reviewed"
+        },
+        "examples_and_evidence": {
+          "status": "reviewed"
+        },
+        "model_behavior": {
+          "status": "reviewed"
+        }
+      },
+      "highest_severity": "note",
+      "rationale": "The statement, scope, strength, routes, attribution, relationships, and examples are coherent for the admitted configurations.",
+      "evidence": [
+        "docs/policies/POL-0011-encapsulate-messy-constructs.md",
+        "the attribution locator declared in the policy frontmatter"
+      ],
+      "related_ids": [],
+      "change": null,
+      "follow_up_issue": null,
+      "finding_status": "resolved"
+    },
+    {
+      "id": "POL-0016",
+      "disposition": "keep",
+      "dimensions": {
+        "technical_truth": {
+          "status": "reviewed"
+        },
+        "strength": {
+          "status": "reviewed"
+        },
+        "scope": {
+          "status": "reviewed"
+        },
+        "decision_clarity": {
+          "status": "reviewed"
+        },
+        "generation_routing": {
+          "status": "reviewed"
+        },
+        "review_routing": {
+          "status": "reviewed"
+        },
+        "consistency": {
+          "status": "reviewed"
+        },
+        "attribution": {
+          "status": "reviewed"
+        },
+        "examples_and_evidence": {
+          "status": "reviewed"
+        },
+        "model_behavior": {
+          "status": "reviewed"
+        }
+      },
+      "highest_severity": "note",
+      "rationale": "The statement, scope, strength, routes, attribution, relationships, and examples are coherent for the admitted configurations.",
+      "evidence": [
+        "docs/policies/POL-0016-single-instance-is-passed-in.md",
+        "the attribution locator declared in the policy frontmatter"
+      ],
+      "related_ids": [],
+      "change": null,
+      "follow_up_issue": null,
+      "finding_status": "resolved"
+    },
+    {
+      "id": "POL-0018",
+      "disposition": "keep",
+      "dimensions": {
+        "technical_truth": {
+          "status": "reviewed"
+        },
+        "strength": {
+          "status": "reviewed"
+        },
+        "scope": {
+          "status": "reviewed"
+        },
+        "decision_clarity": {
+          "status": "reviewed"
+        },
+        "generation_routing": {
+          "status": "reviewed"
+        },
+        "review_routing": {
+          "status": "reviewed"
+        },
+        "consistency": {
+          "status": "reviewed"
+        },
+        "attribution": {
+          "status": "reviewed"
+        },
+        "examples_and_evidence": {
+          "status": "reviewed"
+        },
+        "model_behavior": {
+          "status": "reviewed"
+        }
+      },
+      "highest_severity": "note",
+      "rationale": "The statement, scope, strength, routes, attribution, relationships, and examples are coherent for the admitted configurations.",
+      "evidence": [
+        "docs/policies/POL-0018-structural-precondition-wrapper.md",
+        "the attribution locator declared in the policy frontmatter"
+      ],
+      "related_ids": [],
+      "change": null,
+      "follow_up_issue": null,
+      "finding_status": "resolved"
+    },
+    {
+      "id": "POL-0019",
+      "disposition": "keep",
+      "dimensions": {
+        "technical_truth": {
+          "status": "reviewed"
+        },
+        "strength": {
+          "status": "reviewed"
+        },
+        "scope": {
+          "status": "reviewed"
+        },
+        "decision_clarity": {
+          "status": "reviewed"
+        },
+        "generation_routing": {
+          "status": "reviewed"
+        },
+        "review_routing": {
+          "status": "reviewed"
+        },
+        "consistency": {
+          "status": "reviewed"
+        },
+        "attribution": {
+          "status": "reviewed"
+        },
+        "examples_and_evidence": {
+          "status": "reviewed"
+        },
+        "model_behavior": {
+          "status": "reviewed"
+        }
+      },
+      "highest_severity": "note",
+      "rationale": "The statement, scope, strength, routes, attribution, relationships, and examples are coherent for the admitted configurations.",
+      "evidence": [
+        "docs/policies/POL-0019-preconditions-asserted-not-gsl.md",
+        "the attribution locator declared in the policy frontmatter"
+      ],
+      "related_ids": [],
+      "change": null,
+      "follow_up_issue": null,
+      "finding_status": "resolved"
+    },
+    {
+      "id": "POL-0020",
+      "disposition": "keep",
+      "dimensions": {
+        "technical_truth": {
+          "status": "reviewed"
+        },
+        "strength": {
+          "status": "reviewed"
+        },
+        "scope": {
+          "status": "reviewed"
+        },
+        "decision_clarity": {
+          "status": "reviewed"
+        },
+        "generation_routing": {
+          "status": "reviewed"
+        },
+        "review_routing": {
+          "status": "reviewed"
+        },
+        "consistency": {
+          "status": "reviewed"
+        },
+        "attribution": {
+          "status": "reviewed"
+        },
+        "examples_and_evidence": {
+          "status": "reviewed"
+        },
+        "model_behavior": {
+          "status": "reviewed"
+        }
+      },
+      "highest_severity": "note",
+      "rationale": "The statement, scope, strength, routes, attribution, relationships, and examples are coherent for the admitted configurations.",
+      "evidence": [
+        "docs/policies/POL-0020-postcondition-in-return-type.md",
+        "the attribution locator declared in the policy frontmatter"
+      ],
+      "related_ids": [],
+      "change": null,
+      "follow_up_issue": null,
+      "finding_status": "resolved"
+    },
+    {
+      "id": "POL-0026",
+      "disposition": "keep",
+      "dimensions": {
+        "technical_truth": {
+          "status": "reviewed"
+        },
+        "strength": {
+          "status": "reviewed"
+        },
+        "scope": {
+          "status": "reviewed"
+        },
+        "decision_clarity": {
+          "status": "reviewed"
+        },
+        "generation_routing": {
+          "status": "reviewed"
+        },
+        "review_routing": {
+          "status": "reviewed"
+        },
+        "consistency": {
+          "status": "reviewed"
+        },
+        "attribution": {
+          "status": "reviewed"
+        },
+        "examples_and_evidence": {
+          "status": "reviewed"
+        },
+        "model_behavior": {
+          "status": "reviewed"
+        }
+      },
+      "highest_severity": "note",
+      "rationale": "The statement, scope, strength, routes, attribution, relationships, and examples are coherent for the admitted configurations.",
+      "evidence": [
+        "docs/policies/POL-0026-abi-boundary-is-c-shaped.md",
+        "the attribution locator declared in the policy frontmatter"
+      ],
+      "related_ids": [],
+      "change": null,
+      "follow_up_issue": null,
+      "finding_status": "resolved"
+    },
+    {
+      "id": "POL-0027",
+      "disposition": "keep",
+      "dimensions": {
+        "technical_truth": {
+          "status": "reviewed"
+        },
+        "strength": {
+          "status": "reviewed"
+        },
+        "scope": {
+          "status": "reviewed"
+        },
+        "decision_clarity": {
+          "status": "reviewed"
+        },
+        "generation_routing": {
+          "status": "reviewed"
+        },
+        "review_routing": {
+          "status": "reviewed"
+        },
+        "consistency": {
+          "status": "reviewed"
+        },
+        "attribution": {
+          "status": "reviewed"
+        },
+        "examples_and_evidence": {
+          "status": "reviewed"
+        },
+        "model_behavior": {
+          "status": "reviewed"
+        }
+      },
+      "highest_severity": "note",
+      "rationale": "The statement, scope, strength, routes, attribution, relationships, and examples are coherent for the admitted configurations.",
+      "evidence": [
+        "docs/policies/POL-0027-pimpl-for-stable-abi.md",
+        "the attribution locator declared in the policy frontmatter"
+      ],
+      "related_ids": [],
+      "change": null,
+      "follow_up_issue": null,
+      "finding_status": "resolved"
+    },
+    {
+      "id": "POL-0028",
+      "disposition": "keep",
+      "dimensions": {
+        "technical_truth": {
+          "status": "reviewed"
+        },
+        "strength": {
+          "status": "reviewed"
+        },
+        "scope": {
+          "status": "reviewed"
+        },
+        "decision_clarity": {
+          "status": "reviewed"
+        },
+        "generation_routing": {
+          "status": "reviewed"
+        },
+        "review_routing": {
+          "status": "reviewed"
+        },
+        "consistency": {
+          "status": "reviewed"
+        },
+        "attribution": {
+          "status": "reviewed"
+        },
+        "examples_and_evidence": {
+          "status": "reviewed"
+        },
+        "model_behavior": {
+          "status": "reviewed"
+        }
+      },
+      "highest_severity": "note",
+      "rationale": "The statement, scope, strength, routes, attribution, relationships, and examples are coherent for the admitted configurations.",
+      "evidence": [
+        "docs/policies/POL-0028-encapsulate-rule-violations.md",
+        "the attribution locator declared in the policy frontmatter"
+      ],
+      "related_ids": [],
+      "change": null,
+      "follow_up_issue": null,
+      "finding_status": "resolved"
+    },
+    {
+      "id": "POL-0032",
+      "disposition": "keep",
+      "dimensions": {
+        "technical_truth": {
+          "status": "reviewed"
+        },
+        "strength": {
+          "status": "reviewed"
+        },
+        "scope": {
+          "status": "reviewed"
+        },
+        "decision_clarity": {
+          "status": "reviewed"
+        },
+        "generation_routing": {
+          "status": "reviewed"
+        },
+        "review_routing": {
+          "status": "reviewed"
+        },
+        "consistency": {
+          "status": "reviewed"
+        },
+        "attribution": {
+          "status": "reviewed"
+        },
+        "examples_and_evidence": {
+          "status": "reviewed"
+        },
+        "model_behavior": {
+          "status": "reviewed"
+        }
+      },
+      "highest_severity": "note",
+      "rationale": "The statement, scope, strength, routes, attribution, relationships, and examples are coherent for the admitted configurations.",
+      "evidence": [
+        "docs/policies/POL-0032-noexcept-is-a-claim.md",
+        "the attribution locator declared in the policy frontmatter"
+      ],
+      "related_ids": [],
+      "change": null,
+      "follow_up_issue": null,
+      "finding_status": "resolved"
+    },
+    {
+      "id": "POL-0043",
+      "disposition": "keep",
+      "dimensions": {
+        "technical_truth": {
+          "status": "reviewed"
+        },
+        "strength": {
+          "status": "reviewed"
+        },
+        "scope": {
+          "status": "reviewed"
+        },
+        "decision_clarity": {
+          "status": "reviewed"
+        },
+        "generation_routing": {
+          "status": "reviewed"
+        },
+        "review_routing": {
+          "status": "reviewed"
+        },
+        "consistency": {
+          "status": "reviewed"
+        },
+        "attribution": {
+          "status": "reviewed"
+        },
+        "examples_and_evidence": {
+          "status": "reviewed"
+        },
+        "model_behavior": {
+          "status": "reviewed"
+        }
+      },
+      "highest_severity": "note",
+      "rationale": "The statement, scope, strength, routes, attribution, relationships, and examples are coherent for the admitted configurations.",
+      "evidence": [
+        "docs/policies/POL-0043-c-string-converted-on-entry.md",
+        "the attribution locator declared in the policy frontmatter"
+      ],
+      "related_ids": [],
+      "change": null,
+      "follow_up_issue": null,
+      "finding_status": "resolved"
+    },
+    {
+      "id": "POL-0122",
+      "disposition": "keep",
+      "dimensions": {
+        "technical_truth": {
+          "status": "reviewed"
+        },
+        "strength": {
+          "status": "reviewed"
+        },
+        "scope": {
+          "status": "reviewed"
+        },
+        "decision_clarity": {
+          "status": "reviewed"
+        },
+        "generation_routing": {
+          "status": "reviewed"
+        },
+        "review_routing": {
+          "status": "reviewed"
+        },
+        "consistency": {
+          "status": "reviewed"
+        },
+        "attribution": {
+          "status": "reviewed"
+        },
+        "examples_and_evidence": {
+          "status": "reviewed"
+        },
+        "model_behavior": {
+          "status": "reviewed"
+        }
+      },
+      "highest_severity": "note",
+      "rationale": "The statement, scope, strength, routes, attribution, relationships, and examples are coherent for the admitted configurations.",
+      "evidence": [
+        "docs/policies/POL-0122-no-similar-looking-names.md",
+        "the attribution locator declared in the policy frontmatter"
+      ],
+      "related_ids": [],
+      "change": null,
+      "follow_up_issue": null,
+      "finding_status": "resolved"
+    },
+    {
+      "id": "POL-0183",
+      "disposition": "keep",
+      "dimensions": {
+        "technical_truth": {
+          "status": "reviewed"
+        },
+        "strength": {
+          "status": "reviewed"
+        },
+        "scope": {
+          "status": "reviewed"
+        },
+        "decision_clarity": {
+          "status": "reviewed"
+        },
+        "generation_routing": {
+          "status": "reviewed"
+        },
+        "review_routing": {
+          "status": "reviewed"
+        },
+        "consistency": {
+          "status": "reviewed"
+        },
+        "attribution": {
+          "status": "reviewed"
+        },
+        "examples_and_evidence": {
+          "status": "reviewed"
+        },
+        "model_behavior": {
+          "status": "reviewed"
+        }
+      },
+      "highest_severity": "note",
+      "rationale": "The statement, scope, strength, routes, attribution, relationships, and examples are coherent for the admitted configurations.",
+      "evidence": [
+        "docs/policies/POL-0183-failure-mechanism.md",
+        "the attribution locator declared in the policy frontmatter"
+      ],
+      "related_ids": [],
+      "change": null,
+      "follow_up_issue": null,
+      "finding_status": "resolved"
+    },
+    {
+      "id": "POL-0184",
+      "disposition": "keep",
+      "dimensions": {
+        "technical_truth": {
+          "status": "reviewed"
+        },
+        "strength": {
+          "status": "reviewed"
+        },
+        "scope": {
+          "status": "reviewed"
+        },
+        "decision_clarity": {
+          "status": "reviewed"
+        },
+        "generation_routing": {
+          "status": "reviewed"
+        },
+        "review_routing": {
+          "status": "reviewed"
+        },
+        "consistency": {
+          "status": "reviewed"
+        },
+        "attribution": {
+          "status": "reviewed"
+        },
+        "examples_and_evidence": {
+          "status": "reviewed"
+        },
+        "model_behavior": {
+          "status": "reviewed"
+        }
+      },
+      "highest_severity": "note",
+      "rationale": "The statement, scope, strength, routes, attribution, relationships, and examples are coherent for the admitted configurations.",
+      "evidence": [
+        "docs/policies/POL-0184-exceptions-are-exceptional.md",
+        "the attribution locator declared in the policy frontmatter"
+      ],
+      "related_ids": [],
+      "change": null,
+      "follow_up_issue": null,
+      "finding_status": "resolved"
+    },
+    {
+      "id": "POL-0185",
+      "disposition": "keep",
+      "dimensions": {
+        "technical_truth": {
+          "status": "reviewed"
+        },
+        "strength": {
+          "status": "reviewed"
+        },
+        "scope": {
+          "status": "reviewed"
+        },
+        "decision_clarity": {
+          "status": "reviewed"
+        },
+        "generation_routing": {
+          "status": "reviewed"
+        },
+        "review_routing": {
+          "status": "reviewed"
+        },
+        "consistency": {
+          "status": "reviewed"
+        },
+        "attribution": {
+          "status": "reviewed"
+        },
+        "examples_and_evidence": {
+          "status": "reviewed"
+        },
+        "model_behavior": {
+          "status": "reviewed"
+        }
+      },
+      "highest_severity": "note",
+      "rationale": "The statement, scope, strength, routes, attribution, relationships, and examples are coherent for the admitted configurations.",
+      "evidence": [
+        "docs/policies/POL-0185-no-throw-while-owning.md",
+        "the attribution locator declared in the policy frontmatter"
+      ],
+      "related_ids": [],
+      "change": null,
+      "follow_up_issue": null,
+      "finding_status": "resolved"
+    },
+    {
+      "id": "POL-0186",
+      "disposition": "revise",
+      "dimensions": {
+        "technical_truth": {
+          "status": "reviewed"
+        },
+        "strength": {
+          "status": "finding",
+          "reason": "Standard exception types can be purpose-appropriate; every failure does not require a new class."
+        },
+        "scope": {
+          "status": "reviewed"
+        },
+        "decision_clarity": {
+          "status": "reviewed"
+        },
+        "generation_routing": {
+          "status": "reviewed"
+        },
+        "review_routing": {
+          "status": "reviewed"
+        },
+        "consistency": {
+          "status": "reviewed"
+        },
+        "attribution": {
+          "status": "reviewed"
+        },
+        "examples_and_evidence": {
+          "status": "reviewed"
+        },
+        "model_behavior": {
+          "status": "reviewed"
+        }
+      },
+      "highest_severity": "minor",
+      "rationale": "The policy decision remains applicable after the resolved correction.",
+      "evidence": [
+        "docs/policies/POL-0186-exception-types-and-catching.md",
+        "the attribution locator declared in the policy frontmatter"
+      ],
+      "related_ids": [],
+      "change": {
+        "files": [
+          "docs/policies/POL-0186-exception-types-and-catching.md"
+        ],
+        "commit": "this commit"
+      },
+      "follow_up_issue": null,
+      "finding_status": "resolved"
+    },
+    {
+      "id": "POL-0187",
+      "disposition": "keep",
+      "dimensions": {
+        "technical_truth": {
+          "status": "reviewed"
+        },
+        "strength": {
+          "status": "reviewed"
+        },
+        "scope": {
+          "status": "reviewed"
+        },
+        "decision_clarity": {
+          "status": "reviewed"
+        },
+        "generation_routing": {
+          "status": "reviewed"
+        },
+        "review_routing": {
+          "status": "reviewed"
+        },
+        "consistency": {
+          "status": "reviewed"
+        },
+        "attribution": {
+          "status": "reviewed"
+        },
+        "examples_and_evidence": {
+          "status": "reviewed"
+        },
+        "model_behavior": {
+          "status": "reviewed"
+        }
+      },
+      "highest_severity": "note",
+      "rationale": "The statement, scope, strength, routes, attribution, relationships, and examples are coherent for the admitted configurations.",
+      "evidence": [
+        "docs/policies/POL-0187-translate-exceptions-once.md",
+        "the attribution locator declared in the policy frontmatter"
+      ],
+      "related_ids": [],
+      "change": null,
+      "follow_up_issue": null,
+      "finding_status": "resolved"
+    },
+    {
+      "id": "POL-0189",
+      "disposition": "keep",
+      "dimensions": {
+        "technical_truth": {
+          "status": "reviewed"
+        },
+        "strength": {
+          "status": "reviewed"
+        },
+        "scope": {
+          "status": "reviewed"
+        },
+        "decision_clarity": {
+          "status": "reviewed"
+        },
+        "generation_routing": {
+          "status": "reviewed"
+        },
+        "review_routing": {
+          "status": "reviewed"
+        },
+        "consistency": {
+          "status": "reviewed"
+        },
+        "attribution": {
+          "status": "reviewed"
+        },
+        "examples_and_evidence": {
+          "status": "reviewed"
+        },
+        "model_behavior": {
+          "status": "reviewed"
+        }
+      },
+      "highest_severity": "note",
+      "rationale": "The statement, scope, strength, routes, attribution, relationships, and examples are coherent for the admitted configurations.",
+      "evidence": [
+        "docs/policies/POL-0189-scope-guard-for-cleanup.md",
+        "the attribution locator declared in the policy frontmatter"
+      ],
+      "related_ids": [],
+      "change": null,
+      "follow_up_issue": null,
+      "finding_status": "resolved"
+    },
+    {
+      "id": "POL-0190",
+      "disposition": "keep",
+      "dimensions": {
+        "technical_truth": {
+          "status": "reviewed"
+        },
+        "strength": {
+          "status": "reviewed"
+        },
+        "scope": {
+          "status": "reviewed"
+        },
+        "decision_clarity": {
+          "status": "reviewed"
+        },
+        "generation_routing": {
+          "status": "reviewed"
+        },
+        "review_routing": {
+          "status": "reviewed"
+        },
+        "consistency": {
+          "status": "reviewed"
+        },
+        "attribution": {
+          "status": "reviewed"
+        },
+        "examples_and_evidence": {
+          "status": "reviewed"
+        },
+        "model_behavior": {
+          "status": "reviewed"
+        }
+      },
+      "highest_severity": "note",
+      "rationale": "The statement, scope, strength, routes, attribution, relationships, and examples are coherent for the admitted configurations.",
+      "evidence": [
+        "docs/policies/POL-0190-exception-free-module-convention.md",
+        "the attribution locator declared in the policy frontmatter"
+      ],
+      "related_ids": [],
+      "change": null,
+      "follow_up_issue": null,
+      "finding_status": "resolved"
+    },
+    {
+      "id": "POL-0191",
+      "disposition": "keep",
+      "dimensions": {
+        "technical_truth": {
+          "status": "reviewed"
+        },
+        "strength": {
+          "status": "reviewed"
+        },
+        "scope": {
+          "status": "reviewed"
+        },
+        "decision_clarity": {
+          "status": "reviewed"
+        },
+        "generation_routing": {
+          "status": "reviewed"
+        },
+        "review_routing": {
+          "status": "reviewed"
+        },
+        "consistency": {
+          "status": "reviewed"
+        },
+        "attribution": {
+          "status": "reviewed"
+        },
+        "examples_and_evidence": {
+          "status": "reviewed"
+        },
+        "model_behavior": {
+          "status": "reviewed"
+        }
+      },
+      "highest_severity": "note",
+      "rationale": "The statement, scope, strength, routes, attribution, relationships, and examples are coherent for the admitted configurations.",
+      "evidence": [
+        "docs/policies/POL-0191-no-error-state-in-globals.md",
+        "the attribution locator declared in the policy frontmatter"
+      ],
+      "related_ids": [],
+      "change": null,
+      "follow_up_issue": null,
+      "finding_status": "resolved"
+    },
+    {
+      "id": "POL-0192",
+      "disposition": "keep",
+      "dimensions": {
+        "technical_truth": {
+          "status": "reviewed"
+        },
+        "strength": {
+          "status": "reviewed"
+        },
+        "scope": {
+          "status": "reviewed"
+        },
+        "decision_clarity": {
+          "status": "reviewed"
+        },
+        "generation_routing": {
+          "status": "reviewed"
+        },
+        "review_routing": {
+          "status": "reviewed"
+        },
+        "consistency": {
+          "status": "reviewed"
+        },
+        "attribution": {
+          "status": "reviewed"
+        },
+        "examples_and_evidence": {
+          "status": "reviewed"
+        },
+        "model_behavior": {
+          "status": "reviewed"
+        }
+      },
+      "highest_severity": "note",
+      "rationale": "The statement, scope, strength, routes, attribution, relationships, and examples are coherent for the admitted configurations.",
+      "evidence": [
+        "docs/policies/POL-0192-no-exception-specifications.md",
+        "the attribution locator declared in the policy frontmatter"
+      ],
+      "related_ids": [],
+      "change": null,
+      "follow_up_issue": null,
+      "finding_status": "resolved"
+    },
+    {
+      "id": "POL-0193",
+      "disposition": "keep",
+      "dimensions": {
+        "technical_truth": {
+          "status": "reviewed"
+        },
+        "strength": {
+          "status": "reviewed"
+        },
+        "scope": {
+          "status": "reviewed"
+        },
+        "decision_clarity": {
+          "status": "reviewed"
+        },
+        "generation_routing": {
+          "status": "reviewed"
+        },
+        "review_routing": {
+          "status": "reviewed"
+        },
+        "consistency": {
+          "status": "reviewed"
+        },
+        "attribution": {
+          "status": "reviewed"
+        },
+        "examples_and_evidence": {
+          "status": "reviewed"
+        },
+        "model_behavior": {
+          "status": "reviewed"
+        }
+      },
+      "highest_severity": "note",
+      "rationale": "The statement, scope, strength, routes, attribution, relationships, and examples are coherent for the admitted configurations.",
+      "evidence": [
+        "docs/policies/POL-0193-no-setjmp.md",
+        "the attribution locator declared in the policy frontmatter"
+      ],
+      "related_ids": [],
+      "change": null,
+      "follow_up_issue": null,
+      "finding_status": "resolved"
+    },
+    {
+      "id": "POL-0194",
+      "disposition": "keep",
+      "dimensions": {
+        "technical_truth": {
+          "status": "reviewed"
+        },
+        "strength": {
+          "status": "reviewed"
+        },
+        "scope": {
+          "status": "reviewed"
+        },
+        "decision_clarity": {
+          "status": "reviewed"
+        },
+        "generation_routing": {
+          "status": "reviewed"
+        },
+        "review_routing": {
+          "status": "reviewed"
+        },
+        "consistency": {
+          "status": "reviewed"
+        },
+        "attribution": {
+          "status": "reviewed"
+        },
+        "examples_and_evidence": {
+          "status": "reviewed"
+        },
+        "model_behavior": {
+          "status": "reviewed"
+        }
+      },
+      "highest_severity": "note",
+      "rationale": "The statement, scope, strength, routes, attribution, relationships, and examples are coherent for the admitted configurations.",
+      "evidence": [
+        "docs/policies/POL-0194-reading-validates.md",
+        "the attribution locator declared in the policy frontmatter"
+      ],
+      "related_ids": [],
+      "change": null,
+      "follow_up_issue": null,
+      "finding_status": "resolved"
+    },
+    {
+      "id": "POL-0211",
+      "disposition": "keep",
+      "dimensions": {
+        "technical_truth": {
+          "status": "reviewed"
+        },
+        "strength": {
+          "status": "reviewed"
+        },
+        "scope": {
+          "status": "reviewed"
+        },
+        "decision_clarity": {
+          "status": "reviewed"
+        },
+        "generation_routing": {
+          "status": "reviewed"
+        },
+        "review_routing": {
+          "status": "reviewed"
+        },
+        "consistency": {
+          "status": "reviewed"
+        },
+        "attribution": {
+          "status": "reviewed"
+        },
+        "examples_and_evidence": {
+          "status": "reviewed"
+        },
+        "model_behavior": {
+          "status": "reviewed"
+        }
+      },
+      "highest_severity": "note",
+      "rationale": "The statement, scope, strength, routes, attribution, relationships, and examples are coherent for the admitted configurations.",
+      "evidence": [
+        "docs/policies/POL-0211-non-template-core-for-abi.md",
+        "the attribution locator declared in the policy frontmatter"
+      ],
+      "related_ids": [],
+      "change": null,
+      "follow_up_issue": null,
+      "finding_status": "resolved"
+    },
+    {
+      "id": "POL-0216",
+      "disposition": "revise",
+      "dimensions": {
+        "technical_truth": {
+          "status": "finding",
+          "reason": "Valid C is not necessarily valid C++ and can have different language semantics."
+        },
+        "strength": {
+          "status": "reviewed"
+        },
+        "scope": {
+          "status": "reviewed"
+        },
+        "decision_clarity": {
+          "status": "reviewed"
+        },
+        "generation_routing": {
+          "status": "reviewed"
+        },
+        "review_routing": {
+          "status": "reviewed"
+        },
+        "consistency": {
+          "status": "reviewed"
+        },
+        "attribution": {
+          "status": "reviewed"
+        },
+        "examples_and_evidence": {
+          "status": "reviewed"
+        },
+        "model_behavior": {
+          "status": "reviewed"
+        }
+      },
+      "highest_severity": "major",
+      "rationale": "The policy decision remains applicable after the resolved correction.",
+      "evidence": [
+        "docs/policies/POL-0216-c-code-enters-through-a-wrapper.md",
+        "the attribution locator declared in the policy frontmatter"
+      ],
+      "related_ids": [],
+      "change": {
+        "files": [
+          "docs/policies/POL-0216-c-code-enters-through-a-wrapper.md"
+        ],
+        "commit": "this commit"
+      },
+      "follow_up_issue": null,
+      "finding_status": "resolved"
+    },
+    {
+      "id": "POL-0217",
+      "disposition": "keep",
+      "dimensions": {
+        "technical_truth": {
+          "status": "reviewed"
+        },
+        "strength": {
+          "status": "reviewed"
+        },
+        "scope": {
+          "status": "reviewed"
+        },
+        "decision_clarity": {
+          "status": "reviewed"
+        },
+        "generation_routing": {
+          "status": "reviewed"
+        },
+        "review_routing": {
+          "status": "reviewed"
+        },
+        "consistency": {
+          "status": "reviewed"
+        },
+        "attribution": {
+          "status": "reviewed"
+        },
+        "examples_and_evidence": {
+          "status": "reviewed"
+        },
+        "model_behavior": {
+          "status": "reviewed"
+        }
+      },
+      "highest_severity": "note",
+      "rationale": "The statement, scope, strength, routes, attribution, relationships, and examples are coherent for the admitted configurations.",
+      "evidence": [
+        "docs/policies/POL-0217-headers-declare-sources-define.md",
+        "the attribution locator declared in the policy frontmatter"
+      ],
+      "related_ids": [],
+      "change": null,
+      "follow_up_issue": null,
+      "finding_status": "resolved"
+    },
+    {
+      "id": "POL-0218",
+      "disposition": "keep",
+      "dimensions": {
+        "technical_truth": {
+          "status": "reviewed"
+        },
+        "strength": {
+          "status": "reviewed"
+        },
+        "scope": {
+          "status": "reviewed"
+        },
+        "decision_clarity": {
+          "status": "reviewed"
+        },
+        "generation_routing": {
+          "status": "reviewed"
+        },
+        "review_routing": {
+          "status": "reviewed"
+        },
+        "consistency": {
+          "status": "reviewed"
+        },
+        "attribution": {
+          "status": "reviewed"
+        },
+        "examples_and_evidence": {
+          "status": "reviewed"
+        },
+        "model_behavior": {
+          "status": "reviewed"
+        }
+      },
+      "highest_severity": "note",
+      "rationale": "The statement, scope, strength, routes, attribution, relationships, and examples are coherent for the admitted configurations.",
+      "evidence": [
+        "docs/policies/POL-0218-dependencies-form-a-dag.md",
+        "the attribution locator declared in the policy frontmatter"
+      ],
+      "related_ids": [],
+      "change": null,
+      "follow_up_issue": null,
+      "finding_status": "resolved"
+    },
+    {
+      "id": "POL-0219",
+      "disposition": "keep",
+      "dimensions": {
+        "technical_truth": {
+          "status": "reviewed"
+        },
+        "strength": {
+          "status": "reviewed"
+        },
+        "scope": {
+          "status": "reviewed"
+        },
+        "decision_clarity": {
+          "status": "reviewed"
+        },
+        "generation_routing": {
+          "status": "reviewed"
+        },
+        "review_routing": {
+          "status": "reviewed"
+        },
+        "consistency": {
+          "status": "reviewed"
+        },
+        "attribution": {
+          "status": "reviewed"
+        },
+        "examples_and_evidence": {
+          "status": "reviewed"
+        },
+        "model_behavior": {
+          "status": "reviewed"
+        }
+      },
+      "highest_severity": "note",
+      "rationale": "The statement, scope, strength, routes, attribution, relationships, and examples are coherent for the admitted configurations.",
+      "evidence": [
+        "docs/policies/POL-0219-reusable-parts-become-libraries.md",
+        "the attribution locator declared in the policy frontmatter"
+      ],
+      "related_ids": [],
+      "change": null,
+      "follow_up_issue": null,
+      "finding_status": "resolved"
+    },
+    {
+      "id": "POL-0228",
+      "disposition": "revise",
+      "dimensions": {
+        "technical_truth": {
+          "status": "reviewed"
+        },
+        "strength": {
+          "status": "reviewed"
+        },
+        "scope": {
+          "status": "finding",
+          "reason": "Logging every actual value can expose secrets, personal data, or unbounded payloads, and not every failure has a field."
+        },
+        "decision_clarity": {
+          "status": "reviewed"
+        },
+        "generation_routing": {
+          "status": "reviewed"
+        },
+        "review_routing": {
+          "status": "reviewed"
+        },
+        "consistency": {
+          "status": "reviewed"
+        },
+        "attribution": {
+          "status": "reviewed"
+        },
+        "examples_and_evidence": {
+          "status": "reviewed"
+        },
+        "model_behavior": {
+          "status": "reviewed"
+        }
+      },
+      "highest_severity": "major",
+      "rationale": "The policy decision remains applicable after the resolved correction.",
+      "evidence": [
+        "docs/policies/POL-0228-four-part-error-message.md",
+        "the attribution locator declared in the policy frontmatter"
+      ],
+      "related_ids": [],
+      "change": {
+        "files": [
+          "docs/policies/POL-0228-four-part-error-message.md"
+        ],
+        "commit": "this commit"
+      },
+      "follow_up_issue": null,
+      "finding_status": "resolved"
+    },
+    {
+      "id": "POL-0230",
+      "disposition": "keep",
+      "dimensions": {
+        "technical_truth": {
+          "status": "reviewed"
+        },
+        "strength": {
+          "status": "reviewed"
+        },
+        "scope": {
+          "status": "reviewed"
+        },
+        "decision_clarity": {
+          "status": "reviewed"
+        },
+        "generation_routing": {
+          "status": "reviewed"
+        },
+        "review_routing": {
+          "status": "reviewed"
+        },
+        "consistency": {
+          "status": "reviewed"
+        },
+        "attribution": {
+          "status": "reviewed"
+        },
+        "examples_and_evidence": {
+          "status": "reviewed"
+        },
+        "model_behavior": {
+          "status": "reviewed"
+        }
+      },
+      "highest_severity": "note",
+      "rationale": "The statement, scope, strength, routes, attribution, relationships, and examples are coherent for the admitted configurations.",
+      "evidence": [
+        "docs/policies/POL-0230-binding-layer-is-a-declared-escape-hatch.md",
+        "the attribution locator declared in the policy frontmatter"
+      ],
+      "related_ids": [],
+      "change": null,
+      "follow_up_issue": null,
+      "finding_status": "resolved"
+    },
+    {
+      "id": "POL-0233",
+      "disposition": "revise",
+      "dimensions": {
+        "technical_truth": {
+          "status": "reviewed"
+        },
+        "strength": {
+          "status": "reviewed"
+        },
+        "scope": {
+          "status": "finding",
+          "reason": "A foreign public API can legitimately follow its own naming convention through one explicit binding map."
+        },
+        "decision_clarity": {
+          "status": "reviewed"
+        },
+        "generation_routing": {
+          "status": "reviewed"
+        },
+        "review_routing": {
+          "status": "reviewed"
+        },
+        "consistency": {
+          "status": "reviewed"
+        },
+        "attribution": {
+          "status": "reviewed"
+        },
+        "examples_and_evidence": {
+          "status": "reviewed"
+        },
+        "model_behavior": {
+          "status": "reviewed"
+        }
+      },
+      "highest_severity": "minor",
+      "rationale": "The policy decision remains applicable after the resolved correction.",
+      "evidence": [
+        "docs/policies/POL-0233-names-cross-unchanged.md",
+        "the attribution locator declared in the policy frontmatter"
+      ],
+      "related_ids": [],
+      "change": {
+        "files": [
+          "docs/policies/POL-0233-names-cross-unchanged.md"
+        ],
+        "commit": "this commit"
+      },
+      "follow_up_issue": null,
+      "finding_status": "resolved"
+    },
+    {
+      "id": "POL-0234",
+      "disposition": "revise",
+      "dimensions": {
+        "technical_truth": {
+          "status": "finding",
+          "reason": "A public FFI callee cannot trust that all foreign callers performed validation; assertions may be compiled out."
+        },
+        "strength": {
+          "status": "reviewed"
+        },
+        "scope": {
+          "status": "reviewed"
+        },
+        "decision_clarity": {
+          "status": "reviewed"
+        },
+        "generation_routing": {
+          "status": "reviewed"
+        },
+        "review_routing": {
+          "status": "reviewed"
+        },
+        "consistency": {
+          "status": "reviewed"
+        },
+        "attribution": {
+          "status": "reviewed"
+        },
+        "examples_and_evidence": {
+          "status": "reviewed"
+        },
+        "model_behavior": {
+          "status": "reviewed"
+        }
+      },
+      "highest_severity": "major",
+      "rationale": "The policy decision remains applicable after the resolved correction.",
+      "evidence": [
+        "docs/policies/POL-0234-caller-validates-before-crossing.md",
+        "the attribution locator declared in the policy frontmatter"
+      ],
+      "related_ids": [],
+      "change": {
+        "files": [
+          "docs/policies/POL-0234-caller-validates-before-crossing.md"
+        ],
+        "commit": "this commit"
+      },
+      "follow_up_issue": null,
+      "finding_status": "resolved"
+    },
+    {
+      "id": "POL-0235",
+      "disposition": "revise",
+      "dimensions": {
+        "technical_truth": {
+          "status": "reviewed"
+        },
+        "strength": {
+          "status": "finding",
+          "reason": "NaN can be a legitimate documented numeric-domain value even though it must not encode absence."
+        },
+        "scope": {
+          "status": "reviewed"
+        },
+        "decision_clarity": {
+          "status": "reviewed"
+        },
+        "generation_routing": {
+          "status": "reviewed"
+        },
+        "review_routing": {
+          "status": "reviewed"
+        },
+        "consistency": {
+          "status": "reviewed"
+        },
+        "attribution": {
+          "status": "reviewed"
+        },
+        "examples_and_evidence": {
+          "status": "reviewed"
+        },
+        "model_behavior": {
+          "status": "reviewed"
+        }
+      },
+      "highest_severity": "minor",
+      "rationale": "The policy decision remains applicable after the resolved correction.",
+      "evidence": [
+        "docs/policies/POL-0235-absence-maps-to-absence.md",
+        "the attribution locator declared in the policy frontmatter"
+      ],
+      "related_ids": [],
+      "change": {
+        "files": [
+          "docs/policies/POL-0235-absence-maps-to-absence.md"
+        ],
+        "commit": "this commit"
+      },
+      "follow_up_issue": null,
+      "finding_status": "resolved"
+    },
+    {
+      "id": "POL-0236",
+      "disposition": "keep",
+      "dimensions": {
+        "technical_truth": {
+          "status": "reviewed"
+        },
+        "strength": {
+          "status": "reviewed"
+        },
+        "scope": {
+          "status": "reviewed"
+        },
+        "decision_clarity": {
+          "status": "reviewed"
+        },
+        "generation_routing": {
+          "status": "reviewed"
+        },
+        "review_routing": {
+          "status": "reviewed"
+        },
+        "consistency": {
+          "status": "reviewed"
+        },
+        "attribution": {
+          "status": "reviewed"
+        },
+        "examples_and_evidence": {
+          "status": "reviewed"
+        },
+        "model_behavior": {
+          "status": "reviewed"
+        }
+      },
+      "highest_severity": "note",
+      "rationale": "The statement, scope, strength, routes, attribution, relationships, and examples are coherent for the admitted configurations.",
+      "evidence": [
+        "docs/policies/POL-0236-units-convert-at-the-outer-boundary.md",
+        "the attribution locator declared in the policy frontmatter"
+      ],
+      "related_ids": [],
+      "change": null,
+      "follow_up_issue": null,
+      "finding_status": "resolved"
+    },
+    {
+      "id": "POL-0237",
+      "disposition": "keep",
+      "dimensions": {
+        "technical_truth": {
+          "status": "reviewed"
+        },
+        "strength": {
+          "status": "reviewed"
+        },
+        "scope": {
+          "status": "reviewed"
+        },
+        "decision_clarity": {
+          "status": "reviewed"
+        },
+        "generation_routing": {
+          "status": "reviewed"
+        },
+        "review_routing": {
+          "status": "reviewed"
+        },
+        "consistency": {
+          "status": "reviewed"
+        },
+        "attribution": {
+          "status": "reviewed"
+        },
+        "examples_and_evidence": {
+          "status": "reviewed"
+        },
+        "model_behavior": {
+          "status": "reviewed"
+        }
+      },
+      "highest_severity": "note",
+      "rationale": "The statement, scope, strength, routes, attribution, relationships, and examples are coherent for the admitted configurations.",
+      "evidence": [
+        "docs/policies/POL-0237-ffi-ownership-is-explicit.md",
+        "the attribution locator declared in the policy frontmatter"
+      ],
+      "related_ids": [],
+      "change": null,
+      "follow_up_issue": null,
+      "finding_status": "resolved"
+    },
+    {
+      "id": "POL-0238",
+      "disposition": "keep",
+      "dimensions": {
+        "technical_truth": {
+          "status": "reviewed"
+        },
+        "strength": {
+          "status": "reviewed"
+        },
+        "scope": {
+          "status": "reviewed"
+        },
+        "decision_clarity": {
+          "status": "reviewed"
+        },
+        "generation_routing": {
+          "status": "reviewed"
+        },
+        "review_routing": {
+          "status": "reviewed"
+        },
+        "consistency": {
+          "status": "reviewed"
+        },
+        "attribution": {
+          "status": "reviewed"
+        },
+        "examples_and_evidence": {
+          "status": "reviewed"
+        },
+        "model_behavior": {
+          "status": "reviewed"
+        }
+      },
+      "highest_severity": "note",
+      "rationale": "The statement, scope, strength, routes, attribution, relationships, and examples are coherent for the admitted configurations.",
+      "evidence": [
+        "docs/policies/POL-0238-shared-schema-has-one-source-of-truth.md",
+        "the attribution locator declared in the policy frontmatter"
+      ],
+      "related_ids": [],
+      "change": null,
+      "follow_up_issue": null,
+      "finding_status": "resolved"
+    },
+    {
+      "id": "POL-0239",
+      "disposition": "keep",
+      "dimensions": {
+        "technical_truth": {
+          "status": "reviewed"
+        },
+        "strength": {
+          "status": "reviewed"
+        },
+        "scope": {
+          "status": "reviewed"
+        },
+        "decision_clarity": {
+          "status": "reviewed"
+        },
+        "generation_routing": {
+          "status": "reviewed"
+        },
+        "review_routing": {
+          "status": "reviewed"
+        },
+        "consistency": {
+          "status": "reviewed"
+        },
+        "attribution": {
+          "status": "reviewed"
+        },
+        "examples_and_evidence": {
+          "status": "reviewed"
+        },
+        "model_behavior": {
+          "status": "reviewed"
+        }
+      },
+      "highest_severity": "note",
+      "rationale": "The statement, scope, strength, routes, attribution, relationships, and examples are coherent for the admitted configurations.",
+      "evidence": [
+        "docs/policies/POL-0239-wrapper-type-lives-at-its-layer.md",
+        "the attribution locator declared in the policy frontmatter"
+      ],
+      "related_ids": [],
+      "change": null,
+      "follow_up_issue": null,
+      "finding_status": "resolved"
+    }
+  ]
 }

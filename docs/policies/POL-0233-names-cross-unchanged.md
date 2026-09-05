@@ -7,7 +7,7 @@ attribution:
     locator: "FFI Conventions"
 ---
 
-# A name crosses the language boundary unchanged
+# Cross-language names are identical unless one explicit boundary mapping improves the public API
 
 `parse_layout` in Python is `parse_layout` in C++. No case conversion at the seam,
 no `_impl` shim, no `parseLayout` on one side.
@@ -22,7 +22,7 @@ PYBIND11_MODULE(proj, m) {
 from proj import parse_layout          # the same name, spelled the same way
 ```
 
-A renaming seam means every cross-language search returns half its hits and every
-stack trace changes vocabulary at the boundary. This is the reason the case table is
-mandated machine-wide rather than chosen per project: identical names across the
-boundary are only achievable if both languages already agree on case.
+Prefer identical names because they preserve searchability and stack-trace
+vocabulary. When the foreign language's established public convention requires a
+different spelling, declare that transformation once in the binding layer; do not
+scatter `_impl` aliases or ad hoc renames through either codebase.

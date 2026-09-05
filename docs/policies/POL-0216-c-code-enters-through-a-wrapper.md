@@ -8,11 +8,12 @@ attribution:
     upstream: ["CG CPL.1", "CG CPL.2", "CG CPL.3"]
 ---
 
-# C code is compiled as C++ and reached through a C++ wrapper
+# A C library remains C and is reached through one C++ wrapper
 
-Prefer a C++ library. Where C is unavoidable, keep the C source in the common subset
-of the two languages, compile it as C++, and give it one C++ wrapper that owns its
-resources and converts its errors. Callers never see the C API.
+Prefer a C++ library. Where C is unavoidable, compile the C source with its supported
+C compiler and link it through its declared C ABI. Give it one C++ wrapper that owns
+resources and converts errors; ordinary C++ callers do not see the raw C API. Do not
+assume valid C has the same meaning—or is valid at all—when compiled as C++.
 
 ```cpp
 class ClipperPaths {                     // the only code that touches clipper_*
