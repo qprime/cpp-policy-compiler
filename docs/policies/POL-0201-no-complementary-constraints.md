@@ -26,7 +26,8 @@ template <Formattable T>  void emit(const T& value);
 template <class T> requires (!Formattable<T>) void emit(const T& value);   // no
 ```
 
-The negated overload is not the complement the author intends: adding a third
-overload, or a type that satisfies neither predicate, changes which one is selected
-in ways that are hard to predict. `if constexpr` puts both branches in one function
-where the reader can see the whole decision.
+The negation is a real logical complement, but it scales poorly: adding a more
+specific overload changes the ordering problem, and diagnostics describe the
+negative implementation category rather than a positive semantic requirement.
+`if constexpr` keeps a true binary implementation choice together; independently
+meaningful cases get positive concepts.

@@ -8,11 +8,13 @@ attribution:
     upstream: ["CG I.4"]
 ---
 
-# A dimensioned scalar stays a primitive with a unit-suffixed name
+# A dimensioned scalar uses the lightest representation that prevents unit confusion
 
-Introduce a strong typedef only when both hold: two units of the same underlying
-type are genuinely confusable at a boundary, **and** arithmetic does not flow
-through the type. One without the other is not enough.
+Use a unit-suffixed primitive when local arithmetic is clear and interfaces cannot
+transpose like-typed quantities. Introduce a strong type when unit confusion or
+parameter transposition is a material interface risk. If arithmetic must preserve
+units, use a coherent units abstraction rather than a partial wrapper that callers
+repeatedly unwrap.
 
 ```cpp
 const double r_eff_mm = std::max(0.01, (bore_d_mm - tool_d_mm) * 0.5);       // clear
@@ -26,6 +28,6 @@ library — real infrastructure with real cost. A partial one produces ceremony
 without safety: every expression grows constructor calls, and the one operation
 you forgot to define sends the author back to the primitive anyway.
 
-Unit suffixes plus params structs already close the transposition hole that
-motivates wrapping, at a fraction of the cost. Reach for a strong typedef at a
-confusable boundary where the value is *carried*, not computed.
+Unit suffixes plus params structs often close the transposition hole at lower cost.
+They are naming conventions, however, not type-system enforcement; choose the
+stronger representation when an invalid unit combination should be ill-formed.

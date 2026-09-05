@@ -8,19 +8,21 @@ attribution:
     upstream: ["CG T.1", "CG T.2", "CG T.3"]
 ---
 
-# Write the concrete type; templatize when a third concrete caller forces it
+# Write the concrete type until a demonstrated generic requirement exists
 
-Two callers are two callers. Reach for a template when a third arrives, when the
-alternative is a runtime-typed interface that loses checking, or when the thing being
-written is genuinely a container or an algorithm over element types.
+Reach for a template when the operation is genuinely defined over a family of types
+and static polymorphism is part of its contract—for example a container, iterator
+algorithm, or constrained customization point. A caller count is evidence to
+inspect, not a semantic threshold: three unrelated callers do not create one
+abstraction, and two types can already establish a real generic operation.
 
 ```cpp
 double area_mm2(const ConvexPolygon& poly);       // one shape: concrete
 
-template <class Shape>                            // three callers, real variation
+template <class Shape>                            // demonstrated shape abstraction
 double area_mm2(const Shape& shape);
 ```
 
 A template's errors appear at instantiation, in the caller's file, naming types the
 author never wrote. That cost is worth paying for real genericity and is pure loss
-for a function with one or two call sites.
+for a function whose generic requirement is only hypothetical.

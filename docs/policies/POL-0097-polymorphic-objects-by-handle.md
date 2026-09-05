@@ -8,11 +8,13 @@ attribution:
     upstream: ["CG C.145", "CG C.152", "CG ES.63"]
 ---
 
-# A polymorphic object is only ever reached through a pointer or reference
+# A polymorphic base is passed and stored through a pointer or reference
 
-Store and pass `std::unique_ptr<Base>`, `Base&`, or `Base*`. Never a `Base` by
-value, never a container of `Base`, never an array of derived assigned to a base
-pointer.
+Store and pass a heterogeneous object as `std::unique_ptr<Base>`, `Base&`, or
+`Base*`. Do not pass a derived object through `Base` by value, store heterogeneous
+objects in a container of `Base`, or treat an array of derived objects as a base
+array. A concrete derived object can still be created and used by value when no
+base conversion is involved.
 
 ```cpp
 void run(const PostProcessor& post);                       // yes

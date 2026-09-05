@@ -8,11 +8,12 @@ attribution:
     upstream: ["CG T.60"]
 ---
 
-# A template depends on its parameters and on nothing else in scope
+# A template makes non-parameter dependencies explicit and stable
 
-Everything the body needs arrives through the template parameters, the function
-parameters, or a qualified name. No unqualified calls except deliberate customization
-points, and no reliance on names the instantiation context happens to provide.
+Everything the body needs arrives through template parameters, function parameters,
+or a qualified stable dependency. Use an unqualified dependent call only for a
+deliberate customization point; do not accidentally rely on names supplied by the
+instantiation context.
 
 ```cpp
 template <class Shape>

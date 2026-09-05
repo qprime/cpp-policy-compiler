@@ -1,14 +1,14 @@
 ---
 id: POL-0127
 kind: standard
-trigger: "declare a member function, or a parameter you only read"
+trigger: "declare a non-mutating member function or a borrowed parameter you only read"
 attribution:
   - source: cpp-convention/mechanisms.md
     locator: "6. Immutability"
     upstream: ["CG Con.2", "CG Con.3"]
 ---
 
-# A member function that does not mutate is `const`, and so is every parameter you only read
+# A non-mutating member function is `const`; a borrowed input is `const&`
 
 ```cpp
 class Tool {
@@ -22,5 +22,6 @@ void offset_in_place(Polygon& poly, double delta_mm);   // non-const: it writes
 
 Without `const` on the member function it cannot be called on a `const Tool`, so
 one missing qualifier forces callers to hold non-`const` handles all the way up.
-On a parameter, `const&` is what tells the caller their object comes back
-unchanged — the alternative is reading the body to find out.
+On a borrowed parameter, `const&` prevents mutation through that interface. A
+by-value parameter is already the callee's copy and need not be top-level `const`,
+especially when the implementation may move from it.
