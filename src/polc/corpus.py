@@ -112,7 +112,7 @@ def fingerprint(policies_dir: Path, standard_dir: Path, exemplars_dir: Path) -> 
 
 def overlay_fingerprint(project_path: Path, overlay_root: Path) -> str:
     contributions = [("project.md", project_path)]
-    for label in ("policies", "standard", "exemplars"):
+    for label in ("policies", "standard", "exemplars", "context"):
         root = overlay_root / label
         for path in root.rglob("*") if root.is_dir() else ():
             if path.is_file():

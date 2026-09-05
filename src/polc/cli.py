@@ -118,6 +118,7 @@ def _build_project_projection(
     exemplars_dir: Path,
     adapter: str | None,
     mode: ProjectionMode = ProjectionMode.GENERATION,
+    context_documents: dict[str, str] | None = None,
 ) -> tuple[Projection, list[Exclusion], Configuration, list[Exemplar]]:
     upstream_policies = load_corpus(policies_dir)
     upstream_topics = parse_manifest(policies_dir / "TOPICS.md")
@@ -195,6 +196,8 @@ def _build_project_projection(
         entry_name=adapters.entry_name(adapter),
         identity=identity,
         mode=mode,
+        context_documents=context_documents,
+        preserve_context=context_documents is None,
     )
     if not projection.topic_documents:
         raise PolcError(
@@ -286,6 +289,34 @@ def main(argv: list[str] | None = None) -> int:
     record_parser.add_argument("--out", required=True, type=Path)
     record_parser.add_argument("--quiet-period-ms", type=int, default=500)
     record_parser.add_argument("command_args", nargs=argparse.REMAINDER)
+    project_parser = subparsers.add_parser(
+        "project", help="maintain a paired target-project policy harness"
+    )
+    project_subparsers = project_parser.add_subparsers(
+        dest="project_command", required=True
+    )
+    for name, help_text in (
+        ("init", "initialize and build a managed harness"),
+        ("check", "validate generated output without writing"),
+        ("build", "rebuild both locked projections"),
+        ("diff", "preview the executing release"),
+        ("accept", "accept the executing release and rebuild"),
+    ):
+        sub = project_subparsers.add_parser(name, help=help_text)
+        sub.add_argument("--root", required=True, type=Path)
+        sub.add_argument("--policies", type=Path, default=Path("docs/policies"))
+        sub.add_argument("--standard", type=Path, default=Path("docs/standard"))
+        sub.add_argument("--exemplars", type=Path, default=Path("docs/exemplars"))
+        if name == "init":
+            sub.add_argument("--name")
+            sub.add_argument("--language-version", required=True, type=int)
+            sub.add_argument("--compiler", required=True)
+            sub.add_argument("--domain", required=True)
+            sub.add_argument("--adapter", choices=adapters.ADAPTERS)
+        elif name == "accept":
+            sub.add_argument(
+                "--adapter", choices=("neutral", *adapters.ADAPTERS)
+            )
     args = parser.parse_args(argv)
 
     if args.command == "eval":
@@ -312,6 +343,40 @@ def main(argv: list[str] | None = None) -> int:
             for message in exc.errors:
                 print(message, file=sys.stderr)
             return 1
+        return 0
+
+    if args.command == "project":
+        from . import project
+
+        inputs = project.Inputs(
+            args.root.resolve(),
+            args.policies.resolve(),
+            args.standard.resolve(),
+            args.exemplars.resolve(),
+        )
+        try:
+            if args.project_command == "init":
+                messages = project.init(
+                    inputs,
+                    args.name or args.root.resolve().name,
+                    args.language_version,
+                    args.compiler,
+                    args.domain,
+                    args.adapter,
+                )
+            else:
+                operation = getattr(project, args.project_command)
+                messages = (
+                    operation(inputs, args.adapter)
+                    if args.project_command == "accept"
+                    else operation(inputs)
+                )
+        except PolcError as exc:
+            for message in exc.errors:
+                print(message, file=sys.stderr)
+            return 1
+        for message in messages:
+            print(message)
         return 0
 
     kept: tuple[str, ...] = ()

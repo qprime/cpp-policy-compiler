@@ -64,7 +64,7 @@ def _description(
 def _skill_frontmatter(
     config: Configuration, map_titles: tuple[str, ...], mode: ProjectionMode
 ) -> str:
-    name = _slugify(config.name)
+    name = _slugify(f"{config.name}-{mode.value}")
     if not name:
         raise PolcError(
             [
@@ -89,6 +89,19 @@ class Adapter:
 
 ADAPTERS_BY_NAME = {"claude-code": Adapter("SKILL.md", _skill_frontmatter, None)}
 ADAPTERS = tuple(ADAPTERS_BY_NAME)
+
+
+def destinations(adapter: str | None) -> dict[ProjectionMode, Path]:
+    if adapter is None:
+        return {
+            ProjectionMode.GENERATION: Path("policy/generation"),
+            ProjectionMode.REVIEW: Path("policy/review"),
+        }
+    _lookup(adapter)
+    return {
+        ProjectionMode.GENERATION: Path(".claude/skills/cpp-policy-generation"),
+        ProjectionMode.REVIEW: Path(".claude/skills/cpp-policy-review"),
+    }
 
 
 def _lookup(adapter: str) -> Adapter:

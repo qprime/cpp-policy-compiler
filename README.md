@@ -53,6 +53,24 @@ explicit command. Normal consumer projects run neither; the tooling exists to
 measure whether the `polc` harness works. The benchmark format and initial
 experiment live under [`benchmarks/`](benchmarks/).
 
+For a checked-in, project-maintained harness, initialize both modes together:
+
+```
+uv run polc project init \
+  --root ../my-project \
+  --language-version 20 --compiler gcc --domain application \
+  --policies docs/policies --standard docs/standard --exemplars docs/exemplars
+```
+
+This creates authored inputs under `.polc/` and managed neutral projections at
+`policy/generation` and `policy/review`. Add `--adapter claude-code` to emit two
+independently named skills under `.claude/skills/` instead. `project check` is a
+read-only CI drift check, `project build` incorporates local policy or context
+edits without changing the release lock, `project diff` previews a new compiler
+or corpus, and `project accept` updates the lock and both projections together.
+Pass `project accept --adapter neutral|claude-code` to switch managed layouts.
+The explicit corpus paths are temporary until packaged corpus discovery lands.
+
 Point your project's own instructions at `index.md` and the model routes itself
 from there. For Claude Code, skip that step:
 
@@ -160,8 +178,8 @@ reads it, and nothing in it reaches a projection.
   ships is text and a map.
 
 The [project harness design](https://github.com/qprime/cpp-policy-compiler/issues/17)
-describes the next boundary: a target-owned overlay, separate generation and review
-projections, and coordinated text and tool distribution.
+describes the target-owned overlay, separate generation and review projections,
+and coordinated text and tool distribution.
 
 ## Status
 
@@ -169,9 +187,8 @@ Early, and under active design. The corpus holds 247 policies, 29 standard
 entries, and 14 exemplars, and two configurations are authored. The compiler
 validates and renders both end to end.
 
-The compile path has no test harness yet — changes are verified by building
-both configurations and reading the output. Treat the projection format as
-unstable until it does.
+The compile and managed-project paths have automated tests. Treat the projection
+format as unstable until its versioned packaging contract lands.
 
 ## License
 

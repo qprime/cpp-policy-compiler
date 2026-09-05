@@ -114,6 +114,8 @@ class Projection:
     omitted_standard_documents: tuple[str, ...]
     dropped_references: tuple[str, ...]
     routing_coverage: tuple[int, int]
+    context_documents: dict[str, str] | None = None
+    preserve_context: bool = True
 
     def documents(self) -> dict[str, str]:
         documents = {self.entry_name: self.entry}
@@ -125,7 +127,9 @@ class Projection:
             documents[f"{slug}.md"] = text
         if self.exemplars is not None:
             documents["exemplars.md"] = self.exemplars
-        documents.update(SEEDS)
+        documents.update(
+            SEEDS if self.context_documents is None else self.context_documents
+        )
         documents["configuration.md"] = self.identity.configuration_source
         return documents
 
@@ -643,6 +647,8 @@ def render(
     entry_name: str,
     identity: Identity,
     mode: ProjectionMode,
+    context_documents: dict[str, str] | None = None,
+    preserve_context: bool = True,
 ) -> Projection:
     included_by_id = {p.id: p for p in included}
     home_topic = {member: topic for topic in topics for member in topic.members}
@@ -781,6 +787,8 @@ def render(
         omitted_standard_documents=tuple(omitted_documents),
         dropped_references=tuple(dropped),
         routing_coverage=(routed, routeable),
+        context_documents=context_documents,
+        preserve_context=preserve_context,
     )
 
 
@@ -798,7 +806,11 @@ def write(
                 path.unlink()
     kept: list[str] = []
     for name, text in documents.items():
-        if name in SEED_DOCUMENTS and (out_dir / name).is_file():
+        if (
+            projection.preserve_context
+            and name in SEED_DOCUMENTS
+            and (out_dir / name).is_file()
+        ):
             kept.append(name)
             continue
         (out_dir / name).write_text(text, encoding="utf-8")
