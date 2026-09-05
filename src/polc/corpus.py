@@ -76,6 +76,15 @@ def _parse_policy(path: Path) -> Policy:
     )
 
 
+def _fingerprint(contributions: list[tuple[str, Path]]) -> str:
+    digest = hashlib.sha256()
+    for key, path in sorted(contributions):
+        digest.update(key.encode("utf-8"))
+        digest.update(b"\0")
+        digest.update(path.read_bytes())
+    return f"sha256:{digest.hexdigest()}"
+
+
 def fingerprint(policies_dir: Path, standard_dir: Path, exemplars_dir: Path) -> str:
     contributions: list[tuple[str, Path]] = []
     roots = (
@@ -89,12 +98,19 @@ def fingerprint(policies_dir: Path, standard_dir: Path, exemplars_dir: Path) -> 
                 contributions.append(
                     (f"{label}/{path.relative_to(root).as_posix()}", path)
                 )
-    digest = hashlib.sha256()
-    for key, path in sorted(contributions):
-        digest.update(key.encode("utf-8"))
-        digest.update(b"\0")
-        digest.update(path.read_bytes())
-    return f"sha256:{digest.hexdigest()}"
+    return _fingerprint(contributions)
+
+
+def overlay_fingerprint(project_path: Path, overlay_root: Path) -> str:
+    contributions = [("project.md", project_path)]
+    for label in ("policies", "standard", "exemplars"):
+        root = overlay_root / label
+        for path in root.rglob("*") if root.is_dir() else ():
+            if path.is_file():
+                contributions.append(
+                    (f"{label}/{path.relative_to(root).as_posix()}", path)
+                )
+    return _fingerprint(contributions)
 
 
 def load_corpus(policies_dir: Path) -> list[Policy]:
@@ -108,6 +124,27 @@ def load_corpus(policies_dir: Path) -> list[Policy]:
             policies.append(_parse_policy(path))
         except PolcError as exc:
             errors.extend(exc.errors)
+    if errors:
+        raise PolcError(errors)
+    return policies
+
+
+def load_local_corpus(policies_dir: Path) -> list[Policy]:
+    if not policies_dir.is_dir():
+        return []
+    errors: list[str] = []
+    policies: list[Policy] = []
+    for path in sorted(policies_dir.glob("PRJ-POL-*.md")):
+        try:
+            policies.append(_parse_policy(path))
+        except PolcError as exc:
+            errors.extend(exc.errors)
+    unexpected = sorted(p.name for p in policies_dir.glob("POL-*.md"))
+    if unexpected:
+        errors.append(
+            f"{policies_dir}: local policy files must use PRJ-POL ids: "
+            f"{', '.join(unexpected)}"
+        )
     if errors:
         raise PolcError(errors)
     return policies

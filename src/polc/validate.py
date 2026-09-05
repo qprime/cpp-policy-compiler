@@ -21,7 +21,7 @@ from .render import Projection
 
 CONFIG_LANGUAGE_VERSIONS = (14, 17, 20, 23)
 STANDARD_TOPICS = "STANDARD-TOPICS.md"
-DEMONSTRATED_ID = re.compile(r"(?:POL|STD)-\d{4}")
+DEMONSTRATED_ID = re.compile(r"(?:(?:PRJ-)?POL|(?:PRJ-)?STD)-\d{4}")
 URL_SCHEME = re.compile(r"[a-z][a-z0-9+.-]*:|//", re.IGNORECASE)
 
 

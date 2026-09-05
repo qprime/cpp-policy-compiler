@@ -5,7 +5,7 @@ from pathlib import Path
 
 from .model import PolcError, Topic
 
-POLICY_ID = re.compile(r"POL-\d{4}(?!\d)")
+POLICY_ID = re.compile(r"(?:PRJ-)?POL-\d{4}(?!\d)")
 STANDARD_ENTRY_LINK = re.compile(r"\[(STD-\d{4})\]\(")
 
 

@@ -507,6 +507,17 @@ def _render_sidecar(
         },
         "entries": {entry_id: entries[entry_id] for entry_id in sorted(entries)},
     }
+    if identity.overlay_fingerprint is not None:
+        data["projection"]["overlay_fingerprint"] = identity.overlay_fingerprint
+        data["projection"]["merge_decisions"] = [
+            {
+                "operation": decision.operation,
+                "target": decision.target,
+                "reason": decision.reason,
+                **({"local": decision.local} if decision.local is not None else {}),
+            }
+            for decision in identity.decisions
+        ]
     return json.dumps(data, indent=2, ensure_ascii=False) + "\n"
 
 

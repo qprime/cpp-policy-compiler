@@ -6,16 +6,16 @@ from importlib.metadata import PackageNotFoundError, version
 from pathlib import Path
 
 from . import adapters
-from .config import load_configuration
-from .corpus import fingerprint, load_corpus
-from .exemplars import load_exemplars
+from .config import load_configuration, load_project_configuration
+from .corpus import fingerprint, load_corpus, load_local_corpus, overlay_fingerprint
+from .exemplars import load_exemplars, load_local_exemplars
 from .evaluation import evaluate, write_result
 from .manifest import parse_manifest, parse_standard_topics
-from .model import Configuration, Exclusion, Exemplar, Identity, PolcError
+from .model import Configuration, CorpusLayers, Exclusion, Exemplar, Identity, PolcError
 from .render import Projection, render, write
-from .select import select, select_exemplars, select_standard
+from .select import build_effective_corpus, select, select_exemplars, select_standard
 from .snapshot import record
-from .standard import load_standard
+from .standard import load_local_standard, load_standard
 from .validate import validate, validate_links
 
 
@@ -98,6 +98,100 @@ def _build_projection(
     if errors:
         raise PolcError(errors)
     return projection, all_exclusions, config, admitted
+
+
+def _build_project_projection(
+    project_path: Path,
+    policies_dir: Path,
+    standard_dir: Path,
+    exemplars_dir: Path,
+    adapter: str | None,
+) -> tuple[Projection, list[Exclusion], Configuration, list[Exemplar]]:
+    upstream_policies = load_corpus(policies_dir)
+    upstream_topics = parse_manifest(policies_dir / "TOPICS.md")
+    upstream_standard = load_standard(standard_dir)
+    upstream_standard_topic_ids = parse_standard_topics(
+        policies_dir / "STANDARD-TOPICS.md"
+    )
+    upstream_exemplars = load_exemplars(exemplars_dir)
+    project, configuration_source = load_project_configuration(project_path)
+    upstream_errors = validate(
+        upstream_policies,
+        upstream_topics,
+        project.configuration,
+        upstream_standard,
+        upstream_standard_topic_ids,
+        upstream_exemplars,
+    )
+    if upstream_errors:
+        raise PolcError(upstream_errors)
+
+    overlay_root = project_path.parent
+    local_policies = load_local_corpus(overlay_root / "policies")
+    local_topics_path = overlay_root / "policies" / "TOPICS.md"
+    local_topics = parse_manifest(local_topics_path) if local_topics_path.is_file() else []
+    local_standard = load_local_standard(overlay_root / "standard")
+    local_exemplars = load_local_exemplars(overlay_root / "exemplars")
+    effective, exclusions = build_effective_corpus(
+        CorpusLayers(
+            tuple(upstream_policies),
+            tuple(upstream_topics),
+            tuple(upstream_standard),
+            tuple(upstream_standard_topic_ids),
+            tuple(upstream_exemplars),
+        ),
+        CorpusLayers(
+            tuple(local_policies),
+            tuple(local_topics),
+            tuple(local_standard),
+            (),
+            tuple(local_exemplars),
+        ),
+        project,
+    )
+    errors = validate(
+        list(effective.policies),
+        list(effective.topics),
+        project.configuration,
+        list(effective.standard),
+        list(effective.standard_topic_ids),
+        list(effective.exemplars),
+    )
+    if errors:
+        raise PolcError(errors)
+    try:
+        polc_version = version("polc")
+    except PackageNotFoundError as exc:
+        raise PolcError(
+            ["distribution 'polc' is not installed, so its version cannot be recorded"]
+        ) from exc
+    identity = Identity(
+        polc_version=polc_version,
+        corpus_fingerprint=fingerprint(policies_dir, standard_dir, exemplars_dir),
+        configuration_source=configuration_source,
+        adapter=adapter,
+        overlay_fingerprint=overlay_fingerprint(project_path, overlay_root),
+        decisions=effective.decisions,
+    )
+    projection = render(
+        list(effective.topics),
+        project.configuration,
+        list(effective.policies),
+        list(effective.standard),
+        list(effective.exemplars),
+        exclusions,
+        entry_name=adapters.entry_name(adapter),
+        identity=identity,
+    )
+    if not projection.topic_documents:
+        raise PolcError(
+            ["every topic omitted: the project overlay excludes the whole policy corpus"]
+        )
+    projection = adapters.apply(adapter, projection, project.configuration)
+    errors = validate_links(projection, list(effective.exemplars))
+    if errors:
+        raise PolcError(errors)
+    return projection, exclusions, project.configuration, list(effective.exemplars)
 
 
 def _report(projection: Projection, exclusions: list[Exclusion]) -> None:

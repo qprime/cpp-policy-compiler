@@ -124,6 +124,55 @@ class Configuration:
 
 
 @dataclass(frozen=True)
+class TopicExclusion:
+    topic: str
+    reason: str
+
+
+@dataclass(frozen=True)
+class IdExclusion:
+    id: str
+    reason: str
+
+
+@dataclass(frozen=True)
+class IdReplacement:
+    upstream: str
+    local: str
+    reason: str
+
+
+@dataclass(frozen=True)
+class ProjectConfiguration:
+    configuration: Configuration
+    exclude_topics: tuple[TopicExclusion, ...]
+    exclude_ids: tuple[IdExclusion, ...]
+    replace_ids: tuple[IdReplacement, ...]
+
+
+@dataclass(frozen=True)
+class MergeDecision:
+    operation: str
+    target: str
+    reason: str
+    local: str | None = None
+
+
+@dataclass(frozen=True)
+class CorpusLayers:
+    policies: tuple[Policy, ...]
+    topics: tuple[Topic, ...]
+    standard: tuple[StandardEntry, ...]
+    standard_topic_ids: tuple[str, ...]
+    exemplars: tuple[Exemplar, ...]
+
+
+@dataclass(frozen=True)
+class EffectiveCorpus(CorpusLayers):
+    decisions: tuple[MergeDecision, ...]
+
+
+@dataclass(frozen=True)
 class Exclusion:
     id: str
     axis: str
@@ -135,3 +184,5 @@ class Identity:
     corpus_fingerprint: str
     configuration_source: str
     adapter: str | None
+    overlay_fingerprint: str | None = None
+    decisions: tuple[MergeDecision, ...] = ()

@@ -86,3 +86,29 @@ def load_exemplars(exemplars_dir: Path) -> list[Exemplar]:
     if errors:
         raise PolcError(errors)
     return exemplars
+
+
+def load_local_exemplars(exemplars_dir: Path) -> list[Exemplar]:
+    if not exemplars_dir.is_dir():
+        return []
+    errors: list[str] = []
+    exemplars: list[Exemplar] = []
+    directories = sorted(d for d in exemplars_dir.glob("PRJ-EXM-*") if d.is_dir())
+    for directory in directories:
+        path = directory / "exemplar.md"
+        if not path.is_file():
+            errors.append(f"{directory.name}: directory holds no exemplar.md")
+            continue
+        try:
+            exemplars.append(_parse_exemplar(path))
+        except PolcError as exc:
+            errors.extend(exc.errors)
+    unexpected = sorted(d.name for d in exemplars_dir.glob("EXM-*") if d.is_dir())
+    if unexpected:
+        errors.append(
+            f"{exemplars_dir}: local exemplar directories must use PRJ-EXM ids: "
+            f"{', '.join(unexpected)}"
+        )
+    if errors:
+        raise PolcError(errors)
+    return exemplars

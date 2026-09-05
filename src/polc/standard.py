@@ -74,3 +74,24 @@ def load_standard(standard_dir: Path) -> list[StandardEntry]:
     if errors:
         raise PolcError(errors)
     return entries
+
+
+def load_local_standard(standard_dir: Path) -> list[StandardEntry]:
+    if not standard_dir.is_dir():
+        return []
+    errors: list[str] = []
+    entries: list[StandardEntry] = []
+    for path in sorted(standard_dir.glob("PRJ-STD-*.md")):
+        try:
+            entries.append(_parse_entry(path))
+        except PolcError as exc:
+            errors.extend(exc.errors)
+    unexpected = sorted(p.name for p in standard_dir.glob("STD-*.md"))
+    if unexpected:
+        errors.append(
+            f"{standard_dir}: local standard files must use PRJ-STD ids: "
+            f"{', '.join(unexpected)}"
+        )
+    if errors:
+        raise PolcError(errors)
+    return entries
