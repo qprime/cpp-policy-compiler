@@ -41,27 +41,28 @@ def _validate_applicability(
                     errors.append(f"{origin}: illegal compiler mark '{value}'")
 
 
-def _validate_trigger(origin: str, policy: Policy, errors: list[str]) -> None:
-    if policy.trigger is None:
+def _validate_route(
+    origin: str,
+    key: str,
+    value: str | None,
+    prefix: str,
+    errors: list[str],
+) -> None:
+    if value is None:
         return
-    if policy.kind == "principle":
-        errors.append(
-            f"{origin}: trigger appears on a principle, which has no topic document "
-            "to hold the row"
-        )
-    trigger = policy.trigger.strip()
-    if not trigger:
-        errors.append(f"{origin}: 'trigger' must be a non-empty string")
+    route = value.strip()
+    if not route:
+        errors.append(f"{origin}: '{key}' must be a non-empty string")
         return
-    if trigger.endswith("."):
+    if route.endswith("."):
         errors.append(
-            f"{origin}: trigger ends with a period; it is a fragment completing "
-            "'when you are about to'"
+            f"{origin}: {key} ends with a period; it is a fragment completing "
+            f"'{prefix}'"
         )
-    if trigger[0].isupper():
+    if route[0].isupper():
         errors.append(
-            f"{origin}: trigger opens with a capital; it is a fragment completing "
-            "'when you are about to'"
+            f"{origin}: {key} opens with a capital; it is a fragment completing "
+            f"'{prefix}'"
         )
 
 
@@ -93,7 +94,23 @@ def _validate_policies(corpus: list[Policy], by_id: dict[str, Policy], errors: l
         for target in policy.replacement:
             if target not in by_id:
                 errors.append(f"{origin}: replacement {target} does not resolve")
-        _validate_trigger(origin, policy, errors)
+        if policy.kind == "principle" and (
+            policy.trigger is not None or policy.review_trigger is not None
+        ):
+            errors.append(
+                f"{origin}: trigger appears on a principle, which has no topic "
+                "document to hold the row"
+            )
+        _validate_route(
+            origin, "trigger", policy.trigger, "when you are about to", errors
+        )
+        _validate_route(
+            origin,
+            "review_trigger",
+            policy.review_trigger,
+            "when the change contains",
+            errors,
+        )
         _validate_applicability(origin, policy.applicability, errors)
 
     precedences = sorted(
@@ -111,6 +128,13 @@ def _validate_topics(
     membership: dict[str, str] = {}
     slugs: dict[str, str] = {}
     for topic in topics:
+        if not topic.review_when.strip():
+            errors.append(f"topic '{topic.name}': Review when must be non-empty")
+        elif topic.review_when == topic.read_when:
+            errors.append(
+                f"topic '{topic.name}': Review when must describe review evidence, "
+                "not repeat Read when"
+            )
         if topic.slug in slugs:
             errors.append(
                 f"topics '{slugs[topic.slug]}' and '{topic.name}' collide on slug '{topic.slug}'"
@@ -179,6 +203,13 @@ def _validate_standard(
         if not entry.attribution:
             errors.append(f"{origin}: attribution is required and non-empty")
         _validate_applicability(origin, entry.applicability, errors)
+        _validate_route(
+            origin,
+            "review_trigger",
+            entry.review_trigger,
+            "when the change contains",
+            errors,
+        )
 
     placed: set[str] = set()
     for entry_id in topic_ids:

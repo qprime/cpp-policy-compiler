@@ -2,6 +2,7 @@
 id: STD-0016
 group: layout-of-the-line
 enforced_by: review
+review_trigger: "a declaration places const inconsistently with the project notation"
 attribution:
   - source: standard-practice
     locator: "const placement"

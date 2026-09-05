@@ -2,6 +2,7 @@
 id: STD-0019
 group: layout-of-the-line
 enforced_by: review
+review_trigger: "a numeric literal is difficult to parse or interpret at a glance"
 attribution:
   - source: standard-practice
     locator: "numeric literals"

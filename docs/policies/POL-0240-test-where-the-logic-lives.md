@@ -2,6 +2,7 @@
 id: POL-0240
 kind: standard
 trigger: "choose what a test targets"
+review_trigger: "behavior is tested only through a distant layer instead of where its logic lives"
 attribution:
   - source: cpp-convention/conventions.md
     locator: "Testing"

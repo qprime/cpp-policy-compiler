@@ -2,6 +2,7 @@
 id: STD-0008
 group: files-and-layout
 enforced_by: review
+review_trigger: "a test is not placed beside the behavior it verifies"
 attribution:
   - source: cpp-convention/conventions.md
     locator: "Testing"

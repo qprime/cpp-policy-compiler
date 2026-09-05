@@ -2,6 +2,7 @@
 id: STD-0001
 group: files-and-layout
 enforced_by: review
+review_trigger: "a C++ source or header uses a nonstandard file extension"
 attribution:
   - source: cpp-convention/conventions.md
     locator: "Divergences: [CG SF.1]"

@@ -4,7 +4,11 @@ The task-situation partition of the policy corpus. Each topic becomes one
 topical document in the projection, and its *Read when* line becomes that
 topic's entry in the always-loaded index.
 
-Membership lists go under each *Read when* line, as a paragraph of policy ids.
+Each topic also carries a *Review when* line. It describes evidence observable
+in an existing change and becomes that topic's entry in the review index. It is
+authored independently from *Read when* rather than mechanically translated.
+
+Membership lists go under the routing lines, as a paragraph of policy ids.
 `polc` fails while any topic has no members.
 
 ## Rules
@@ -36,6 +40,8 @@ A topic that stops answering a single question splits here, not in the compiler.
 Read when: deciding what type holds a piece of data — alternatives, absence,
 aggregates, inheritance, whether a thing becomes a type at all.
 
+Review when: a change introduces or alters a data representation, variant, or hierarchy.
+
 POL-0017 POL-0025 POL-0057 POL-0065 POL-0066 POL-0067 POL-0068 POL-0090
 POL-0093 POL-0097 POL-0098 POL-0105 POL-0106 POL-0107 POL-0108 POL-0198
 POL-0210 POL-0222 POL-0224 POL-0229
@@ -44,6 +50,8 @@ POL-0210 POL-0222 POL-0224 POL-0229
 
 Read when: writing a type's mechanics — constructors, invariants, special
 members, `noexcept`, wrapper types.
+
+Review when: a change adds or modifies a class, constructor, invariant, or special member.
 
 POL-0058 POL-0059 POL-0060 POL-0063 POL-0064 POL-0069 POL-0070 POL-0071
 POL-0072 POL-0073 POL-0074 POL-0075 POL-0076 POL-0077 POL-0078 POL-0079
@@ -58,6 +66,8 @@ Cross-reference: POL-0018
 Read when: deciding who owns an allocation or resource and how the declaration
 says so.
 
+Review when: a change creates, transfers, stores, or exposes an owned resource.
+
 POL-0021 POL-0022 POL-0040 POL-0044 POL-0045 POL-0046 POL-0109 POL-0110
 POL-0111 POL-0112 POL-0113 POL-0114 POL-0115 POL-0116
 
@@ -65,6 +75,8 @@ POL-0111 POL-0112 POL-0113 POL-0114 POL-0115 POL-0116
 
 Read when: writing a signature or body — parameters, decomposition,
 duplication, templates, `auto`.
+
+Review when: a change adds or modifies a function signature, body, or template.
 
 POL-0014 POL-0024 POL-0029 POL-0033 POL-0034 POL-0035 POL-0036 POL-0037
 POL-0038 POL-0039 POL-0041 POL-0042 POL-0047 POL-0048 POL-0049 POL-0050
@@ -78,6 +90,8 @@ POL-0213 POL-0214 POL-0215 POL-0231 POL-0232
 Read when: declaring anything — `const`, named constants, initialization,
 determinism.
 
+Review when: a change adds or alters a declaration, initializer, constant, or global.
+
 POL-0015 POL-0023 POL-0030 POL-0062 POL-0104 POL-0120 POL-0121 POL-0123
 POL-0124 POL-0125 POL-0126 POL-0127 POL-0128 POL-0129 POL-0133 POL-0134
 POL-0152 POL-0204
@@ -85,6 +99,8 @@ POL-0152 POL-0204
 ### Handling failure
 
 Read when: choosing what happens when an operation cannot do what it was asked.
+
+Review when: a change introduces, handles, translates, or suppresses a failure path.
 
 POL-0032 POL-0183 POL-0184 POL-0185 POL-0186 POL-0187 POL-0188 POL-0189
 POL-0190 POL-0191 POL-0192 POL-0193 POL-0228
@@ -95,12 +111,16 @@ Cross-reference: POL-0058
 
 Read when: deciding where a check lives — boundaries validate, internals trust.
 
+Review when: a change accepts external data or moves validation across a boundary.
+
 POL-0018 POL-0019 POL-0020 POL-0194
 
 ### Structuring modules and layers
 
 Read when: laying out headers, includes, namespaces, dependency direction, or a
 threading model.
+
+Review when: a change alters headers, includes, namespaces, targets, layers, or dependencies.
 
 POL-0011 POL-0016 POL-0028 POL-0217 POL-0218 POL-0219 POL-0239
 
@@ -109,12 +129,16 @@ POL-0011 POL-0016 POL-0028 POL-0217 POL-0218 POL-0219 POL-0239
 Read when: naming anything — case, operation verbs, return-contract prefixes,
 unit suffixes — and deciding whether to write a comment.
 
+Review when: a change introduces or renames an identifier or adds explanatory prose.
+
 POL-0122
 
 ### Crossing the FFI boundary
 
 Read when: writing or touching the binding layer — names, validation, errors,
 absence, units, ownership, shared schemas.
+
+Review when: a change crosses a language, compiler, ABI, or foreign-library boundary.
 
 POL-0026 POL-0027 POL-0043 POL-0211 POL-0216 POL-0230 POL-0233 POL-0234
 POL-0235 POL-0236 POL-0237 POL-0238
@@ -124,11 +148,15 @@ POL-0235 POL-0236 POL-0237 POL-0238
 Read when: writing or reviewing tests — what to test, what not to, goldens,
 round-trips, the framework.
 
+Review when: a change adds behavior without proportionate tests or modifies test structure.
+
 POL-0240 POL-0241 POL-0242 POL-0243 POL-0244 POL-0245 POL-0246 POL-0247
 
 ### Logging
 
 Read when: emitting diagnostics from library or application code.
+
+Review when: a change emits, formats, routes, or assigns severity to a diagnostic.
 
 POL-0225 POL-0226 POL-0248
 
@@ -136,6 +164,8 @@ POL-0225 POL-0226 POL-0248
 
 Read when: writing code under a deadline — scan loops, audio callbacks,
 interrupt handlers. The whole topic is gated by the realtime domain.
+
+Review when: a deadline-bound path changes allocation, blocking, I/O, or scheduling behavior.
 
 POL-0161 POL-0162
 
@@ -146,12 +176,16 @@ Cross-reference: POL-0190
 Read when: writing coroutines — lifetimes across suspension, captures,
 awaitables, deep chains. Vacuous below C++20.
 
+Review when: a change adds suspension, coroutine state, awaitables, or coroutine captures.
+
 POL-0179 POL-0180 POL-0181 POL-0182
 
 ### Choosing a statement
 
 Read when: shaping control flow — which loop, which selection, early returns,
 `switch` arms and fallthrough.
+
+Review when: a change adds or reshapes a branch, loop, jump, or switch arm.
 
 POL-0056 POL-0143 POL-0144 POL-0145 POL-0147 POL-0149 POL-0150 POL-0151
 POL-0153
@@ -163,6 +197,8 @@ Cross-reference: POL-0146
 Read when: writing the line itself — casts, arithmetic and signedness, which
 standard-library facility to reach for, how text gets formatted.
 
+Review when: a change adds casts, pointer operations, arithmetic, formatting, or dense expressions.
+
 POL-0013 POL-0117 POL-0130 POL-0131 POL-0132 POL-0135 POL-0136 POL-0137
 POL-0138 POL-0140 POL-0141 POL-0142 POL-0154 POL-0155 POL-0220 POL-0221
 POL-0223 POL-0227
@@ -171,6 +207,8 @@ POL-0223 POL-0227
 
 Read when: walking a container — whether a loop is the right shape at all, how
 the element is bound, what may not change while iterating.
+
+Review when: a change iterates a sequence or mutates iteration state or storage.
 
 POL-0139 POL-0146 POL-0148
 
@@ -181,6 +219,8 @@ Cross-reference: POL-0128
 Read when: a threading model exists and shared state has to be reached from more
 than one thread.
 
+Review when: a change shares state across threads or alters locking, waiting, or task ownership.
+
 POL-0163 POL-0164 POL-0165 POL-0166 POL-0167 POL-0169 POL-0170 POL-0171
 POL-0172 POL-0173 POL-0174 POL-0175 POL-0176 POL-0177 POL-0178
 
@@ -189,12 +229,16 @@ POL-0172 POL-0173 POL-0174 POL-0175 POL-0176 POL-0177 POL-0178
 Read when: setting up or changing a project's build — warnings, sanitizers,
 static analysis, formatting, the standard declaration.
 
+Review when: a change modifies build targets, compiler settings, tooling, or generated artifacts.
+
 POL-0009 POL-0012
 
 ### Optimizing
 
 Read when: deciding whether to make code faster, and what to change once a
 measurement says where the time goes.
+
+Review when: a change claims or introduces a performance, memory, or layout optimization.
 
 POL-0010 POL-0031 POL-0156 POL-0157 POL-0158 POL-0159 POL-0160
 

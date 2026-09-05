@@ -2,6 +2,7 @@
 id: POL-0014
 kind: standard
 trigger: "write a function that reaches for global state"
+review_trigger: "a function reads state its parameters and object do not name"
 attribution:
   - source: cpp-convention/conventions.md
     locator: "Values #6"

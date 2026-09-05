@@ -2,6 +2,7 @@
 id: STD-0011
 group: names
 enforced_by: review
+review_trigger: "a function name obscures its return or failure contract"
 attribution:
   - source: cpp-convention/conventions.md
     locator: "Naming Vocabulary"

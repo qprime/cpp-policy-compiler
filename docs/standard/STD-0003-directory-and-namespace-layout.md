@@ -2,6 +2,7 @@
 id: STD-0003
 group: files-and-layout
 enforced_by: review
+review_trigger: "a file path, namespace, or layer placement disagrees with project structure"
 attribution:
   - source: cpp-convention/conventions.md
     locator: "Pattern: module boundary"

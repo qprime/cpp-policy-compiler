@@ -2,6 +2,7 @@
 id: STD-0012
 group: names
 enforced_by: review
+review_trigger: "a numeric interface omits the unit from its type or name"
 attribution:
   - source: cpp-convention/conventions.md
     locator: "Tier 1 #5"

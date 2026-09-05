@@ -17,6 +17,7 @@ from .model import (
     Identity,
     PolcError,
     Policy,
+    ProjectionMode,
     StandardEntry,
     Topic,
 )
@@ -43,6 +44,10 @@ LEGEND = (
 MAP_ROUTING = (
     "Read the document whose line matches what you are about to do. Read the coding\n"
     "standard for any file; read one topic for the decision in front of you."
+)
+REVIEW_MAP_ROUTING = (
+    "Read the document whose line matches evidence in the change. Read the coding\n"
+    "standard for every changed file; read each topic implicated by the diff."
 )
 
 PRINCIPLES = "principles"
@@ -104,10 +109,11 @@ class Projection:
     exemplars: str | None
     sidecar: str
     identity: Identity
+    mode: ProjectionMode
     omitted_topics: tuple[str, ...]
     omitted_standard_documents: tuple[str, ...]
     dropped_references: tuple[str, ...]
-    trigger_coverage: tuple[int, int]
+    routing_coverage: tuple[int, int]
 
     def documents(self) -> dict[str, str]:
         documents = {self.entry_name: self.entry}
@@ -226,32 +232,63 @@ def _render_principles_document(
     return "\n".join(lines).rstrip("\n") + "\n"
 
 
-def _procedure(has_principles: bool, has_exemplars: bool) -> list[str]:
+def _procedure(
+    mode: ProjectionMode, has_principles: bool, has_exemplars: bool
+) -> list[str]:
     steps: list[str] = []
-    if has_exemplars:
+    if mode == ProjectionMode.REVIEW:
         steps.append(
-            "Take the shape from the nearest exemplar. "
-            f"[{EXEMPLARS.title}]({EXEMPLARS.slug}.md) indexes them by situation."
+            "Inspect the existing change; do not redesign it before identifying defects."
         )
-    triggers = (
-        "Check each construct you write against the trigger table at the head of "
-        "the document the map names below."
-    )
-    if has_principles:
-        triggers += (
-            f" [{PRINCIPLES_TITLE}]({PRINCIPLES_DOCUMENT}) governs what no trigger "
-            "row matches."
+        evidence = (
+            "Match observable evidence in the diff to the review tables in every "
+            "document the map names below."
         )
-    steps.append(triggers)
-    steps.append(
-        f"Read [{LAYERS_TITLE}]({LAYERS_DOCUMENT}) for how code at this layer "
-        "reports failure."
-    )
-    steps.append(
-        f"Read [{INVARIANTS_TITLE}]({INVARIANTS_DOCUMENT}) before you touch a "
-        "subsystem."
-    )
-    lines = ["## Procedure", "", "Take these in order for every change.", ""]
+        if has_principles:
+            evidence += (
+                f" [{PRINCIPLES_TITLE}]({PRINCIPLES_DOCUMENT}) governs evidence no "
+                "review row matches."
+            )
+        steps.append(evidence)
+        steps.append(
+            f"Read [{LAYERS_TITLE}]({LAYERS_DOCUMENT}) for dependency and failure "
+            "boundaries affected by the change."
+        )
+        steps.append(
+            f"Read [{INVARIANTS_TITLE}]({INVARIANTS_DOCUMENT}) and trace each affected "
+            "invariant through the changed paths."
+        )
+        steps.append(
+            "Report only supported findings. Name the stable identity, precise "
+            "location, observable consequence, and minimal repair direction."
+        )
+        intro = "Take these in order for every review."
+    else:
+        if has_exemplars:
+            steps.append(
+                "Take the shape from the nearest exemplar. "
+                f"[{EXEMPLARS.title}]({EXEMPLARS.slug}.md) indexes them by situation."
+            )
+        triggers = (
+            "Check each construct you write against the trigger table at the head of "
+            "the document the map names below."
+        )
+        if has_principles:
+            triggers += (
+                f" [{PRINCIPLES_TITLE}]({PRINCIPLES_DOCUMENT}) governs what no trigger "
+                "row matches."
+            )
+        steps.append(triggers)
+        steps.append(
+            f"Read [{LAYERS_TITLE}]({LAYERS_DOCUMENT}) for how code at this layer "
+            "reports failure."
+        )
+        steps.append(
+            f"Read [{INVARIANTS_TITLE}]({INVARIANTS_DOCUMENT}) before you touch a "
+            "subsystem."
+        )
+        intro = "Take these in order for every change."
+    lines = ["## Procedure", "", intro, ""]
     for number, step in enumerate(steps, start=1):
         lines.append(
             textwrap.fill(
@@ -262,15 +299,24 @@ def _procedure(has_principles: bool, has_exemplars: bool) -> list[str]:
     return lines
 
 
-def _trigger_table(ordered: list[Policy]) -> list[str]:
-    rows = [
-        f"| {policy.trigger} | {MARKS[policy.kind]} | {policy.id} |"
-        for policy in ordered
-        if policy.trigger
-    ]
+def _trigger_table(ordered: list[Policy], mode: ProjectionMode) -> list[str]:
+    column = (
+        "When the change contains"
+        if mode == ProjectionMode.REVIEW
+        else TRIGGER_COLUMN
+    )
+    rows: list[str] = []
+    for policy in ordered:
+        route = (
+            policy.review_trigger
+            if mode == ProjectionMode.REVIEW
+            else policy.trigger
+        )
+        if route:
+            rows.append(f"| {route} | {MARKS[policy.kind]} | {policy.id} |")
     if not rows:
         return []
-    return [f"| {TRIGGER_COLUMN} | | Rule |", "|---|---|---|", *rows, ""]
+    return [f"| {column} | | Rule |", "|---|---|---|", *rows, ""]
 
 
 def _situation_index(admitted: list[Exemplar]) -> list[str]:
@@ -287,6 +333,7 @@ def _render_entry_document(
     has_exemplars: bool,
     emitted: list[tuple[Topic, list[Policy]]],
     written: set[str],
+    mode: ProjectionMode,
 ) -> tuple[str, tuple[str, ...]]:
     lines = [
         f"# {config.name}",
@@ -300,8 +347,9 @@ def _render_entry_document(
         "Per-standard tables in these documents read against the declared standard above.",
         "",
     ]
-    lines.extend(_procedure(has_principles, has_exemplars))
-    lines.extend(["## Map", "", MAP_ROUTING, ""])
+    lines.extend(_procedure(mode, has_principles, has_exemplars))
+    routing = REVIEW_MAP_ROUTING if mode == ProjectionMode.REVIEW else MAP_ROUTING
+    lines.extend(["## Map", "", routing, ""])
 
     titles: list[str] = []
 
@@ -309,8 +357,13 @@ def _render_entry_document(
         if destination.slug not in written:
             return
         titles.append(destination.title)
+        route = (
+            destination.review_when
+            if mode == ProjectionMode.REVIEW
+            else destination.read_when
+        )
         lines.append(
-            f"- [{destination.title}]({destination.slug}.md) — {destination.read_when}"
+            f"- [{destination.title}]({destination.slug}.md) — {route}"
         )
 
     for destination in DESTINATIONS:
@@ -318,7 +371,8 @@ def _render_entry_document(
             destination_line(destination)
     for topic, _ in emitted:
         titles.append(topic.name)
-        lines.append(f"- [{topic.name}]({topic.slug}.md) — {topic.read_when}")
+        route = topic.review_when if mode == ProjectionMode.REVIEW else topic.read_when
+        lines.append(f"- [{topic.name}]({topic.slug}.md) — {route}")
     for destination in DESTINATIONS:
         if not destination.before_topics:
             destination_line(destination)
@@ -334,14 +388,17 @@ def _render_topic_document(
     demonstrated_by: dict[str, list[str]],
     home_document: dict[str, str],
     dropped: list[str],
+    mode: ProjectionMode,
 ) -> str:
+    route_label = "Review when" if mode == ProjectionMode.REVIEW else "Read when"
+    route = topic.review_when if mode == ProjectionMode.REVIEW else topic.read_when
     lines = [
         f"{config.name} › {topic.name}",
         "",
-        f"Read when: {topic.read_when}",
+        f"{route_label}: {route}",
         "",
     ]
-    lines.extend(_trigger_table(ordered))
+    lines.extend(_trigger_table(ordered, mode))
     for policy in ordered:
         lines.extend(
             _entry_block(
@@ -385,8 +442,25 @@ def _render_standard_document(
     demonstrated_by: dict[str, list[str]],
     home_document: dict[str, str],
     dropped: list[str],
+    mode: ProjectionMode,
 ) -> str:
     lines = [f"{config.name} › {title}", ""]
+    if mode == ProjectionMode.REVIEW:
+        rows = []
+        for entry in sorted(members, key=lambda item: item.id):
+            if entry.review_trigger:
+                rows.append(
+                    f"| {entry.review_trigger} | {entry.enforced_by} | {entry.id} |"
+                )
+        if rows:
+            lines.extend(
+                [
+                    "| When the change contains | Enforced by | Rule |",
+                    "|---|---|---|",
+                    *rows,
+                    "",
+                ]
+            )
     for group in groups:
         grouped = sorted((e for e in members if e.group == group), key=lambda e: e.id)
         if not grouped:
@@ -461,6 +535,7 @@ def _render_sidecar(
     standard: list[tuple[Destination, list[StandardEntry]]],
     admitted: list[Exemplar],
     citations: dict[str, list[str]],
+    mode: ProjectionMode,
 ) -> str:
     entries: dict[str, dict[str, object]] = {}
 
@@ -472,6 +547,7 @@ def _render_sidecar(
             "statement": policy.statement,
             "attribution": _attribution_records(policy),
             "file": policy.path.name,
+            "review_trigger": policy.review_trigger,
         }
 
     for principle in principles:
@@ -489,6 +565,7 @@ def _render_sidecar(
                 "statement": entry.statement,
                 "attribution": _attribution_records(entry),
                 "file": entry.path.name,
+                "review_trigger": entry.review_trigger,
             }
     for exemplar in admitted:
         entries[exemplar.id] = {
@@ -504,6 +581,7 @@ def _render_sidecar(
             "corpus_fingerprint": identity.corpus_fingerprint,
             "configuration": config.name,
             "adapter": identity.adapter,
+            "mode": mode.value,
         },
         "entries": {entry_id: entries[entry_id] for entry_id in sorted(entries)},
     }
@@ -564,6 +642,7 @@ def render(
     exclusions: list[Exclusion],
     entry_name: str,
     identity: Identity,
+    mode: ProjectionMode,
 ) -> Projection:
     included_by_id = {p.id: p for p in included}
     home_topic = {member: topic for topic in topics for member in topic.members}
@@ -601,8 +680,9 @@ def render(
     for destination, members in standard_emitted:
         for entry in members:
             home_document[entry.id] = f"{destination.slug}.md"
-    for exemplar in admitted_exemplars:
-        home_document[exemplar.id] = f"{EXEMPLARS.slug}.md"
+    if mode == ProjectionMode.GENERATION:
+        for exemplar in admitted_exemplars:
+            home_document[exemplar.id] = f"{EXEMPLARS.slug}.md"
 
     dropped: list[str] = []
     citations, demonstrated_by = _resolve_citations(
@@ -612,6 +692,8 @@ def render(
         exclusions,
         dropped,
     )
+    if mode == ProjectionMode.REVIEW:
+        demonstrated_by = {}
 
     banner = _banner(config)
     standard_documents = {
@@ -624,6 +706,7 @@ def render(
             demonstrated_by,
             home_document,
             dropped,
+            mode,
         )
         for destination, members in standard_emitted
     }
@@ -638,11 +721,12 @@ def render(
             demonstrated_by,
             home_document,
             dropped,
+            mode,
         )
         for topic, ordered in emitted
     }
     written = {destination.slug for destination, _ in standard_emitted}
-    if admitted_exemplars:
+    if admitted_exemplars and mode == ProjectionMode.GENERATION:
         written.add(EXEMPLARS.slug)
     entry, map_titles = _render_entry_document(
         config,
@@ -651,9 +735,16 @@ def render(
         bool(admitted_exemplars),
         emitted,
         written,
+        mode,
     )
-    triggered = sum(1 for _, ordered in emitted for p in ordered if p.trigger)
-    triggerable = sum(len(ordered) for _, ordered in emitted)
+    if mode == ProjectionMode.REVIEW:
+        routed = sum(
+            1 for _, ordered in emitted for policy in ordered if policy.review_trigger
+        ) + sum(1 for entry in included_standard if entry.review_trigger)
+        routeable = sum(len(ordered) for _, ordered in emitted) + len(included_standard)
+    else:
+        routed = sum(1 for _, ordered in emitted for policy in ordered if policy.trigger)
+        routeable = sum(len(ordered) for _, ordered in emitted)
     return Projection(
         entry=banner + entry,
         entry_name=entry_name,
@@ -671,7 +762,7 @@ def render(
             + _render_exemplars_document(
                 config, admitted_exemplars, citations, home_document, dropped
             )
-            if admitted_exemplars
+            if admitted_exemplars and mode == ProjectionMode.GENERATION
             else None
         ),
         sidecar=_render_sidecar(
@@ -682,12 +773,14 @@ def render(
             standard_emitted,
             admitted_exemplars,
             citations,
+            mode,
         ),
         identity=identity,
+        mode=mode,
         omitted_topics=tuple(omitted),
         omitted_standard_documents=tuple(omitted_documents),
         dropped_references=tuple(dropped),
-        trigger_coverage=(triggered, triggerable),
+        routing_coverage=(routed, routeable),
     )
 
 

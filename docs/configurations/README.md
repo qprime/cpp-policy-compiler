@@ -18,4 +18,8 @@ emitting the entry document, the coding standard, project setup, one document
 per topic, and the exemplar source trees. Add `--adapter claude-code` to name
 the entry document `SKILL.md` and give it skill frontmatter.
 
+Generation is the default. Add `--mode review` to emit the independent review
+procedure and evidence routes without `exemplars.md` or copied exemplar source.
+Both modes carry the same selected identities in `provenance.json`.
+
 **Next:** add a configuration when a real project needs one.

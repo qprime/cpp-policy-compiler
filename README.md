@@ -31,6 +31,21 @@ source trees. `polc check` takes the same arguments minus `--out`, validates
 and renders, and writes nothing; use it to see what a configuration would emit,
 or in CI to catch a corpus that no longer compiles.
 
+Generation is the default projection mode. Add `--mode review` to `build` or
+`check` for an independent review harness:
+
+```
+uv run polc build \
+  --config docs/configurations/cpp20-gcc-application.md \
+  --mode review \
+  --out ../my-project/policy-review
+```
+
+Both modes select the same policy identities. Generation routes from constructs
+about to be written and includes exemplar source; review routes from evidence in
+an existing change and omits exemplar implementations. `provenance.json` records
+the mode, and missing mode-specific routes are reported as coverage debt.
+
 Correctness experiments are opt-in and separate from projection builds. `polc
 eval run <manifest> --out <result>` scores a recorded generation or review
 benchmark, while `polc eval record` captures coherent file states around an
@@ -71,6 +86,9 @@ against a trigger table, read the layer semantics, read the subsystem
 invariants. The map is the routing mechanism the second step uses: one line per
 document, each saying when to read it. The model reads the entry document,
 matches the situation in front of it to a line, and opens that one document.
+In review mode the procedure, map, and topic tables instead route from observable
+evidence in a change and require findings to name their stable identity, location,
+consequence, and repair direction.
 
 Each lookup the procedure names is a table rather than a judgment call.
 `exemplars.md` opens with one row per exemplar keyed by the situation it

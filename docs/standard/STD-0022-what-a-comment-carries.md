@@ -2,6 +2,7 @@
 id: STD-0022
 group: comments
 enforced_by: review
+review_trigger: "a comment restates code or fails to explain non-obvious intent"
 attribution:
   - source: cpp-convention/conventions.md
     locator: "Naming"

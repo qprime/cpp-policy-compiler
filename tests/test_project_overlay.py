@@ -102,6 +102,8 @@ attribution:
 
 Read when: encoding the project's network protocol.
 
+Review when: a change encodes or decodes the project's network protocol.
+
 PRJ-POL-0001
 """,
     )

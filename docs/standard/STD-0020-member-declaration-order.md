@@ -2,6 +2,7 @@
 id: STD-0020
 group: layout-of-the-line
 enforced_by: review
+review_trigger: "a class declares members outside the project visibility order"
 attribution:
   - source: standard-practice
     locator: "class layout"

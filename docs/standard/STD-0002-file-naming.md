@@ -2,6 +2,7 @@
 id: STD-0002
 group: files-and-layout
 enforced_by: review
+review_trigger: "a source filename does not use the project naming convention"
 attribution:
   - source: cpp-convention/conventions.md
     locator: "Naming"

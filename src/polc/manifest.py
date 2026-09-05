@@ -24,11 +24,14 @@ def _build_topic(
     name: str, paragraphs: list[str], origin: str, errors: list[str]
 ) -> Topic:
     read_when = None
+    review_when = None
     members: list[str] = []
     cross_references: list[str] = []
     for text in paragraphs:
         if text.startswith("Read when:"):
             read_when = text[len("Read when:") :].strip()
+        elif text.startswith("Review when:"):
+            review_when = text[len("Review when:") :].strip()
         elif text.startswith("Cross-reference:"):
             cross_references.extend(POLICY_ID.findall(text))
         else:
@@ -38,8 +41,13 @@ def _build_topic(
         read_when = ""
     if not members:
         errors.append(f"{origin}: topic '{name}' lists no members")
+    if review_when is None:
+        errors.append(f"{origin}: topic '{name}' has no 'Review when:' paragraph")
+        review_when = ""
     slug = name.lower().replace(" ", "-")
-    return Topic(name, slug, read_when, tuple(members), tuple(cross_references))
+    return Topic(
+        name, slug, read_when, review_when, tuple(members), tuple(cross_references)
+    )
 
 
 def parse_manifest(path: Path) -> list[Topic]:

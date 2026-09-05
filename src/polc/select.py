@@ -106,9 +106,14 @@ def _merge_topics(upstream: list[Topic], local: list[Topic]) -> list[Topic]:
             merged.append(topic)
             continue
         current = merged[index]
-        if topic.name != current.name or topic.read_when != current.read_when:
+        if (
+            topic.name != current.name
+            or topic.read_when != current.read_when
+            or topic.review_when != current.review_when
+        ):
             errors.append(
-                f"local topic '{topic.slug}' must keep upstream name and Read when text"
+                f"local topic '{topic.slug}' must keep upstream name, Read when, "
+                "and Review when text"
             )
             continue
         merged[index] = replace(

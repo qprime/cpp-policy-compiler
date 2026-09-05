@@ -2,6 +2,7 @@
 id: STD-0013
 group: names
 enforced_by: review
+review_trigger: "an identifier is too terse or verbose for its scope"
 attribution:
   - source: standard-practice
     locator: "name length"

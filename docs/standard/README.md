@@ -31,6 +31,7 @@ and identity cannot. The slug in the filename is a human convenience; frontmatte
 | `enforced_by` | required | Who catches a violation: `compiler`, `clang-format`, `clang-tidy`, `build`, or `review`. `review` means nothing automatic checks it. |
 | `applicability` | optional | Axis marks that constrain the entry out, same axes as a policy. Absent entirely means universal, which is the usual case. |
 | `attribution` | required | A list, never empty, same shape as a policy's: `source` and `locator`, plus optional `upstream` for Core Guidelines rule ids. |
+| `review_trigger` | optional | Observable evidence that earns the entry a row in the review table, as a lowercase fragment completing *when the change contains* with no trailing period. |
 
 ```yaml
 ---
@@ -91,6 +92,7 @@ violation across the layer is reported in one run.
 - `group` is one of the five
 - `enforced_by` is one of the five
 - `attribution` is present and non-empty on every entry
+- `review_trigger`, where present, is a lowercase fragment with no trailing period
 - every topic in [STANDARD-TOPICS.md](../policies/STANDARD-TOPICS.md) resolves to
   exactly one entry, and every entry resolves to exactly one topic
 

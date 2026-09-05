@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass, field
+from enum import StrEnum
 from pathlib import Path
 
 KINDS = ("principle", "standard", "guideline", "pattern", "anti-pattern")
@@ -10,11 +11,17 @@ COMPILERS = ("gcc", "clang")
 ENFORCERS = ("compiler", "clang-format", "clang-tidy", "build", "review")
 
 
+class ProjectionMode(StrEnum):
+    GENERATION = "generation"
+    REVIEW = "review"
+
+
 @dataclass(frozen=True)
 class Destination:
     slug: str
     title: str
     read_when: str
+    review_when: str
     groups: tuple[str, ...] = ()
     before_topics: bool = False
 
@@ -24,6 +31,7 @@ DESTINATIONS = (
         "standard",
         "Coding standard",
         "writing any file — the mechanical rules a formatter or a compiler enforces",
+        "reviewing any changed C++ file for mechanical and repository-wide rules",
         ("files-and-layout", "names", "layout-of-the-line", "comments"),
         before_topics=True,
     ),
@@ -31,12 +39,14 @@ DESTINATIONS = (
         "exemplars",
         "Exemplars",
         "reaching for a whole compilable example of a recurring situation",
+        "",
     ),
     Destination(
         "project-setup",
         "Project setup",
         "configuring the toolchain — language standard, warning set, formatter, "
         "test framework",
+        "reviewing build configuration, compiler settings, analysis, or test setup",
         ("toolchain",),
     ),
 )
@@ -80,6 +90,7 @@ class Policy:
     applicability: dict[str, tuple[str, ...]] = field(default_factory=dict)
     replacement: tuple[str, ...] = ()
     trigger: str | None = None
+    review_trigger: str | None = None
 
 
 @dataclass(frozen=True)
@@ -92,6 +103,7 @@ class StandardEntry:
     attribution: tuple[Attribution, ...]
     path: Path
     applicability: dict[str, tuple[str, ...]] = field(default_factory=dict)
+    review_trigger: str | None = None
 
 
 @dataclass(frozen=True)
@@ -111,6 +123,7 @@ class Topic:
     name: str
     slug: str
     read_when: str
+    review_when: str
     members: tuple[str, ...]
     cross_references: tuple[str, ...]
 

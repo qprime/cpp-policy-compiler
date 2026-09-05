@@ -5,7 +5,7 @@ from collections.abc import Callable
 from dataclasses import dataclass, replace
 from pathlib import Path
 
-from .model import Configuration, PolcError
+from .model import Configuration, PolcError, ProjectionMode
 from .render import Projection
 
 NEUTRAL_ENTRY = "index.md"
@@ -16,6 +16,12 @@ NEUTRAL_WIRING = (
     "\n"
     "    Read `{path}` before writing or changing any C++ in this\n"
     "    project. It maps each situation to the one document that governs it."
+)
+NEUTRAL_REVIEW_WIRING = (
+    "Add to this project's review instructions:\n"
+    "\n"
+    "    Read `{path}` before reviewing any C++ change in this project. It maps\n"
+    "    observable evidence to the documents that govern the review."
 )
 
 ABSOLUTE_PATH_NOTE = (
@@ -32,12 +38,18 @@ def _quote(value: str) -> str:
     return f"'{escaped}'"
 
 
-def _description(config: Configuration, map_titles: tuple[str, ...]) -> str:
+def _description(
+    config: Configuration, map_titles: tuple[str, ...], mode: ProjectionMode
+) -> str:
     covers = ", ".join(title.lower() for title in map_titles)
+    purpose = (
+        "Use when reviewing existing C++ changes"
+        if mode == ProjectionMode.REVIEW
+        else "Read before writing or changing any C++ in this project"
+    )
     text = (
         f"C++ engineering policy for {config.name} — C++{config.language_version}, "
-        f"{config.compiler}, {config.domain}. Read before writing or changing any "
-        f"C++ in this project. Covers: {covers}."
+        f"{config.compiler}, {config.domain}. {purpose}. Covers: {covers}."
     )
     if len(text) > DESCRIPTION_LIMIT:
         raise PolcError(
@@ -49,7 +61,9 @@ def _description(config: Configuration, map_titles: tuple[str, ...]) -> str:
     return text
 
 
-def _skill_frontmatter(config: Configuration, map_titles: tuple[str, ...]) -> str:
+def _skill_frontmatter(
+    config: Configuration, map_titles: tuple[str, ...], mode: ProjectionMode
+) -> str:
     name = _slugify(config.name)
     if not name:
         raise PolcError(
@@ -61,7 +75,7 @@ def _skill_frontmatter(config: Configuration, map_titles: tuple[str, ...]) -> st
     return (
         "---\n"
         f"name: {name}\n"
-        f"description: {_quote(_description(config, map_titles))}\n"
+        f"description: {_quote(_description(config, map_titles, mode))}\n"
         "---\n\n"
     )
 
@@ -69,7 +83,7 @@ def _skill_frontmatter(config: Configuration, map_titles: tuple[str, ...]) -> st
 @dataclass(frozen=True)
 class Adapter:
     entry: str
-    frontmatter: Callable[[Configuration, tuple[str, ...]], str]
+    frontmatter: Callable[[Configuration, tuple[str, ...], ProjectionMode], str]
     wiring: str | None
 
 
@@ -90,11 +104,22 @@ def entry_name(adapter: str | None) -> str:
     return NEUTRAL_ENTRY if adapter is None else _lookup(adapter).entry
 
 
-def wiring_note(adapter: str | None, out_dir: Path, entry_name: str) -> str | None:
-    wiring = NEUTRAL_WIRING if adapter is None else _lookup(adapter).wiring
+def wiring_note(
+    adapter: str | None,
+    out_dir: Path,
+    projection: Projection,
+) -> str | None:
+    if adapter is None:
+        wiring = (
+            NEUTRAL_REVIEW_WIRING
+            if projection.mode == ProjectionMode.REVIEW
+            else NEUTRAL_WIRING
+        )
+    else:
+        wiring = _lookup(adapter).wiring
     if wiring is None:
         return None
-    note = wiring.format(path=out_dir / entry_name)
+    note = wiring.format(path=out_dir / projection.entry_name)
     if out_dir.is_absolute():
         note = f"{note}\n\n{ABSOLUTE_PATH_NOTE}"
     return note
@@ -105,5 +130,7 @@ def apply(
 ) -> Projection:
     if adapter is None:
         return projection
-    frontmatter = _lookup(adapter).frontmatter(config, projection.map_titles)
+    frontmatter = _lookup(adapter).frontmatter(
+        config, projection.map_titles, projection.mode
+    )
     return replace(projection, entry=frontmatter + projection.entry)

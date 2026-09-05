@@ -11,7 +11,15 @@ from .corpus import fingerprint, load_corpus, load_local_corpus, overlay_fingerp
 from .exemplars import load_exemplars, load_local_exemplars
 from .evaluation import evaluate, write_result
 from .manifest import parse_manifest, parse_standard_topics
-from .model import Configuration, CorpusLayers, Exclusion, Exemplar, Identity, PolcError
+from .model import (
+    Configuration,
+    CorpusLayers,
+    Exclusion,
+    Exemplar,
+    Identity,
+    PolcError,
+    ProjectionMode,
+)
 from .render import Projection, render, write
 from .select import build_effective_corpus, select, select_exemplars, select_standard
 from .snapshot import record
@@ -25,6 +33,7 @@ def _build_projection(
     standard_dir: Path,
     exemplars_dir: Path,
     adapter: str | None,
+    mode: ProjectionMode = ProjectionMode.GENERATION,
 ) -> tuple[Projection, list[Exclusion], Configuration, list[Exemplar]]:
     errors: list[str] = []
     corpus = topics = config = standard = standard_topic_ids = exemplars = None
@@ -88,16 +97,18 @@ def _build_projection(
         all_exclusions,
         entry_name=adapters.entry_name(adapter),
         identity=identity,
+        mode=mode,
     )
     if not projection.topic_documents:
         raise PolcError(
             ["every topic omitted: the configuration excludes the whole policy corpus"]
         )
     projection = adapters.apply(adapter, projection, config)
-    errors = validate_links(projection, admitted)
+    emitted_exemplars = admitted if mode == ProjectionMode.GENERATION else []
+    errors = validate_links(projection, emitted_exemplars)
     if errors:
         raise PolcError(errors)
-    return projection, all_exclusions, config, admitted
+    return projection, all_exclusions, config, emitted_exemplars
 
 
 def _build_project_projection(
@@ -106,6 +117,7 @@ def _build_project_projection(
     standard_dir: Path,
     exemplars_dir: Path,
     adapter: str | None,
+    mode: ProjectionMode = ProjectionMode.GENERATION,
 ) -> tuple[Projection, list[Exclusion], Configuration, list[Exemplar]]:
     upstream_policies = load_corpus(policies_dir)
     upstream_topics = parse_manifest(policies_dir / "TOPICS.md")
@@ -182,16 +194,20 @@ def _build_project_projection(
         exclusions,
         entry_name=adapters.entry_name(adapter),
         identity=identity,
+        mode=mode,
     )
     if not projection.topic_documents:
         raise PolcError(
             ["every topic omitted: the project overlay excludes the whole policy corpus"]
         )
     projection = adapters.apply(adapter, projection, project.configuration)
-    errors = validate_links(projection, list(effective.exemplars))
+    emitted_exemplars = (
+        list(effective.exemplars) if mode == ProjectionMode.GENERATION else []
+    )
+    errors = validate_links(projection, emitted_exemplars)
     if errors:
         raise PolcError(errors)
-    return projection, exclusions, project.configuration, list(effective.exemplars)
+    return projection, exclusions, project.configuration, emitted_exemplars
 
 
 def _report(projection: Projection, exclusions: list[Exclusion]) -> None:
@@ -213,12 +229,20 @@ def _report(projection: Projection, exclusions: list[Exclusion]) -> None:
     for slug in projection.omitted_standard_documents:
         print(f"omitted {slug}.md: every entry excluded")
     if projection.exemplars is None:
-        print("omitted exemplars.md: every exemplar excluded")
+        reason = (
+            "review mode"
+            if projection.mode == ProjectionMode.REVIEW
+            else "every exemplar excluded"
+        )
+        print(f"omitted exemplars.md: {reason}")
     if projection.principles is None:
         print("omitted principles.md: every principle excluded")
-    triggered, triggerable = projection.trigger_coverage
-    if triggered < triggerable:
-        print(f"{triggerable - triggered} of {triggerable} policies carry no trigger")
+    routed, routeable = projection.routing_coverage
+    if routed < routeable:
+        print(
+            f"{routeable - routed} of {routeable} entries carry no "
+            f"{projection.mode.value} route"
+        )
     for line in projection.dropped_references:
         print(f"dropped {line}")
 
@@ -237,6 +261,11 @@ def main(argv: list[str] | None = None) -> int:
         sub.add_argument("--policies", type=Path, default=Path("docs/policies"))
         sub.add_argument("--standard", type=Path, default=Path("docs/standard"))
         sub.add_argument("--exemplars", type=Path, default=Path("docs/exemplars"))
+        sub.add_argument(
+            "--mode",
+            choices=tuple(mode.value for mode in ProjectionMode),
+            default=ProjectionMode.GENERATION.value,
+        )
         if name == "build":
             sub.add_argument("--out", required=True, type=Path)
             sub.add_argument("--adapter", choices=adapters.ADAPTERS)
@@ -293,6 +322,7 @@ def main(argv: list[str] | None = None) -> int:
             args.standard,
             args.exemplars,
             getattr(args, "adapter", None),
+            ProjectionMode(args.mode),
         )
         if args.command == "build":
             kept = write(projection, admitted, args.out)
@@ -305,7 +335,9 @@ def main(argv: list[str] | None = None) -> int:
     for name in kept:
         print(f"kept {name}: present and not owned")
     if args.command == "build":
-        note = adapters.wiring_note(args.adapter, args.out, projection.entry_name)
+        note = adapters.wiring_note(
+            args.adapter, args.out, projection
+        )
         if note is not None:
             print()
             print(note)

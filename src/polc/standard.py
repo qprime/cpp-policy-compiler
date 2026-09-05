@@ -17,6 +17,7 @@ STANDARD_KEYS = {
     "enforced_by",
     "applicability",
     "attribution",
+    "review_trigger",
 }
 
 
@@ -40,6 +41,13 @@ def _parse_entry(path: Path) -> StandardEntry:
     applicability = parse_applicability(
         frontmatter.get("applicability"), path.name, errors
     )
+    review_trigger = (
+        required_str(
+            frontmatter["review_trigger"], path.name, "review_trigger", errors
+        )
+        if "review_trigger" in frontmatter
+        else None
+    )
     try:
         statement, body = split_statement(markdown, path.name)
     except PolcError as exc:
@@ -57,6 +65,7 @@ def _parse_entry(path: Path) -> StandardEntry:
         attribution=attribution,
         path=path,
         applicability=applicability,
+        review_trigger=review_trigger,
     )
 
 

@@ -2,6 +2,7 @@
 id: STD-0010
 group: names
 enforced_by: review
+review_trigger: "an operation name uses a verb outside the project vocabulary"
 attribution:
   - source: cpp-convention/conventions.md
     locator: "Naming Vocabulary"

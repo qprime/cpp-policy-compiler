@@ -2,6 +2,7 @@
 id: POL-0246
 kind: standard
 trigger: "write code that produces structured output"
+review_trigger: "structured output changes without a complete golden comparison"
 attribution:
   - source: cpp-convention/conventions.md
     locator: "Testing"
