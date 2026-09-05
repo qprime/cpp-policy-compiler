@@ -1,7 +1,8 @@
 ---
 id: STD-0017
 group: layout-of-the-line
-enforced_by: clang-tidy
+enforced_by: review
+review_trigger: "a line contains multiple declarations or statements"
 attribution:
   - source: standard-practice
     locator: "declaration and statement layout"

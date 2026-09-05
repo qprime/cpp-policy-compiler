@@ -101,7 +101,7 @@ def test_mode_and_initial_coverage_are_reported() -> None:
 
     assert json.loads(generation.sidecar)["projection"]["mode"] == "generation"
     assert json.loads(review.sidecar)["projection"]["mode"] == "review"
-    assert review.routing_coverage == (17, 266)
+    assert review.routing_coverage == (18, 266)
     assert generation.routing_coverage[0] > review.routing_coverage[0]
 
 

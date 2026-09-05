@@ -39,6 +39,7 @@ class ConvexPolygon {
 }  // namespace proj::algo
 ```
 
-The table is mandated machine-wide rather than chosen per project because names
-must cross the FFI boundary unchanged, and that is unachievable if either side
-picks its own case.
+The table is one repository-wide choice so declarations, definitions, generated
+bindings, and foreign-language adapters do not invent separate spellings. An FFI
+tool may expose a deliberately transformed public name, but that mapping belongs
+at the boundary and does not change the C++ convention.

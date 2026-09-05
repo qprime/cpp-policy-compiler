@@ -9,7 +9,7 @@ attribution:
     upstream: ["CG I.4", "CG NL.19"]
 ---
 
-# A dimensioned value carries its unit in its name, at every interface
+# A dimensioned value carries its unit in its type or name, at every interface
 
 ```cpp
 double width_mm;
@@ -21,8 +21,11 @@ double width;              // no
 double feed;               // no
 ```
 
-The suffix is the unit, spelled out, lowercase, underscore-joined: `_mm`, `_deg`,
-`_s`, `_mm_per_min`, `_mm2` for area. It appears on parameters, members, return
-value names, and struct fields — everywhere the value is named.
+For primitive numeric representations, the suffix is the unit, spelled out,
+lowercase, underscore-joined: `_mm`, `_deg`, `_s`, `_mm_per_min`, `_mm2` for
+area. It appears on functions that return a primitive, parameters, members, and
+struct fields. A strong unit type carries that information without repeating the
+unit in every variable name.
 
-Without exception, because the exception is where the transposition happens.
+Every primitive-valued interface carries the suffix, because an omitted boundary
+is where unit transposition becomes possible.

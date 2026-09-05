@@ -10,12 +10,14 @@ attribution:
 # Warnings are `-Wall -Wextra -Wpedantic -Wconversion -Wsign-conversion -Werror`
 
 ```cmake
-add_compile_options(-Wall -Wextra -Wpedantic -Wconversion -Wsign-conversion -Werror)
+target_compile_options(project_target PRIVATE
+    -Wall -Wextra -Wpedantic -Wconversion -Wsign-conversion -Werror)
 ```
 
 `-Werror=switch` is load-bearing where exhaustive dispatch rests on the warning
 system rather than on the type system.
 
+Apply the warning set to project-owned targets, not imported or vendored code.
 Any per-site disable carries a comment saying what it permits and why.
 
 ```cpp

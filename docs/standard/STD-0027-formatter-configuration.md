@@ -7,7 +7,7 @@ attribution:
     locator: "Tooling Commitments"
 ---
 
-# clang-format runs on every file, Google baseline, indent 4, column limit 100
+# clang-format runs on every project-owned C++ file, Google baseline, indent 4, column limit 100
 
 ```yaml
 # .clang-format
@@ -23,3 +23,6 @@ both.
 
 Formatting is decided once per project and not revisited. Details beyond this
 baseline are the project's to set; the four keys above are not.
+
+Generated and vendored sources follow their owner's process and are excluded
+rather than rewritten.

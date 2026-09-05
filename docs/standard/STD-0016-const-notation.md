@@ -21,6 +21,6 @@ Tool const& tool;                    // no
 double const kMinMarginMm = 10.0;    // no
 ```
 
-Left-`const` is what nearly all C++ reads like, so it is what a reader parses
-without stopping. The one place `const` appears on the right is a `const` pointer,
-where the language leaves no choice.
+Left-`const` is the repository's single consistent spelling for a const-qualified
+base type. A top-level const pointer necessarily places its own `const` after the
+`*`; this is grammar, not a competing base-type convention.

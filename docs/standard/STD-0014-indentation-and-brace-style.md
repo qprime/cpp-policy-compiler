@@ -10,9 +10,8 @@ attribution:
 
 # Indentation is four spaces; the column limit is 100; braces are K&R-derived
 
-Opening brace on the same line as the statement that owns it, except for a function
-definition's body, which follows the Google baseline. Access specifiers indent one
-space. No tabs.
+Opening braces stay on the same line as the declaration or statement that owns
+them, following the Google baseline. Access specifiers indent one space. No tabs.
 
 ```cpp
 namespace proj::algo {

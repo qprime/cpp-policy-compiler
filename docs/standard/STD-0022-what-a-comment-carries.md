@@ -9,11 +9,12 @@ attribution:
     upstream: ["CG NL.1", "CG NL.2", "CG NL.3"]
 ---
 
-# A comment states intent, never mechanism
+# A comment explains intent, contract, or a necessary constraint
 
 Write a comment for what the code cannot say: why this constant, why this order,
-which rule an exception breaks, what a foreign API requires. Do not restate the
-line below it. Keep it to a sentence or two.
+which rule an exception breaks, what contract or foreign mechanism constrains the
+implementation. Do not merely restate the line below it. Keep it to a sentence or
+two.
 
 ```cpp
 // Clipper needs closed rings wound clockwise; ours arrive counter-clockwise.
