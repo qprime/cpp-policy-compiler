@@ -1,0 +1,2277 @@
+{
+  "schema_version": 1,
+  "reports": {
+    "principles-anti-patterns": "reports/principles-anti-patterns.json",
+    "topics-01-05": "reports/topics-01-05.json",
+    "topics-06-10": "reports/topics-06-10.json",
+    "topics-11-15": "reports/topics-11-15.json",
+    "topics-16-20": "reports/topics-16-20.json",
+    "coding-standard": "reports/coding-standard.json",
+    "exemplars-integration": "reports/exemplars-integration.json"
+  },
+  "items": [
+    {
+      "id": "POL-0001",
+      "kind": "policy",
+      "policy_kind": "principle",
+      "path": "docs/policies/POL-0001-correct-by-construction.md",
+      "topic": null,
+      "slice": "principles-anti-patterns"
+    },
+    {
+      "id": "POL-0002",
+      "kind": "policy",
+      "policy_kind": "principle",
+      "path": "docs/policies/POL-0002-failure-modes-visible.md",
+      "topic": null,
+      "slice": "principles-anti-patterns"
+    },
+    {
+      "id": "POL-0003",
+      "kind": "policy",
+      "policy_kind": "principle",
+      "path": "docs/policies/POL-0003-ownership-is-obvious.md",
+      "topic": null,
+      "slice": "principles-anti-patterns"
+    },
+    {
+      "id": "POL-0004",
+      "kind": "policy",
+      "policy_kind": "principle",
+      "path": "docs/policies/POL-0004-boring-is-a-feature.md",
+      "topic": null,
+      "slice": "principles-anti-patterns"
+    },
+    {
+      "id": "POL-0005",
+      "kind": "policy",
+      "policy_kind": "principle",
+      "path": "docs/policies/POL-0005-defensive-at-boundaries.md",
+      "topic": null,
+      "slice": "principles-anti-patterns"
+    },
+    {
+      "id": "POL-0006",
+      "kind": "policy",
+      "policy_kind": "principle",
+      "path": "docs/policies/POL-0006-express-intent.md",
+      "topic": null,
+      "slice": "principles-anti-patterns"
+    },
+    {
+      "id": "POL-0007",
+      "kind": "policy",
+      "policy_kind": "principle",
+      "path": "docs/policies/POL-0007-determinism-default.md",
+      "topic": null,
+      "slice": "principles-anti-patterns"
+    },
+    {
+      "id": "POL-0008",
+      "kind": "policy",
+      "policy_kind": "principle",
+      "path": "docs/policies/POL-0008-compiler-is-your-ally.md",
+      "topic": null,
+      "slice": "principles-anti-patterns"
+    },
+    {
+      "id": "POL-0009",
+      "kind": "policy",
+      "policy_kind": "standard",
+      "path": "docs/policies/POL-0009-iso-standard-cpp.md",
+      "topic": "Build and tooling",
+      "slice": "topics-16-20"
+    },
+    {
+      "id": "POL-0010",
+      "kind": "policy",
+      "policy_kind": "guideline",
+      "path": "docs/policies/POL-0010-cost-of-what-you-write.md",
+      "topic": "Optimizing",
+      "slice": "topics-16-20"
+    },
+    {
+      "id": "POL-0011",
+      "kind": "policy",
+      "policy_kind": "guideline",
+      "path": "docs/policies/POL-0011-encapsulate-messy-constructs.md",
+      "topic": "Structuring modules and layers",
+      "slice": "topics-06-10"
+    },
+    {
+      "id": "POL-0012",
+      "kind": "policy",
+      "policy_kind": "standard",
+      "path": "docs/policies/POL-0012-tools-are-due-diligence.md",
+      "topic": "Build and tooling",
+      "slice": "topics-16-20"
+    },
+    {
+      "id": "POL-0013",
+      "kind": "policy",
+      "policy_kind": "guideline",
+      "path": "docs/policies/POL-0013-standard-library-first.md",
+      "topic": "Writing an expression",
+      "slice": "topics-16-20"
+    },
+    {
+      "id": "POL-0014",
+      "kind": "policy",
+      "policy_kind": "standard",
+      "path": "docs/policies/POL-0014-interface-states-its-dependencies.md",
+      "topic": "Writing a function",
+      "slice": "topics-01-05"
+    },
+    {
+      "id": "POL-0015",
+      "kind": "policy",
+      "policy_kind": "standard",
+      "path": "docs/policies/POL-0015-no-mutable-globals.md",
+      "topic": "Everyday declarations",
+      "slice": "topics-01-05"
+    },
+    {
+      "id": "POL-0016",
+      "kind": "policy",
+      "policy_kind": "standard",
+      "path": "docs/policies/POL-0016-single-instance-is-passed-in.md",
+      "topic": "Structuring modules and layers",
+      "slice": "topics-06-10"
+    },
+    {
+      "id": "POL-0017",
+      "kind": "policy",
+      "policy_kind": "standard",
+      "path": "docs/policies/POL-0017-interface-takes-the-meaningful-type.md",
+      "topic": "Choosing a representation",
+      "slice": "topics-01-05"
+    },
+    {
+      "id": "POL-0018",
+      "kind": "policy",
+      "policy_kind": "pattern",
+      "path": "docs/policies/POL-0018-structural-precondition-wrapper.md",
+      "topic": "Placing validation",
+      "slice": "topics-06-10"
+    },
+    {
+      "id": "POL-0019",
+      "kind": "policy",
+      "policy_kind": "guideline",
+      "path": "docs/policies/POL-0019-preconditions-asserted-not-gsl.md",
+      "topic": "Placing validation",
+      "slice": "topics-06-10"
+    },
+    {
+      "id": "POL-0020",
+      "kind": "policy",
+      "policy_kind": "guideline",
+      "path": "docs/policies/POL-0020-postcondition-in-return-type.md",
+      "topic": "Placing validation",
+      "slice": "topics-06-10"
+    },
+    {
+      "id": "POL-0021",
+      "kind": "policy",
+      "policy_kind": "standard",
+      "path": "docs/policies/POL-0021-no-ownership-through-raw-pointer.md",
+      "topic": "Deciding ownership",
+      "slice": "topics-01-05"
+    },
+    {
+      "id": "POL-0022",
+      "kind": "policy",
+      "policy_kind": "guideline",
+      "path": "docs/policies/POL-0022-non-null-pointer-documented.md",
+      "topic": "Deciding ownership",
+      "slice": "topics-01-05"
+    },
+    {
+      "id": "POL-0023",
+      "kind": "policy",
+      "policy_kind": "standard",
+      "path": "docs/policies/POL-0023-global-init-is-trivial.md",
+      "topic": "Everyday declarations",
+      "slice": "topics-01-05"
+    },
+    {
+      "id": "POL-0024",
+      "kind": "policy",
+      "policy_kind": "pattern",
+      "path": "docs/policies/POL-0024-params-struct.md",
+      "topic": "Writing a function",
+      "slice": "topics-01-05"
+    },
+    {
+      "id": "POL-0025",
+      "kind": "policy",
+      "policy_kind": "standard",
+      "path": "docs/policies/POL-0025-interface-base-has-no-data.md",
+      "topic": "Choosing a representation",
+      "slice": "topics-01-05"
+    },
+    {
+      "id": "POL-0026",
+      "kind": "policy",
+      "policy_kind": "standard",
+      "path": "docs/policies/POL-0026-abi-boundary-is-c-shaped.md",
+      "topic": "Crossing the FFI boundary",
+      "slice": "topics-06-10"
+    },
+    {
+      "id": "POL-0027",
+      "kind": "policy",
+      "policy_kind": "guideline",
+      "path": "docs/policies/POL-0027-pimpl-for-stable-abi.md",
+      "topic": "Crossing the FFI boundary",
+      "slice": "topics-06-10"
+    },
+    {
+      "id": "POL-0028",
+      "kind": "policy",
+      "policy_kind": "guideline",
+      "path": "docs/policies/POL-0028-encapsulate-rule-violations.md",
+      "topic": "Structuring modules and layers",
+      "slice": "topics-06-10"
+    },
+    {
+      "id": "POL-0029",
+      "kind": "policy",
+      "policy_kind": "pattern",
+      "path": "docs/policies/POL-0029-named-operation.md",
+      "topic": "Writing a function",
+      "slice": "topics-01-05"
+    },
+    {
+      "id": "POL-0030",
+      "kind": "policy",
+      "policy_kind": "standard",
+      "path": "docs/policies/POL-0030-constexpr-what-you-can.md",
+      "topic": "Everyday declarations",
+      "slice": "topics-01-05"
+    },
+    {
+      "id": "POL-0031",
+      "kind": "policy",
+      "policy_kind": "guideline",
+      "path": "docs/policies/POL-0031-inline-only-when-measured.md",
+      "topic": "Optimizing",
+      "slice": "topics-16-20"
+    },
+    {
+      "id": "POL-0032",
+      "kind": "policy",
+      "policy_kind": "standard",
+      "path": "docs/policies/POL-0032-noexcept-is-a-claim.md",
+      "topic": "Handling failure",
+      "slice": "topics-06-10"
+    },
+    {
+      "id": "POL-0033",
+      "kind": "policy",
+      "policy_kind": "guideline",
+      "path": "docs/policies/POL-0033-prefer-pure-functions.md",
+      "topic": "Writing a function",
+      "slice": "topics-01-05"
+    },
+    {
+      "id": "POL-0034",
+      "kind": "policy",
+      "policy_kind": "standard",
+      "path": "docs/policies/POL-0034-unused-parameter-unnamed.md",
+      "topic": "Writing a function",
+      "slice": "topics-01-05"
+    },
+    {
+      "id": "POL-0035",
+      "kind": "policy",
+      "policy_kind": "guideline",
+      "path": "docs/policies/POL-0035-lambda-only-for-glue.md",
+      "topic": "Writing a function",
+      "slice": "topics-01-05"
+    },
+    {
+      "id": "POL-0036",
+      "kind": "policy",
+      "policy_kind": "standard",
+      "path": "docs/policies/POL-0036-conventional-parameter-passing.md",
+      "topic": "Writing a function",
+      "slice": "topics-01-05"
+    },
+    {
+      "id": "POL-0037",
+      "kind": "policy",
+      "policy_kind": "standard",
+      "path": "docs/policies/POL-0037-output-is-returned.md",
+      "topic": "Writing a function",
+      "slice": "topics-01-05"
+    },
+    {
+      "id": "POL-0038",
+      "kind": "policy",
+      "policy_kind": "standard",
+      "path": "docs/policies/POL-0038-move-from-parameter.md",
+      "topic": "Writing a function",
+      "slice": "topics-01-05"
+    },
+    {
+      "id": "POL-0039",
+      "kind": "policy",
+      "policy_kind": "standard",
+      "path": "docs/policies/POL-0039-forwarding-parameter.md",
+      "topic": "Writing a function",
+      "slice": "topics-01-05"
+    },
+    {
+      "id": "POL-0040",
+      "kind": "policy",
+      "policy_kind": "standard",
+      "path": "docs/policies/POL-0040-raw-pointer-one-object-non-owning.md",
+      "topic": "Deciding ownership",
+      "slice": "topics-01-05"
+    },
+    {
+      "id": "POL-0041",
+      "kind": "policy",
+      "policy_kind": "pattern",
+      "path": "docs/policies/POL-0041-sequence-parameter-carries-bounds.md",
+      "topic": "Writing a function",
+      "slice": "topics-01-05"
+    },
+    {
+      "id": "POL-0042",
+      "kind": "policy",
+      "policy_kind": "anti-pattern",
+      "path": "docs/policies/POL-0042-pointer-and-length-pair.md",
+      "topic": "Writing a function",
+      "slice": "principles-anti-patterns"
+    },
+    {
+      "id": "POL-0043",
+      "kind": "policy",
+      "policy_kind": "guideline",
+      "path": "docs/policies/POL-0043-c-string-converted-on-entry.md",
+      "topic": "Crossing the FFI boundary",
+      "slice": "topics-06-10"
+    },
+    {
+      "id": "POL-0044",
+      "kind": "policy",
+      "policy_kind": "pattern",
+      "path": "docs/policies/POL-0044-ownership-decision.md",
+      "topic": "Deciding ownership",
+      "slice": "topics-01-05"
+    },
+    {
+      "id": "POL-0045",
+      "kind": "policy",
+      "policy_kind": "standard",
+      "path": "docs/policies/POL-0045-smart-pointer-parameter-says-lifetime.md",
+      "topic": "Deciding ownership",
+      "slice": "topics-01-05"
+    },
+    {
+      "id": "POL-0046",
+      "kind": "policy",
+      "policy_kind": "guideline",
+      "path": "docs/policies/POL-0046-return-pointer-means-position.md",
+      "topic": "Deciding ownership",
+      "slice": "topics-01-05"
+    },
+    {
+      "id": "POL-0047",
+      "kind": "policy",
+      "policy_kind": "standard",
+      "path": "docs/policies/POL-0047-never-return-dangling.md",
+      "topic": "Writing a function",
+      "slice": "topics-01-05"
+    },
+    {
+      "id": "POL-0048",
+      "kind": "policy",
+      "policy_kind": "guideline",
+      "path": "docs/policies/POL-0048-return-reference-when-copy-costs.md",
+      "topic": "Writing a function",
+      "slice": "topics-01-05"
+    },
+    {
+      "id": "POL-0049",
+      "kind": "policy",
+      "policy_kind": "standard",
+      "path": "docs/policies/POL-0049-no-rvalue-reference-return.md",
+      "topic": "Writing a function",
+      "slice": "topics-01-05"
+    },
+    {
+      "id": "POL-0050",
+      "kind": "policy",
+      "policy_kind": "standard",
+      "path": "docs/policies/POL-0050-main-returns-int.md",
+      "topic": "Writing a function",
+      "slice": "topics-01-05"
+    },
+    {
+      "id": "POL-0051",
+      "kind": "policy",
+      "policy_kind": "standard",
+      "path": "docs/policies/POL-0051-no-const-value-return.md",
+      "topic": "Writing a function",
+      "slice": "topics-01-05"
+    },
+    {
+      "id": "POL-0052",
+      "kind": "policy",
+      "policy_kind": "guideline",
+      "path": "docs/policies/POL-0052-default-arguments-over-overloads.md",
+      "topic": "Writing a function",
+      "slice": "topics-01-05"
+    },
+    {
+      "id": "POL-0053",
+      "kind": "policy",
+      "policy_kind": "standard",
+      "path": "docs/policies/POL-0053-explicit-lambda-captures.md",
+      "topic": "Writing a function",
+      "slice": "topics-01-05"
+    },
+    {
+      "id": "POL-0054",
+      "kind": "policy",
+      "policy_kind": "standard",
+      "path": "docs/policies/POL-0054-escaping-lambda-captures-by-value.md",
+      "topic": "Writing a function",
+      "slice": "topics-01-05"
+    },
+    {
+      "id": "POL-0055",
+      "kind": "policy",
+      "policy_kind": "standard",
+      "path": "docs/policies/POL-0055-no-va-arg.md",
+      "topic": "Writing a function",
+      "slice": "topics-01-05"
+    },
+    {
+      "id": "POL-0056",
+      "kind": "policy",
+      "policy_kind": "guideline",
+      "path": "docs/policies/POL-0056-early-return-over-nesting.md",
+      "topic": "Choosing a statement",
+      "slice": "topics-11-15"
+    },
+    {
+      "id": "POL-0057",
+      "kind": "policy",
+      "policy_kind": "guideline",
+      "path": "docs/policies/POL-0057-group-related-data.md",
+      "topic": "Choosing a representation",
+      "slice": "topics-01-05"
+    },
+    {
+      "id": "POL-0058",
+      "kind": "policy",
+      "policy_kind": "pattern",
+      "path": "docs/policies/POL-0058-value-type-with-invariant.md",
+      "topic": "Building a class",
+      "slice": "topics-01-05"
+    },
+    {
+      "id": "POL-0059",
+      "kind": "policy",
+      "policy_kind": "standard",
+      "path": "docs/policies/POL-0059-initialize-in-the-member-init-list.md",
+      "topic": "Building a class",
+      "slice": "topics-01-05"
+    },
+    {
+      "id": "POL-0060",
+      "kind": "policy",
+      "policy_kind": "standard",
+      "path": "docs/policies/POL-0060-explicit-single-argument-constructor.md",
+      "topic": "Building a class",
+      "slice": "topics-01-05"
+    },
+    {
+      "id": "POL-0061",
+      "kind": "policy",
+      "policy_kind": "pattern",
+      "path": "docs/policies/POL-0061-free-function-by-default.md",
+      "topic": "Writing a function",
+      "slice": "topics-01-05"
+    },
+    {
+      "id": "POL-0062",
+      "kind": "policy",
+      "policy_kind": "standard",
+      "path": "docs/policies/POL-0062-one-declaration-per-statement.md",
+      "topic": "Everyday declarations",
+      "slice": "topics-01-05"
+    },
+    {
+      "id": "POL-0063",
+      "kind": "policy",
+      "policy_kind": "standard",
+      "path": "docs/policies/POL-0063-members-are-private.md",
+      "topic": "Building a class",
+      "slice": "topics-01-05"
+    },
+    {
+      "id": "POL-0064",
+      "kind": "policy",
+      "policy_kind": "guideline",
+      "path": "docs/policies/POL-0064-no-trivial-accessor-pairs.md",
+      "topic": "Building a class",
+      "slice": "topics-01-05"
+    },
+    {
+      "id": "POL-0065",
+      "kind": "policy",
+      "policy_kind": "standard",
+      "path": "docs/policies/POL-0065-concrete-types-over-hierarchies.md",
+      "topic": "Choosing a representation",
+      "slice": "topics-01-05"
+    },
+    {
+      "id": "POL-0066",
+      "kind": "policy",
+      "policy_kind": "pattern",
+      "path": "docs/policies/POL-0066-closed-set-variation.md",
+      "topic": "Choosing a representation",
+      "slice": "topics-01-05"
+    },
+    {
+      "id": "POL-0067",
+      "kind": "policy",
+      "policy_kind": "anti-pattern",
+      "path": "docs/policies/POL-0067-inheritance-for-variation.md",
+      "topic": "Choosing a representation",
+      "slice": "principles-anti-patterns"
+    },
+    {
+      "id": "POL-0068",
+      "kind": "policy",
+      "policy_kind": "anti-pattern",
+      "path": "docs/policies/POL-0068-stringly-typed-dispatch.md",
+      "topic": "Choosing a representation",
+      "slice": "principles-anti-patterns"
+    },
+    {
+      "id": "POL-0069",
+      "kind": "policy",
+      "policy_kind": "guideline",
+      "path": "docs/policies/POL-0069-concrete-types-are-regular.md",
+      "topic": "Building a class",
+      "slice": "topics-01-05"
+    },
+    {
+      "id": "POL-0070",
+      "kind": "policy",
+      "policy_kind": "standard",
+      "path": "docs/policies/POL-0070-no-const-or-reference-members.md",
+      "topic": "Building a class",
+      "slice": "topics-01-05"
+    },
+    {
+      "id": "POL-0071",
+      "kind": "policy",
+      "policy_kind": "pattern",
+      "path": "docs/policies/POL-0071-rule-of-zero.md",
+      "topic": "Building a class",
+      "slice": "topics-01-05"
+    },
+    {
+      "id": "POL-0072",
+      "kind": "policy",
+      "policy_kind": "pattern",
+      "path": "docs/policies/POL-0072-resource-owner-owns-only-that.md",
+      "topic": "Building a class",
+      "slice": "topics-01-05"
+    },
+    {
+      "id": "POL-0073",
+      "kind": "policy",
+      "policy_kind": "standard",
+      "path": "docs/policies/POL-0073-base-destructor-public-virtual-or-protected.md",
+      "topic": "Building a class",
+      "slice": "topics-01-05"
+    },
+    {
+      "id": "POL-0074",
+      "kind": "policy",
+      "policy_kind": "standard",
+      "path": "docs/policies/POL-0074-destructors-do-not-fail.md",
+      "topic": "Building a class",
+      "slice": "topics-01-05"
+    },
+    {
+      "id": "POL-0075",
+      "kind": "policy",
+      "policy_kind": "guideline",
+      "path": "docs/policies/POL-0075-default-constructor-is-cheap-or-absent.md",
+      "topic": "Building a class",
+      "slice": "topics-01-05"
+    },
+    {
+      "id": "POL-0076",
+      "kind": "policy",
+      "policy_kind": "guideline",
+      "path": "docs/policies/POL-0076-factory-for-virtual-behaviour-at-construction.md",
+      "topic": "Building a class",
+      "slice": "topics-01-05"
+    },
+    {
+      "id": "POL-0077",
+      "kind": "policy",
+      "policy_kind": "guideline",
+      "path": "docs/policies/POL-0077-delegating-and-inheriting-constructors.md",
+      "topic": "Building a class",
+      "slice": "topics-01-05"
+    },
+    {
+      "id": "POL-0078",
+      "kind": "policy",
+      "policy_kind": "standard",
+      "path": "docs/policies/POL-0078-assignment-operator-shape.md",
+      "topic": "Building a class",
+      "slice": "topics-01-05"
+    },
+    {
+      "id": "POL-0079",
+      "kind": "policy",
+      "policy_kind": "standard",
+      "path": "docs/policies/POL-0079-copy-copies-move-leaves-valid.md",
+      "topic": "Building a class",
+      "slice": "topics-01-05"
+    },
+    {
+      "id": "POL-0080",
+      "kind": "policy",
+      "policy_kind": "standard",
+      "path": "docs/policies/POL-0080-move-operations-noexcept.md",
+      "topic": "Building a class",
+      "slice": "topics-01-05"
+    },
+    {
+      "id": "POL-0081",
+      "kind": "policy",
+      "policy_kind": "standard",
+      "path": "docs/policies/POL-0081-polymorphic-types-suppress-copy.md",
+      "topic": "Building a class",
+      "slice": "topics-01-05"
+    },
+    {
+      "id": "POL-0082",
+      "kind": "policy",
+      "policy_kind": "standard",
+      "path": "docs/policies/POL-0082-default-and-delete-are-explicit.md",
+      "topic": "Building a class",
+      "slice": "topics-01-05"
+    },
+    {
+      "id": "POL-0083",
+      "kind": "policy",
+      "policy_kind": "standard",
+      "path": "docs/policies/POL-0083-no-virtual-calls-during-construction.md",
+      "topic": "Building a class",
+      "slice": "topics-01-05"
+    },
+    {
+      "id": "POL-0084",
+      "kind": "policy",
+      "policy_kind": "guideline",
+      "path": "docs/policies/POL-0084-swap-is-noexcept-and-cannot-fail.md",
+      "topic": "Building a class",
+      "slice": "topics-01-05"
+    },
+    {
+      "id": "POL-0085",
+      "kind": "policy",
+      "policy_kind": "standard",
+      "path": "docs/policies/POL-0085-equality-is-symmetric.md",
+      "topic": "Building a class",
+      "slice": "topics-01-05"
+    },
+    {
+      "id": "POL-0086",
+      "kind": "policy",
+      "policy_kind": "standard",
+      "path": "docs/policies/POL-0086-hash-is-noexcept.md",
+      "topic": "Building a class",
+      "slice": "topics-01-05"
+    },
+    {
+      "id": "POL-0087",
+      "kind": "policy",
+      "policy_kind": "standard",
+      "path": "docs/policies/POL-0087-no-memcpy-over-objects.md",
+      "topic": "Building a class",
+      "slice": "topics-01-05"
+    },
+    {
+      "id": "POL-0088",
+      "kind": "policy",
+      "policy_kind": "pattern",
+      "path": "docs/policies/POL-0088-container-follows-the-standard-library.md",
+      "topic": "Building a class",
+      "slice": "topics-01-05"
+    },
+    {
+      "id": "POL-0089",
+      "kind": "policy",
+      "policy_kind": "guideline",
+      "path": "docs/policies/POL-0089-resource-handle-pointer-semantics.md",
+      "topic": "Building a class",
+      "slice": "topics-01-05"
+    },
+    {
+      "id": "POL-0090",
+      "kind": "policy",
+      "policy_kind": "standard",
+      "path": "docs/policies/POL-0090-interface-base-is-pure-abstract.md",
+      "topic": "Choosing a representation",
+      "slice": "topics-01-05"
+    },
+    {
+      "id": "POL-0091",
+      "kind": "policy",
+      "policy_kind": "guideline",
+      "path": "docs/policies/POL-0091-abstract-class-needs-no-constructor.md",
+      "topic": "Building a class",
+      "slice": "topics-01-05"
+    },
+    {
+      "id": "POL-0092",
+      "kind": "policy",
+      "policy_kind": "standard",
+      "path": "docs/policies/POL-0092-virtual-override-final-exactly-one.md",
+      "topic": "Building a class",
+      "slice": "topics-01-05"
+    },
+    {
+      "id": "POL-0093",
+      "kind": "policy",
+      "policy_kind": "guideline",
+      "path": "docs/policies/POL-0093-multiple-inheritance-combines-interfaces.md",
+      "topic": "Choosing a representation",
+      "slice": "topics-01-05"
+    },
+    {
+      "id": "POL-0094",
+      "kind": "policy",
+      "policy_kind": "standard",
+      "path": "docs/policies/POL-0094-using-declaration-restores-overload-set.md",
+      "topic": "Building a class",
+      "slice": "topics-01-05"
+    },
+    {
+      "id": "POL-0095",
+      "kind": "policy",
+      "policy_kind": "guideline",
+      "path": "docs/policies/POL-0095-final-sparingly.md",
+      "topic": "Building a class",
+      "slice": "topics-01-05"
+    },
+    {
+      "id": "POL-0096",
+      "kind": "policy",
+      "policy_kind": "standard",
+      "path": "docs/policies/POL-0096-no-differing-default-arguments-on-overrides.md",
+      "topic": "Building a class",
+      "slice": "topics-01-05"
+    },
+    {
+      "id": "POL-0097",
+      "kind": "policy",
+      "policy_kind": "standard",
+      "path": "docs/policies/POL-0097-polymorphic-objects-by-handle.md",
+      "topic": "Choosing a representation",
+      "slice": "topics-01-05"
+    },
+    {
+      "id": "POL-0098",
+      "kind": "policy",
+      "policy_kind": "standard",
+      "path": "docs/policies/POL-0098-virtual-function-over-cast.md",
+      "topic": "Choosing a representation",
+      "slice": "topics-01-05"
+    },
+    {
+      "id": "POL-0099",
+      "kind": "policy",
+      "policy_kind": "standard",
+      "path": "docs/policies/POL-0099-operators-keep-their-meaning.md",
+      "topic": "Building a class",
+      "slice": "topics-01-05"
+    },
+    {
+      "id": "POL-0100",
+      "kind": "policy",
+      "policy_kind": "standard",
+      "path": "docs/policies/POL-0100-symmetric-operators-are-non-member.md",
+      "topic": "Building a class",
+      "slice": "topics-01-05"
+    },
+    {
+      "id": "POL-0101",
+      "kind": "policy",
+      "policy_kind": "standard",
+      "path": "docs/policies/POL-0101-no-implicit-conversion-operators.md",
+      "topic": "Building a class",
+      "slice": "topics-01-05"
+    },
+    {
+      "id": "POL-0102",
+      "kind": "policy",
+      "policy_kind": "guideline",
+      "path": "docs/policies/POL-0102-customization-point-is-an-unqualified-call.md",
+      "topic": "Writing a function",
+      "slice": "topics-01-05"
+    },
+    {
+      "id": "POL-0103",
+      "kind": "policy",
+      "policy_kind": "guideline",
+      "path": "docs/policies/POL-0103-generic-lambda-instead-of-overload-set.md",
+      "topic": "Writing a function",
+      "slice": "topics-01-05"
+    },
+    {
+      "id": "POL-0104",
+      "kind": "policy",
+      "policy_kind": "standard",
+      "path": "docs/policies/POL-0104-no-macros.md",
+      "topic": "Everyday declarations",
+      "slice": "topics-01-05"
+    },
+    {
+      "id": "POL-0105",
+      "kind": "policy",
+      "policy_kind": "standard",
+      "path": "docs/policies/POL-0105-enum-class-always.md",
+      "topic": "Choosing a representation",
+      "slice": "topics-01-05"
+    },
+    {
+      "id": "POL-0106",
+      "kind": "policy",
+      "policy_kind": "guideline",
+      "path": "docs/policies/POL-0106-enum-operations-are-named-functions.md",
+      "topic": "Choosing a representation",
+      "slice": "topics-01-05"
+    },
+    {
+      "id": "POL-0107",
+      "kind": "policy",
+      "policy_kind": "standard",
+      "path": "docs/policies/POL-0107-no-unnamed-enumerations.md",
+      "topic": "Choosing a representation",
+      "slice": "topics-01-05"
+    },
+    {
+      "id": "POL-0108",
+      "kind": "policy",
+      "policy_kind": "guideline",
+      "path": "docs/policies/POL-0108-enum-values-only-when-they-matter.md",
+      "topic": "Choosing a representation",
+      "slice": "topics-01-05"
+    },
+    {
+      "id": "POL-0109",
+      "kind": "policy",
+      "policy_kind": "pattern",
+      "path": "docs/policies/POL-0109-raii.md",
+      "topic": "Deciding ownership",
+      "slice": "topics-01-05"
+    },
+    {
+      "id": "POL-0110",
+      "kind": "policy",
+      "policy_kind": "standard",
+      "path": "docs/policies/POL-0110-no-explicit-new-or-malloc.md",
+      "topic": "Deciding ownership",
+      "slice": "topics-01-05"
+    },
+    {
+      "id": "POL-0111",
+      "kind": "policy",
+      "policy_kind": "standard",
+      "path": "docs/policies/POL-0111-make-unique-and-make-shared.md",
+      "topic": "Deciding ownership",
+      "slice": "topics-01-05"
+    },
+    {
+      "id": "POL-0112",
+      "kind": "policy",
+      "policy_kind": "guideline",
+      "path": "docs/policies/POL-0112-matched-allocation-pairs.md",
+      "topic": "Deciding ownership",
+      "slice": "topics-01-05"
+    },
+    {
+      "id": "POL-0113",
+      "kind": "policy",
+      "policy_kind": "guideline",
+      "path": "docs/policies/POL-0113-weak-ptr-breaks-cycles.md",
+      "topic": "Deciding ownership",
+      "slice": "topics-01-05"
+    },
+    {
+      "id": "POL-0114",
+      "kind": "policy",
+      "policy_kind": "guideline",
+      "path": "docs/policies/POL-0114-custom-smart-pointer-follows-std.md",
+      "topic": "Deciding ownership",
+      "slice": "topics-01-05"
+    },
+    {
+      "id": "POL-0115",
+      "kind": "policy",
+      "policy_kind": "standard",
+      "path": "docs/policies/POL-0115-no-borrow-from-aliased-smart-pointer.md",
+      "topic": "Deciding ownership",
+      "slice": "topics-01-05"
+    },
+    {
+      "id": "POL-0116",
+      "kind": "policy",
+      "policy_kind": "anti-pattern",
+      "path": "docs/policies/POL-0116-reflexive-shared-ptr.md",
+      "topic": "Deciding ownership",
+      "slice": "principles-anti-patterns"
+    },
+    {
+      "id": "POL-0117",
+      "kind": "policy",
+      "policy_kind": "guideline",
+      "path": "docs/policies/POL-0117-abstraction-over-language-feature.md",
+      "topic": "Writing an expression",
+      "slice": "topics-16-20"
+    },
+    {
+      "id": "POL-0118",
+      "kind": "policy",
+      "policy_kind": "standard",
+      "path": "docs/policies/POL-0118-one-definition-of-shared-logic.md",
+      "topic": "Writing a function",
+      "slice": "topics-01-05"
+    },
+    {
+      "id": "POL-0119",
+      "kind": "policy",
+      "policy_kind": "anti-pattern",
+      "path": "docs/policies/POL-0119-parallel-near-duplicates.md",
+      "topic": "Writing a function",
+      "slice": "principles-anti-patterns"
+    },
+    {
+      "id": "POL-0120",
+      "kind": "policy",
+      "policy_kind": "standard",
+      "path": "docs/policies/POL-0120-name-introduced-where-valued.md",
+      "topic": "Everyday declarations",
+      "slice": "topics-01-05"
+    },
+    {
+      "id": "POL-0121",
+      "kind": "policy",
+      "policy_kind": "standard",
+      "path": "docs/policies/POL-0121-one-variable-one-purpose.md",
+      "topic": "Everyday declarations",
+      "slice": "topics-01-05"
+    },
+    {
+      "id": "POL-0122",
+      "kind": "policy",
+      "policy_kind": "guideline",
+      "path": "docs/policies/POL-0122-no-similar-looking-names.md",
+      "topic": "Naming",
+      "slice": "topics-06-10"
+    },
+    {
+      "id": "POL-0123",
+      "kind": "policy",
+      "policy_kind": "standard",
+      "path": "docs/policies/POL-0123-auto-where-the-type-is-redundant.md",
+      "topic": "Everyday declarations",
+      "slice": "topics-01-05"
+    },
+    {
+      "id": "POL-0124",
+      "kind": "policy",
+      "policy_kind": "anti-pattern",
+      "path": "docs/policies/POL-0124-auto-by-default.md",
+      "topic": "Everyday declarations",
+      "slice": "principles-anti-patterns"
+    },
+    {
+      "id": "POL-0125",
+      "kind": "policy",
+      "policy_kind": "standard",
+      "path": "docs/policies/POL-0125-everything-is-initialized.md",
+      "topic": "Everyday declarations",
+      "slice": "topics-01-05"
+    },
+    {
+      "id": "POL-0126",
+      "kind": "policy",
+      "policy_kind": "pattern",
+      "path": "docs/policies/POL-0126-immutability-by-default.md",
+      "topic": "Everyday declarations",
+      "slice": "topics-01-05"
+    },
+    {
+      "id": "POL-0127",
+      "kind": "policy",
+      "policy_kind": "standard",
+      "path": "docs/policies/POL-0127-const-on-what-does-not-mutate.md",
+      "topic": "Everyday declarations",
+      "slice": "topics-01-05"
+    },
+    {
+      "id": "POL-0128",
+      "kind": "policy",
+      "policy_kind": "standard",
+      "path": "docs/policies/POL-0128-fixed-size-local-sequence.md",
+      "topic": "Everyday declarations",
+      "slice": "topics-01-05"
+    },
+    {
+      "id": "POL-0129",
+      "kind": "policy",
+      "policy_kind": "guideline",
+      "path": "docs/policies/POL-0129-lambda-for-complex-const-init.md",
+      "topic": "Everyday declarations",
+      "slice": "topics-01-05"
+    },
+    {
+      "id": "POL-0130",
+      "kind": "policy",
+      "policy_kind": "standard",
+      "path": "docs/policies/POL-0130-simple-expressions.md",
+      "topic": "Writing an expression",
+      "slice": "topics-16-20"
+    },
+    {
+      "id": "POL-0131",
+      "kind": "policy",
+      "policy_kind": "guideline",
+      "path": "docs/policies/POL-0131-simple-pointer-use.md",
+      "topic": "Writing an expression",
+      "slice": "topics-16-20"
+    },
+    {
+      "id": "POL-0132",
+      "kind": "policy",
+      "policy_kind": "standard",
+      "path": "docs/policies/POL-0132-no-evaluation-order-dependence.md",
+      "topic": "Writing an expression",
+      "slice": "topics-16-20"
+    },
+    {
+      "id": "POL-0133",
+      "kind": "policy",
+      "policy_kind": "standard",
+      "path": "docs/policies/POL-0133-named-constants.md",
+      "topic": "Everyday declarations",
+      "slice": "topics-01-05"
+    },
+    {
+      "id": "POL-0134",
+      "kind": "policy",
+      "policy_kind": "anti-pattern",
+      "path": "docs/policies/POL-0134-magic-number.md",
+      "topic": "Everyday declarations",
+      "slice": "principles-anti-patterns"
+    },
+    {
+      "id": "POL-0135",
+      "kind": "policy",
+      "policy_kind": "standard",
+      "path": "docs/policies/POL-0135-signed-arithmetic-unsigned-bits.md",
+      "topic": "Writing an expression",
+      "slice": "topics-16-20"
+    },
+    {
+      "id": "POL-0136",
+      "kind": "policy",
+      "policy_kind": "standard",
+      "path": "docs/policies/POL-0136-no-narrowing-conversions.md",
+      "topic": "Writing an expression",
+      "slice": "topics-16-20"
+    },
+    {
+      "id": "POL-0137",
+      "kind": "policy",
+      "policy_kind": "standard",
+      "path": "docs/policies/POL-0137-nullptr-not-zero.md",
+      "topic": "Writing an expression",
+      "slice": "topics-16-20"
+    },
+    {
+      "id": "POL-0138",
+      "kind": "policy",
+      "policy_kind": "standard",
+      "path": "docs/policies/POL-0138-casts-are-named-and-rare.md",
+      "topic": "Writing an expression",
+      "slice": "topics-16-20"
+    },
+    {
+      "id": "POL-0139",
+      "kind": "policy",
+      "policy_kind": "guideline",
+      "path": "docs/policies/POL-0139-no-range-checks-at-use.md",
+      "topic": "Iterating a sequence",
+      "slice": "topics-16-20"
+    },
+    {
+      "id": "POL-0140",
+      "kind": "policy",
+      "policy_kind": "standard",
+      "path": "docs/policies/POL-0140-move-only-when-moving-out.md",
+      "topic": "Writing an expression",
+      "slice": "topics-16-20"
+    },
+    {
+      "id": "POL-0141",
+      "kind": "policy",
+      "policy_kind": "standard",
+      "path": "docs/policies/POL-0141-no-cross-object-pointer-comparison.md",
+      "topic": "Writing an expression",
+      "slice": "topics-16-20"
+    },
+    {
+      "id": "POL-0142",
+      "kind": "policy",
+      "policy_kind": "standard",
+      "path": "docs/policies/POL-0142-no-invalid-dereference.md",
+      "topic": "Writing an expression",
+      "slice": "topics-16-20"
+    },
+    {
+      "id": "POL-0143",
+      "kind": "policy",
+      "policy_kind": "standard",
+      "path": "docs/policies/POL-0143-switch-over-if-chain.md",
+      "topic": "Choosing a statement",
+      "slice": "topics-11-15"
+    },
+    {
+      "id": "POL-0144",
+      "kind": "policy",
+      "policy_kind": "standard",
+      "path": "docs/policies/POL-0144-no-implicit-fallthrough.md",
+      "topic": "Choosing a statement",
+      "slice": "topics-11-15"
+    },
+    {
+      "id": "POL-0145",
+      "kind": "policy",
+      "policy_kind": "guideline",
+      "path": "docs/policies/POL-0145-default-arm-is-for-common-cases.md",
+      "topic": "Choosing a statement",
+      "slice": "topics-11-15"
+    },
+    {
+      "id": "POL-0146",
+      "kind": "policy",
+      "policy_kind": "standard",
+      "path": "docs/policies/POL-0146-range-for-preferred.md",
+      "topic": "Iterating a sequence",
+      "slice": "topics-16-20"
+    },
+    {
+      "id": "POL-0147",
+      "kind": "policy",
+      "policy_kind": "guideline",
+      "path": "docs/policies/POL-0147-for-when-there-is-a-loop-variable.md",
+      "topic": "Choosing a statement",
+      "slice": "topics-11-15"
+    },
+    {
+      "id": "POL-0148",
+      "kind": "policy",
+      "policy_kind": "standard",
+      "path": "docs/policies/POL-0148-loop-variable-scope-and-stability.md",
+      "topic": "Iterating a sequence",
+      "slice": "topics-16-20"
+    },
+    {
+      "id": "POL-0149",
+      "kind": "policy",
+      "policy_kind": "guideline",
+      "path": "docs/policies/POL-0149-no-do-statement.md",
+      "topic": "Choosing a statement",
+      "slice": "topics-11-15"
+    },
+    {
+      "id": "POL-0150",
+      "kind": "policy",
+      "policy_kind": "standard",
+      "path": "docs/policies/POL-0150-no-goto.md",
+      "topic": "Choosing a statement",
+      "slice": "topics-11-15"
+    },
+    {
+      "id": "POL-0151",
+      "kind": "policy",
+      "policy_kind": "guideline",
+      "path": "docs/policies/POL-0151-minimize-break-and-continue.md",
+      "topic": "Choosing a statement",
+      "slice": "topics-11-15"
+    },
+    {
+      "id": "POL-0152",
+      "kind": "policy",
+      "policy_kind": "standard",
+      "path": "docs/policies/POL-0152-no-unnamed-local.md",
+      "topic": "Everyday declarations",
+      "slice": "topics-01-05"
+    },
+    {
+      "id": "POL-0153",
+      "kind": "policy",
+      "policy_kind": "guideline",
+      "path": "docs/policies/POL-0153-visible-empty-statement.md",
+      "topic": "Choosing a statement",
+      "slice": "topics-11-15"
+    },
+    {
+      "id": "POL-0154",
+      "kind": "policy",
+      "policy_kind": "standard",
+      "path": "docs/policies/POL-0154-no-redundant-boolean-comparison.md",
+      "topic": "Writing an expression",
+      "slice": "topics-16-20"
+    },
+    {
+      "id": "POL-0155",
+      "kind": "policy",
+      "policy_kind": "standard",
+      "path": "docs/policies/POL-0155-no-overflow-or-divide-by-zero.md",
+      "topic": "Writing an expression",
+      "slice": "topics-16-20"
+    },
+    {
+      "id": "POL-0156",
+      "kind": "policy",
+      "policy_kind": "standard",
+      "path": "docs/policies/POL-0156-optimize-what-measurement-named.md",
+      "topic": "Optimizing",
+      "slice": "topics-16-20"
+    },
+    {
+      "id": "POL-0157",
+      "kind": "policy",
+      "policy_kind": "guideline",
+      "path": "docs/policies/POL-0157-design-to-enable-optimization.md",
+      "topic": "Optimizing",
+      "slice": "topics-16-20"
+    },
+    {
+      "id": "POL-0158",
+      "kind": "policy",
+      "policy_kind": "guideline",
+      "path": "docs/policies/POL-0158-remove-redundant-indirection.md",
+      "topic": "Optimizing",
+      "slice": "topics-16-20"
+    },
+    {
+      "id": "POL-0159",
+      "kind": "policy",
+      "policy_kind": "guideline",
+      "path": "docs/policies/POL-0159-minimize-allocations.md",
+      "topic": "Optimizing",
+      "slice": "topics-16-20"
+    },
+    {
+      "id": "POL-0160",
+      "kind": "policy",
+      "policy_kind": "guideline",
+      "path": "docs/policies/POL-0160-layout-follows-access.md",
+      "topic": "Optimizing",
+      "slice": "topics-16-20"
+    },
+    {
+      "id": "POL-0161",
+      "kind": "policy",
+      "policy_kind": "standard",
+      "path": "docs/policies/POL-0161-no-allocation-on-the-critical-path.md",
+      "topic": "Real-time loops",
+      "slice": "topics-11-15"
+    },
+    {
+      "id": "POL-0162",
+      "kind": "policy",
+      "policy_kind": "standard",
+      "path": "docs/policies/POL-0162-no-context-switches-on-the-critical-path.md",
+      "topic": "Real-time loops",
+      "slice": "topics-11-15"
+    },
+    {
+      "id": "POL-0163",
+      "kind": "policy",
+      "policy_kind": "standard",
+      "path": "docs/policies/POL-0163-single-threaded-by-contract.md",
+      "topic": "Running concurrently",
+      "slice": "topics-16-20"
+    },
+    {
+      "id": "POL-0164",
+      "kind": "policy",
+      "policy_kind": "anti-pattern",
+      "path": "docs/policies/POL-0164-cargo-culted-mutex.md",
+      "topic": "Running concurrently",
+      "slice": "principles-anti-patterns"
+    },
+    {
+      "id": "POL-0165",
+      "kind": "policy",
+      "policy_kind": "standard",
+      "path": "docs/policies/POL-0165-no-data-races.md",
+      "topic": "Running concurrently",
+      "slice": "topics-16-20"
+    },
+    {
+      "id": "POL-0166",
+      "kind": "policy",
+      "policy_kind": "standard",
+      "path": "docs/policies/POL-0166-think-in-tasks.md",
+      "topic": "Running concurrently",
+      "slice": "topics-16-20"
+    },
+    {
+      "id": "POL-0167",
+      "kind": "policy",
+      "policy_kind": "standard",
+      "path": "docs/policies/POL-0167-volatile-is-not-synchronization.md",
+      "topic": "Running concurrently",
+      "slice": "topics-16-20"
+    },
+    {
+      "id": "POL-0169",
+      "kind": "policy",
+      "policy_kind": "standard",
+      "path": "docs/policies/POL-0169-locks-are-raii.md",
+      "topic": "Running concurrently",
+      "slice": "topics-16-20"
+    },
+    {
+      "id": "POL-0170",
+      "kind": "policy",
+      "policy_kind": "standard",
+      "path": "docs/policies/POL-0170-acquire-multiple-locks-atomically.md",
+      "topic": "Running concurrently",
+      "slice": "topics-16-20"
+    },
+    {
+      "id": "POL-0171",
+      "kind": "policy",
+      "policy_kind": "standard",
+      "path": "docs/policies/POL-0171-no-unknown-code-under-a-lock.md",
+      "topic": "Running concurrently",
+      "slice": "topics-16-20"
+    },
+    {
+      "id": "POL-0172",
+      "kind": "policy",
+      "policy_kind": "standard",
+      "path": "docs/policies/POL-0172-threads-are-owned-and-joined.md",
+      "topic": "Running concurrently",
+      "slice": "topics-16-20"
+    },
+    {
+      "id": "POL-0173",
+      "kind": "policy",
+      "policy_kind": "standard",
+      "path": "docs/policies/POL-0173-pass-data-between-threads-by-value.md",
+      "topic": "Running concurrently",
+      "slice": "topics-16-20"
+    },
+    {
+      "id": "POL-0174",
+      "kind": "policy",
+      "policy_kind": "standard",
+      "path": "docs/policies/POL-0174-wait-on-a-condition.md",
+      "topic": "Running concurrently",
+      "slice": "topics-16-20"
+    },
+    {
+      "id": "POL-0175",
+      "kind": "policy",
+      "policy_kind": "guideline",
+      "path": "docs/policies/POL-0175-short-critical-sections.md",
+      "topic": "Running concurrently",
+      "slice": "topics-16-20"
+    },
+    {
+      "id": "POL-0176",
+      "kind": "policy",
+      "policy_kind": "pattern",
+      "path": "docs/policies/POL-0176-mutex-lives-with-its-data.md",
+      "topic": "Running concurrently",
+      "slice": "topics-16-20"
+    },
+    {
+      "id": "POL-0177",
+      "kind": "policy",
+      "policy_kind": "standard",
+      "path": "docs/policies/POL-0177-lock-free-is-a-last-resort.md",
+      "topic": "Running concurrently",
+      "slice": "topics-16-20"
+    },
+    {
+      "id": "POL-0178",
+      "kind": "policy",
+      "policy_kind": "standard",
+      "path": "docs/policies/POL-0178-one-time-init-is-provided.md",
+      "topic": "Running concurrently",
+      "slice": "topics-16-20"
+    },
+    {
+      "id": "POL-0179",
+      "kind": "policy",
+      "policy_kind": "standard",
+      "path": "docs/policies/POL-0179-coroutine-parameters-by-value.md",
+      "topic": "Coroutines",
+      "slice": "topics-11-15"
+    },
+    {
+      "id": "POL-0180",
+      "kind": "policy",
+      "policy_kind": "standard",
+      "path": "docs/policies/POL-0180-coroutine-lambda-captures-by-value.md",
+      "topic": "Coroutines",
+      "slice": "topics-11-15"
+    },
+    {
+      "id": "POL-0181",
+      "kind": "policy",
+      "policy_kind": "standard",
+      "path": "docs/policies/POL-0181-no-locks-across-suspension.md",
+      "topic": "Coroutines",
+      "slice": "topics-11-15"
+    },
+    {
+      "id": "POL-0182",
+      "kind": "policy",
+      "policy_kind": "guideline",
+      "path": "docs/policies/POL-0182-bound-coroutine-chain-depth.md",
+      "topic": "Coroutines",
+      "slice": "topics-11-15"
+    },
+    {
+      "id": "POL-0183",
+      "kind": "policy",
+      "policy_kind": "pattern",
+      "path": "docs/policies/POL-0183-failure-mechanism.md",
+      "topic": "Handling failure",
+      "slice": "topics-06-10"
+    },
+    {
+      "id": "POL-0184",
+      "kind": "policy",
+      "policy_kind": "standard",
+      "path": "docs/policies/POL-0184-exceptions-are-exceptional.md",
+      "topic": "Handling failure",
+      "slice": "topics-06-10"
+    },
+    {
+      "id": "POL-0185",
+      "kind": "policy",
+      "policy_kind": "standard",
+      "path": "docs/policies/POL-0185-no-throw-while-owning.md",
+      "topic": "Handling failure",
+      "slice": "topics-06-10"
+    },
+    {
+      "id": "POL-0186",
+      "kind": "policy",
+      "policy_kind": "standard",
+      "path": "docs/policies/POL-0186-exception-types-and-catching.md",
+      "topic": "Handling failure",
+      "slice": "topics-06-10"
+    },
+    {
+      "id": "POL-0187",
+      "kind": "policy",
+      "policy_kind": "standard",
+      "path": "docs/policies/POL-0187-translate-exceptions-once.md",
+      "topic": "Handling failure",
+      "slice": "topics-06-10"
+    },
+    {
+      "id": "POL-0188",
+      "kind": "policy",
+      "policy_kind": "anti-pattern",
+      "path": "docs/policies/POL-0188-mid-stack-exception-translation.md",
+      "topic": "Handling failure",
+      "slice": "principles-anti-patterns"
+    },
+    {
+      "id": "POL-0189",
+      "kind": "policy",
+      "policy_kind": "guideline",
+      "path": "docs/policies/POL-0189-scope-guard-for-cleanup.md",
+      "topic": "Handling failure",
+      "slice": "topics-06-10"
+    },
+    {
+      "id": "POL-0190",
+      "kind": "policy",
+      "policy_kind": "standard",
+      "path": "docs/policies/POL-0190-exception-free-module-convention.md",
+      "topic": "Handling failure",
+      "slice": "topics-06-10"
+    },
+    {
+      "id": "POL-0191",
+      "kind": "policy",
+      "policy_kind": "standard",
+      "path": "docs/policies/POL-0191-no-error-state-in-globals.md",
+      "topic": "Handling failure",
+      "slice": "topics-06-10"
+    },
+    {
+      "id": "POL-0192",
+      "kind": "policy",
+      "policy_kind": "standard",
+      "path": "docs/policies/POL-0192-no-exception-specifications.md",
+      "topic": "Handling failure",
+      "slice": "topics-06-10"
+    },
+    {
+      "id": "POL-0193",
+      "kind": "policy",
+      "policy_kind": "standard",
+      "path": "docs/policies/POL-0193-no-setjmp.md",
+      "topic": "Handling failure",
+      "slice": "topics-06-10"
+    },
+    {
+      "id": "POL-0194",
+      "kind": "policy",
+      "policy_kind": "standard",
+      "path": "docs/policies/POL-0194-reading-validates.md",
+      "topic": "Placing validation",
+      "slice": "topics-06-10"
+    },
+    {
+      "id": "POL-0195",
+      "kind": "policy",
+      "policy_kind": "standard",
+      "path": "docs/policies/POL-0195-templatize-on-the-third-caller.md",
+      "topic": "Writing a function",
+      "slice": "topics-01-05"
+    },
+    {
+      "id": "POL-0196",
+      "kind": "policy",
+      "policy_kind": "anti-pattern",
+      "path": "docs/policies/POL-0196-premature-template.md",
+      "topic": "Writing a function",
+      "slice": "principles-anti-patterns"
+    },
+    {
+      "id": "POL-0197",
+      "kind": "policy",
+      "policy_kind": "standard",
+      "path": "docs/policies/POL-0197-no-expression-templates.md",
+      "topic": "Writing a function",
+      "slice": "topics-01-05"
+    },
+    {
+      "id": "POL-0198",
+      "kind": "policy",
+      "policy_kind": "guideline",
+      "path": "docs/policies/POL-0198-generic-and-dynamic-stay-separate.md",
+      "topic": "Choosing a representation",
+      "slice": "topics-01-05"
+    },
+    {
+      "id": "POL-0199",
+      "kind": "policy",
+      "policy_kind": "standard",
+      "path": "docs/policies/POL-0199-constrain-every-template-parameter.md",
+      "topic": "Writing a function",
+      "slice": "topics-01-05"
+    },
+    {
+      "id": "POL-0200",
+      "kind": "policy",
+      "policy_kind": "standard",
+      "path": "docs/policies/POL-0200-concepts-name-semantics.md",
+      "topic": "Writing a function",
+      "slice": "topics-01-05"
+    },
+    {
+      "id": "POL-0201",
+      "kind": "policy",
+      "policy_kind": "standard",
+      "path": "docs/policies/POL-0201-no-complementary-constraints.md",
+      "topic": "Writing a function",
+      "slice": "topics-01-05"
+    },
+    {
+      "id": "POL-0202",
+      "kind": "policy",
+      "policy_kind": "guideline",
+      "path": "docs/policies/POL-0202-tag-types-for-semantic-difference.md",
+      "topic": "Writing a function",
+      "slice": "topics-01-05"
+    },
+    {
+      "id": "POL-0203",
+      "kind": "policy",
+      "policy_kind": "guideline",
+      "path": "docs/policies/POL-0203-function-objects-to-algorithms.md",
+      "topic": "Writing a function",
+      "slice": "topics-01-05"
+    },
+    {
+      "id": "POL-0204",
+      "kind": "policy",
+      "policy_kind": "standard",
+      "path": "docs/policies/POL-0204-aliases-are-using-declarations.md",
+      "topic": "Everyday declarations",
+      "slice": "topics-01-05"
+    },
+    {
+      "id": "POL-0205",
+      "kind": "policy",
+      "policy_kind": "guideline",
+      "path": "docs/policies/POL-0205-deduce-through-a-factory.md",
+      "topic": "Writing a function",
+      "slice": "topics-01-05"
+    },
+    {
+      "id": "POL-0206",
+      "kind": "policy",
+      "policy_kind": "standard",
+      "path": "docs/policies/POL-0206-no-unconstrained-templates-with-common-names.md",
+      "topic": "Writing a function",
+      "slice": "topics-01-05"
+    },
+    {
+      "id": "POL-0207",
+      "kind": "policy",
+      "policy_kind": "standard",
+      "path": "docs/policies/POL-0207-minimize-template-context-dependencies.md",
+      "topic": "Writing a function",
+      "slice": "topics-01-05"
+    },
+    {
+      "id": "POL-0208",
+      "kind": "policy",
+      "policy_kind": "guideline",
+      "path": "docs/policies/POL-0208-do-not-over-parameterize.md",
+      "topic": "Writing a function",
+      "slice": "topics-01-05"
+    },
+    {
+      "id": "POL-0209",
+      "kind": "policy",
+      "policy_kind": "standard",
+      "path": "docs/policies/POL-0209-specialize-classes-overload-functions.md",
+      "topic": "Writing a function",
+      "slice": "topics-01-05"
+    },
+    {
+      "id": "POL-0210",
+      "kind": "policy",
+      "policy_kind": "guideline",
+      "path": "docs/policies/POL-0210-templates-and-hierarchies-do-not-mix.md",
+      "topic": "Choosing a representation",
+      "slice": "topics-01-05"
+    },
+    {
+      "id": "POL-0211",
+      "kind": "policy",
+      "policy_kind": "guideline",
+      "path": "docs/policies/POL-0211-non-template-core-for-abi.md",
+      "topic": "Crossing the FFI boundary",
+      "slice": "topics-06-10"
+    },
+    {
+      "id": "POL-0212",
+      "kind": "policy",
+      "policy_kind": "standard",
+      "path": "docs/policies/POL-0212-variadic-only-for-heterogeneous-arguments.md",
+      "topic": "Writing a function",
+      "slice": "topics-01-05"
+    },
+    {
+      "id": "POL-0213",
+      "kind": "policy",
+      "policy_kind": "standard",
+      "path": "docs/policies/POL-0213-metaprogramming-is-a-last-resort.md",
+      "topic": "Writing a function",
+      "slice": "topics-01-05"
+    },
+    {
+      "id": "POL-0214",
+      "kind": "policy",
+      "policy_kind": "guideline",
+      "path": "docs/policies/POL-0214-no-accidentally-non-generic-code.md",
+      "topic": "Writing a function",
+      "slice": "topics-01-05"
+    },
+    {
+      "id": "POL-0215",
+      "kind": "policy",
+      "policy_kind": "standard",
+      "path": "docs/policies/POL-0215-static-assert-the-concept.md",
+      "topic": "Writing a function",
+      "slice": "topics-01-05"
+    },
+    {
+      "id": "POL-0216",
+      "kind": "policy",
+      "policy_kind": "standard",
+      "path": "docs/policies/POL-0216-c-code-enters-through-a-wrapper.md",
+      "topic": "Crossing the FFI boundary",
+      "slice": "topics-06-10"
+    },
+    {
+      "id": "POL-0217",
+      "kind": "policy",
+      "policy_kind": "standard",
+      "path": "docs/policies/POL-0217-headers-declare-sources-define.md",
+      "topic": "Structuring modules and layers",
+      "slice": "topics-06-10"
+    },
+    {
+      "id": "POL-0218",
+      "kind": "policy",
+      "policy_kind": "standard",
+      "path": "docs/policies/POL-0218-dependencies-form-a-dag.md",
+      "topic": "Structuring modules and layers",
+      "slice": "topics-06-10"
+    },
+    {
+      "id": "POL-0219",
+      "kind": "policy",
+      "policy_kind": "guideline",
+      "path": "docs/policies/POL-0219-reusable-parts-become-libraries.md",
+      "topic": "Structuring modules and layers",
+      "slice": "topics-06-10"
+    },
+    {
+      "id": "POL-0220",
+      "kind": "policy",
+      "policy_kind": "standard",
+      "path": "docs/policies/POL-0220-no-additions-to-namespace-std.md",
+      "topic": "Writing an expression",
+      "slice": "topics-16-20"
+    },
+    {
+      "id": "POL-0221",
+      "kind": "policy",
+      "policy_kind": "guideline",
+      "path": "docs/policies/POL-0221-type-safe-standard-library-use.md",
+      "topic": "Writing an expression",
+      "slice": "topics-16-20"
+    },
+    {
+      "id": "POL-0222",
+      "kind": "policy",
+      "policy_kind": "standard",
+      "path": "docs/policies/POL-0222-vector-by-default.md",
+      "topic": "Choosing a representation",
+      "slice": "topics-01-05"
+    },
+    {
+      "id": "POL-0223",
+      "kind": "policy",
+      "policy_kind": "standard",
+      "path": "docs/policies/POL-0223-own-with-string-refer-with-view.md",
+      "topic": "Writing an expression",
+      "slice": "topics-16-20"
+    },
+    {
+      "id": "POL-0224",
+      "kind": "policy",
+      "policy_kind": "anti-pattern",
+      "path": "docs/policies/POL-0224-stored-view.md",
+      "topic": "Choosing a representation",
+      "slice": "principles-anti-patterns"
+    },
+    {
+      "id": "POL-0225",
+      "kind": "policy",
+      "policy_kind": "standard",
+      "path": "docs/policies/POL-0225-no-stream-output-in-library-code.md",
+      "topic": "Logging",
+      "slice": "topics-11-15"
+    },
+    {
+      "id": "POL-0226",
+      "kind": "policy",
+      "policy_kind": "standard",
+      "path": "docs/policies/POL-0226-no-endl.md",
+      "topic": "Logging",
+      "slice": "topics-11-15"
+    },
+    {
+      "id": "POL-0227",
+      "kind": "policy",
+      "policy_kind": "standard",
+      "path": "docs/policies/POL-0227-no-type-punning.md",
+      "topic": "Writing an expression",
+      "slice": "topics-16-20"
+    },
+    {
+      "id": "POL-0228",
+      "kind": "policy",
+      "policy_kind": "standard",
+      "path": "docs/policies/POL-0228-four-part-error-message.md",
+      "topic": "Handling failure",
+      "slice": "topics-06-10"
+    },
+    {
+      "id": "POL-0229",
+      "kind": "policy",
+      "policy_kind": "standard",
+      "path": "docs/policies/POL-0229-strong-typedef-threshold.md",
+      "topic": "Choosing a representation",
+      "slice": "topics-01-05"
+    },
+    {
+      "id": "POL-0230",
+      "kind": "policy",
+      "policy_kind": "standard",
+      "path": "docs/policies/POL-0230-binding-layer-is-a-declared-escape-hatch.md",
+      "topic": "Crossing the FFI boundary",
+      "slice": "topics-06-10"
+    },
+    {
+      "id": "POL-0231",
+      "kind": "policy",
+      "policy_kind": "standard",
+      "path": "docs/policies/POL-0231-unimplemented-function-is-absent-or-loud.md",
+      "topic": "Writing a function",
+      "slice": "topics-01-05"
+    },
+    {
+      "id": "POL-0232",
+      "kind": "policy",
+      "policy_kind": "anti-pattern",
+      "path": "docs/policies/POL-0232-empty-stub-public-function.md",
+      "topic": "Writing a function",
+      "slice": "principles-anti-patterns"
+    },
+    {
+      "id": "POL-0233",
+      "kind": "policy",
+      "policy_kind": "standard",
+      "path": "docs/policies/POL-0233-names-cross-unchanged.md",
+      "topic": "Crossing the FFI boundary",
+      "slice": "topics-06-10"
+    },
+    {
+      "id": "POL-0234",
+      "kind": "policy",
+      "policy_kind": "standard",
+      "path": "docs/policies/POL-0234-caller-validates-before-crossing.md",
+      "topic": "Crossing the FFI boundary",
+      "slice": "topics-06-10"
+    },
+    {
+      "id": "POL-0235",
+      "kind": "policy",
+      "policy_kind": "standard",
+      "path": "docs/policies/POL-0235-absence-maps-to-absence.md",
+      "topic": "Crossing the FFI boundary",
+      "slice": "topics-06-10"
+    },
+    {
+      "id": "POL-0236",
+      "kind": "policy",
+      "policy_kind": "standard",
+      "path": "docs/policies/POL-0236-units-convert-at-the-outer-boundary.md",
+      "topic": "Crossing the FFI boundary",
+      "slice": "topics-06-10"
+    },
+    {
+      "id": "POL-0237",
+      "kind": "policy",
+      "policy_kind": "standard",
+      "path": "docs/policies/POL-0237-ffi-ownership-is-explicit.md",
+      "topic": "Crossing the FFI boundary",
+      "slice": "topics-06-10"
+    },
+    {
+      "id": "POL-0238",
+      "kind": "policy",
+      "policy_kind": "standard",
+      "path": "docs/policies/POL-0238-shared-schema-has-one-source-of-truth.md",
+      "topic": "Crossing the FFI boundary",
+      "slice": "topics-06-10"
+    },
+    {
+      "id": "POL-0239",
+      "kind": "policy",
+      "policy_kind": "standard",
+      "path": "docs/policies/POL-0239-wrapper-type-lives-at-its-layer.md",
+      "topic": "Structuring modules and layers",
+      "slice": "topics-06-10"
+    },
+    {
+      "id": "POL-0240",
+      "kind": "policy",
+      "policy_kind": "standard",
+      "path": "docs/policies/POL-0240-test-where-the-logic-lives.md",
+      "topic": "Writing tests",
+      "slice": "topics-11-15"
+    },
+    {
+      "id": "POL-0241",
+      "kind": "policy",
+      "policy_kind": "standard",
+      "path": "docs/policies/POL-0241-do-not-test-the-language.md",
+      "topic": "Writing tests",
+      "slice": "topics-11-15"
+    },
+    {
+      "id": "POL-0242",
+      "kind": "policy",
+      "policy_kind": "standard",
+      "path": "docs/policies/POL-0242-test-the-invariant-not-the-accessor.md",
+      "topic": "Writing tests",
+      "slice": "topics-11-15"
+    },
+    {
+      "id": "POL-0243",
+      "kind": "policy",
+      "policy_kind": "standard",
+      "path": "docs/policies/POL-0243-round-trip-asserts-semantic-equivalence.md",
+      "topic": "Writing tests",
+      "slice": "topics-11-15"
+    },
+    {
+      "id": "POL-0244",
+      "kind": "policy",
+      "policy_kind": "standard",
+      "path": "docs/policies/POL-0244-one-assertion-of-a-behaviour.md",
+      "topic": "Writing tests",
+      "slice": "topics-11-15"
+    },
+    {
+      "id": "POL-0245",
+      "kind": "policy",
+      "policy_kind": "standard",
+      "path": "docs/policies/POL-0245-use-the-project-test-framework.md",
+      "topic": "Writing tests",
+      "slice": "topics-11-15"
+    },
+    {
+      "id": "POL-0246",
+      "kind": "policy",
+      "policy_kind": "standard",
+      "path": "docs/policies/POL-0246-golden-tested-structured-output.md",
+      "topic": "Writing tests",
+      "slice": "topics-11-15"
+    },
+    {
+      "id": "POL-0247",
+      "kind": "policy",
+      "policy_kind": "standard",
+      "path": "docs/policies/POL-0247-include-a-test-that-would-fail.md",
+      "topic": "Writing tests",
+      "slice": "topics-11-15"
+    },
+    {
+      "id": "POL-0248",
+      "kind": "policy",
+      "policy_kind": "standard",
+      "path": "docs/policies/POL-0248-log-levels-have-fixed-meanings.md",
+      "topic": "Logging",
+      "slice": "topics-11-15"
+    },
+    {
+      "id": "STD-0001",
+      "kind": "standard",
+      "path": "docs/standard/STD-0001-file-extensions.md",
+      "group": "files-and-layout",
+      "slice": "coding-standard"
+    },
+    {
+      "id": "STD-0002",
+      "kind": "standard",
+      "path": "docs/standard/STD-0002-file-naming.md",
+      "group": "files-and-layout",
+      "slice": "coding-standard"
+    },
+    {
+      "id": "STD-0003",
+      "kind": "standard",
+      "path": "docs/standard/STD-0003-directory-and-namespace-layout.md",
+      "group": "files-and-layout",
+      "slice": "coding-standard"
+    },
+    {
+      "id": "STD-0004",
+      "kind": "standard",
+      "path": "docs/standard/STD-0004-include-guards.md",
+      "group": "files-and-layout",
+      "slice": "coding-standard"
+    },
+    {
+      "id": "STD-0005",
+      "kind": "standard",
+      "path": "docs/standard/STD-0005-include-order-and-form.md",
+      "group": "files-and-layout",
+      "slice": "coding-standard"
+    },
+    {
+      "id": "STD-0006",
+      "kind": "standard",
+      "path": "docs/standard/STD-0006-using-namespace-placement.md",
+      "group": "files-and-layout",
+      "slice": "coding-standard"
+    },
+    {
+      "id": "STD-0007",
+      "kind": "standard",
+      "path": "docs/standard/STD-0007-anonymous-namespace.md",
+      "group": "files-and-layout",
+      "slice": "coding-standard"
+    },
+    {
+      "id": "STD-0008",
+      "kind": "standard",
+      "path": "docs/standard/STD-0008-test-file-location.md",
+      "group": "files-and-layout",
+      "slice": "coding-standard"
+    },
+    {
+      "id": "STD-0009",
+      "kind": "standard",
+      "path": "docs/standard/STD-0009-case-table.md",
+      "group": "names",
+      "slice": "coding-standard"
+    },
+    {
+      "id": "STD-0010",
+      "kind": "standard",
+      "path": "docs/standard/STD-0010-operation-verb-vocabulary.md",
+      "group": "names",
+      "slice": "coding-standard"
+    },
+    {
+      "id": "STD-0011",
+      "kind": "standard",
+      "path": "docs/standard/STD-0011-return-contract-prefixes.md",
+      "group": "names",
+      "slice": "coding-standard"
+    },
+    {
+      "id": "STD-0012",
+      "kind": "standard",
+      "path": "docs/standard/STD-0012-unit-suffixes.md",
+      "group": "names",
+      "slice": "coding-standard"
+    },
+    {
+      "id": "STD-0013",
+      "kind": "standard",
+      "path": "docs/standard/STD-0013-name-length-against-scope.md",
+      "group": "names",
+      "slice": "coding-standard"
+    },
+    {
+      "id": "STD-0014",
+      "kind": "standard",
+      "path": "docs/standard/STD-0014-indentation-and-brace-style.md",
+      "group": "layout-of-the-line",
+      "slice": "coding-standard"
+    },
+    {
+      "id": "STD-0015",
+      "kind": "standard",
+      "path": "docs/standard/STD-0015-declarator-layout.md",
+      "group": "layout-of-the-line",
+      "slice": "coding-standard"
+    },
+    {
+      "id": "STD-0016",
+      "kind": "standard",
+      "path": "docs/standard/STD-0016-const-notation.md",
+      "group": "layout-of-the-line",
+      "slice": "coding-standard"
+    },
+    {
+      "id": "STD-0017",
+      "kind": "standard",
+      "path": "docs/standard/STD-0017-one-thing-per-line.md",
+      "group": "layout-of-the-line",
+      "slice": "coding-standard"
+    },
+    {
+      "id": "STD-0018",
+      "kind": "standard",
+      "path": "docs/standard/STD-0018-whitespace.md",
+      "group": "layout-of-the-line",
+      "slice": "coding-standard"
+    },
+    {
+      "id": "STD-0019",
+      "kind": "standard",
+      "path": "docs/standard/STD-0019-literal-readability.md",
+      "group": "layout-of-the-line",
+      "slice": "coding-standard"
+    },
+    {
+      "id": "STD-0020",
+      "kind": "standard",
+      "path": "docs/standard/STD-0020-member-declaration-order.md",
+      "group": "layout-of-the-line",
+      "slice": "coding-standard"
+    },
+    {
+      "id": "STD-0021",
+      "kind": "standard",
+      "path": "docs/standard/STD-0021-empty-argument-lists.md",
+      "group": "layout-of-the-line",
+      "slice": "coding-standard"
+    },
+    {
+      "id": "STD-0022",
+      "kind": "standard",
+      "path": "docs/standard/STD-0022-what-a-comment-carries.md",
+      "group": "comments",
+      "slice": "coding-standard"
+    },
+    {
+      "id": "STD-0023",
+      "kind": "standard",
+      "path": "docs/standard/STD-0023-language-standard-declaration.md",
+      "group": "toolchain",
+      "slice": "coding-standard"
+    },
+    {
+      "id": "STD-0024",
+      "kind": "standard",
+      "path": "docs/standard/STD-0024-warning-set.md",
+      "group": "toolchain",
+      "slice": "coding-standard"
+    },
+    {
+      "id": "STD-0025",
+      "kind": "standard",
+      "path": "docs/standard/STD-0025-sanitizer-configuration.md",
+      "group": "toolchain",
+      "slice": "coding-standard"
+    },
+    {
+      "id": "STD-0026",
+      "kind": "standard",
+      "path": "docs/standard/STD-0026-static-analysis-check-families.md",
+      "group": "toolchain",
+      "slice": "coding-standard"
+    },
+    {
+      "id": "STD-0027",
+      "kind": "standard",
+      "path": "docs/standard/STD-0027-formatter-configuration.md",
+      "group": "toolchain",
+      "slice": "coding-standard"
+    },
+    {
+      "id": "STD-0028",
+      "kind": "standard",
+      "path": "docs/standard/STD-0028-build-system.md",
+      "group": "toolchain",
+      "slice": "coding-standard"
+    },
+    {
+      "id": "STD-0029",
+      "kind": "standard",
+      "path": "docs/standard/STD-0029-test-framework.md",
+      "group": "toolchain",
+      "slice": "coding-standard"
+    },
+    {
+      "id": "EXM-0001",
+      "kind": "exemplar",
+      "path": "docs/exemplars/EXM-0001-value-type/exemplar.md",
+      "slice": "exemplars-integration"
+    },
+    {
+      "id": "EXM-0002",
+      "kind": "exemplar",
+      "path": "docs/exemplars/EXM-0002-module-boundary/exemplar.md",
+      "slice": "exemplars-integration"
+    },
+    {
+      "id": "EXM-0003",
+      "kind": "exemplar",
+      "path": "docs/exemplars/EXM-0003-stateful-class/exemplar.md",
+      "slice": "exemplars-integration"
+    },
+    {
+      "id": "EXM-0004",
+      "kind": "exemplar",
+      "path": "docs/exemplars/EXM-0004-resource-owner/exemplar.md",
+      "slice": "exemplars-integration"
+    },
+    {
+      "id": "EXM-0005",
+      "kind": "exemplar",
+      "path": "docs/exemplars/EXM-0005-non-owning-collaborator/exemplar.md",
+      "slice": "exemplars-integration"
+    },
+    {
+      "id": "EXM-0006",
+      "kind": "exemplar",
+      "path": "docs/exemplars/EXM-0006-validated-boundary/exemplar.md",
+      "slice": "exemplars-integration"
+    },
+    {
+      "id": "EXM-0007",
+      "kind": "exemplar",
+      "path": "docs/exemplars/EXM-0007-fallible-operation/exemplar.md",
+      "slice": "exemplars-integration"
+    },
+    {
+      "id": "EXM-0008",
+      "kind": "exemplar",
+      "path": "docs/exemplars/EXM-0008-alternatives/exemplar.md",
+      "slice": "exemplars-integration"
+    },
+    {
+      "id": "EXM-0009",
+      "kind": "exemplar",
+      "path": "docs/exemplars/EXM-0009-collection-operation/exemplar.md",
+      "slice": "exemplars-integration"
+    },
+    {
+      "id": "EXM-0010",
+      "kind": "exemplar",
+      "path": "docs/exemplars/EXM-0010-thread-owner/exemplar.md",
+      "slice": "exemplars-integration"
+    },
+    {
+      "id": "EXM-0011",
+      "kind": "exemplar",
+      "path": "docs/exemplars/EXM-0011-shared-state/exemplar.md",
+      "slice": "exemplars-integration"
+    },
+    {
+      "id": "EXM-0012",
+      "kind": "exemplar",
+      "path": "docs/exemplars/EXM-0012-realtime-loop/exemplar.md",
+      "slice": "exemplars-integration"
+    },
+    {
+      "id": "EXM-0013",
+      "kind": "exemplar",
+      "path": "docs/exemplars/EXM-0013-ffi-boundary/exemplar.md",
+      "slice": "exemplars-integration"
+    },
+    {
+      "id": "EXM-0014",
+      "kind": "exemplar",
+      "path": "docs/exemplars/EXM-0014-coroutine/exemplar.md",
+      "slice": "exemplars-integration"
+    }
+  ]
+}

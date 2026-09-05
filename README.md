@@ -126,6 +126,10 @@ prove that every C++ decision is technically correct or properly scoped. The
 [canonical corpus audit](https://github.com/qprime/cpp-policy-compiler/issues/28)
 tracks that review before broad brownfield normalization.
 
+Maintainers record that semantic review under [`audits/corpus-v1/`](audits/corpus-v1/).
+`polc audit check --root audits/corpus-v1` deterministically checks inventory and
+report coverage; it does not attempt to score technical correctness.
+
 The original [project harness design](https://github.com/qprime/cpp-policy-compiler/issues/17)
 records the reasoning behind the managed lifecycle and distribution model.
 

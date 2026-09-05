@@ -331,6 +331,21 @@ def main(argv: list[str] | None = None) -> int:
         "verify", help="verify stock text archives"
     )
     release_verify.add_argument("archives", nargs="+", type=Path)
+    audit_parser = subparsers.add_parser(
+        "audit", help="validate a semantic corpus-audit record"
+    )
+    audit_subparsers = audit_parser.add_subparsers(
+        dest="audit_command", required=True
+    )
+    audit_check = audit_subparsers.add_parser(
+        "check", help="check audit inventory and report coverage"
+    )
+    audit_check.add_argument("--root", required=True, type=Path)
+    audit_check.add_argument("--repository", type=Path, default=Path("."))
+    audit_check.add_argument("--policies", type=Path, default=Path("docs/policies"))
+    audit_check.add_argument("--standard", type=Path, default=Path("docs/standard"))
+    audit_check.add_argument("--exemplars", type=Path, default=Path("docs/exemplars"))
+    audit_check.add_argument("--final", action="store_true")
     args = parser.parse_args(argv)
 
     if args.command == "eval":
@@ -421,6 +436,28 @@ def main(argv: list[str] | None = None) -> int:
             return 1
         for output in outputs:
             print(output)
+        return 0
+
+    if args.command == "audit":
+        from .audit import check as check_audit
+
+        try:
+            counts = check_audit(
+                args.root,
+                args.repository,
+                args.policies,
+                args.standard,
+                args.exemplars,
+                final=args.final,
+            )
+        except PolcError as exc:
+            for message in exc.errors:
+                print(message, file=sys.stderr)
+            return 1
+        print(
+            f"audit coverage: {counts[0]} policies, {counts[1]} standard entries, "
+            f"{counts[2]} exemplars"
+        )
         return 0
 
     kept: tuple[str, ...] = ()
