@@ -7,10 +7,11 @@ attribution:
     locator: "Testing"
 ---
 
-# Test the invariant; an accessor that returns a member needs no test
+# Test the invariant; a trivial accessor usually needs no separate test
 
-A validating constructor deserves a test for every input it must reject. An accessor
-that returns what was stored does not.
+A validating constructor deserves a test for every input category it must reject.
+An accessor already exercised while testing meaningful behavior usually does not
+need its own test.
 
 ```cpp
 TEST_CASE("Tool rejects a negative rpm") {
@@ -22,7 +23,7 @@ TEST_CASE("diameter_mm returns the diameter") {          // tests the compiler
 }
 ```
 
-The accessor test passes on every implementation that compiles, so it can only fail
-if someone changes the accessor to do something — at which point the test tells you
-it changed, not whether the change was wrong. The invariant test is the one that
-holds the design in place.
+A standalone accessor test can catch returning the wrong member, but often duplicates
+the observation made by a behavior or invariant test. Add it when the mapping itself
+is a public contract not otherwise exercised; do not test boilerplate merely to give
+each method a test-shaped neighbor.

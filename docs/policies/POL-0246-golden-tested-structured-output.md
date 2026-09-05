@@ -8,11 +8,13 @@ attribution:
     locator: "Testing"
 ---
 
-# Anything producing structured output is golden-tested
+# Deterministic structured output has a representative golden test
 
-Toolpaths, plans, schedules, traces, generated code — each has a checked-in golden.
-Every change is one of two things: no golden diff, which proves the change was a
-refactor, or a deliberate regeneration whose diff the commit message explains.
+Toolpaths, plans, schedules, traces, generated code — each deterministic format has
+a small representative checked-in golden. Normalize or separately assert volatile
+fields such as timestamps and random identifiers. No golden diff is evidence that
+the covered output stayed stable, not proof that every behavior is unchanged; a
+deliberate regeneration has a reviewed diff and explanation.
 
 ```
 tests/goldens/pocket_100mm.gcode        # checked in, diffed on every run
@@ -22,6 +24,6 @@ Adding an alternative to the output is versioned: define it, expose it across th
 FFI, document it, regenerate — in that order.
 
 Structured output is where a refactor's unintended effects hide, because the code
-still compiles and the unit tests still pass. The golden is the only cheap check that
-the bytes did not move, and the commit message is what tells a future reader whether
-a diff was intended.
+still compiles and focused unit tests can pass. A golden is a cheap, reviewable check
+that the covered bytes did not move, while semantic assertions cover properties for
+which textual identity is too strict.

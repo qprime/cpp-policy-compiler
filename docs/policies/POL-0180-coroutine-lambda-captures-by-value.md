@@ -10,19 +10,22 @@ attribution:
     upstream: ["CG CP.51"]
 ---
 
-# A lambda that is a coroutine captures by value, or is not a lambda
+# A coroutine lambda is captureless; state is passed as by-value parameters
 
 Prefer a named coroutine function taking parameters by value. Where a lambda must
-be one, capture every variable explicitly and by value, and never capture `this`.
+be a coroutine, make it captureless and pass each required value as a parameter so
+the values are copied into the coroutine frame.
 
 ```cpp
 Task<void> stream_job(Job job);                     // prefer this
 
-auto task = [job]() -> Task<void> { co_await send(job); };     // by value
-auto task = [&job]() -> Task<void> { co_await send(job); };    // dangles
+auto stream = [](Job job) -> Task<void> { co_await send(job); };
+auto task = stream(job);                              // parameter lives in frame
+
+auto task = [job]() -> Task<void> { co_await send(job); }();  // capture dangles
 ```
 
-The closure object is destroyed at the end of the full expression that created the
-coroutine, while the coroutine frame lives until it completes. Every capture — by
-reference or by value — lives in the closure, so the frame outlives the captures it
-is still using.
+The closure object can be destroyed after the call creates the coroutine, while the
+coroutine frame lives until completion. Every capture — by reference or by value —
+lives in that closure rather than becoming a parameter copy in the frame, so a
+suspended coroutine can outlive what it still uses.
