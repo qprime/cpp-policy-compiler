@@ -1,17 +1,19 @@
 ---
 id: POL-0141
 kind: standard
-trigger: "compare two pointers"
+trigger: "order two pointers with a relational comparison"
 attribution:
   - source: standard-practice
     locator: "pointer comparison"
     upstream: ["CG ES.62"]
 ---
 
-# Only compare pointers into the same object or array
+# Relationally compare pointers only within the same object or array
 
-Compare iterators from the same container, or pointers into the same array. Use
-equality against `nullptr` freely; relational comparison needs a common object.
+Compare iterators from the same container, or order pointers within the same
+array. Equality and inequality can compare unrelated pointers and `nullptr`;
+relational comparison needs a common array object unless an explicit library
+ordering such as `std::less` is the intended abstraction.
 
 ```cpp
 if (it != moves.end()) { ... }                 // same container

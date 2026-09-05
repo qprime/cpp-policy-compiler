@@ -1,14 +1,14 @@
 ---
 id: POL-0178
 kind: standard
-trigger: "initialize something once"
+trigger: "initialize shared state lazily at run time"
 attribution:
   - source: cpp-convention/mechanisms.md
     locator: "10. Concurrency"
     upstream: ["CG CP.110", "CG CP.111"]
 ---
 
-# One-time initialization is a function-local `static` or `std::call_once`
+# Lazy run-time initialization uses a function-local `static` or `std::call_once`
 
 ```cpp
 const ToolTable& default_tools() {
@@ -29,3 +29,6 @@ the compiler emits the guard. Hand-written double-checked locking reads the poin
 outside the lock, which is a data race unless the pointer is atomic with the right
 ordering, and getting that right is the whole reason the language provides the
 feature.
+
+Prefer constant or ordinary startup initialization when it already fits; this rule
+governs shared lazy initialization that might be reached concurrently.
