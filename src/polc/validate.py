@@ -258,7 +258,7 @@ def _validate_demonstrates(
     for target in exemplar.demonstrates:
         if not DEMONSTRATED_ID.fullmatch(target):
             errors.append(f"{origin}: demonstrates entry '{target}' is not an id")
-        elif target.startswith("POL-"):
+        elif target.startswith(("POL-", "PRJ-POL-")):
             policy = by_id.get(target)
             if policy is None:
                 errors.append(f"{origin}: demonstrates {target} does not resolve")

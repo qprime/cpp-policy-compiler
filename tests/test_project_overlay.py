@@ -8,7 +8,7 @@ import pytest
 from polc.cli import _build_project_projection, _build_projection
 from polc.config import load_project_configuration
 from polc.corpus import overlay_fingerprint
-from polc.model import PolcError
+from polc.model import PolcError, ProjectionMode
 
 ROOT = Path(__file__).parents[1]
 POLICIES = ROOT / "docs" / "policies"
@@ -51,6 +51,42 @@ def _build(project: Path):
     return _build_project_projection(
         project, POLICIES, STANDARD, EXEMPLARS, adapter=None
     )
+
+
+def _write_local_policy(project: Path) -> None:
+    _write(
+        project.parent / "policies" / "PRJ-POL-0001-portable-code.md",
+        f"""---
+id: PRJ-POL-0001
+kind: standard
+trigger: use a project portability boundary
+attribution:
+  - source: project design
+    locator: portability
+---
+
+# Follow the project's declared portability boundary
+""",
+    )
+
+
+def _write_local_exemplar(project: Path, citation: str) -> None:
+    root = project.parent / "exemplars" / "PRJ-EXM-0001-portable-boundary"
+    _write(
+        root / "exemplar.md",
+        f"""---
+id: PRJ-EXM-0001
+situation: implement the project's portable boundary
+demonstrates:
+  - {citation}
+---
+
+# A project-specific portable boundary
+""",
+    )
+    _write(root / "core" / "boundary.cpp", '#include "boundary.hpp"\n')
+    _write(root / "core" / "boundary.hpp", "#pragma once\n")
+    _write(root / "core" / "boundary_test.cpp", "// project test\n")
 
 
 def test_empty_overlay_builds_with_overlay_identity(tmp_path: Path) -> None:
@@ -142,12 +178,12 @@ def test_standard_replacement_preserves_audit_decision(tmp_path: Path) -> None:
     project = _project(
         tmp_path,
         replace_ids=(
-            "[{upstream: STD-0029, local: PRJ-STD-0001, "
-            "reason: existing suite uses GoogleTest}]"
+            "[{upstream: STD-0028, local: PRJ-STD-0001, "
+            "reason: existing build uses a project system}]"
         ),
     )
     _write(
-        project.parent / "standard" / "PRJ-STD-0001-test-framework.md",
+        project.parent / "standard" / "PRJ-STD-0001-build-system.md",
         """---
 id: PRJ-STD-0001
 group: toolchain
@@ -157,16 +193,114 @@ attribution:
     locator: CMakeLists.txt
 ---
 
-# The test framework is GoogleTest
+# Use the project's established build system
 """,
     )
 
     projection, _, _, _ = _build(project)
 
     provenance = json.loads(projection.sidecar)
-    assert "STD-0029" not in provenance["entries"]
+    assert "STD-0028" not in provenance["entries"]
     assert "PRJ-STD-0001" in provenance["entries"]
     assert provenance["projection"]["merge_decisions"][0]["local"] == "PRJ-STD-0001"
+
+
+def test_replacement_cannot_transfer_retained_exemplar_evidence(
+    tmp_path: Path,
+) -> None:
+    project = _project(
+        tmp_path,
+        replace_ids=(
+            "[{upstream: POL-0009, local: PRJ-POL-0001, "
+            "reason: project portability contract}]"
+        ),
+    )
+    _write_local_policy(project)
+
+    with pytest.raises(PolcError) as caught:
+        _build(project)
+
+    message = str(caught.value)
+    assert "POL-0009 -> PRJ-POL-0001" in message
+    assert "EXM-0004" in message
+    assert "exclude EXM-0004 or replace it" in message
+
+
+def test_excluding_affected_exemplar_permits_replacement(tmp_path: Path) -> None:
+    project = _project(
+        tmp_path,
+        exclude_ids="[{id: EXM-0004, reason: source demonstrates old decision}]",
+        replace_ids=(
+            "[{upstream: POL-0009, local: PRJ-POL-0001, "
+            "reason: project portability contract}]"
+        ),
+    )
+    _write_local_policy(project)
+
+    projection, _, _, admitted = _build(project)
+    provenance = json.loads(projection.sidecar)
+
+    assert "PRJ-POL-0001" in provenance["entries"]
+    assert "EXM-0004" not in provenance["entries"]
+    assert any(
+        "PRJ-POL-0001" in document
+        for document in projection.topic_documents.values()
+    )
+    assert all(
+        "PRJ-POL-0001" not in entry.get("demonstrates", [])
+        for entry in provenance["entries"].values()
+    )
+    assert all(exemplar.id != "EXM-0004" for exemplar in admitted)
+
+
+def test_replacing_affected_exemplar_with_explicit_local_evidence(
+    tmp_path: Path,
+) -> None:
+    project = _project(
+        tmp_path,
+        replace_ids=(
+            "[{upstream: POL-0009, local: PRJ-POL-0001, "
+            "reason: project portability contract}, "
+            "{upstream: EXM-0004, local: PRJ-EXM-0001, "
+            "reason: project source demonstrates replacement}]"
+        ),
+    )
+    _write_local_policy(project)
+    _write_local_exemplar(project, "PRJ-POL-0001")
+
+    generation, _, _, admitted = _build(project)
+    review, _, _, review_exemplars = _build_project_projection(
+        project,
+        POLICIES,
+        STANDARD,
+        EXEMPLARS,
+        adapter=None,
+        mode=ProjectionMode.REVIEW,
+    )
+    generation_entries = json.loads(generation.sidecar)["entries"]
+    review_entries = json.loads(review.sidecar)["entries"]
+
+    assert generation_entries == review_entries
+    assert "EXM-0004" not in generation_entries
+    assert generation_entries["PRJ-EXM-0001"]["demonstrates"] == ["PRJ-POL-0001"]
+    assert [exemplar.id for exemplar in admitted if exemplar.id == "PRJ-EXM-0001"]
+    assert review_exemplars == []
+
+
+def test_local_exemplar_must_cite_replacement_explicitly(tmp_path: Path) -> None:
+    project = _project(
+        tmp_path,
+        exclude_ids="[{id: EXM-0004, reason: replace its evidence locally}]",
+        replace_ids=(
+            "[{upstream: POL-0009, local: PRJ-POL-0001, "
+            "reason: project portability contract}]"
+        ),
+    )
+    _write_local_policy(project)
+    _write_local_exemplar(project, "POL-0009")
+
+    with pytest.raises(PolcError, match="PRJ-EXM-0001"):
+        _build(project)
 
 
 def test_conflicting_exclusion_and_replacement_fails(tmp_path: Path) -> None:

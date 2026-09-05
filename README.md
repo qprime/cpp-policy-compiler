@@ -74,6 +74,11 @@ The installed wheel contains the matching canonical corpus. Pinning the package
 version pins the compiler and corpus together; explicit corpus paths remain available
 for repository development and candidate testing.
 
+Replacing a decision does not transfer an exemplar's evidence automatically. If a
+retained exemplar cites the replaced identity, the project must explicitly exclude
+that exemplar or replace it with compatible local source that cites the local decision.
+This keeps provenance from claiming that unchanged code demonstrates a different rule.
+
 `polc release build --out dist/text` produces deterministic text-only archives for
 the supported stock configurations. Each contains neutral generation and review
 projections plus a manifest of versions, the corpus fingerprint, and file hashes.

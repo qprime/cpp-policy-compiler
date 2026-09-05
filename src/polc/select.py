@@ -263,6 +263,17 @@ def build_effective_corpus(
         else:
             effective_exemplars.append(local_item)
 
+    evidence_errors = [
+        f"project.md: replacement {target} -> {replacement_map[target]} cannot "
+        f"transfer exemplar evidence from {exemplar.id}; exclude {exemplar.id} or "
+        "replace it with a compatible local exemplar that cites the local decision"
+        for exemplar in effective_exemplars
+        for target in exemplar.demonstrates
+        if target in replacement_map
+    ]
+    if evidence_errors:
+        raise PolcError(evidence_errors)
+
     effective_policies = [
         replace(
             policy,
@@ -274,7 +285,7 @@ def build_effective_corpus(
         replace(
             exemplar,
             demonstrates=tuple(
-                replacement_map.get(item, item) for item in exemplar.demonstrates
+                item for item in exemplar.demonstrates
                 if item not in axis_excluded_ids
             ),
         )
