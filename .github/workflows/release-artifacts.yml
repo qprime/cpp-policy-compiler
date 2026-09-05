@@ -1,0 +1,36 @@
+name: release artifacts
+
+on:
+  workflow_dispatch:
+  push:
+    tags:
+      - "v*"
+
+jobs:
+  build-and-verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: python -m pip install build
+      - run: python -m pip install -e . pytest
+      - run: python -m pytest
+      - run: python -m build --wheel
+      - run: python -m venv /tmp/polc-release
+      - run: /tmp/polc-release/bin/pip install dist/polc-*.whl
+      - run: >-
+          /tmp/polc-release/bin/polc project init --root /tmp/empty-project
+          --language-version 20 --compiler gcc --domain application
+      - run: /tmp/polc-release/bin/polc project check --root /tmp/empty-project
+      - run: /tmp/polc-release/bin/polc release build --out /tmp/archives-first
+      - run: /tmp/polc-release/bin/polc release build --out /tmp/archives-second
+      - run: diff -qr /tmp/archives-first /tmp/archives-second
+      - run: /tmp/polc-release/bin/polc release verify /tmp/archives-first/*.zip
+      - run: cp /tmp/archives-first/*.zip dist/
+      - uses: actions/upload-artifact@v4
+        with:
+          name: polc-${{ github.ref_name }}
+          path: dist/*
+          if-no-files-found: error

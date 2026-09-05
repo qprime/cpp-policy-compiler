@@ -15,7 +15,15 @@ build-backend = "hatchling.build"
 [tool.hatch.build.targets.wheel]
 packages = ["src/polc"]
 
+[tool.hatch.build.targets.wheel.force-include]
+"docs/policies" = "polc/data/policies"
+"docs/standard" = "polc/data/standard"
+"docs/exemplars" = "polc/data/exemplars"
+"docs/configurations" = "polc/data/configurations"
+
 [dependency-groups]
 dev = [
+    "build>=1.2",
+    "hatchling>=1.27",
     "pytest>=9.1.1",
 ]

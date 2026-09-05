@@ -56,10 +56,11 @@ experiment live under [`benchmarks/`](benchmarks/).
 For a checked-in, project-maintained harness, initialize both modes together:
 
 ```
-uv run polc project init \
+# Once a release is published:
+pipx install polc==0.1.0
+polc project init \
   --root ../my-project \
-  --language-version 20 --compiler gcc --domain application \
-  --policies docs/policies --standard docs/standard --exemplars docs/exemplars
+  --language-version 20 --compiler gcc --domain application
 ```
 
 This creates authored inputs under `.polc/` and managed neutral projections at
@@ -69,7 +70,16 @@ read-only CI drift check, `project build` incorporates local policy or context
 edits without changing the release lock, `project diff` previews a new compiler
 or corpus, and `project accept` updates the lock and both projections together.
 Pass `project accept --adapter neutral|claude-code` to switch managed layouts.
-The explicit corpus paths are temporary until packaged corpus discovery lands.
+The installed wheel contains the matching canonical corpus. Pinning the package
+version pins the compiler and corpus together; explicit corpus paths remain available
+for repository development and candidate testing.
+
+`polc release build --out dist/text` produces deterministic text-only archives for
+the supported stock configurations. Each contains neutral generation and review
+projections plus a manifest of versions, the corpus fingerprint, and file hashes.
+Those archives are the no-tool adoption path: extract and check in the text, then point
+the agent at its entry documents. The wheel is needed only when a project wants the
+managed initialization, overlay, drift-check, rebuild, or upgrade workflow.
 
 Point your project's own instructions at `index.md` and the model routes itself
 from there. For Claude Code, skip that step:
@@ -132,7 +142,8 @@ attribution and source file.
 
 The fingerprint covers every file under the policies, standard, and exemplars
 directories, so a projection in a target repository can be compared against a
-fresh build by reading one line.
+fresh build by reading one line. Provenance also records an integer projection-format
+version; project locks enforce that compatibility independently from package versions.
 
 ## How it's organized
 
@@ -187,8 +198,9 @@ Early, and under active design. The corpus holds 247 policies, 29 standard
 entries, and 14 exemplars, and two configurations are authored. The compiler
 validates and renders both end to end.
 
-The compile and managed-project paths have automated tests. Treat the projection
-format as unstable until its versioned packaging contract lands.
+The compile, managed-project, and installed-distribution paths have automated tests.
+The projection format is explicitly versioned; incompatible formats fail by naming
+both the locked and executing versions.
 
 ## License
 

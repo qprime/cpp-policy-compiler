@@ -304,9 +304,9 @@ def main(argv: list[str] | None = None) -> int:
     ):
         sub = project_subparsers.add_parser(name, help=help_text)
         sub.add_argument("--root", required=True, type=Path)
-        sub.add_argument("--policies", type=Path, default=Path("docs/policies"))
-        sub.add_argument("--standard", type=Path, default=Path("docs/standard"))
-        sub.add_argument("--exemplars", type=Path, default=Path("docs/exemplars"))
+        sub.add_argument("--policies", type=Path)
+        sub.add_argument("--standard", type=Path)
+        sub.add_argument("--exemplars", type=Path)
         if name == "init":
             sub.add_argument("--name")
             sub.add_argument("--language-version", required=True, type=int)
@@ -317,6 +317,20 @@ def main(argv: list[str] | None = None) -> int:
             sub.add_argument(
                 "--adapter", choices=("neutral", *adapters.ADAPTERS)
             )
+    release_parser = subparsers.add_parser(
+        "release", help="build or verify coordinated text artifacts"
+    )
+    release_subparsers = release_parser.add_subparsers(
+        dest="release_command", required=True
+    )
+    release_build = release_subparsers.add_parser(
+        "build", help="build deterministic stock text archives"
+    )
+    release_build.add_argument("--out", required=True, type=Path)
+    release_verify = release_subparsers.add_parser(
+        "verify", help="verify stock text archives"
+    )
+    release_verify.add_argument("archives", nargs="+", type=Path)
     args = parser.parse_args(argv)
 
     if args.command == "eval":
@@ -347,12 +361,24 @@ def main(argv: list[str] | None = None) -> int:
 
     if args.command == "project":
         from . import project
+        from .resources import installed_corpus
 
+        if None in (args.policies, args.standard, args.exemplars):
+            resources = installed_corpus()
+            policies = args.policies or resources.policies
+            standard = args.standard or resources.standard
+            exemplars = args.exemplars or resources.exemplars
+        else:
+            policies, standard, exemplars = (
+                args.policies,
+                args.standard,
+                args.exemplars,
+            )
         inputs = project.Inputs(
             args.root.resolve(),
-            args.policies.resolve(),
-            args.standard.resolve(),
-            args.exemplars.resolve(),
+            policies.resolve(),
+            standard.resolve(),
+            exemplars.resolve(),
         )
         try:
             if args.project_command == "init":
@@ -377,6 +403,24 @@ def main(argv: list[str] | None = None) -> int:
             return 1
         for message in messages:
             print(message)
+        return 0
+
+    if args.command == "release":
+        from .release import build_stock_archives, verify_archive
+
+        try:
+            if args.release_command == "build":
+                outputs = build_stock_archives(args.out)
+            else:
+                for archive in args.archives:
+                    verify_archive(archive)
+                outputs = args.archives
+        except PolcError as exc:
+            for message in exc.errors:
+                print(message, file=sys.stderr)
+            return 1
+        for output in outputs:
+            print(output)
         return 0
 
     kept: tuple[str, ...] = ()

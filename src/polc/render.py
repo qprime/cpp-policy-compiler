@@ -21,6 +21,7 @@ from .model import (
     StandardEntry,
     Topic,
 )
+from .resources import PROJECTION_FORMAT_VERSION
 
 MARKS = {
     "standard": "MUST",
@@ -581,6 +582,7 @@ def _render_sidecar(
         }
     data = {
         "projection": {
+            "projection_format_version": PROJECTION_FORMAT_VERSION,
             "polc_version": identity.polc_version,
             "corpus_fingerprint": identity.corpus_fingerprint,
             "configuration": config.name,

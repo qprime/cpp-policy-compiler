@@ -11,8 +11,13 @@ from . import adapters
 from .corpus import fingerprint
 from .model import Exemplar, PolcError, ProjectionMode
 from .render import Projection, write
+from .resources import (
+    LOCK_SCHEMA_VERSION,
+    PROJECT_LAYOUT_VERSION,
+    PROJECTION_FORMAT_VERSION,
+)
 
-LOCK_VERSION = 1
+LOCK_VERSION = LOCK_SCHEMA_VERSION
 CONTEXT = {
     "layers.md": (
         "# Layers\n\nDescribe the project's layers, allowed dependencies, and failure "
@@ -47,6 +52,7 @@ def _lock(inputs: Inputs, adapter: str | None) -> dict[str, object]:
     paths = _paths(adapter)
     return {
         "version": LOCK_VERSION,
+        "projection_format_version": PROJECTION_FORMAT_VERSION,
         "polc_version": _polc_version(),
         "corpus_fingerprint": fingerprint(
             inputs.policies, inputs.standard, inputs.exemplars
@@ -56,17 +62,60 @@ def _lock(inputs: Inputs, adapter: str | None) -> dict[str, object]:
     }
 
 
-def _read_lock(root: Path) -> dict[str, object]:
+def _read_lock(
+    root: Path, allow_projection_mismatch: bool = False
+) -> dict[str, object]:
     path = root / ".polc/lock.json"
     try:
         data = json.loads(path.read_text(encoding="utf-8"))
     except (OSError, json.JSONDecodeError) as exc:
         raise PolcError([f"{path}: cannot read a valid project lock: {exc}"]) from exc
-    required = {"version", "polc_version", "corpus_fingerprint", "adapter", "destinations"}
+    legacy = {
+        "version",
+        "polc_version",
+        "corpus_fingerprint",
+        "adapter",
+        "destinations",
+    }
+    required = legacy | {
+        "projection_format_version",
+    }
+    if isinstance(data, dict) and data.get("version") == 1:
+        if set(data) != legacy:
+            raise PolcError([f"{path}: invalid version 1 lock structure"])
+        if not allow_projection_mismatch:
+            raise PolcError(
+                [
+                    f"{path}: lock schema 1 is incompatible with executing schema "
+                    f"{LOCK_VERSION}; run project diff then project accept"
+                ]
+            )
+        data = {
+            **data,
+            "version": LOCK_VERSION,
+            "projection_format_version": 0,
+        }
     if not isinstance(data, dict) or set(data) != required:
-        raise PolcError([f"{path}: lock must contain exactly {', '.join(sorted(required))}"])
+        raise PolcError(
+            [f"{path}: lock must contain exactly {', '.join(sorted(required))}"]
+        )
     if data["version"] != LOCK_VERSION:
-        raise PolcError([f"{path}: unsupported lock version {data['version']!r}"])
+        raise PolcError(
+            [
+                f"{path}: lock schema {data['version']!r} is incompatible with "
+                f"executing schema {LOCK_VERSION}"
+            ]
+        )
+    if (
+        data["projection_format_version"] != PROJECTION_FORMAT_VERSION
+        and not allow_projection_mismatch
+    ):
+        raise PolcError(
+            [
+                f"{path}: projection format {data['projection_format_version']!r} "
+                f"is incompatible with executing format {PROJECTION_FORMAT_VERSION}"
+            ]
+        )
     adapter = data["adapter"]
     if adapter is not None and adapter not in adapters.ADAPTERS:
         raise PolcError([f"{path}: unknown locked adapter {adapter!r}"])
@@ -90,7 +139,7 @@ def _context(root: Path) -> dict[str, str]:
 def _managed(projection: Projection, adapter: str | None) -> Projection:
     sidecar = json.loads(projection.sidecar)
     sidecar["projection"]["managed"] = True
-    sidecar["projection"]["layout_version"] = LOCK_VERSION
+    sidecar["projection"]["layout_version"] = PROJECT_LAYOUT_VERSION
     sidecar["projection"]["adapter"] = adapter
     return replace(projection, sidecar=json.dumps(sidecar, indent=2, ensure_ascii=False) + "\n")
 
@@ -127,7 +176,7 @@ def _assert_owned(path: Path, mode: ProjectionMode, adapter: str | None) -> None
         raise PolcError([f"{path}: refusing to replace an unowned output directory"]) from exc
     if not (
         projection.get("managed") is True
-        and projection.get("layout_version") == LOCK_VERSION
+        and projection.get("layout_version") == PROJECT_LAYOUT_VERSION
         and projection.get("mode") == mode.value
         and projection.get("adapter") == adapter
     ):
@@ -279,14 +328,17 @@ def build(inputs: Inputs) -> list[str]:
 
 
 def diff(inputs: Inputs) -> list[str]:
-    lock = _read_lock(inputs.root)
+    lock = _read_lock(inputs.root, allow_projection_mismatch=True)
     adapter = lock["adapter"]
     candidate = _lock(inputs, adapter)
     lines = [
         f"polc: {lock['polc_version']} -> {candidate['polc_version']}",
         f"corpus: {lock['corpus_fingerprint']} -> "
         f"{candidate['corpus_fingerprint']}",
+        f"projection format: {lock['projection_format_version']} -> "
+        f"{candidate['projection_format_version']}",
     ]
+    identity_lines = len(lines)
     with tempfile.TemporaryDirectory(prefix="polc-diff-") as temp:
         staged = _stage_pair(_build_pair(inputs, adapter), Path(temp), adapter)
         for mode, relative in _paths(adapter).items():
@@ -304,15 +356,15 @@ def diff(inputs: Inputs) -> list[str]:
     identities_match = all(
         line.split(" -> ", 1)[0].split(": ", 1)[1]
         == line.split(" -> ", 1)[1]
-        for line in lines[:2]
+        for line in lines[:identity_lines]
     )
-    if len(lines) == 2 and identities_match:
+    if len(lines) == identity_lines and identities_match:
         lines.append("no changes")
     return lines
 
 
 def accept(inputs: Inputs, requested_adapter: str | None = None) -> list[str]:
-    old = _read_lock(inputs.root)
+    old = _read_lock(inputs.root, allow_projection_mismatch=True)
     old_adapter = old["adapter"]
     adapter = (
         old_adapter
