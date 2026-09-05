@@ -104,6 +104,21 @@ def test_diff_is_read_only_and_accepts_new_corpus(tmp_path: Path, capsys) -> Non
     assert lock["corpus_fingerprint"] != json.loads(before[".polc/lock.json"])["corpus_fingerprint"]
 
 
+def test_diff_reports_effective_identity_changes(tmp_path: Path, capsys) -> None:
+    root = tmp_path / "target"
+    _init(root)
+    project = root / ".polc/project.md"
+    project.write_text(
+        project.read_text(encoding="utf-8").replace(
+            "exclude_ids: []",
+            "exclude_ids:\n  - id: POL-0239\n    reason: target chooses locally",
+        ),
+        encoding="utf-8",
+    )
+    assert main(_args("diff", root)) == 0
+    assert "removed identity POL-0239" in capsys.readouterr().out
+
+
 def test_failed_accept_leaves_old_state(tmp_path: Path) -> None:
     root = tmp_path / "target"
     _init(root)

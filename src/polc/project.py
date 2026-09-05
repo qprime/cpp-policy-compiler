@@ -339,8 +339,29 @@ def diff(inputs: Inputs) -> list[str]:
         f"{candidate['projection_format_version']}",
     ]
     identity_lines = len(lines)
+    pair = _build_pair(inputs, adapter)
+    generation_path = inputs.root / _paths(adapter)[ProjectionMode.GENERATION]
+    current_provenance = generation_path / "provenance.json"
+    if current_provenance.is_file():
+        try:
+            loaded_entries = json.loads(
+                current_provenance.read_text(encoding="utf-8")
+            )["entries"]
+            before_entries = loaded_entries if isinstance(loaded_entries, dict) else {}
+        except (OSError, json.JSONDecodeError, KeyError, TypeError):
+            before_entries = {}
+    else:
+        before_entries = {}
+    after_entries = json.loads(pair[ProjectionMode.GENERATION][0].sidecar)["entries"]
+    for entry_id in sorted(before_entries.keys() | after_entries.keys()):
+        if entry_id not in before_entries:
+            lines.append(f"added identity {entry_id}")
+        elif entry_id not in after_entries:
+            lines.append(f"removed identity {entry_id}")
+        elif before_entries[entry_id] != after_entries[entry_id]:
+            lines.append(f"changed identity {entry_id}")
     with tempfile.TemporaryDirectory(prefix="polc-diff-") as temp:
-        staged = _stage_pair(_build_pair(inputs, adapter), Path(temp), adapter)
+        staged = _stage_pair(pair, Path(temp), adapter)
         for mode, relative in _paths(adapter).items():
             before, after = _files(inputs.root / relative), _files(staged[mode])
             for name in sorted(before.keys() | after.keys()):
