@@ -194,18 +194,35 @@ reads it, and nothing in it reaches a projection.
   ships is text and a map.
 
 The [project harness design](https://github.com/qprime/cpp-policy-compiler/issues/17)
-describes the target-owned overlay, separate generation and review projections,
-and coordinated text and tool distribution.
+led to the implemented target-owned overlay, separate generation and review
+projections, managed upgrade lifecycle, and coordinated text and tool
+distribution described above.
 
 ## Status
 
-Early, and under active design. The corpus holds 247 policies, 29 standard
-entries, and 14 exemplars, and two configurations are authored. The compiler
-validates and renders both end to end.
+The end-to-end harness is implemented and remains under active development. The
+corpus holds 247 policies, 29 standard entries, and 14 exemplars, and two stock
+configurations are authored. The compiler validates and renders both generation
+and review projections; target projects can consume checked-in text archives or
+use the installed `polc` package to maintain local overlays and coordinated
+upgrades.
 
-The compile, managed-project, and installed-distribution paths have automated tests.
-The projection format is explicitly versioned; incompatible formats fail by naming
-both the locked and executing versions.
+The compile, evaluation, managed-project, release-archive, and
+installed-distribution paths have automated tests. The projection format is
+explicitly versioned; incompatible formats fail by naming both the locked and
+executing versions.
+
+The current maturity frontier is the policy content itself. The compiler can
+prove that the corpus is structurally valid and reproducibly projected, but
+those checks cannot prove that every C++ decision is technically correct,
+properly scoped, or optimally worded for an agent. The
+[canonical corpus audit](https://github.com/qprime/cpp-policy-compiler/issues/28)
+tracks a systematic review of every policy, standard entry, attribution, route,
+and exemplar before using the corpus for broad brownfield normalization.
+
+Correctness experiments remain explicit and opt-in. Their results are evidence
+about how a particular harness performs on a recorded task, not a claim that one
+benchmark, target project, or model proves the corpus universally correct.
 
 ## License
 
