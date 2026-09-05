@@ -9,7 +9,7 @@ attribution:
 replacement: ["POL-0118"]
 ---
 
-# Two functions sharing most of their bodies
+# Two functions containing logic that must evolve together
 
 ```cpp
 Paths plan_pocket_raster(const PlanarFace& face, double step_over_mm) {
@@ -25,5 +25,6 @@ Paths plan_pocket_spiral(const PlanarFace& face, double step_over_mm) {
 }
 ```
 
-A fix applied to one is forgotten in the other, and the divergence is invisible
-because both files still compile and both tests still pass.
+When the shared lines represent one decision, a fix applied to one copy is easily
+forgotten in the other. Similar-looking implementations that need not evolve
+together remain separate; visual similarity alone is not duplication.

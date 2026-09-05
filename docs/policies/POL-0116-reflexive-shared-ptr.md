@@ -20,5 +20,7 @@ std::shared_ptr<MachineConfig> config_;                            // never shar
 ```
 
 Shared ownership means several owners with no primary and independent lifetimes.
-Where that is not the case, `shared_ptr` costs two atomic operations per copy,
-makes the lifetime unknowable by inspection, and lets a cycle leak silently.
+Where that is not the case, `shared_ptr` adds shared control-block bookkeeping,
+makes the lifetime harder to determine by inspection, and permits ownership
+cycles that do not release themselves. Exact synchronization costs are an
+implementation detail and depend on the operation.

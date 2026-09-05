@@ -9,8 +9,9 @@ attribution:
 
 # Boring is a feature
 
-Given two forms that work, take the one the next reader already knows. Reach for
-two language features rather than seven, and keep the reader inside the file.
+Given two equally correct and expressive forms, take the one the next reader is
+more likely to know. Prefer a named standard algorithm when the algorithm is the
+intent; prefer direct control flow when it says the same thing more clearly.
 
 ```cpp
 for (const Move& move : moves) { ... }                    // read and move on
@@ -19,6 +20,6 @@ std::for_each(moves.cbegin(), moves.cend(),
               [&](const auto& move) { ... });             // same work, more to know
 ```
 
-Every feature you reach for is a feature the next reader must know before they
-can change the line. Cleverness is a cost paid by everyone downstream of it and
-recovered by no one.
+Every feature adds something the next reader must understand before changing
+the line. Pay that cost when it supplies a real guarantee or communicates the
+operation, not merely to compress familiar code.

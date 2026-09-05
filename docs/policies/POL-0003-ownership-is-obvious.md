@@ -10,8 +10,9 @@ attribution:
 
 # Ownership is obvious from the declaration
 
-Anyone reading a declaration answers *who owns this* in under five seconds. If
-they cannot, the declaration is wrong, not the reader.
+Anyone reading a declaration can distinguish ownership from borrowing. If a
+borrow is retained, its required lifetime is part of the surrounding interface
+contract rather than an assumption reconstructed from call sites.
 
 ```cpp
 std::unique_ptr<Spindle> spindle_;   // this object owns it
@@ -19,5 +20,6 @@ const Spindle& spindle_;             // someone else owns it, outlives us
 Spindle* spindle_;                   // someone else owns it, may be absent
 ```
 
-RAII by default means the answer is always in the type. A resource whose owner
-has to be reconstructed from call sites has no owner, only habits.
+RAII makes resource ownership visible in the owning type. A reference or pointer
+states that it does not own; the API that retains one must also make the actual
+owner and lifetime relationship clear.

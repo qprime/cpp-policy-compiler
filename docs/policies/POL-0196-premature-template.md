@@ -16,7 +16,8 @@ template <class Face, class Tool>                 // one call site, both concret
 Paths plan_pocket(const Face& face, const Tool& tool, double step_over_mm);
 ```
 
-Nothing about the function is generic: it has one caller and both types are known.
-What the template bought is the loss of type checking at the declaration, error
-messages that appear in the caller's translation unit, and a definition that must
-live in a header.
+The example has no demonstrated generic requirement: it has one caller and both
+types are known. A template can provide strong checking, especially when
+constrained, but it moves checking and diagnostics to instantiation and commonly
+requires its definition to be visible there. Pay that cost for real genericity,
+not in anticipation of hypothetical callers.

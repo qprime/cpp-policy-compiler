@@ -17,6 +17,7 @@ std::optional<Span> find_sliver_span(const Polygon& poly, double tool_diameter_m
 ```
 
 `{}` is what this function returns when it legitimately finds nothing, so no caller
-can tell the difference and no test can catch it. The `TODO` is visible only to
-someone already reading the body — which is the one place the defect does not
-matter.
+can tell the difference from the return value alone and ordinary empty-result tests
+can accidentally bless it. A test expecting non-empty output may catch this case,
+but the `TODO` remains invisible to callers and bindings; absence or a loud failure
+makes the unfinished contract unambiguous.

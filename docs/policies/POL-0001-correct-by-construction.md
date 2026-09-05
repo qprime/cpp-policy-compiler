@@ -16,7 +16,7 @@ Take the earliest of these that closes the defect:
    dispatch.
 2. Make the wrong object unconstructible — a constructor that rejects the input.
 3. Check once at a boundary and encode the result in a type.
-4. Only then write a test.
+4. Test the resulting behavior and the boundaries that establish the invariant.
 
 ```cpp
 enum class Units { Millimeters, Inches };
@@ -24,6 +24,7 @@ double to_mm(double value, Units units);      // a transposed call will not comp
 double to_mm(double value, bool is_metric);   // a transposed call compiles
 ```
 
-A passing test says a defect was absent on the day it ran. A type says the
-defect cannot be written. A codebase relying on its suite for correctness has
-moved its invariants out of the code and into a process.
+A passing test samples behavior; a type can make a whole class of invalid
+programs or states unrepresentable. Tests still verify that the chosen types and
+boundary checks implement the required behavior. Do not use a test as the only
+home for an invariant that the program can enforce structurally.

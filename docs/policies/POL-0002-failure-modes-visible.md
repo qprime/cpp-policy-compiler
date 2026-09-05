@@ -8,10 +8,13 @@ attribution:
     upstream: ["CG P.6", "CG P.7"]
 ---
 
-# Failure modes are visible
+# Expected failure modes are visible
 
-A function that can fail says so in its signature. Nothing is swallowed, and no
-failure is returned as a value that reads as success.
+A failure the caller is expected to branch on is represented in the function's
+return type. Other failures are documented and propagate to a layer that can
+act; C++ function types do not generally enumerate the exceptions an operation
+may throw. Nothing is swallowed, and no failure is returned as a value that
+reads as success.
 
 ```cpp
 std::optional<Tool> find_tool(const ToolTable& table, int slot);

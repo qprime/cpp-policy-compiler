@@ -9,15 +9,17 @@ attribution:
 
 # Determinism is the default
 
-Same input, same output, on every platform and every run. No undefined
-behaviour, no unordered-container iteration order in output, no uninitialized
-reads, no platform-dependent floating point in golden output.
+Within the product's stated platform and reproducibility contract, the same
+input produces the same observable output on every run. Do not leak undefined
+behavior, unordered-container iteration, uninitialized reads, locale, or
+uncontrolled floating-point variation into serialized or golden output.
 
 ```cpp
 std::map<std::string, Layer> layers;             // ordered: safe to emit in order
 std::unordered_map<std::string, Layer> layers;   // iteration order is not a contract
 ```
 
-Nondeterminism turns a reproducible defect into an intermittent one, and an
-intermittent defect costs an order of magnitude more to find. It also destroys
-golden testing, which is the only cheap check on structured output.
+Nondeterminism turns reproducible defects into intermittent ones and makes
+golden tests noisy. When output must compare across different implementations
+or platforms, define normalization or tolerances instead of promising byte
+identity the underlying operations do not provide.

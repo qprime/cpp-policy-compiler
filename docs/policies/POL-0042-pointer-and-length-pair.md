@@ -16,7 +16,7 @@ the bounds check on every caller. Replace it with a view.
 
 ```cpp
 double path_length_mm(const Vec2* points, std::size_t count);   // no
-double path_length_mm(std::span<const Vec2> points);            // instead
+double path_length_mm(std::span<const Vec2> points);            // C++20 instead
 ```
 
 At an `extern "C"` boundary the foreign signature dictates the pair. Convert on
@@ -28,6 +28,10 @@ extern "C" int process_buffer(const Vec2* data, std::size_t length) {
     // body uses path only
 }
 ```
+
+Before C++20, use the project view type or iterator-pair form selected by
+POL-0041. The defect is a public contract whose pointer and extent can disagree,
+not the unavoidable representation at a foreign boundary.
 
 Nothing ties the two arguments together, so a caller who edits one and forgets
 the other gets a read past the end and no diagnostic.

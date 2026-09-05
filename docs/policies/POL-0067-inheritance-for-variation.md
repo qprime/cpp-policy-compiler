@@ -22,6 +22,7 @@ class Move {                                  // no
 };
 ```
 
-Inherit only for an open set of behaviours behind an interface with no data. A
-closed set gets no exhaustiveness check from a hierarchy: adding `Dwell` compiles
-everywhere and is handled nowhere.
+Use inheritance when substitutable runtime polymorphism is the required model,
+including genuinely open extension points. For a closed sum of alternatives, a
+hierarchy alone provides no exhaustiveness check: adding `Dwell` can compile
+without forcing every consumer to handle it.

@@ -10,8 +10,10 @@ attribution:
 
 # Defensive at boundaries, trusting inside
 
-Validate where untrusted data enters — user input, file parsing, FFI. Past that
-line, trust it.
+Validate where untrusted data enters — user input, file parsing, FFI — and encode
+the validated result so internal code can rely on it. Revalidate when data
+crosses another trust boundary or an operation can invalidate the guarantee;
+do not repeat the same fallback throughout ordinary internal code.
 
 ```cpp
 // boundary: the only place a bad value can be rejected
@@ -21,6 +23,6 @@ ToolTable load_tool_table(const std::filesystem::path& path);  // throws on bad 
 double chip_load_mm(const Tool& tool, double feed_mm_per_min);
 ```
 
-Defensive checks scattered through internals are a symptom of an invariant that
-was never established. Each copy of the check is a place the fallback can differ
-from its siblings.
+Repeated recovery checks scattered through internals are a symptom of an
+invariant that was never established. Internal assertions can still document and
+diagnose programmer errors; they are not substitutes for boundary validation.

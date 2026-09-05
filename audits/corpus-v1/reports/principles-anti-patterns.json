@@ -1,6 +1,1029 @@
 {
   "schema_version": 1,
   "slice": "principles-anti-patterns",
-  "status": "pending",
-  "records": []
+  "status": "complete",
+  "records": [
+    {
+      "id": "POL-0001",
+      "disposition": "revise",
+      "dimensions": {
+        "technical_truth": {
+          "status": "reviewed"
+        },
+        "strength": {
+          "status": "finding",
+          "reason": "Tests complement structural prevention; they are not merely the last fallback."
+        },
+        "scope": {
+          "status": "reviewed"
+        },
+        "decision_clarity": {
+          "status": "reviewed"
+        },
+        "generation_routing": {
+          "status": "reviewed"
+        },
+        "review_routing": {
+          "status": "reviewed"
+        },
+        "consistency": {
+          "status": "reviewed"
+        },
+        "attribution": {
+          "status": "reviewed"
+        },
+        "examples_and_evidence": {
+          "status": "reviewed"
+        },
+        "model_behavior": {
+          "status": "reviewed"
+        }
+      },
+      "highest_severity": "minor",
+      "rationale": "The original decision remains sound after narrowing or correcting the resolved finding.",
+      "evidence": [
+        "docs/policies/POL-0001-correct-by-construction.md",
+        "docs/source/cpp-convention/conventions.md — Values"
+      ],
+      "related_ids": [],
+      "change": {
+        "files": [
+          "docs/policies/POL-0001-correct-by-construction.md"
+        ],
+        "commit": "this commit"
+      },
+      "follow_up_issue": null,
+      "finding_status": "resolved"
+    },
+    {
+      "id": "POL-0002",
+      "disposition": "revise",
+      "dimensions": {
+        "technical_truth": {
+          "status": "finding",
+          "reason": "C++ function types do not generally expose thrown exception types."
+        },
+        "strength": {
+          "status": "reviewed"
+        },
+        "scope": {
+          "status": "reviewed"
+        },
+        "decision_clarity": {
+          "status": "reviewed"
+        },
+        "generation_routing": {
+          "status": "reviewed"
+        },
+        "review_routing": {
+          "status": "reviewed"
+        },
+        "consistency": {
+          "status": "reviewed"
+        },
+        "attribution": {
+          "status": "reviewed"
+        },
+        "examples_and_evidence": {
+          "status": "reviewed"
+        },
+        "model_behavior": {
+          "status": "reviewed"
+        }
+      },
+      "highest_severity": "major",
+      "rationale": "The original decision remains sound after narrowing or correcting the resolved finding.",
+      "evidence": [
+        "docs/policies/POL-0002-failure-modes-visible.md",
+        "docs/source/cpp-convention/conventions.md — Values"
+      ],
+      "related_ids": [],
+      "change": {
+        "files": [
+          "docs/policies/POL-0002-failure-modes-visible.md"
+        ],
+        "commit": "this commit"
+      },
+      "follow_up_issue": null,
+      "finding_status": "resolved"
+    },
+    {
+      "id": "POL-0003",
+      "disposition": "revise",
+      "dimensions": {
+        "technical_truth": {
+          "status": "reviewed"
+        },
+        "strength": {
+          "status": "reviewed"
+        },
+        "scope": {
+          "status": "reviewed"
+        },
+        "decision_clarity": {
+          "status": "finding",
+          "reason": "A borrowed type does not identify its owner or prove a retained lifetime."
+        },
+        "generation_routing": {
+          "status": "reviewed"
+        },
+        "review_routing": {
+          "status": "reviewed"
+        },
+        "consistency": {
+          "status": "reviewed"
+        },
+        "attribution": {
+          "status": "reviewed"
+        },
+        "examples_and_evidence": {
+          "status": "reviewed"
+        },
+        "model_behavior": {
+          "status": "reviewed"
+        }
+      },
+      "highest_severity": "minor",
+      "rationale": "The original decision remains sound after narrowing or correcting the resolved finding.",
+      "evidence": [
+        "docs/policies/POL-0003-ownership-is-obvious.md",
+        "docs/source/cpp-convention/conventions.md — Values"
+      ],
+      "related_ids": [],
+      "change": {
+        "files": [
+          "docs/policies/POL-0003-ownership-is-obvious.md"
+        ],
+        "commit": "this commit"
+      },
+      "follow_up_issue": null,
+      "finding_status": "resolved"
+    },
+    {
+      "id": "POL-0004",
+      "disposition": "revise",
+      "dimensions": {
+        "technical_truth": {
+          "status": "reviewed"
+        },
+        "strength": {
+          "status": "reviewed"
+        },
+        "scope": {
+          "status": "finding",
+          "reason": "A standard algorithm can communicate intent better than direct control flow."
+        },
+        "decision_clarity": {
+          "status": "reviewed"
+        },
+        "generation_routing": {
+          "status": "reviewed"
+        },
+        "review_routing": {
+          "status": "reviewed"
+        },
+        "consistency": {
+          "status": "reviewed"
+        },
+        "attribution": {
+          "status": "reviewed"
+        },
+        "examples_and_evidence": {
+          "status": "reviewed"
+        },
+        "model_behavior": {
+          "status": "reviewed"
+        }
+      },
+      "highest_severity": "minor",
+      "rationale": "The original decision remains sound after narrowing or correcting the resolved finding.",
+      "evidence": [
+        "docs/policies/POL-0004-boring-is-a-feature.md",
+        "docs/source/cpp-convention/conventions.md — Values"
+      ],
+      "related_ids": [],
+      "change": {
+        "files": [
+          "docs/policies/POL-0004-boring-is-a-feature.md"
+        ],
+        "commit": "this commit"
+      },
+      "follow_up_issue": null,
+      "finding_status": "resolved"
+    },
+    {
+      "id": "POL-0005",
+      "disposition": "revise",
+      "dimensions": {
+        "technical_truth": {
+          "status": "reviewed"
+        },
+        "strength": {
+          "status": "reviewed"
+        },
+        "scope": {
+          "status": "finding",
+          "reason": "Later boundaries and invalidating operations can require validation again."
+        },
+        "decision_clarity": {
+          "status": "reviewed"
+        },
+        "generation_routing": {
+          "status": "reviewed"
+        },
+        "review_routing": {
+          "status": "reviewed"
+        },
+        "consistency": {
+          "status": "reviewed"
+        },
+        "attribution": {
+          "status": "reviewed"
+        },
+        "examples_and_evidence": {
+          "status": "reviewed"
+        },
+        "model_behavior": {
+          "status": "reviewed"
+        }
+      },
+      "highest_severity": "minor",
+      "rationale": "The original decision remains sound after narrowing or correcting the resolved finding.",
+      "evidence": [
+        "docs/policies/POL-0005-defensive-at-boundaries.md",
+        "docs/source/cpp-convention/conventions.md — Values"
+      ],
+      "related_ids": [],
+      "change": {
+        "files": [
+          "docs/policies/POL-0005-defensive-at-boundaries.md"
+        ],
+        "commit": "this commit"
+      },
+      "follow_up_issue": null,
+      "finding_status": "resolved"
+    },
+    {
+      "id": "POL-0006",
+      "disposition": "keep",
+      "dimensions": {
+        "technical_truth": {
+          "status": "reviewed"
+        },
+        "strength": {
+          "status": "reviewed"
+        },
+        "scope": {
+          "status": "reviewed"
+        },
+        "decision_clarity": {
+          "status": "reviewed"
+        },
+        "generation_routing": {
+          "status": "reviewed"
+        },
+        "review_routing": {
+          "status": "reviewed"
+        },
+        "consistency": {
+          "status": "reviewed"
+        },
+        "attribution": {
+          "status": "reviewed"
+        },
+        "examples_and_evidence": {
+          "status": "reviewed"
+        },
+        "model_behavior": {
+          "status": "reviewed"
+        }
+      },
+      "highest_severity": "note",
+      "rationale": "Intent-over-mechanism is a proportionate readability fallback.",
+      "evidence": [
+        "docs/policies/POL-0006-express-intent.md",
+        "docs/source/cpp-convention/conventions.md — Values"
+      ],
+      "related_ids": [],
+      "change": null,
+      "follow_up_issue": null,
+      "finding_status": "resolved"
+    },
+    {
+      "id": "POL-0007",
+      "disposition": "revise",
+      "dimensions": {
+        "technical_truth": {
+          "status": "finding",
+          "reason": "Cross-platform byte identity is unavailable for some floating-point and implementation-dependent behavior."
+        },
+        "strength": {
+          "status": "reviewed"
+        },
+        "scope": {
+          "status": "reviewed"
+        },
+        "decision_clarity": {
+          "status": "reviewed"
+        },
+        "generation_routing": {
+          "status": "reviewed"
+        },
+        "review_routing": {
+          "status": "reviewed"
+        },
+        "consistency": {
+          "status": "reviewed"
+        },
+        "attribution": {
+          "status": "reviewed"
+        },
+        "examples_and_evidence": {
+          "status": "reviewed"
+        },
+        "model_behavior": {
+          "status": "reviewed"
+        }
+      },
+      "highest_severity": "major",
+      "rationale": "The original decision remains sound after narrowing or correcting the resolved finding.",
+      "evidence": [
+        "docs/policies/POL-0007-determinism-default.md",
+        "docs/source/cpp-convention/conventions.md — Values"
+      ],
+      "related_ids": [],
+      "change": {
+        "files": [
+          "docs/policies/POL-0007-determinism-default.md"
+        ],
+        "commit": "this commit"
+      },
+      "follow_up_issue": null,
+      "finding_status": "resolved"
+    },
+    {
+      "id": "POL-0008",
+      "disposition": "revise",
+      "dimensions": {
+        "technical_truth": {
+          "status": "reviewed"
+        },
+        "strength": {
+          "status": "finding",
+          "reason": "The listed language mechanisms are not useful or appropriate unconditionally."
+        },
+        "scope": {
+          "status": "reviewed"
+        },
+        "decision_clarity": {
+          "status": "reviewed"
+        },
+        "generation_routing": {
+          "status": "reviewed"
+        },
+        "review_routing": {
+          "status": "reviewed"
+        },
+        "consistency": {
+          "status": "reviewed"
+        },
+        "attribution": {
+          "status": "reviewed"
+        },
+        "examples_and_evidence": {
+          "status": "reviewed"
+        },
+        "model_behavior": {
+          "status": "reviewed"
+        }
+      },
+      "highest_severity": "minor",
+      "rationale": "The original decision remains sound after narrowing or correcting the resolved finding.",
+      "evidence": [
+        "docs/policies/POL-0008-compiler-is-your-ally.md",
+        "docs/source/cpp-convention/conventions.md — Values"
+      ],
+      "related_ids": [],
+      "change": {
+        "files": [
+          "docs/policies/POL-0008-compiler-is-your-ally.md"
+        ],
+        "commit": "this commit"
+      },
+      "follow_up_issue": null,
+      "finding_status": "resolved"
+    },
+    {
+      "id": "POL-0042",
+      "disposition": "revise",
+      "dimensions": {
+        "technical_truth": {
+          "status": "reviewed"
+        },
+        "strength": {
+          "status": "reviewed"
+        },
+        "scope": {
+          "status": "finding",
+          "reason": "std::span is unavailable in the admitted C++14 and C++17 configurations."
+        },
+        "decision_clarity": {
+          "status": "reviewed"
+        },
+        "generation_routing": {
+          "status": "reviewed"
+        },
+        "review_routing": {
+          "status": "reviewed"
+        },
+        "consistency": {
+          "status": "reviewed"
+        },
+        "attribution": {
+          "status": "reviewed"
+        },
+        "examples_and_evidence": {
+          "status": "reviewed"
+        },
+        "model_behavior": {
+          "status": "reviewed"
+        }
+      },
+      "highest_severity": "minor",
+      "rationale": "The original decision remains sound after narrowing or correcting the resolved finding.",
+      "evidence": [
+        "docs/policies/POL-0042-pointer-and-length-pair.md",
+        "docs/source/cpp-convention/conventions.md — matching Trap section"
+      ],
+      "related_ids": [],
+      "change": {
+        "files": [
+          "docs/policies/POL-0042-pointer-and-length-pair.md"
+        ],
+        "commit": "this commit"
+      },
+      "follow_up_issue": null,
+      "finding_status": "resolved"
+    },
+    {
+      "id": "POL-0067",
+      "disposition": "revise",
+      "dimensions": {
+        "technical_truth": {
+          "status": "reviewed"
+        },
+        "strength": {
+          "status": "finding",
+          "reason": "Legitimate inheritance is not limited to an open, data-free interface."
+        },
+        "scope": {
+          "status": "reviewed"
+        },
+        "decision_clarity": {
+          "status": "reviewed"
+        },
+        "generation_routing": {
+          "status": "reviewed"
+        },
+        "review_routing": {
+          "status": "reviewed"
+        },
+        "consistency": {
+          "status": "reviewed"
+        },
+        "attribution": {
+          "status": "reviewed"
+        },
+        "examples_and_evidence": {
+          "status": "reviewed"
+        },
+        "model_behavior": {
+          "status": "reviewed"
+        }
+      },
+      "highest_severity": "minor",
+      "rationale": "The original decision remains sound after narrowing or correcting the resolved finding.",
+      "evidence": [
+        "docs/policies/POL-0067-inheritance-for-variation.md",
+        "docs/source/cpp-convention/conventions.md — matching Trap section"
+      ],
+      "related_ids": [],
+      "change": {
+        "files": [
+          "docs/policies/POL-0067-inheritance-for-variation.md"
+        ],
+        "commit": "this commit"
+      },
+      "follow_up_issue": null,
+      "finding_status": "resolved"
+    },
+    {
+      "id": "POL-0068",
+      "disposition": "keep",
+      "dimensions": {
+        "technical_truth": {
+          "status": "reviewed"
+        },
+        "strength": {
+          "status": "reviewed"
+        },
+        "scope": {
+          "status": "reviewed"
+        },
+        "decision_clarity": {
+          "status": "reviewed"
+        },
+        "generation_routing": {
+          "status": "reviewed"
+        },
+        "review_routing": {
+          "status": "reviewed"
+        },
+        "consistency": {
+          "status": "reviewed"
+        },
+        "attribution": {
+          "status": "reviewed"
+        },
+        "examples_and_evidence": {
+          "status": "reviewed"
+        },
+        "model_behavior": {
+          "status": "reviewed"
+        }
+      },
+      "highest_severity": "note",
+      "rationale": "Unchecked tag and optional-payload combinations are invalid-state defects repaired by closed-set variation.",
+      "evidence": [
+        "docs/policies/POL-0068-stringly-typed-dispatch.md",
+        "docs/source/cpp-convention/conventions.md — matching Trap section"
+      ],
+      "related_ids": [],
+      "change": null,
+      "follow_up_issue": null,
+      "finding_status": "resolved"
+    },
+    {
+      "id": "POL-0116",
+      "disposition": "revise",
+      "dimensions": {
+        "technical_truth": {
+          "status": "finding",
+          "reason": "The exact shared_ptr atomic-operation count is implementation- and operation-dependent."
+        },
+        "strength": {
+          "status": "reviewed"
+        },
+        "scope": {
+          "status": "reviewed"
+        },
+        "decision_clarity": {
+          "status": "reviewed"
+        },
+        "generation_routing": {
+          "status": "reviewed"
+        },
+        "review_routing": {
+          "status": "reviewed"
+        },
+        "consistency": {
+          "status": "reviewed"
+        },
+        "attribution": {
+          "status": "reviewed"
+        },
+        "examples_and_evidence": {
+          "status": "reviewed"
+        },
+        "model_behavior": {
+          "status": "reviewed"
+        }
+      },
+      "highest_severity": "minor",
+      "rationale": "The original decision remains sound after narrowing or correcting the resolved finding.",
+      "evidence": [
+        "docs/policies/POL-0116-reflexive-shared-ptr.md",
+        "docs/source/cpp-convention/conventions.md — matching Trap section"
+      ],
+      "related_ids": [],
+      "change": {
+        "files": [
+          "docs/policies/POL-0116-reflexive-shared-ptr.md"
+        ],
+        "commit": "this commit"
+      },
+      "follow_up_issue": null,
+      "finding_status": "resolved"
+    },
+    {
+      "id": "POL-0119",
+      "disposition": "revise",
+      "dimensions": {
+        "technical_truth": {
+          "status": "reviewed"
+        },
+        "strength": {
+          "status": "reviewed"
+        },
+        "scope": {
+          "status": "finding",
+          "reason": "Similar bodies need not represent logic that evolves together."
+        },
+        "decision_clarity": {
+          "status": "reviewed"
+        },
+        "generation_routing": {
+          "status": "reviewed"
+        },
+        "review_routing": {
+          "status": "reviewed"
+        },
+        "consistency": {
+          "status": "reviewed"
+        },
+        "attribution": {
+          "status": "reviewed"
+        },
+        "examples_and_evidence": {
+          "status": "reviewed"
+        },
+        "model_behavior": {
+          "status": "reviewed"
+        }
+      },
+      "highest_severity": "minor",
+      "rationale": "The original decision remains sound after narrowing or correcting the resolved finding.",
+      "evidence": [
+        "docs/policies/POL-0119-parallel-near-duplicates.md",
+        "docs/source/cpp-convention/conventions.md — matching Trap section"
+      ],
+      "related_ids": [],
+      "change": {
+        "files": [
+          "docs/policies/POL-0119-parallel-near-duplicates.md"
+        ],
+        "commit": "this commit"
+      },
+      "follow_up_issue": null,
+      "finding_status": "resolved"
+    },
+    {
+      "id": "POL-0124",
+      "disposition": "revise",
+      "dimensions": {
+        "technical_truth": {
+          "status": "reviewed"
+        },
+        "strength": {
+          "status": "reviewed"
+        },
+        "scope": {
+          "status": "reviewed"
+        },
+        "decision_clarity": {
+          "status": "reviewed"
+        },
+        "generation_routing": {
+          "status": "reviewed"
+        },
+        "review_routing": {
+          "status": "reviewed"
+        },
+        "consistency": {
+          "status": "reviewed"
+        },
+        "attribution": {
+          "status": "reviewed"
+        },
+        "examples_and_evidence": {
+          "status": "finding",
+          "reason": "container.size() is a legitimate API-coupled use of auto."
+        },
+        "model_behavior": {
+          "status": "reviewed"
+        }
+      },
+      "highest_severity": "minor",
+      "rationale": "The original decision remains sound after narrowing or correcting the resolved finding.",
+      "evidence": [
+        "docs/policies/POL-0124-auto-by-default.md",
+        "docs/source/cpp-convention/conventions.md — matching Trap section"
+      ],
+      "related_ids": [],
+      "change": {
+        "files": [
+          "docs/policies/POL-0124-auto-by-default.md"
+        ],
+        "commit": "this commit"
+      },
+      "follow_up_issue": null,
+      "finding_status": "resolved"
+    },
+    {
+      "id": "POL-0134",
+      "disposition": "revise",
+      "dimensions": {
+        "technical_truth": {
+          "status": "reviewed"
+        },
+        "strength": {
+          "status": "reviewed"
+        },
+        "scope": {
+          "status": "reviewed"
+        },
+        "decision_clarity": {
+          "status": "reviewed"
+        },
+        "generation_routing": {
+          "status": "finding",
+          "reason": "The trigger included trivial and locally obvious numeric literals."
+        },
+        "review_routing": {
+          "status": "reviewed"
+        },
+        "consistency": {
+          "status": "reviewed"
+        },
+        "attribution": {
+          "status": "reviewed"
+        },
+        "examples_and_evidence": {
+          "status": "reviewed"
+        },
+        "model_behavior": {
+          "status": "reviewed"
+        }
+      },
+      "highest_severity": "minor",
+      "rationale": "The original decision remains sound after narrowing or correcting the resolved finding.",
+      "evidence": [
+        "docs/policies/POL-0134-magic-number.md",
+        "docs/source/cpp-convention/conventions.md — matching Trap section"
+      ],
+      "related_ids": [],
+      "change": {
+        "files": [
+          "docs/policies/POL-0134-magic-number.md"
+        ],
+        "commit": "this commit"
+      },
+      "follow_up_issue": null,
+      "finding_status": "resolved"
+    },
+    {
+      "id": "POL-0164",
+      "disposition": "keep",
+      "dimensions": {
+        "technical_truth": {
+          "status": "reviewed"
+        },
+        "strength": {
+          "status": "reviewed"
+        },
+        "scope": {
+          "status": "reviewed"
+        },
+        "decision_clarity": {
+          "status": "reviewed"
+        },
+        "generation_routing": {
+          "status": "reviewed"
+        },
+        "review_routing": {
+          "status": "reviewed"
+        },
+        "consistency": {
+          "status": "reviewed"
+        },
+        "attribution": {
+          "status": "reviewed"
+        },
+        "examples_and_evidence": {
+          "status": "reviewed"
+        },
+        "model_behavior": {
+          "status": "reviewed"
+        }
+      },
+      "highest_severity": "note",
+      "rationale": "A mutex without a threading model cannot make compound operations atomic.",
+      "evidence": [
+        "docs/policies/POL-0164-cargo-culted-mutex.md",
+        "docs/source/cpp-convention/conventions.md — matching Trap section"
+      ],
+      "related_ids": [],
+      "change": null,
+      "follow_up_issue": null,
+      "finding_status": "resolved"
+    },
+    {
+      "id": "POL-0188",
+      "disposition": "revise",
+      "dimensions": {
+        "technical_truth": {
+          "status": "reviewed"
+        },
+        "strength": {
+          "status": "reviewed"
+        },
+        "scope": {
+          "status": "reviewed"
+        },
+        "decision_clarity": {
+          "status": "reviewed"
+        },
+        "generation_routing": {
+          "status": "finding",
+          "reason": "The trigger included legitimate exception translation at a boundary."
+        },
+        "review_routing": {
+          "status": "reviewed"
+        },
+        "consistency": {
+          "status": "reviewed"
+        },
+        "attribution": {
+          "status": "reviewed"
+        },
+        "examples_and_evidence": {
+          "status": "reviewed"
+        },
+        "model_behavior": {
+          "status": "reviewed"
+        }
+      },
+      "highest_severity": "minor",
+      "rationale": "The original decision remains sound after narrowing or correcting the resolved finding.",
+      "evidence": [
+        "docs/policies/POL-0188-mid-stack-exception-translation.md",
+        "docs/source/cpp-convention/conventions.md — matching Trap section"
+      ],
+      "related_ids": [],
+      "change": {
+        "files": [
+          "docs/policies/POL-0188-mid-stack-exception-translation.md"
+        ],
+        "commit": "this commit"
+      },
+      "follow_up_issue": null,
+      "finding_status": "resolved"
+    },
+    {
+      "id": "POL-0196",
+      "disposition": "revise",
+      "dimensions": {
+        "technical_truth": {
+          "status": "finding",
+          "reason": "Templates, especially constrained templates, do not inherently lose type checking."
+        },
+        "strength": {
+          "status": "reviewed"
+        },
+        "scope": {
+          "status": "reviewed"
+        },
+        "decision_clarity": {
+          "status": "reviewed"
+        },
+        "generation_routing": {
+          "status": "reviewed"
+        },
+        "review_routing": {
+          "status": "reviewed"
+        },
+        "consistency": {
+          "status": "reviewed"
+        },
+        "attribution": {
+          "status": "reviewed"
+        },
+        "examples_and_evidence": {
+          "status": "reviewed"
+        },
+        "model_behavior": {
+          "status": "reviewed"
+        }
+      },
+      "highest_severity": "minor",
+      "rationale": "The original decision remains sound after narrowing or correcting the resolved finding.",
+      "evidence": [
+        "docs/policies/POL-0196-premature-template.md",
+        "docs/source/cpp-convention/conventions.md — matching Trap section"
+      ],
+      "related_ids": [],
+      "change": {
+        "files": [
+          "docs/policies/POL-0196-premature-template.md"
+        ],
+        "commit": "this commit"
+      },
+      "follow_up_issue": null,
+      "finding_status": "resolved"
+    },
+    {
+      "id": "POL-0224",
+      "disposition": "revise",
+      "dimensions": {
+        "technical_truth": {
+          "status": "reviewed"
+        },
+        "strength": {
+          "status": "finding",
+          "reason": "Stored views can be valid under an enforced stable-storage lifetime contract."
+        },
+        "scope": {
+          "status": "reviewed"
+        },
+        "decision_clarity": {
+          "status": "reviewed"
+        },
+        "generation_routing": {
+          "status": "reviewed"
+        },
+        "review_routing": {
+          "status": "reviewed"
+        },
+        "consistency": {
+          "status": "reviewed"
+        },
+        "attribution": {
+          "status": "reviewed"
+        },
+        "examples_and_evidence": {
+          "status": "reviewed"
+        },
+        "model_behavior": {
+          "status": "reviewed"
+        }
+      },
+      "highest_severity": "minor",
+      "rationale": "The original decision remains sound after narrowing or correcting the resolved finding.",
+      "evidence": [
+        "docs/policies/POL-0224-stored-view.md",
+        "docs/source/cpp-convention/mechanisms.md — 4. Sequences"
+      ],
+      "related_ids": [],
+      "change": {
+        "files": [
+          "docs/policies/POL-0224-stored-view.md"
+        ],
+        "commit": "this commit"
+      },
+      "follow_up_issue": null,
+      "finding_status": "resolved"
+    },
+    {
+      "id": "POL-0232",
+      "disposition": "revise",
+      "dimensions": {
+        "technical_truth": {
+          "status": "finding",
+          "reason": "A test with a non-empty expectation can catch an empty stub."
+        },
+        "strength": {
+          "status": "reviewed"
+        },
+        "scope": {
+          "status": "reviewed"
+        },
+        "decision_clarity": {
+          "status": "reviewed"
+        },
+        "generation_routing": {
+          "status": "reviewed"
+        },
+        "review_routing": {
+          "status": "reviewed"
+        },
+        "consistency": {
+          "status": "reviewed"
+        },
+        "attribution": {
+          "status": "reviewed"
+        },
+        "examples_and_evidence": {
+          "status": "reviewed"
+        },
+        "model_behavior": {
+          "status": "reviewed"
+        }
+      },
+      "highest_severity": "minor",
+      "rationale": "The original decision remains sound after narrowing or correcting the resolved finding.",
+      "evidence": [
+        "docs/policies/POL-0232-empty-stub-public-function.md",
+        "docs/source/cpp-convention/conventions.md — matching Trap section"
+      ],
+      "related_ids": [],
+      "change": {
+        "files": [
+          "docs/policies/POL-0232-empty-stub-public-function.md"
+        ],
+        "commit": "this commit"
+      },
+      "follow_up_issue": null,
+      "finding_status": "resolved"
+    }
+  ]
 }
