@@ -1,228 +1,133 @@
 # cpp-policy-compiler
 
-`cpp-policy-compiler` is an opinionated, configurable policy compiler for C++ projects. It records engineering decisions once, selects the subset that applies to a project's language version, compiler, and domain, and puts that guidance in an LLM's context before it writes code.
+`cpp-policy-compiler` gives a C++ project a maintained set of engineering
+decisions for coding agents. It combines a canonical C++ policy corpus with the
+facts and exceptions of one project, then generates two documentation harnesses:
 
-The repository combines attributed source material with authored C++ policies, coding standards, and complete exemplars. `polc` compiles those inputs into a project-specific guidance projection: a set of documents and source trees organized for an LLM-assisted project.
+- **generation** guidance for writing code;
+- **review** guidance for inspecting an existing change.
 
-The goal is consistent engineering judgment rather than merely consistent formatting. Generated code should reflect the same decisions about ownership, errors, interfaces, concurrency, and other recurring concerns across a project, while remaining traceable to their source or stated rationale.
+The result is ordinary Markdown and example source. Nothing generated executes
+inside the target project, and compiling a harness never calls an LLM.
 
 ## Why
 
-A model’s training is fixed at generation time, but the context supplied to it is under the project’s control. If an engineering decision is absent from that context, the model must rely on its general training, and any disagreement may only be discovered later through review, static analysis, or testing.
+Coding models know C++, but they do not automatically know a project's choices
+about ownership, errors, interfaces, concurrency, testing, or architecture.
+When those decisions are absent, the model guesses and reviewers rediscover the
+same disagreements repeatedly.
 
-This project treats that context as a compiled project artifact. Each policy records a decision, the circumstances in which it applies, and the source or reasoning behind it. A project configuration selects the applicable policies and exemplars, and `polc` turns them into documents organized for model retrieval.
+This project records those decisions once and puts the applicable subset in the
+agent's context. Every generated rule has a stable identity and provenance, so
+a weak result can lead to a durable policy improvement rather than only a
+one-file repair.
 
-When generated code exposes a missing or poorly stated rule, the lasting correction can be made in the corpus and propagated into future projections. The individual file is repaired, but the guidance that produced it improves as well.
+## Use it in a project
 
-## Quickstart
+Python 3.12 or newer is required. Once a release is published, install and pin
+the tool:
 
-Python 3.12 or newer. The repository is a [uv](https://docs.astral.sh/uv/)
-project, so no separate install step is needed:
-
-```
-uv run polc build \
-  --config docs/configurations/cpp20-gcc-application.md \
-  --out ../my-project/policy
-```
-
-That reads the whole corpus, selects the subset the configuration admits, and
-writes a projection — about two dozen markdown documents plus the exemplar
-source trees. `polc check` takes the same arguments minus `--out`, validates
-and renders, and writes nothing; use it to see what a configuration would emit,
-or in CI to catch a corpus that no longer compiles.
-
-Generation is the default projection mode. Add `--mode review` to `build` or
-`check` for an independent review harness:
-
-```
-uv run polc build \
-  --config docs/configurations/cpp20-gcc-application.md \
-  --mode review \
-  --out ../my-project/policy-review
-```
-
-Both modes select the same policy identities. Generation routes from constructs
-about to be written and includes exemplar source; review routes from evidence in
-an existing change and omits exemplar implementations. `provenance.json` records
-the mode, and missing mode-specific routes are reported as coverage debt.
-
-Correctness experiments are opt-in and separate from projection builds. `polc
-eval run <manifest> --out <result>` scores a recorded generation or review
-benchmark, while `polc eval record` captures coherent file states around an
-explicit command. Normal consumer projects run neither; the tooling exists to
-measure whether the `polc` harness works. The benchmark format and initial
-experiment live under [`benchmarks/`](benchmarks/).
-
-For a checked-in, project-maintained harness, initialize both modes together:
-
-```
-# Once a release is published:
+```text
 pipx install polc==0.1.0
+```
+
+Initialize a target project:
+
+```text
 polc project init \
   --root ../my-project \
-  --language-version 20 --compiler gcc --domain application
+  --language-version 20 \
+  --compiler gcc \
+  --domain application
 ```
 
-This creates authored inputs under `.polc/` and managed neutral projections at
-`policy/generation` and `policy/review`. Add `--adapter claude-code` to emit two
-independently named skills under `.claude/skills/` instead. `project check` is a
-read-only CI drift check, `project build` incorporates local policy or context
-edits without changing the release lock, `project diff` previews a new compiler
-or corpus, and `project accept` updates the lock and both projections together.
-Pass `project accept --adapter neutral|claude-code` to switch managed layouts.
-The installed wheel contains the matching canonical corpus. Pinning the package
-version pins the compiler and corpus together; explicit corpus paths remain available
-for repository development and candidate testing.
+This creates project-owned inputs under `.polc/` and generated guidance under
+`policy/generation/` and `policy/review/`. Describe the project's architecture
+in `.polc/context/layers.md` and its load-bearing guarantees in
+`.polc/context/invariants.md`, then rebuild:
 
-Replacing a decision does not transfer an exemplar's evidence automatically. If a
-retained exemplar cites the replaced identity, the project must explicitly exclude
-that exemplar or replace it with compatible local source that cites the local decision.
-This keeps provenance from claiming that unchanged code demonstrates a different rule.
-
-`polc release build --out dist/text` produces deterministic text-only archives for
-the supported stock configurations. Each contains neutral generation and review
-projections plus a manifest of versions, the corpus fingerprint, and file hashes.
-Those archives are the no-tool adoption path: extract and check in the text, then point
-the agent at its entry documents. The wheel is needed only when a project wants the
-managed initialization, overlay, drift-check, rebuild, or upgrade workflow.
-
-Point your project's own instructions at `index.md` and the model routes itself
-from there. For Claude Code, skip that step:
-
-```
-uv run polc build \
-  --config docs/configurations/cpp23-gcc-realtime.md \
-  --out ../my-project/.claude/skills/cpp-policy \
-  --adapter claude-code
+```text
+polc project build --root ../my-project
 ```
 
-`--adapter claude-code` names the entry document `SKILL.md` and gives it skill
-frontmatter, so the output directory is a working skill as written. Nothing
-polc emits executes in the target project — the output is text and a map.
+Point the coding agent at `policy/generation/index.md` when it writes code and
+the reviewing agent at `policy/review/index.md` when it reviews code. Check the
+generated directories and `.polc/` inputs into the target repository.
 
-Both invocations own their output directory. Regeneration overwrites hand
-edits, and every rendered document says so in a banner on its first line. The
-copied configuration carries no banner, since it is a verbatim copy rather than
-a rendered document. `layers.md` and `invariants.md` carry no banner either:
-polc seeds them once with a note saying what the project writes there, and
-after that leaves whatever it finds in place.
+Use the read-only drift check in CI:
 
-## What a projection contains
+```text
+polc project check --root ../my-project
+```
 
-One entry document plus the documents it routes to.
+Local policies, exclusions, replacements, standards, and exemplars live under
+`.polc/`. They belong to the target project and evolve with it. See
+[Adopting and maintaining a harness](docs/adopting.md) for overlays, Claude Code
+integration, upgrades, and the lower-level compiler commands.
 
-`index.md` (or `SKILL.md`) is a pointer file: the configuration's three axes,
-the polc version and corpus fingerprint the projection was built from, a
-four-step procedure, and a map. The procedure fixes the order of operations —
-take the shape from the nearest exemplar, check each construct you write
-against a trigger table, read the layer semantics, read the subsystem
-invariants. The map is the routing mechanism the second step uses: one line per
-document, each saying when to read it. The model reads the entry document,
-matches the situation in front of it to a line, and opens that one document.
-In review mode the procedure, map, and topic tables instead route from observable
-evidence in a change and require findings to name their stable identity, location,
-consequence, and repair direction.
+## What gets generated
 
-Each lookup the procedure names is a table rather than a judgment call.
-`exemplars.md` opens with one row per exemplar keyed by the situation it
-answers, and each topic document opens with one row per rule keyed by the
-construct you are about to write. `principles.md` is where the second step
-lands when no trigger row matches: the principles, which apply to every
-decision rather than to a situation, and a legend defining the `MUST` /
-`SHOULD` / `THIS WAY` / `NEVER` marks that head every rule. The map does not
-route to it.
+Each harness has one entry document and a set of focused documents to which it
+routes the agent. The selected policy identities are the same in both modes,
+but their routes differ:
 
-Steps three and four land in `layers.md` and `invariants.md`, the two documents
-the project writes itself. polc seeds each once and never overwrites it, because
-what the layers are and what each subsystem guarantees are facts about the
-target project rather than about the corpus.
+- Generation routes from the construct about to be written and includes
+  complete exemplar source trees.
+- Review routes from observable evidence in a change and omits exemplar
+  implementations so that the review remains independent.
 
-The map covers the coding standard, one document per topic, the exemplars, and
-project setup. Alongside them sits `exemplars/`, the copied source trees;
-`configuration.md`, a verbatim copy of the configuration the projection was
-built from; and `provenance.json`, which holds a `projection` block naming the
-polc version, a SHA-256 fingerprint of the corpus, the configuration, and the
-adapter, and an `entries` block indexing every emitted id back to its
-attribution and source file.
+Both include the target project's layers and invariants. `provenance.json`
+records the compiler version, corpus fingerprint, configuration, mode, and the
+source of every emitted identity.
 
-The fingerprint covers every file under the policies, standard, and exemplars
-directories, so a projection in a target repository can be compared against a
-fresh build by reading one line. Provenance also records an integer projection-format
-version; project locks enforce that compatibility independently from package versions.
+## What lives in this repository
 
-## How it's organized
+- [Policies](docs/policies/) hold attributed engineering decisions, organized
+  into twenty task-oriented topics.
+- [The standard](docs/standard/) holds decided-once, mechanically visible
+  choices such as naming, layout, warnings, and build tools.
+- [Exemplars](docs/exemplars/) are complete source trees showing recurring
+  situations.
+- [Configurations](docs/configurations/) select policies by C++ version,
+  compiler, and domain.
+- [Source material](docs/source/) is evidence from which policies derive; it is
+  not itself generated guidance.
 
-Five authored layers and one derived:
+The compiler validates, selects, renders, and packages these layers. It does not
+format or rewrite a target project's C++ source.
 
-- **Source** ([docs/source/](docs/source/)) — the material policies derive
-  from: captured external documents and original testimony. Nothing here is
-  guidance; it is the evidence guidance cites.
-- **Policies** ([docs/policies/](docs/policies/)) — the opinionated layer, in
-  five kinds: principles, standards, guidelines, patterns, and anti-patterns.
-  Every policy is attributed to source and marked with where it applies.
-  [TOPICS.md](docs/policies/TOPICS.md) partitions them into twenty topics by
-  the task a reader is in the middle of — choosing a representation, handling
-  failure, crossing the FFI boundary — and each topic becomes one document in
-  the projection. Every non-principle policy belongs to exactly one topic, so a
-  reader is never deciding between two homes for the same rule.
-- **Standard** ([docs/standard/](docs/standard/)) — the decided-once layer:
-  file layout, naming, line layout, comments, and toolchain. Each entry fixes
-  one value that every file follows and that a tool or a glance can check.
-- **Exemplars** ([docs/exemplars/](docs/exemplars/)) — whole compilable source
-  trees, each showing a recurring situation as header, implementation, and
-  adjacent tests. An exemplar cites the policy and standard ids it
-  demonstrates rather than restating them.
-- **Configurations** ([docs/configurations/](docs/configurations/)) —
-  per-project facts on three axes: language version, compiler, domain. A
-  configuration is what selects the subset; a C++23 realtime project and a
-  C++20 application project get different documents from the same corpus.
-- **Projections** — the compiled output, described above. Regenerable from the
-  corpus, and not meant to be edited.
+## Development
 
-[docs/conventions/](docs/conventions/) is not one of these layers. It holds house
-rules for writing the compiler and this repository's own documents. `polc` never
-reads it, and nothing in it reaches a projection.
+This repository is a [uv](https://docs.astral.sh/uv/) project:
 
-## Design commitments
+```text
+uv run polc check \
+  --config docs/configurations/cpp20-gcc-application.md
+uv run pytest -q
+```
 
-- The compile step is pure code. No LLM runs at compile time; the LLM assists
-  at authoring time only.
-- The tool is written in Python. The guidance it produces targets C++.
-- Every piece of generated guidance is traceable to a stable decision identity
-  and its source material.
-- The projection ships no retrieval logic. The model is the retriever; what
-  ships is text and a map.
+Repository authors can build a projection directly with `polc build`. Consumers
+should normally use the managed `polc project` workflow above. Text-only release
+archives provide a no-tool alternative; see [Distribution](docs/distribution.md).
 
-The [project harness design](https://github.com/qprime/cpp-policy-compiler/issues/17)
-led to the implemented target-owned overlay, separate generation and review
-projections, managed upgrade lifecycle, and coordinated text and tool
-distribution described above.
+Correctness evaluation is explicit and opt-in. It measures how a recorded
+harness performs on a particular task and is never part of normal project
+builds. See [Correctness benchmarks](benchmarks/README.md).
 
 ## Status
 
-The end-to-end harness is implemented and remains under active development. The
-corpus holds 247 policies, 29 standard entries, and 14 exemplars, and two stock
-configurations are authored. The compiler validates and renders both generation
-and review projections; target projects can consume checked-in text archives or
-use the installed `polc` package to maintain local overlays and coordinated
-upgrades.
+The end-to-end harness, project overlay lifecycle, paired projections,
+distribution paths, and correctness evaluator are implemented and tested. The
+corpus currently contains 247 policies, 29 standard entries, 14 exemplars, and
+two stock configurations.
 
-The compile, evaluation, managed-project, release-archive, and
-installed-distribution paths have automated tests. The projection format is
-explicitly versioned; incompatible formats fail by naming both the locked and
-executing versions.
-
-The current maturity frontier is the policy content itself. The compiler can
-prove that the corpus is structurally valid and reproducibly projected, but
-those checks cannot prove that every C++ decision is technically correct,
-properly scoped, or optimally worded for an agent. The
+The current maturity frontier is policy content. Structural validation cannot
+prove that every C++ decision is technically correct or properly scoped. The
 [canonical corpus audit](https://github.com/qprime/cpp-policy-compiler/issues/28)
-tracks a systematic review of every policy, standard entry, attribution, route,
-and exemplar before using the corpus for broad brownfield normalization.
+tracks that review before broad brownfield normalization.
 
-Correctness experiments remain explicit and opt-in. Their results are evidence
-about how a particular harness performs on a recorded task, not a claim that one
-benchmark, target project, or model proves the corpus universally correct.
+The original [project harness design](https://github.com/qprime/cpp-policy-compiler/issues/17)
+records the reasoning behind the managed lifecycle and distribution model.
 
 ## License
 
