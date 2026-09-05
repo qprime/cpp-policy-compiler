@@ -36,6 +36,11 @@ the foreign handle in its constructor, releases it in its destructor, and conver
 every status code the driver can return into a domain failure exactly once. Callers
 never see the C API.
 
+The fake C provider validates pointer arguments at its independently callable ABI
+before dereferencing them. The C++ wrapper then establishes stronger constructor
+and ownership contracts for ordinary callers without duplicating the provider's
+memory-safety checks as assertions.
+
 `driver.h` is the one file in the corpus that is correctly a `.h`: it is compilable
 as C, reachable from both languages, and its guard ends `_H` because that is what
 uppercasing the file name gives.
@@ -56,9 +61,9 @@ binary runs.
 - `ffi/driver_adapter.cpp` — the status translated in one `switch`, the handle owned
   by all five special members, and the C string produced at the seam and carried no
   further
-- `ffi/driver_adapter_test.cpp` — the fake driver asserting what the C signatures
-  cannot state, its counters in a function-local static, and open and close counted
-  to a balance
+- `ffi/driver_adapter_test.cpp` — the fake driver rejecting invalid pointers at its
+  public C entry points, its counters in a function-local static, and open and close
+  counted to a balance
 - `ffi/testdata/frame.golden` — three frames, checked in
 - `include/sampler/core/temperature.hpp`, `core/temperature.cpp`,
   `core/temperature_test.cpp` — copied verbatim from EXM-0001

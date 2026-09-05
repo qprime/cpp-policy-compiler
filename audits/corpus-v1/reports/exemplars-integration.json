@@ -1,6 +1,752 @@
 {
   "schema_version": 1,
   "slice": "exemplars-integration",
-  "status": "pending",
-  "records": []
+  "status": "complete",
+  "records": [
+    {
+      "id": "EXM-0001",
+      "disposition": "revise",
+      "dimensions": {
+        "technical_truth": {
+          "status": "reviewed"
+        },
+        "strength": {
+          "status": "reviewed"
+        },
+        "scope": {
+          "status": "reviewed"
+        },
+        "decision_clarity": {
+          "status": "reviewed"
+        },
+        "generation_routing": {
+          "status": "reviewed"
+        },
+        "review_routing": {
+          "status": "reviewed"
+        },
+        "consistency": {
+          "status": "reviewed"
+        },
+        "attribution": {
+          "status": "reviewed"
+        },
+        "examples_and_evidence": {
+          "status": "finding",
+          "reason": "The shared Temperature source admitted non-finite values despite claiming a validated domain invariant."
+        },
+        "model_behavior": {
+          "status": "reviewed"
+        }
+      },
+      "highest_severity": "major",
+      "rationale": "The complete tree now supports every demonstrates claim without the resolved adjacent correctness defect.",
+      "evidence": [
+        "docs/exemplars/EXM-0001-value-type/exemplar.md",
+        "clean syntax compilation with the stated language floor and project warning set",
+        "manual inspection of every source and test file"
+      ],
+      "related_ids": [],
+      "change": {
+        "files": [
+          "docs/exemplars/EXM-0001-value-type/core/temperature.cpp",
+          "docs/exemplars/EXM-0001-value-type/core/temperature_test.cpp"
+        ],
+        "commit": "this commit"
+      },
+      "follow_up_issue": null,
+      "finding_status": "resolved"
+    },
+    {
+      "id": "EXM-0002",
+      "disposition": "keep",
+      "dimensions": {
+        "technical_truth": {
+          "status": "reviewed"
+        },
+        "strength": {
+          "status": "reviewed"
+        },
+        "scope": {
+          "status": "reviewed"
+        },
+        "decision_clarity": {
+          "status": "reviewed"
+        },
+        "generation_routing": {
+          "status": "reviewed"
+        },
+        "review_routing": {
+          "status": "reviewed"
+        },
+        "consistency": {
+          "status": "reviewed"
+        },
+        "attribution": {
+          "status": "reviewed"
+        },
+        "examples_and_evidence": {
+          "status": "reviewed"
+        },
+        "model_behavior": {
+          "status": "reviewed"
+        }
+      },
+      "highest_severity": "note",
+      "rationale": "The complete source tree is valid at its stated language floor and each demonstrates claim is visible and consistent with the audited corpus.",
+      "evidence": [
+        "docs/exemplars/EXM-0002-module-boundary/exemplar.md",
+        "clean syntax compilation with the stated language floor and project warning set",
+        "manual inspection of every source and test file"
+      ],
+      "related_ids": [],
+      "change": null,
+      "follow_up_issue": null,
+      "finding_status": "resolved"
+    },
+    {
+      "id": "EXM-0003",
+      "disposition": "revise",
+      "dimensions": {
+        "technical_truth": {
+          "status": "reviewed"
+        },
+        "strength": {
+          "status": "reviewed"
+        },
+        "scope": {
+          "status": "reviewed"
+        },
+        "decision_clarity": {
+          "status": "reviewed"
+        },
+        "generation_routing": {
+          "status": "reviewed"
+        },
+        "review_routing": {
+          "status": "reviewed"
+        },
+        "consistency": {
+          "status": "reviewed"
+        },
+        "attribution": {
+          "status": "reviewed"
+        },
+        "examples_and_evidence": {
+          "status": "finding",
+          "reason": "The shared Temperature source admitted non-finite values despite claiming a validated domain invariant."
+        },
+        "model_behavior": {
+          "status": "reviewed"
+        }
+      },
+      "highest_severity": "major",
+      "rationale": "The complete tree now supports every demonstrates claim without the resolved adjacent correctness defect.",
+      "evidence": [
+        "docs/exemplars/EXM-0003-stateful-class/exemplar.md",
+        "clean syntax compilation with the stated language floor and project warning set",
+        "manual inspection of every source and test file"
+      ],
+      "related_ids": [],
+      "change": {
+        "files": [
+          "docs/exemplars/EXM-0003-stateful-class/core/temperature.cpp",
+          "docs/exemplars/EXM-0003-stateful-class/core/temperature_test.cpp"
+        ],
+        "commit": "this commit"
+      },
+      "follow_up_issue": null,
+      "finding_status": "resolved"
+    },
+    {
+      "id": "EXM-0004",
+      "disposition": "keep",
+      "dimensions": {
+        "technical_truth": {
+          "status": "reviewed"
+        },
+        "strength": {
+          "status": "reviewed"
+        },
+        "scope": {
+          "status": "reviewed"
+        },
+        "decision_clarity": {
+          "status": "reviewed"
+        },
+        "generation_routing": {
+          "status": "reviewed"
+        },
+        "review_routing": {
+          "status": "reviewed"
+        },
+        "consistency": {
+          "status": "reviewed"
+        },
+        "attribution": {
+          "status": "reviewed"
+        },
+        "examples_and_evidence": {
+          "status": "reviewed"
+        },
+        "model_behavior": {
+          "status": "reviewed"
+        }
+      },
+      "highest_severity": "note",
+      "rationale": "The complete source tree is valid at its stated language floor and each demonstrates claim is visible and consistent with the audited corpus.",
+      "evidence": [
+        "docs/exemplars/EXM-0004-resource-owner/exemplar.md",
+        "clean syntax compilation with the stated language floor and project warning set",
+        "manual inspection of every source and test file"
+      ],
+      "related_ids": [],
+      "change": null,
+      "follow_up_issue": null,
+      "finding_status": "resolved"
+    },
+    {
+      "id": "EXM-0005",
+      "disposition": "revise",
+      "dimensions": {
+        "technical_truth": {
+          "status": "reviewed"
+        },
+        "strength": {
+          "status": "reviewed"
+        },
+        "scope": {
+          "status": "reviewed"
+        },
+        "decision_clarity": {
+          "status": "reviewed"
+        },
+        "generation_routing": {
+          "status": "reviewed"
+        },
+        "review_routing": {
+          "status": "reviewed"
+        },
+        "consistency": {
+          "status": "reviewed"
+        },
+        "attribution": {
+          "status": "reviewed"
+        },
+        "examples_and_evidence": {
+          "status": "finding",
+          "reason": "The shared Temperature source admitted non-finite values despite claiming a validated domain invariant."
+        },
+        "model_behavior": {
+          "status": "reviewed"
+        }
+      },
+      "highest_severity": "major",
+      "rationale": "The complete tree now supports every demonstrates claim without the resolved adjacent correctness defect.",
+      "evidence": [
+        "docs/exemplars/EXM-0005-non-owning-collaborator/exemplar.md",
+        "clean syntax compilation with the stated language floor and project warning set",
+        "manual inspection of every source and test file"
+      ],
+      "related_ids": [],
+      "change": {
+        "files": [
+          "docs/exemplars/EXM-0005-non-owning-collaborator/core/temperature.cpp",
+          "docs/exemplars/EXM-0005-non-owning-collaborator/core/temperature_test.cpp"
+        ],
+        "commit": "this commit"
+      },
+      "follow_up_issue": null,
+      "finding_status": "resolved"
+    },
+    {
+      "id": "EXM-0006",
+      "disposition": "revise",
+      "dimensions": {
+        "technical_truth": {
+          "status": "reviewed"
+        },
+        "strength": {
+          "status": "reviewed"
+        },
+        "scope": {
+          "status": "reviewed"
+        },
+        "decision_clarity": {
+          "status": "reviewed"
+        },
+        "generation_routing": {
+          "status": "reviewed"
+        },
+        "review_routing": {
+          "status": "reviewed"
+        },
+        "consistency": {
+          "status": "reviewed"
+        },
+        "attribution": {
+          "status": "reviewed"
+        },
+        "examples_and_evidence": {
+          "status": "finding",
+          "reason": "The shared Temperature source admitted non-finite values despite claiming a validated domain invariant."
+        },
+        "model_behavior": {
+          "status": "reviewed"
+        }
+      },
+      "highest_severity": "major",
+      "rationale": "The complete tree now supports every demonstrates claim without the resolved adjacent correctness defect.",
+      "evidence": [
+        "docs/exemplars/EXM-0006-validated-boundary/exemplar.md",
+        "clean syntax compilation with the stated language floor and project warning set",
+        "manual inspection of every source and test file"
+      ],
+      "related_ids": [],
+      "change": {
+        "files": [
+          "docs/exemplars/EXM-0006-validated-boundary/core/temperature.cpp",
+          "docs/exemplars/EXM-0006-validated-boundary/core/temperature_test.cpp"
+        ],
+        "commit": "this commit"
+      },
+      "follow_up_issue": null,
+      "finding_status": "resolved"
+    },
+    {
+      "id": "EXM-0007",
+      "disposition": "revise",
+      "dimensions": {
+        "technical_truth": {
+          "status": "reviewed"
+        },
+        "strength": {
+          "status": "reviewed"
+        },
+        "scope": {
+          "status": "reviewed"
+        },
+        "decision_clarity": {
+          "status": "reviewed"
+        },
+        "generation_routing": {
+          "status": "reviewed"
+        },
+        "review_routing": {
+          "status": "reviewed"
+        },
+        "consistency": {
+          "status": "reviewed"
+        },
+        "attribution": {
+          "status": "reviewed"
+        },
+        "examples_and_evidence": {
+          "status": "finding",
+          "reason": "The shared Temperature source admitted non-finite values despite claiming a validated domain invariant. The try_ operation could throw when its computed temperature fell outside the domain."
+        },
+        "model_behavior": {
+          "status": "reviewed"
+        }
+      },
+      "highest_severity": "major",
+      "rationale": "The complete tree now supports every demonstrates claim without the resolved adjacent correctness defect.",
+      "evidence": [
+        "docs/exemplars/EXM-0007-fallible-operation/exemplar.md",
+        "clean syntax compilation with the stated language floor and project warning set",
+        "manual inspection of every source and test file"
+      ],
+      "related_ids": [],
+      "change": {
+        "files": [
+          "docs/exemplars/EXM-0007-fallible-operation/core/temperature.cpp",
+          "docs/exemplars/EXM-0007-fallible-operation/core/temperature_test.cpp",
+          "docs/exemplars/EXM-0007-fallible-operation/core/calibration.cpp",
+          "docs/exemplars/EXM-0007-fallible-operation/core/calibration_test.cpp",
+          "docs/exemplars/EXM-0007-fallible-operation/exemplar.md"
+        ],
+        "commit": "this commit"
+      },
+      "follow_up_issue": null,
+      "finding_status": "resolved"
+    },
+    {
+      "id": "EXM-0008",
+      "disposition": "keep",
+      "dimensions": {
+        "technical_truth": {
+          "status": "reviewed"
+        },
+        "strength": {
+          "status": "reviewed"
+        },
+        "scope": {
+          "status": "reviewed"
+        },
+        "decision_clarity": {
+          "status": "reviewed"
+        },
+        "generation_routing": {
+          "status": "reviewed"
+        },
+        "review_routing": {
+          "status": "reviewed"
+        },
+        "consistency": {
+          "status": "reviewed"
+        },
+        "attribution": {
+          "status": "reviewed"
+        },
+        "examples_and_evidence": {
+          "status": "reviewed"
+        },
+        "model_behavior": {
+          "status": "reviewed"
+        }
+      },
+      "highest_severity": "note",
+      "rationale": "The complete source tree is valid at its stated language floor and each demonstrates claim is visible and consistent with the audited corpus.",
+      "evidence": [
+        "docs/exemplars/EXM-0008-alternatives/exemplar.md",
+        "clean syntax compilation with the stated language floor and project warning set",
+        "manual inspection of every source and test file"
+      ],
+      "related_ids": [],
+      "change": null,
+      "follow_up_issue": null,
+      "finding_status": "resolved"
+    },
+    {
+      "id": "EXM-0009",
+      "disposition": "revise",
+      "dimensions": {
+        "technical_truth": {
+          "status": "reviewed"
+        },
+        "strength": {
+          "status": "reviewed"
+        },
+        "scope": {
+          "status": "reviewed"
+        },
+        "decision_clarity": {
+          "status": "reviewed"
+        },
+        "generation_routing": {
+          "status": "reviewed"
+        },
+        "review_routing": {
+          "status": "reviewed"
+        },
+        "consistency": {
+          "status": "reviewed"
+        },
+        "attribution": {
+          "status": "reviewed"
+        },
+        "examples_and_evidence": {
+          "status": "finding",
+          "reason": "The shared Temperature source admitted non-finite values despite claiming a validated domain invariant."
+        },
+        "model_behavior": {
+          "status": "reviewed"
+        }
+      },
+      "highest_severity": "major",
+      "rationale": "The complete tree now supports every demonstrates claim without the resolved adjacent correctness defect.",
+      "evidence": [
+        "docs/exemplars/EXM-0009-collection-operation/exemplar.md",
+        "clean syntax compilation with the stated language floor and project warning set",
+        "manual inspection of every source and test file"
+      ],
+      "related_ids": [],
+      "change": {
+        "files": [
+          "docs/exemplars/EXM-0009-collection-operation/core/temperature.cpp",
+          "docs/exemplars/EXM-0009-collection-operation/core/temperature_test.cpp"
+        ],
+        "commit": "this commit"
+      },
+      "follow_up_issue": null,
+      "finding_status": "resolved"
+    },
+    {
+      "id": "EXM-0010",
+      "disposition": "revise",
+      "dimensions": {
+        "technical_truth": {
+          "status": "reviewed"
+        },
+        "strength": {
+          "status": "reviewed"
+        },
+        "scope": {
+          "status": "reviewed"
+        },
+        "decision_clarity": {
+          "status": "reviewed"
+        },
+        "generation_routing": {
+          "status": "reviewed"
+        },
+        "review_routing": {
+          "status": "reviewed"
+        },
+        "consistency": {
+          "status": "reviewed"
+        },
+        "attribution": {
+          "status": "reviewed"
+        },
+        "examples_and_evidence": {
+          "status": "finding",
+          "reason": "The shared Temperature source admitted non-finite values despite claiming a validated domain invariant."
+        },
+        "model_behavior": {
+          "status": "reviewed"
+        }
+      },
+      "highest_severity": "major",
+      "rationale": "The complete tree now supports every demonstrates claim without the resolved adjacent correctness defect.",
+      "evidence": [
+        "docs/exemplars/EXM-0010-thread-owner/exemplar.md",
+        "clean syntax compilation with the stated language floor and project warning set",
+        "manual inspection of every source and test file"
+      ],
+      "related_ids": [],
+      "change": {
+        "files": [
+          "docs/exemplars/EXM-0010-thread-owner/core/temperature.cpp",
+          "docs/exemplars/EXM-0010-thread-owner/core/temperature_test.cpp"
+        ],
+        "commit": "this commit"
+      },
+      "follow_up_issue": null,
+      "finding_status": "resolved"
+    },
+    {
+      "id": "EXM-0011",
+      "disposition": "revise",
+      "dimensions": {
+        "technical_truth": {
+          "status": "reviewed"
+        },
+        "strength": {
+          "status": "reviewed"
+        },
+        "scope": {
+          "status": "reviewed"
+        },
+        "decision_clarity": {
+          "status": "reviewed"
+        },
+        "generation_routing": {
+          "status": "reviewed"
+        },
+        "review_routing": {
+          "status": "reviewed"
+        },
+        "consistency": {
+          "status": "reviewed"
+        },
+        "attribution": {
+          "status": "reviewed"
+        },
+        "examples_and_evidence": {
+          "status": "finding",
+          "reason": "The shared Temperature source admitted non-finite values despite claiming a validated domain invariant."
+        },
+        "model_behavior": {
+          "status": "reviewed"
+        }
+      },
+      "highest_severity": "major",
+      "rationale": "The complete tree now supports every demonstrates claim without the resolved adjacent correctness defect.",
+      "evidence": [
+        "docs/exemplars/EXM-0011-shared-state/exemplar.md",
+        "clean syntax compilation with the stated language floor and project warning set",
+        "manual inspection of every source and test file"
+      ],
+      "related_ids": [],
+      "change": {
+        "files": [
+          "docs/exemplars/EXM-0011-shared-state/core/temperature.cpp",
+          "docs/exemplars/EXM-0011-shared-state/core/temperature_test.cpp"
+        ],
+        "commit": "this commit"
+      },
+      "follow_up_issue": null,
+      "finding_status": "resolved"
+    },
+    {
+      "id": "EXM-0012",
+      "disposition": "revise",
+      "dimensions": {
+        "technical_truth": {
+          "status": "reviewed"
+        },
+        "strength": {
+          "status": "reviewed"
+        },
+        "scope": {
+          "status": "reviewed"
+        },
+        "decision_clarity": {
+          "status": "reviewed"
+        },
+        "generation_routing": {
+          "status": "reviewed"
+        },
+        "review_routing": {
+          "status": "reviewed"
+        },
+        "consistency": {
+          "status": "reviewed"
+        },
+        "attribution": {
+          "status": "reviewed"
+        },
+        "examples_and_evidence": {
+          "status": "finding",
+          "reason": "The shared Temperature source admitted non-finite values despite claiming a validated domain invariant."
+        },
+        "model_behavior": {
+          "status": "reviewed"
+        }
+      },
+      "highest_severity": "major",
+      "rationale": "The complete tree now supports every demonstrates claim without the resolved adjacent correctness defect.",
+      "evidence": [
+        "docs/exemplars/EXM-0012-realtime-loop/exemplar.md",
+        "clean syntax compilation with the stated language floor and project warning set",
+        "manual inspection of every source and test file"
+      ],
+      "related_ids": [],
+      "change": {
+        "files": [
+          "docs/exemplars/EXM-0012-realtime-loop/core/temperature.cpp",
+          "docs/exemplars/EXM-0012-realtime-loop/core/temperature_test.cpp"
+        ],
+        "commit": "this commit"
+      },
+      "follow_up_issue": null,
+      "finding_status": "resolved"
+    },
+    {
+      "id": "EXM-0013",
+      "disposition": "revise",
+      "dimensions": {
+        "technical_truth": {
+          "status": "reviewed"
+        },
+        "strength": {
+          "status": "reviewed"
+        },
+        "scope": {
+          "status": "reviewed"
+        },
+        "decision_clarity": {
+          "status": "reviewed"
+        },
+        "generation_routing": {
+          "status": "reviewed"
+        },
+        "review_routing": {
+          "status": "reviewed"
+        },
+        "consistency": {
+          "status": "reviewed"
+        },
+        "attribution": {
+          "status": "reviewed"
+        },
+        "examples_and_evidence": {
+          "status": "finding",
+          "reason": "The shared Temperature source admitted non-finite values despite claiming a validated domain invariant. The public C provider asserted pointer preconditions instead of validating independently callable FFI input."
+        },
+        "model_behavior": {
+          "status": "reviewed"
+        }
+      },
+      "highest_severity": "major",
+      "rationale": "The complete tree now supports every demonstrates claim without the resolved adjacent correctness defect.",
+      "evidence": [
+        "docs/exemplars/EXM-0013-ffi-boundary/exemplar.md",
+        "clean syntax compilation with the stated language floor and project warning set",
+        "manual inspection of every source and test file"
+      ],
+      "related_ids": [],
+      "change": {
+        "files": [
+          "docs/exemplars/EXM-0013-ffi-boundary/core/temperature.cpp",
+          "docs/exemplars/EXM-0013-ffi-boundary/core/temperature_test.cpp",
+          "docs/exemplars/EXM-0013-ffi-boundary/include/sampler/ffi/driver_adapter.hpp",
+          "docs/exemplars/EXM-0013-ffi-boundary/ffi/driver_adapter_test.cpp",
+          "docs/exemplars/EXM-0013-ffi-boundary/exemplar.md"
+        ],
+        "commit": "this commit"
+      },
+      "follow_up_issue": null,
+      "finding_status": "resolved"
+    },
+    {
+      "id": "EXM-0014",
+      "disposition": "revise",
+      "dimensions": {
+        "technical_truth": {
+          "status": "reviewed"
+        },
+        "strength": {
+          "status": "reviewed"
+        },
+        "scope": {
+          "status": "reviewed"
+        },
+        "decision_clarity": {
+          "status": "reviewed"
+        },
+        "generation_routing": {
+          "status": "reviewed"
+        },
+        "review_routing": {
+          "status": "reviewed"
+        },
+        "consistency": {
+          "status": "reviewed"
+        },
+        "attribution": {
+          "status": "reviewed"
+        },
+        "examples_and_evidence": {
+          "status": "finding",
+          "reason": "The shared Temperature source admitted non-finite values despite claiming a validated domain invariant. Destroying an unfinished task left its slot holding a continuation into a destroyed coroutine frame."
+        },
+        "model_behavior": {
+          "status": "reviewed"
+        }
+      },
+      "highest_severity": "major",
+      "rationale": "The complete tree now supports every demonstrates claim without the resolved adjacent correctness defect.",
+      "evidence": [
+        "docs/exemplars/EXM-0014-coroutine/exemplar.md",
+        "clean syntax compilation with the stated language floor and project warning set",
+        "manual inspection of every source and test file"
+      ],
+      "related_ids": [],
+      "change": {
+        "files": [
+          "docs/exemplars/EXM-0014-coroutine/core/temperature.cpp",
+          "docs/exemplars/EXM-0014-coroutine/core/temperature_test.cpp",
+          "docs/exemplars/EXM-0014-coroutine/include/sampler/device/async_read.hpp",
+          "docs/exemplars/EXM-0014-coroutine/device/async_read.cpp",
+          "docs/exemplars/EXM-0014-coroutine/device/async_read_test.cpp",
+          "docs/exemplars/EXM-0014-coroutine/exemplar.md"
+        ],
+        "commit": "this commit"
+      },
+      "follow_up_issue": null,
+      "finding_status": "resolved"
+    }
+  ]
 }

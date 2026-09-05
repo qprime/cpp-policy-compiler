@@ -1,6 +1,7 @@
 #include "sampler/core/calibration.hpp"
 
 #include <array>
+#include <limits>
 #include <optional>
 #include <stdexcept>
 
@@ -20,6 +21,15 @@ TEST_CASE("reports_domain_failure_for_unstable_input") {
 
 TEST_CASE("precondition_violation_is_not_a_return_value") {
     REQUIRE_THROWS_AS(Calibration(2.0, 0.0), std::invalid_argument);
+    REQUIRE_THROWS_AS(Calibration(2.0, std::numeric_limits<double>::quiet_NaN()),
+                      std::invalid_argument);
+}
+
+TEST_CASE("reports_domain_failure_for_an_invalid_calibrated_value") {
+    const Calibration calibration{-300.0, 1.0};
+    const std::array<double, 1> steady{20.0};
+
+    REQUIRE(try_calibrated_temperature(steady, calibration) == std::nullopt);
 }
 
 TEST_CASE("catches_a_plausible_wrong_implementation") {

@@ -35,8 +35,9 @@ mechanism, an `assert` on the non-empty span, is the one no test can claim.
 - `include/sampler/core/calibration.hpp` — the two mechanisms visible in the
   declarations: a constructor that can throw, and a `try_` that cannot
 - `core/calibration.cpp` — the guard returning `std::nullopt`, the constructor
-  throwing with the value that failed, and the `assert` for the condition upstream
-  is expected to have settled
+  rejecting invalid calibration parameters, and the `assert` for the condition
+  upstream is expected to have settled; an out-of-domain computed temperature is
+  also returned as absence rather than escaping through the `try_` contract
 - `core/calibration_test.cpp` — `catches_a_plausible_wrong_implementation` asserts
   the calibrated value, so an implementation that ignored the offset, or returned
   the mean unchanged, fails it

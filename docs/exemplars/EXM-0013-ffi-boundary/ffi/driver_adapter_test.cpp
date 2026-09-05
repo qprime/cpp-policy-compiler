@@ -1,6 +1,5 @@
 #include "sampler/ffi/driver_adapter.hpp"
 
-#include <cassert>
 #include <expected>
 #include <fstream>
 #include <sstream>
@@ -45,8 +44,9 @@ sampler_driver_session& fake_session() {
 
 extern "C" sampler_driver_status sampler_driver_open(const char* endpoint,
                                                      sampler_driver_session** out_session) {
-    assert(endpoint != nullptr);
-    assert(out_session != nullptr);
+    if (endpoint == nullptr || out_session == nullptr) {
+        return SAMPLER_DRIVER_FAULT;
+    }
 
     if (std::string_view{endpoint}.empty()) {
         return SAMPLER_DRIVER_NOT_FOUND;
@@ -60,14 +60,17 @@ extern "C" sampler_driver_status sampler_driver_open(const char* endpoint,
 }
 
 extern "C" void sampler_driver_close(sampler_driver_session* session) {
-    assert(session != nullptr);
+    if (session == nullptr) {
+        return;
+    }
     ++fake_driver().closes;
 }
 
 extern "C" sampler_driver_status sampler_driver_read(sampler_driver_session* session,
                                                      double* out_celsius) {
-    assert(session != nullptr);
-    assert(out_celsius != nullptr);
+    if (session == nullptr || out_celsius == nullptr) {
+        return SAMPLER_DRIVER_FAULT;
+    }
 
     const FakeDriver& driver = fake_driver();
     if (driver.read_status != SAMPLER_DRIVER_OK) {
@@ -101,6 +104,14 @@ TEST_CASE("translates_foreign_error_codes") {
     REQUIRE(status_to_failure(SAMPLER_DRIVER_BUSY) == DriverFailure::Busy);
     REQUIRE(status_to_failure(SAMPLER_DRIVER_FAULT) == DriverFailure::Fault);
     REQUIRE_THROWS_AS(status_to_failure(SAMPLER_DRIVER_OK), std::logic_error);
+}
+
+TEST_CASE("the_public_c_boundary_rejects_invalid_pointers") {
+    sampler_driver_session* session = nullptr;
+    REQUIRE(sampler_driver_open(nullptr, &session) == SAMPLER_DRIVER_FAULT);
+    REQUIRE(sampler_driver_open("endpoint", nullptr) == SAMPLER_DRIVER_FAULT);
+    REQUIRE(sampler_driver_read(nullptr, nullptr) == SAMPLER_DRIVER_FAULT);
+    sampler_driver_close(nullptr);
 }
 
 TEST_CASE("acquisition_failure_throws_a_domain_error") {

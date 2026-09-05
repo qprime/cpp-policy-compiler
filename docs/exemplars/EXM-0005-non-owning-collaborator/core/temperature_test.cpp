@@ -1,5 +1,6 @@
 #include "sampler/core/temperature.hpp"
 
+#include <limits>
 #include <optional>
 #include <stdexcept>
 
@@ -22,6 +23,13 @@ TEST_CASE("rejects_below_absolute_zero") {
 TEST_CASE("try_from_reports_absence_below_absolute_zero") {
     REQUIRE(Temperature::try_from(-300.0) == std::nullopt);
     REQUIRE(Temperature::try_from(kAbsoluteZeroCelsius).has_value());
+}
+
+TEST_CASE("rejects_non_finite_values") {
+    const double infinity = std::numeric_limits<double>::infinity();
+    const double nan = std::numeric_limits<double>::quiet_NaN();
+    REQUIRE_THROWS_AS(Temperature{infinity}, std::invalid_argument);
+    REQUIRE(Temperature::try_from(nan) == std::nullopt);
 }
 
 TEST_CASE("compares_equal_by_value") {

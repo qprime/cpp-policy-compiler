@@ -37,13 +37,18 @@ which is how the property is carried — no test asserts it, because none could.
 follow from that. It is a concrete type rather than a `Task<T>`, because one return
 type is one return type.
 
+Destroying an unfinished task unregisters its continuation from the slot before
+destroying the coroutine frame. The slot therefore never retains a handle to a dead
+frame when cancellation wins the race with device completion.
+
 ### Reading order
 
 - `include/sampler/device/async_read.hpp` — the awaitable's three functions, the
   promise type as a nested type ahead of the constructors, and a coroutine whose
   only parameter is a value
 - `device/async_read.cpp` — the handle taken out of the slot before it is resumed,
-  and the five special members of a handle owner
+  cancellation disconnecting the continuation, and the five special members of a
+  handle owner
 - `device/async_read_test.cpp` — resumption observed through the task, the
   already-ready path that never suspends, and the share count showing the frame
   took a copy

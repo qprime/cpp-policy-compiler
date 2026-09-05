@@ -18,6 +18,12 @@ void ReadSlot::write_reading(core::Temperature reading) {
     }
 }
 
+void ReadSlot::cancel(std::coroutine_handle<> waiter) noexcept {
+    if (waiter_ == waiter) {
+        waiter_ = {};
+    }
+}
+
 ReadTask ReadTask::promise_type::get_return_object() {
     return ReadTask{std::coroutine_handle<promise_type>::from_promise(*this)};
 }
@@ -26,6 +32,7 @@ ReadTask::ReadTask(std::coroutine_handle<promise_type> handle) noexcept : handle
 
 ReadTask::~ReadTask() {
     if (handle_) {
+        cancel_wait();
         handle_.destroy();
     }
 }
@@ -37,6 +44,7 @@ ReadTask& ReadTask::operator=(ReadTask&& other) noexcept {
         return *this;
     }
     if (handle_) {
+        cancel_wait();
         handle_.destroy();
     }
     handle_ = std::exchange(other.handle_, {});
@@ -53,6 +61,12 @@ core::Temperature ReadTask::get_reading() const {
         std::rethrow_exception(promise.error);
     }
     return *promise.reading;
+}
+
+void ReadTask::cancel_wait() noexcept {
+    if (const std::shared_ptr<ReadSlot> slot = handle_.promise().slot.lock()) {
+        slot->cancel(handle_);
+    }
 }
 
 ReadTask load_reading(std::shared_ptr<ReadSlot> slot, double offset_celsius) {

@@ -9,9 +9,9 @@
 #include "sampler/core/temperature.hpp"
 #include "sampler/ffi/driver.h"
 
-// This layer is the declared exception to validate-at-the-boundary. It converts
-// foreign status codes, owns a foreign handle, and asserts what the C signatures
-// cannot state. The ceremony below is correct here and nowhere else.
+// This layer converts foreign status codes and owns a foreign handle. The C
+// provider validates its public pointer boundary; this trusted wrapper passes
+// values whose stronger C++ contracts are already established.
 namespace sampler::ffi {
 
 enum class DriverFailure { NotFound, Busy, Fault };

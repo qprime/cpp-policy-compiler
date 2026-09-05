@@ -88,10 +88,17 @@ def test_live_corpus_path_change_makes_inventory_stale(tmp_path: Path) -> None:
         )
 
 
-def test_incremental_accepts_pending_but_final_rejects_it() -> None:
-    _check()
+def test_incremental_accepts_pending_but_final_rejects_it(tmp_path: Path) -> None:
+    audit = _copy_audit(tmp_path)
+    report_path = audit / REPORTS["exemplars-integration"]
+    report = json.loads(report_path.read_text(encoding="utf-8"))
+    report["status"] = "pending"
+    report["records"] = []
+    report_path.write_text(json.dumps(report), encoding="utf-8")
+
+    _check(audit)
     with pytest.raises(PolcError, match="final audit cannot contain a pending slice"):
-        _check(final=True)
+        _check(audit, final=True)
 
 
 def test_completed_report_requires_exact_owned_identity_order(tmp_path: Path) -> None:

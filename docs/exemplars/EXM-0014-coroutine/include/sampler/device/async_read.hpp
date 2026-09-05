@@ -20,6 +20,7 @@ class ReadSlot {
     core::Temperature await_resume() const { return *reading_; }
 
     void write_reading(core::Temperature reading);
+    void cancel(std::coroutine_handle<> waiter) noexcept;
 
  private:
     std::optional<core::Temperature> reading_;
@@ -29,8 +30,11 @@ class ReadSlot {
 class ReadTask {
  public:
     struct promise_type {
+        explicit promise_type(std::shared_ptr<ReadSlot> slot, double) : slot{slot} {}
+
         std::optional<core::Temperature> reading;
         std::exception_ptr error;
+        std::weak_ptr<ReadSlot> slot;
 
         ReadTask get_return_object();
         std::suspend_never initial_suspend() const noexcept { return {}; }
@@ -51,6 +55,8 @@ class ReadTask {
     core::Temperature get_reading() const;
 
  private:
+    void cancel_wait() noexcept;
+
     std::coroutine_handle<promise_type> handle_;
 };
 
