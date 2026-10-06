@@ -12,11 +12,11 @@ namespace sampler::device {
 
 // Threading: a ReadSlot is single-threaded. The reader awaits it and the device
 // writes to it from the same thread; a slot shared across threads would need a
-// different type.
+// different type. Only one reader may be suspended on a slot at a time.
 class ReadSlot {
  public:
     bool await_ready() const noexcept { return reading_.has_value(); }
-    void await_suspend(std::coroutine_handle<> waiter) noexcept { waiter_ = waiter; }
+    void await_suspend(std::coroutine_handle<> waiter);
     core::Temperature await_resume() const { return *reading_; }
 
     void write_reading(core::Temperature reading);

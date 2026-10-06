@@ -32,7 +32,10 @@ exist, which is what `std::optional` says.
 
 The window bounds stay `double` with unit-suffixed names rather than becoming
 wrapped types, because arithmetic flows straight through them. The invariant they
-do carry — lowest at or below highest — is what makes the window a class.
+do carry — finite bounds with lowest at or below highest — is what makes the
+window a class. Reduction computes a running mean with `std::lerp`, which stays
+finite for finite endpoints and a weight between zero and one. Summing first
+could overflow even when the mathematical mean fits.
 
 `within_celsius` is not `const`. A `filter_view` caches the position of its first
 element on the first traversal, so `begin()` is non-`const` and a `const` view is
@@ -44,7 +47,7 @@ unusable.
   predicate under the standard library's name for it, and a `try_` that returns
   absence
 - `core/reading_stats.cpp` — transform and filter composed before anything is
-  summed, each lambda naming its captures
+  reduced, each lambda naming its captures
 - `core/reading_stats_test.cpp` — a fixture holding the window, `GENERATE` over
   three shapes of empty result, and `filters_before_reducing` asserting the mean
   itself so that reducing before filtering fails it

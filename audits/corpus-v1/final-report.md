@@ -36,7 +36,11 @@ exemplar evidence. Material corrections include:
 - redacting unsafe diagnostic values and allowing explicit cross-language naming
   maps;
 - rejecting non-finite temperatures throughout copied exemplar source;
-- disconnecting a destroyed coroutine frame from its pending continuation.
+- disconnecting a destroyed coroutine frame from its pending continuation;
+- checking wire range before floating-point narrowing and documenting quantization;
+- computing finite running means without an overflowing intermediate sum;
+- enforcing finite window bounds and single-reader coroutine registration;
+- distinguishing an allocation-free path from measured deadline compliance.
 
 The resolved cross-corpus findings are recorded in `cross-slice.md`. Replacement
 edges, topic membership, routing, standard grouping, and exemplar provenance remain
@@ -47,8 +51,8 @@ structurally valid after the changes.
 Three different claims are kept separate:
 
 1. **Deterministic validation.** `polc audit check --final`, the compiler tests,
-   both projection modes for both stock configurations, syntax compilation of
-   exemplar production translation units, C compilation of the shared driver
+   both projection modes for both stock configurations, compilation and execution
+   of every exemplar's production and adjacent test translation units, C compilation of the shared driver
    header, evaluator fixtures, and reproducible installed release archives check
    structure and executable invariants.
 2. **Expert semantic review.** The slice reports record the technical, strength,
@@ -66,8 +70,11 @@ normal builds.
 
 ## Completion gate
 
-Brownfield normalization may proceed from this audited corpus version once the
-verification commands recorded with the integration commit pass. Target projects
+Brownfield normalization may proceed from this audited corpus version: the
+verification commands in [integration-verification.md](integration-verification.md)
+pass, including 55 Python tests, all 14 executable exemplar suites and the C11
+header check, both deterministic evaluators, all four stock projections, and
+matching independently built wheel and archive hashes. Target projects
 still own their platform facts, exceptions, and deviations through overlays; this
 audit does not turn canonical defaults into universal C++ law.
 
@@ -90,3 +97,13 @@ transfer; fallthrough guidance admits C++14; and coroutine lifetime guidance
 accounts for borrowed views and enforced referent lifetimes. EXM-0014 prose now
 explains its ownership guarantee without asserting references always dangle.
 All findings are resolved and recorded in the owning reports.
+
+## Issue 36 integration follow-up
+
+The complete-tree review retained every exemplar identity and demonstrates claim.
+Additional numeric-boundary, reduction, waiter-registration, null-slot, and
+deadline-scope findings are corrected in EXM-0006, EXM-0007, EXM-0009, EXM-0012,
+and EXM-0014. These were already revised identities, so the disposition and
+highest-severity totals remain unchanged. Runtime regressions and reproducible
+commands are recorded in the integration verification document. No unresolved
+cross-slice finding or new compiler invariant remains.

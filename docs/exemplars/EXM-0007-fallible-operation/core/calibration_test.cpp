@@ -42,4 +42,18 @@ TEST_CASE("catches_a_plausible_wrong_implementation") {
     REQUIRE(calibrated->celsius() == Catch::Approx(32.0));
 }
 
+TEST_CASE("large_finite_samples_can_be_scaled_into_the_domain") {
+    const double maximum = std::numeric_limits<double>::max();
+    const std::array<double, 2> samples{maximum, maximum};
+    const Calibration calibration{0.0, 1.0 / maximum};
+    const auto result = try_calibrated_temperature(samples, calibration);
+    REQUIRE(result.has_value());
+    REQUIRE(result->celsius() == Catch::Approx(1.0));
+}
+
+TEST_CASE("non_finite_samples_are_rejected_before_reducing") {
+    const std::array<double, 2> samples{20.0, std::numeric_limits<double>::quiet_NaN()};
+    REQUIRE(try_calibrated_temperature(samples, Calibration{0.0, 1.0}) == std::nullopt);
+}
+
 }  // namespace sampler::core

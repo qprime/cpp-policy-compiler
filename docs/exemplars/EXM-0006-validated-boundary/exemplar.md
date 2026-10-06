@@ -29,21 +29,26 @@ three separate facts before it will return a `Reading`: the frame is whole, the
 temperature is a number, and the number is one the domain admits. Each failure the
 caller must act on differently has its own enumerator.
 
-`reading_to_frame` is total. Every `Reading` that exists has a frame, so the
-encode side has no failure mode and no error type.
+`reading_to_frame` checks the binary32 wire range before narrowing a `double`.
+It returns `EncodeError::TemperatureOutOfRange` in `std::expected` if the value
+exceeds that range or rounding takes it outside the temperature domain. A
+validated domain value need not fit a wire
+format. The implementation requires eight-bit bytes and IEEE binary32 `float`.
+Encoding quantizes arbitrary `double` values; it preserves decoded wire values,
+but does not promise an exact round trip for every domain value.
 
 `std::expected` is what sets the C++23 floor. Below it, POL-0183 names a project
 result type instead.
 
 ### Reading order
 
-- `include/sampler/wire/frame.hpp` — the failure set as an `enum class`, the
+- `include/sampler/wire/frame.hpp` — decoding and encoding failure sets as `enum class`, the
   decoded value as an aggregate, and the wire size as one named constant
 - `wire/frame.cpp` — unsigned arithmetic confined to the byte assembly,
   `std::bit_cast` where the wire's float has to be read out of four octets, and
   the narrowing back to `float` written out
 - `wire/frame_test.cpp` — one frame per rejection, and `round_trips_semantically`
-  comparing the decoded values rather than the bytes, because one temperature has
-  more than one wire representation
+  comparing the decoded values rather than the bytes, plus rejection before an
+  out-of-range floating-point conversion
 - `include/sampler/core/temperature.hpp`, `core/temperature.cpp`,
   `core/temperature_test.cpp` — copied verbatim from EXM-0001

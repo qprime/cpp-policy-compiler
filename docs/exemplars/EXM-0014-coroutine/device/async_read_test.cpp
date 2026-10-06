@@ -1,6 +1,7 @@
 #include "sampler/device/async_read.hpp"
 
 #include <memory>
+#include <stdexcept>
 
 #include <catch2/catch_test_macros.hpp>
 
@@ -54,6 +55,25 @@ TEST_CASE("destroying_an_unfinished_task_disconnects_its_continuation") {
     }
 
     slot->write_reading(core::Temperature{20.0});
+}
+
+TEST_CASE("a_second_waiter_is_rejected_without_disconnecting_the_first") {
+    const auto slot = std::make_shared<ReadSlot>();
+    const ReadTask first = load_reading(slot, kOffsetCelsius);
+    {
+        const ReadTask second = load_reading(slot, kOffsetCelsius);
+        REQUIRE(second.is_done());
+        REQUIRE_THROWS_AS(second.get_reading(), std::logic_error);
+    }
+    slot->write_reading(core::Temperature{20.0});
+    REQUIRE(first.is_done());
+    REQUIRE(first.get_reading() == core::Temperature{21.5});
+}
+
+TEST_CASE("a_null_slot_reports_failure_instead_of_dereferencing_it") {
+    const ReadTask task = load_reading(nullptr, kOffsetCelsius);
+    REQUIRE(task.is_done());
+    REQUIRE_THROWS_AS(task.get_reading(), std::invalid_argument);
 }
 
 }  // namespace sampler::device

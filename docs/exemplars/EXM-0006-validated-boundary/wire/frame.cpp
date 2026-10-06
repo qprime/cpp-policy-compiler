@@ -6,6 +6,7 @@
 #include <cstddef>
 #include <cstdint>
 #include <expected>
+#include <limits>
 #include <optional>
 #include <span>
 
@@ -18,6 +19,9 @@ constexpr std::size_t kSequenceOffset = 0;
 constexpr std::size_t kCelsiusOffset = 4;
 constexpr std::size_t kWordSizeBytes = 4;
 constexpr unsigned int kBitsPerByte = 8;
+static_assert(std::numeric_limits<unsigned char>::digits == kBitsPerByte);
+static_assert(std::numeric_limits<float>::is_iec559 &&
+              std::numeric_limits<float>::digits == 24 && sizeof(float) == 4);
 
 std::uint32_t read_word_be(std::span<const std::byte> bytes) {
     std::uint32_t word = 0;
@@ -55,10 +59,19 @@ std::expected<Reading, DecodeError> parse_frame(std::span<const std::byte> frame
     return Reading{sequence, *temperature};
 }
 
-std::array<std::byte, kFrameSizeBytes> reading_to_frame(const Reading& reading) {
+std::expected<std::array<std::byte, kFrameSizeBytes>, EncodeError> reading_to_frame(
+    const Reading& reading) {
+    const double celsius = reading.temperature.celsius();
+    if (celsius > static_cast<double>(std::numeric_limits<float>::max())) {
+        return std::unexpected{EncodeError::TemperatureOutOfRange};
+    }
+    const float wire_celsius = static_cast<float>(celsius);
+    if (!core::Temperature::try_from(wire_celsius)) {
+        return std::unexpected{EncodeError::TemperatureOutOfRange};
+    }
     std::array<std::byte, kFrameSizeBytes> frame{};
     write_word_be(reading.sequence, std::span{frame}.subspan(kSequenceOffset, kWordSizeBytes));
-    write_word_be(std::bit_cast<std::uint32_t>(static_cast<float>(reading.temperature.celsius())),
+    write_word_be(std::bit_cast<std::uint32_t>(wire_celsius),
                   std::span{frame}.subspan(kCelsiusOffset, kWordSizeBytes));
     return frame;
 }

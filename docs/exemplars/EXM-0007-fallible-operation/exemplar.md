@@ -30,10 +30,15 @@ that should never have been constructed — a calibration with a scale of zero �
 where it was constructed, so it never reaches this function at all. The third
 mechanism, an `assert` on the non-empty span, is the one no test can claim.
 
+Non-finite samples are rejected before reduction. A running mean uses
+`std::lerp` rather than an unbounded sum, so large finite stable samples can be
+scaled into the domain without an avoidable intermediate overflow.
+
 ### Reading order
 
 - `include/sampler/core/calibration.hpp` — the two mechanisms visible in the
-  declarations: a constructor that can throw, and a `try_` that cannot
+  declarations: a constructor that rejects programmer errors by exception, and
+  a `try_` that reports domain failures as absence
 - `core/calibration.cpp` — the guard returning `std::nullopt`, the constructor
   rejecting invalid calibration parameters, and the `assert` for the condition
   upstream is expected to have settled; an out-of-domain computed temperature is

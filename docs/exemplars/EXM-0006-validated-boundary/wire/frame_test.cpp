@@ -3,6 +3,7 @@
 #include <array>
 #include <cstddef>
 #include <expected>
+#include <limits>
 #include <span>
 
 #include <catch2/catch_test_macros.hpp>
@@ -64,12 +65,29 @@ TEST_CASE("round_trips_semantically") {
     const std::expected<Reading, DecodeError> first = parse_frame(kRoomTemperatureFrame);
     REQUIRE(first.has_value());
 
-    const std::array<std::byte, kFrameSizeBytes> encoded = reading_to_frame(*first);
-    const std::expected<Reading, DecodeError> second = parse_frame(encoded);
+    const auto encoded = reading_to_frame(*first);
+    REQUIRE(encoded.has_value());
+    const std::expected<Reading, DecodeError> second = parse_frame(*encoded);
 
     REQUIRE(second.has_value());
     REQUIRE(second->sequence == first->sequence);
     REQUIRE(second->temperature == first->temperature);
+}
+
+TEST_CASE("rejects_temperature_outside_the_wire_numeric_range") {
+    const Reading reading{7, core::Temperature{std::numeric_limits<double>::max()}};
+    const auto encoded = reading_to_frame(reading);
+    REQUIRE_FALSE(encoded.has_value());
+    REQUIRE(encoded.error() == EncodeError::TemperatureOutOfRange);
+}
+
+TEST_CASE("encodes_the_largest_finite_wire_temperature") {
+    const Reading reading{7, core::Temperature{std::numeric_limits<float>::max()}};
+    const auto encoded = reading_to_frame(reading);
+    REQUIRE(encoded.has_value());
+    const auto decoded = parse_frame(*encoded);
+    REQUIRE(decoded.has_value());
+    REQUIRE(decoded->temperature == reading.temperature);
 }
 
 }  // namespace sampler::wire

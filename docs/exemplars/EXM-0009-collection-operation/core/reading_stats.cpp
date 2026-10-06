@@ -1,5 +1,7 @@
 #include "sampler/core/reading_stats.hpp"
 
+#include <cmath>
+#include <cstddef>
 #include <iterator>
 #include <numeric>
 #include <optional>
@@ -14,9 +16,10 @@ namespace sampler::core {
 
 SampleWindow::SampleWindow(double lowest_celsius, double highest_celsius)
     : lowest_celsius_{lowest_celsius}, highest_celsius_{highest_celsius} {
-    if (lowest_celsius > highest_celsius) {
+    if (!std::isfinite(lowest_celsius) || !std::isfinite(highest_celsius) ||
+        lowest_celsius > highest_celsius) {
         throw std::invalid_argument(
-            "SampleWindow: lowest_celsius must be <= highest_celsius, got " +
+            "SampleWindow: finite bounds must satisfy lowest_celsius <= highest_celsius, got " +
             std::to_string(lowest_celsius));
     }
 }
@@ -33,9 +36,14 @@ std::optional<Temperature> try_mean_temperature(std::span<const Temperature> rea
         return std::nullopt;
     }
 
-    const double total_celsius =
-        std::accumulate(within_celsius.begin(), within_celsius.end(), 0.0);
-    return Temperature{total_celsius / static_cast<double>(count)};
+    std::size_t processed = 0;
+    const double mean_celsius = std::accumulate(
+        within_celsius.begin(), within_celsius.end(), 0.0,
+        [&processed](double mean, double next) {
+            ++processed;
+            return std::lerp(mean, next, 1.0 / static_cast<double>(processed));
+        });
+    return Temperature{mean_celsius};
 }
 
 }  // namespace sampler::core

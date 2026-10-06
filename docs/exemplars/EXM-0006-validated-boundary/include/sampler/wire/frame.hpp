@@ -14,6 +14,7 @@ namespace sampler::wire {
 constexpr std::size_t kFrameSizeBytes = 8;
 
 enum class DecodeError { TruncatedFrame, NotANumber, TemperatureOutOfRange };
+enum class EncodeError { TemperatureOutOfRange };
 
 struct Reading {
     std::uint32_t sequence;
@@ -22,7 +23,8 @@ struct Reading {
 
 std::expected<Reading, DecodeError> parse_frame(std::span<const std::byte> frame);
 
-std::array<std::byte, kFrameSizeBytes> reading_to_frame(const Reading& reading);
+std::expected<std::array<std::byte, kFrameSizeBytes>, EncodeError> reading_to_frame(
+    const Reading& reading);
 
 }  // namespace sampler::wire
 

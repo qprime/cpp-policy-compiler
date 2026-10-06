@@ -44,9 +44,36 @@
       "evidence": [
         "docs/exemplars/EXM-0001-value-type/exemplar.md",
         "clean syntax compilation with the stated language floor and project warning set",
-        "manual inspection of every source and test file"
+        "manual inspection of every source and test file",
+        "audits/corpus-v1/integration-verification.md",
+        "scripts/check_exemplars.py: complete source and adjacent Catch2 tests built and executed at the declared minimum language version"
       ],
-      "related_ids": [],
+      "related_ids": [
+        "POL-0058",
+        "POL-0059",
+        "POL-0060",
+        "POL-0063",
+        "POL-0069",
+        "POL-0071",
+        "POL-0085",
+        "POL-0133",
+        "POL-0183",
+        "POL-0217",
+        "POL-0228",
+        "POL-0229",
+        "POL-0240",
+        "POL-0242",
+        "POL-0244",
+        "POL-0245",
+        "STD-0003",
+        "STD-0004",
+        "STD-0005",
+        "STD-0008",
+        "STD-0009",
+        "STD-0011",
+        "STD-0012",
+        "STD-0020"
+      ],
       "change": {
         "files": [
           "docs/exemplars/EXM-0001-value-type/core/temperature.cpp",
@@ -97,9 +124,34 @@
       "evidence": [
         "docs/exemplars/EXM-0002-module-boundary/exemplar.md",
         "clean syntax compilation with the stated language floor and project warning set",
-        "manual inspection of every source and test file"
+        "manual inspection of every source and test file",
+        "audits/corpus-v1/integration-verification.md",
+        "scripts/check_exemplars.py: complete source and adjacent Catch2 tests built and executed at the declared minimum language version"
       ],
-      "related_ids": [],
+      "related_ids": [
+        "POL-0014",
+        "POL-0017",
+        "POL-0056",
+        "POL-0057",
+        "POL-0058",
+        "POL-0064",
+        "POL-0183",
+        "POL-0217",
+        "POL-0218",
+        "POL-0228",
+        "POL-0240",
+        "POL-0244",
+        "POL-0245",
+        "STD-0001",
+        "STD-0002",
+        "STD-0003",
+        "STD-0004",
+        "STD-0005",
+        "STD-0007",
+        "STD-0008",
+        "STD-0010",
+        "STD-0011"
+      ],
       "change": null,
       "follow_up_issue": null,
       "finding_status": "resolved"
@@ -145,9 +197,28 @@
       "evidence": [
         "docs/exemplars/EXM-0003-stateful-class/exemplar.md",
         "clean syntax compilation with the stated language floor and project warning set",
-        "manual inspection of every source and test file"
+        "manual inspection of every source and test file",
+        "audits/corpus-v1/integration-verification.md",
+        "scripts/check_exemplars.py: complete source and adjacent Catch2 tests built and executed at the declared minimum language version"
       ],
-      "related_ids": [],
+      "related_ids": [
+        "POL-0058",
+        "POL-0063",
+        "POL-0064",
+        "POL-0071",
+        "POL-0088",
+        "POL-0128",
+        "POL-0156",
+        "POL-0159",
+        "POL-0195",
+        "POL-0228",
+        "POL-0240",
+        "POL-0244",
+        "POL-0245",
+        "POL-0247",
+        "STD-0011",
+        "STD-0020"
+      ],
       "change": {
         "files": [
           "docs/exemplars/EXM-0003-stateful-class/core/temperature.cpp",
@@ -198,9 +269,29 @@
       "evidence": [
         "docs/exemplars/EXM-0004-resource-owner/exemplar.md",
         "clean syntax compilation with the stated language floor and project warning set",
-        "manual inspection of every source and test file"
+        "manual inspection of every source and test file",
+        "audits/corpus-v1/integration-verification.md",
+        "scripts/check_exemplars.py: complete source and adjacent Catch2 tests built and executed at the declared minimum language version"
       ],
-      "related_ids": [],
+      "related_ids": [
+        "POL-0009",
+        "POL-0028",
+        "POL-0071",
+        "POL-0072",
+        "POL-0074",
+        "POL-0079",
+        "POL-0080",
+        "POL-0082",
+        "POL-0109",
+        "POL-0110",
+        "POL-0133",
+        "POL-0228",
+        "POL-0240",
+        "POL-0244",
+        "POL-0245",
+        "STD-0005",
+        "STD-0022"
+      ],
       "change": null,
       "follow_up_issue": null,
       "finding_status": "resolved"
@@ -246,9 +337,29 @@
       "evidence": [
         "docs/exemplars/EXM-0005-non-owning-collaborator/exemplar.md",
         "clean syntax compilation with the stated language floor and project warning set",
-        "manual inspection of every source and test file"
+        "manual inspection of every source and test file",
+        "audits/corpus-v1/integration-verification.md",
+        "scripts/check_exemplars.py: complete source and adjacent Catch2 tests built and executed at the declared minimum language version"
       ],
-      "related_ids": [],
+      "related_ids": [
+        "POL-0014",
+        "POL-0016",
+        "POL-0021",
+        "POL-0022",
+        "POL-0025",
+        "POL-0040",
+        "POL-0057",
+        "POL-0070",
+        "POL-0073",
+        "POL-0081",
+        "POL-0090",
+        "POL-0092",
+        "POL-0240",
+        "POL-0244",
+        "POL-0245",
+        "STD-0007",
+        "STD-0022"
+      ],
       "change": {
         "files": [
           "docs/exemplars/EXM-0005-non-owning-collaborator/core/temperature.cpp",
@@ -289,26 +400,51 @@
         },
         "examples_and_evidence": {
           "status": "finding",
-          "reason": "The shared Temperature source admitted non-finite values despite claiming a validated domain invariant."
+          "reason": "The shared Temperature source admitted non-finite values despite claiming a validated domain invariant. An unrestricted finite double could be narrowed outside the binary32 range; the prose incorrectly promised total encoding and exact domain round trips."
         },
         "model_behavior": {
           "status": "reviewed"
         }
       },
       "highest_severity": "major",
-      "rationale": "The complete tree now supports every demonstrates claim without the resolved adjacent correctness defect.",
+      "rationale": "The complete tree now supports every demonstrates claim without the resolved adjacent correctness defect. Issue #36 regression tests and scope corrections resolve the additional findings. Encoding input failures use std::expected, consistent with POL-0183.",
       "evidence": [
         "docs/exemplars/EXM-0006-validated-boundary/exemplar.md",
         "clean syntax compilation with the stated language floor and project warning set",
-        "manual inspection of every source and test file"
+        "manual inspection of every source and test file",
+        "audits/corpus-v1/integration-verification.md",
+        "scripts/check_exemplars.py: complete source and adjacent Catch2 tests built and executed at the declared minimum language version",
+        "https://eel.is/c++draft/conv.double",
+        "https://eel.is/c++draft/c.math.lerp"
       ],
-      "related_ids": [],
+      "related_ids": [
+        "POL-0005",
+        "POL-0041",
+        "POL-0056",
+        "POL-0105",
+        "POL-0133",
+        "POL-0135",
+        "POL-0136",
+        "POL-0183",
+        "POL-0194",
+        "POL-0227",
+        "POL-0240",
+        "POL-0243",
+        "POL-0244",
+        "POL-0245",
+        "STD-0010",
+        "STD-0019"
+      ],
       "change": {
         "files": [
           "docs/exemplars/EXM-0006-validated-boundary/core/temperature.cpp",
-          "docs/exemplars/EXM-0006-validated-boundary/core/temperature_test.cpp"
+          "docs/exemplars/EXM-0006-validated-boundary/core/temperature_test.cpp",
+          "docs/exemplars/EXM-0006-validated-boundary/exemplar.md",
+          "docs/exemplars/EXM-0006-validated-boundary/wire/frame.cpp",
+          "docs/exemplars/EXM-0006-validated-boundary/wire/frame_test.cpp",
+          "docs/exemplars/EXM-0006-validated-boundary/include/sampler/wire/frame.hpp"
         ],
-        "commit": "this commit"
+        "commit": "Complete exemplar and corpus integration gate (includes earlier audited corrections)"
       },
       "follow_up_issue": null,
       "finding_status": "resolved"
@@ -343,29 +479,50 @@
         },
         "examples_and_evidence": {
           "status": "finding",
-          "reason": "The shared Temperature source admitted non-finite values despite claiming a validated domain invariant. The try_ operation could throw when its computed temperature fell outside the domain."
+          "reason": "The shared Temperature source admitted non-finite values despite claiming a validated domain invariant. The try_ operation could throw when its computed temperature fell outside the domain. Summing large finite stable samples overflowed before a valid calibration could scale the mean into the domain."
         },
         "model_behavior": {
           "status": "reviewed"
         }
       },
       "highest_severity": "major",
-      "rationale": "The complete tree now supports every demonstrates claim without the resolved adjacent correctness defect.",
+      "rationale": "The complete tree now supports every demonstrates claim without the resolved adjacent correctness defect. Issue #36 regression tests and scope corrections resolve the additional findings.",
       "evidence": [
         "docs/exemplars/EXM-0007-fallible-operation/exemplar.md",
         "clean syntax compilation with the stated language floor and project warning set",
-        "manual inspection of every source and test file"
+        "manual inspection of every source and test file",
+        "audits/corpus-v1/integration-verification.md",
+        "scripts/check_exemplars.py: complete source and adjacent Catch2 tests built and executed at the declared minimum language version",
+        "https://eel.is/c++draft/conv.double",
+        "https://eel.is/c++draft/c.math.lerp"
       ],
-      "related_ids": [],
+      "related_ids": [
+        "POL-0013",
+        "POL-0019",
+        "POL-0033",
+        "POL-0041",
+        "POL-0056",
+        "POL-0058",
+        "POL-0133",
+        "POL-0183",
+        "POL-0191",
+        "POL-0228",
+        "POL-0240",
+        "POL-0244",
+        "POL-0245",
+        "POL-0247",
+        "STD-0011",
+        "STD-0012"
+      ],
       "change": {
         "files": [
-          "docs/exemplars/EXM-0007-fallible-operation/core/temperature.cpp",
-          "docs/exemplars/EXM-0007-fallible-operation/core/temperature_test.cpp",
           "docs/exemplars/EXM-0007-fallible-operation/core/calibration.cpp",
           "docs/exemplars/EXM-0007-fallible-operation/core/calibration_test.cpp",
+          "docs/exemplars/EXM-0007-fallible-operation/core/temperature.cpp",
+          "docs/exemplars/EXM-0007-fallible-operation/core/temperature_test.cpp",
           "docs/exemplars/EXM-0007-fallible-operation/exemplar.md"
         ],
-        "commit": "this commit"
+        "commit": "Complete exemplar and corpus integration gate (includes earlier audited corrections)"
       },
       "follow_up_issue": null,
       "finding_status": "resolved"
@@ -410,9 +567,28 @@
       "evidence": [
         "docs/exemplars/EXM-0008-alternatives/exemplar.md",
         "clean syntax compilation with the stated language floor and project warning set",
-        "manual inspection of every source and test file"
+        "manual inspection of every source and test file",
+        "audits/corpus-v1/integration-verification.md",
+        "scripts/check_exemplars.py: complete source and adjacent Catch2 tests built and executed at the declared minimum language version"
       ],
-      "related_ids": [],
+      "related_ids": [
+        "POL-0035",
+        "POL-0057",
+        "POL-0066",
+        "POL-0105",
+        "POL-0106",
+        "POL-0107",
+        "POL-0108",
+        "POL-0143",
+        "POL-0144",
+        "POL-0145",
+        "POL-0228",
+        "POL-0240",
+        "POL-0244",
+        "POL-0245",
+        "STD-0009",
+        "STD-0010"
+      ],
       "change": null,
       "follow_up_issue": null,
       "finding_status": "resolved"
@@ -447,26 +623,52 @@
         },
         "examples_and_evidence": {
           "status": "finding",
-          "reason": "The shared Temperature source admitted non-finite values despite claiming a validated domain invariant."
+          "reason": "The shared Temperature source admitted non-finite values despite claiming a validated domain invariant. Window construction admitted non-finite bounds and summing valid finite readings could overflow before division."
         },
         "model_behavior": {
           "status": "reviewed"
         }
       },
       "highest_severity": "major",
-      "rationale": "The complete tree now supports every demonstrates claim without the resolved adjacent correctness defect.",
+      "rationale": "The complete tree now supports every demonstrates claim without the resolved adjacent correctness defect. Issue #36 regression tests and scope corrections resolve the additional findings.",
       "evidence": [
         "docs/exemplars/EXM-0009-collection-operation/exemplar.md",
         "clean syntax compilation with the stated language floor and project warning set",
-        "manual inspection of every source and test file"
+        "manual inspection of every source and test file",
+        "audits/corpus-v1/integration-verification.md",
+        "scripts/check_exemplars.py: complete source and adjacent Catch2 tests built and executed at the declared minimum language version",
+        "https://eel.is/c++draft/conv.double",
+        "https://eel.is/c++draft/c.math.lerp"
       ],
-      "related_ids": [],
+      "related_ids": [
+        "POL-0013",
+        "POL-0033",
+        "POL-0035",
+        "POL-0041",
+        "POL-0053",
+        "POL-0056",
+        "POL-0058",
+        "POL-0136",
+        "POL-0183",
+        "POL-0203",
+        "POL-0228",
+        "POL-0229",
+        "POL-0240",
+        "POL-0244",
+        "POL-0245",
+        "POL-0247",
+        "STD-0011",
+        "STD-0012"
+      ],
       "change": {
         "files": [
+          "docs/exemplars/EXM-0009-collection-operation/core/reading_stats.cpp",
+          "docs/exemplars/EXM-0009-collection-operation/core/reading_stats_test.cpp",
           "docs/exemplars/EXM-0009-collection-operation/core/temperature.cpp",
-          "docs/exemplars/EXM-0009-collection-operation/core/temperature_test.cpp"
+          "docs/exemplars/EXM-0009-collection-operation/core/temperature_test.cpp",
+          "docs/exemplars/EXM-0009-collection-operation/exemplar.md"
         ],
-        "commit": "this commit"
+        "commit": "Complete exemplar and corpus integration gate (includes earlier audited corrections)"
       },
       "follow_up_issue": null,
       "finding_status": "resolved"
@@ -512,9 +714,32 @@
       "evidence": [
         "docs/exemplars/EXM-0010-thread-owner/exemplar.md",
         "clean syntax compilation with the stated language floor and project warning set",
-        "manual inspection of every source and test file"
+        "manual inspection of every source and test file",
+        "audits/corpus-v1/integration-verification.md",
+        "scripts/check_exemplars.py: complete source and adjacent Catch2 tests built and executed at the declared minimum language version"
       ],
-      "related_ids": [],
+      "related_ids": [
+        "POL-0053",
+        "POL-0054",
+        "POL-0071",
+        "POL-0082",
+        "POL-0163",
+        "POL-0165",
+        "POL-0169",
+        "POL-0171",
+        "POL-0172",
+        "POL-0173",
+        "POL-0174",
+        "POL-0175",
+        "POL-0176",
+        "POL-0225",
+        "POL-0226",
+        "POL-0240",
+        "POL-0244",
+        "POL-0245",
+        "POL-0248",
+        "STD-0009"
+      ],
       "change": {
         "files": [
           "docs/exemplars/EXM-0010-thread-owner/core/temperature.cpp",
@@ -566,9 +791,25 @@
       "evidence": [
         "docs/exemplars/EXM-0011-shared-state/exemplar.md",
         "clean syntax compilation with the stated language floor and project warning set",
-        "manual inspection of every source and test file"
+        "manual inspection of every source and test file",
+        "audits/corpus-v1/integration-verification.md",
+        "scripts/check_exemplars.py: complete source and adjacent Catch2 tests built and executed at the declared minimum language version"
       ],
-      "related_ids": [],
+      "related_ids": [
+        "POL-0053",
+        "POL-0126",
+        "POL-0133",
+        "POL-0163",
+        "POL-0165",
+        "POL-0169",
+        "POL-0172",
+        "POL-0176",
+        "POL-0183",
+        "POL-0240",
+        "POL-0244",
+        "POL-0245",
+        "STD-0019"
+      ],
       "change": {
         "files": [
           "docs/exemplars/EXM-0011-shared-state/core/temperature.cpp",
@@ -609,26 +850,45 @@
         },
         "examples_and_evidence": {
           "status": "finding",
-          "reason": "The shared Temperature source admitted non-finite values despite claiming a validated domain invariant."
+          "reason": "The shared Temperature source admitted non-finite values despite claiming a validated domain invariant. Allocation-free execution does not establish a deadline without a caller-bounded input length and target timing evidence."
         },
         "model_behavior": {
           "status": "reviewed"
         }
       },
       "highest_severity": "major",
-      "rationale": "The complete tree now supports every demonstrates claim without the resolved adjacent correctness defect.",
+      "rationale": "The complete tree now supports every demonstrates claim without the resolved adjacent correctness defect. Issue #36 regression tests and scope corrections resolve the additional findings.",
       "evidence": [
         "docs/exemplars/EXM-0012-realtime-loop/exemplar.md",
         "clean syntax compilation with the stated language floor and project warning set",
-        "manual inspection of every source and test file"
+        "manual inspection of every source and test file",
+        "audits/corpus-v1/integration-verification.md",
+        "scripts/check_exemplars.py: complete source and adjacent Catch2 tests built and executed at the declared minimum language version"
       ],
-      "related_ids": [],
+      "related_ids": [
+        "POL-0023",
+        "POL-0028",
+        "POL-0032",
+        "POL-0041",
+        "POL-0112",
+        "POL-0128",
+        "POL-0159",
+        "POL-0161",
+        "POL-0162",
+        "POL-0163",
+        "POL-0228",
+        "POL-0240",
+        "POL-0244",
+        "POL-0245",
+        "STD-0021"
+      ],
       "change": {
         "files": [
           "docs/exemplars/EXM-0012-realtime-loop/core/temperature.cpp",
-          "docs/exemplars/EXM-0012-realtime-loop/core/temperature_test.cpp"
+          "docs/exemplars/EXM-0012-realtime-loop/core/temperature_test.cpp",
+          "docs/exemplars/EXM-0012-realtime-loop/exemplar.md"
         ],
-        "commit": "this commit"
+        "commit": "Complete exemplar and corpus integration gate (includes earlier audited corrections)"
       },
       "follow_up_issue": null,
       "finding_status": "resolved"
@@ -674,9 +934,35 @@
       "evidence": [
         "docs/exemplars/EXM-0013-ffi-boundary/exemplar.md",
         "clean syntax compilation with the stated language floor and project warning set",
-        "manual inspection of every source and test file"
+        "manual inspection of every source and test file",
+        "audits/corpus-v1/integration-verification.md",
+        "scripts/check_exemplars.py: complete source and adjacent Catch2 tests built and executed at the declared minimum language version"
       ],
-      "related_ids": [],
+      "related_ids": [
+        "POL-0026",
+        "POL-0028",
+        "POL-0043",
+        "POL-0072",
+        "POL-0079",
+        "POL-0080",
+        "POL-0082",
+        "POL-0109",
+        "POL-0143",
+        "POL-0178",
+        "POL-0183",
+        "POL-0186",
+        "POL-0187",
+        "POL-0216",
+        "POL-0228",
+        "POL-0230",
+        "POL-0234",
+        "POL-0240",
+        "POL-0244",
+        "POL-0245",
+        "POL-0246",
+        "STD-0001",
+        "STD-0004"
+      ],
       "change": {
         "files": [
           "docs/exemplars/EXM-0013-ffi-boundary/core/temperature.cpp",
@@ -720,31 +1006,53 @@
         },
         "examples_and_evidence": {
           "status": "finding",
-          "reason": "The shared Temperature source admitted non-finite values despite claiming a validated domain invariant. Destroying an unfinished task left its slot holding a continuation into a destroyed coroutine frame."
+          "reason": "The shared Temperature source admitted non-finite values despite claiming a validated domain invariant. Destroying an unfinished task left its slot holding a continuation into a destroyed coroutine frame. A second suspended reader overwrote the first continuation; a null owning pointer was dereferenced; cancellation prose implied cross-thread race safety."
         },
         "model_behavior": {
           "status": "reviewed"
         }
       },
       "highest_severity": "major",
-      "rationale": "The complete tree now supports every demonstrates claim without the resolved adjacent correctness defect. Follow-up: clarify that reference parameters can be valid with an enforced lifetime, while the shown by-value shared_ptr explicitly retains the slot across suspension and cancellation.",
+      "rationale": "The complete tree now supports every demonstrates claim without the resolved adjacent correctness defect. Follow-up: clarify that reference parameters can be valid with an enforced lifetime, while the shown by-value shared_ptr explicitly retains the slot across suspension and cancellation. Issue #36 regression tests and scope corrections resolve the additional findings.",
       "evidence": [
         "docs/exemplars/EXM-0014-coroutine/exemplar.md",
         "clean syntax compilation with the stated language floor and project warning set",
         "manual inspection of every source and test file",
+        "https://eel.is/c++draft/dcl.fct.def.coroutine",
+        "audits/corpus-v1/integration-verification.md",
+        "scripts/check_exemplars.py: complete source and adjacent Catch2 tests built and executed at the declared minimum language version",
+        "https://eel.is/c++draft/expr.await",
         "https://eel.is/c++draft/dcl.fct.def.coroutine"
       ],
-      "related_ids": [],
+      "related_ids": [
+        "POL-0071",
+        "POL-0072",
+        "POL-0079",
+        "POL-0080",
+        "POL-0082",
+        "POL-0109",
+        "POL-0163",
+        "POL-0173",
+        "POL-0179",
+        "POL-0181",
+        "POL-0195",
+        "POL-0240",
+        "POL-0244",
+        "POL-0245",
+        "STD-0010",
+        "STD-0011",
+        "STD-0020"
+      ],
       "change": {
         "files": [
           "docs/exemplars/EXM-0014-coroutine/core/temperature.cpp",
           "docs/exemplars/EXM-0014-coroutine/core/temperature_test.cpp",
-          "docs/exemplars/EXM-0014-coroutine/include/sampler/device/async_read.hpp",
           "docs/exemplars/EXM-0014-coroutine/device/async_read.cpp",
           "docs/exemplars/EXM-0014-coroutine/device/async_read_test.cpp",
-          "docs/exemplars/EXM-0014-coroutine/exemplar.md"
+          "docs/exemplars/EXM-0014-coroutine/exemplar.md",
+          "docs/exemplars/EXM-0014-coroutine/include/sampler/device/async_read.hpp"
         ],
-        "commit": "Complete standard, FFI, and coroutine audit follow-ups"
+        "commit": "Complete exemplar and corpus integration gate (includes earlier audited corrections)"
       },
       "follow_up_issue": null,
       "finding_status": "resolved"

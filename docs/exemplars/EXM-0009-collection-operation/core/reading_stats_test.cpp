@@ -1,5 +1,6 @@
 #include "sampler/core/reading_stats.hpp"
 
+#include <limits>
 #include <optional>
 #include <stdexcept>
 #include <vector>
@@ -40,6 +41,23 @@ TEST_CASE_METHOD(RoomWindow, "filters_before_reducing") {
 
     REQUIRE(mean.has_value());
     REQUIRE(mean->celsius() == Catch::Approx(21.0));
+}
+
+TEST_CASE("rejects_non_finite_window_bounds") {
+    const double nan = std::numeric_limits<double>::quiet_NaN();
+    const double infinity = std::numeric_limits<double>::infinity();
+    REQUIRE_THROWS_AS(SampleWindow(nan, 24.0), std::invalid_argument);
+    REQUIRE_THROWS_AS(SampleWindow(18.0, nan), std::invalid_argument);
+    REQUIRE_THROWS_AS(SampleWindow(18.0, infinity), std::invalid_argument);
+}
+
+TEST_CASE("finite_large_readings_have_a_finite_mean") {
+    const double maximum = std::numeric_limits<double>::max();
+    const SampleWindow window{0.0, maximum};
+    const std::vector<Temperature> readings{Temperature{maximum}, Temperature{maximum}};
+    const auto mean = try_mean_temperature(readings, window);
+    REQUIRE(mean.has_value());
+    REQUIRE(mean->celsius() == maximum);
 }
 
 }  // namespace sampler::core

@@ -1,5 +1,9 @@
 # Canonical corpus audit v1
 
+The final issue 36 gate and reproducible commands are recorded in
+[integration-verification.md](integration-verification.md). Its executable
+checks cover all 14 exemplar suites, the C header, and release reproducibility.
+
 This directory records the semantic audit governed by issue #28. Structural
 validation proves that the corpus can be parsed and projected; it does not prove
 that the engineering advice is true.
@@ -78,4 +82,3 @@ this shape:
 
 The real record contains all ten dimensions. Cross-slice findings go in
 `cross-slice.md`; do not silently edit an identity owned by another report.
-

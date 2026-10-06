@@ -4,11 +4,19 @@
 #include <coroutine>
 #include <exception>
 #include <memory>
+#include <stdexcept>
 #include <utility>
 
 #include "sampler/core/temperature.hpp"
 
 namespace sampler::device {
+
+void ReadSlot::await_suspend(std::coroutine_handle<> waiter) {
+    if (waiter_) {
+        throw std::logic_error("ReadSlot: another reader is already suspended");
+    }
+    waiter_ = waiter;
+}
 
 void ReadSlot::write_reading(core::Temperature reading) {
     reading_ = reading;
@@ -70,6 +78,9 @@ void ReadTask::cancel_wait() noexcept {
 }
 
 ReadTask load_reading(std::shared_ptr<ReadSlot> slot, double offset_celsius) {
+    if (!slot) {
+        throw std::invalid_argument("load_reading: slot must not be null");
+    }
     const core::Temperature raw = co_await *slot;
     co_return core::Temperature{raw.celsius() + offset_celsius};
 }

@@ -3,6 +3,7 @@
 #include <algorithm>
 #include <cassert>
 #include <cmath>
+#include <cstddef>
 #include <numeric>
 #include <optional>
 #include <span>
@@ -15,8 +16,13 @@ namespace sampler::core {
 namespace {
 
 double mean_celsius(std::span<const double> samples_celsius) {
-    const double total = std::accumulate(samples_celsius.begin(), samples_celsius.end(), 0.0);
-    return total / static_cast<double>(samples_celsius.size());
+    std::size_t processed = 0;
+    return std::accumulate(
+        samples_celsius.begin(), samples_celsius.end(), 0.0,
+        [&processed](double mean, double next) {
+            ++processed;
+            return std::lerp(mean, next, 1.0 / static_cast<double>(processed));
+        });
 }
 
 double spread_celsius(std::span<const double> samples_celsius) {
@@ -41,7 +47,8 @@ std::optional<Temperature> try_calibrated_temperature(std::span<const double> sa
                                                       const Calibration& calibration) {
     assert(!samples_celsius.empty());
 
-    if (spread_celsius(samples_celsius) > kMaxStableSpreadCelsius) {
+    if (!std::ranges::all_of(samples_celsius, [](double sample) { return std::isfinite(sample); }) ||
+        spread_celsius(samples_celsius) > kMaxStableSpreadCelsius) {
         return std::nullopt;
     }
     return Temperature::try_from(mean_celsius(samples_celsius) * calibration.scale() +

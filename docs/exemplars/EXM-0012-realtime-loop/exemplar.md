@@ -1,6 +1,6 @@
 ---
 id: EXM-0012
-situation: write a path that runs inside a deadline
+situation: write an allocation-free scan path with a caller-bounded input size
 demonstrates:
   - POL-0023
   - POL-0028
@@ -32,6 +32,11 @@ at the scan boundary.
 
 `noexcept` on `write_scan` is a claim that holds, because the body reaches nothing
 that can throw.
+
+The loop still visits every input reading, including dropped readings. The caller
+must bound the input length and establish a worst-case execution time on its
+target before assigning a deadline. These tests establish allocation behavior
+for the sampled path; they do not measure or prove deadline compliance.
 
 This exemplar is authored and verified against `cpp23-gcc-realtime`. Under a
 configuration whose domain is not realtime it constrains out entirely.
