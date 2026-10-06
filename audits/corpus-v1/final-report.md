@@ -2,21 +2,21 @@
 
 ## Result
 
-The audit covers all 290 identities in the inventory: 247 policies, 29
+The audit covers all 291 identities in the inventory: 248 policies, 29
 decided-once standard entries, and 14 exemplars. Every identity has an affirmative
-disposition. There are 231 `keep` and 59 `revise` results; no identity was split,
+disposition. There are 231 `keep` and 60 `revise` results; no identity was split,
 merged, or removed.
 
 By layer:
 
 | Layer | Keep | Revise | Total |
 |---|---:|---:|---:|
-| Policies | 210 | 37 | 247 |
+| Policies | 210 | 38 | 248 |
 | Decided-once standard | 18 | 11 | 29 |
 | Exemplars | 3 | 11 | 14 |
-| **Total** | **231** | **59** | **290** |
+| **Total** | **231** | **60** | **291** |
 
-The highest recorded severities were 18 major findings, 41 minor findings, and
+The highest recorded severities were 19 major findings, 41 minor findings, and
 231 notes. Every finding is resolved in the audited corpus. No blocking, major,
 or accepted minor debt remains open.
 
@@ -71,3 +71,12 @@ verification commands recorded with the integration commit pass. Target projects
 still own their platform facts, exceptions, and deviations through overlays; this
 audit does not turn canonical defaults into universal C++ law.
 
+
+## Post-audit addition
+
+POL-0249 was added after the original integration audit without topic membership
+or an audit record. It now belongs to Writing a function, and the topics 1–5
+report records its semantic review. The correction distinguishes optional NRVO
+from guaranteed same-type prvalue initialization, narrows the restriction on
+`std::move`, and avoids forcing construction through one mutable result. The
+totals above include this addition; earlier slice reviews retain their provenance.

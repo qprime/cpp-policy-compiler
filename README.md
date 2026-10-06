@@ -118,7 +118,7 @@ builds. See [Correctness benchmarks](benchmarks/README.md).
 
 The end-to-end harness, project overlay lifecycle, paired projections,
 distribution paths, and correctness evaluator are implemented and tested. The
-corpus currently contains 247 policies, 29 standard entries, 14 exemplars, and
+corpus currently contains 248 policies, 29 standard entries, 14 exemplars, and
 two stock configurations.
 
 The current maturity frontier is policy content. Structural validation cannot

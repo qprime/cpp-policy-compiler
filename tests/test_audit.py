@@ -69,9 +69,9 @@ def test_current_inventory_is_complete_unique_and_deterministic() -> None:
     first = build_inventory(REPOSITORY, POLICIES, STANDARD, EXEMPLARS)
     second = build_inventory(REPOSITORY, POLICIES, STANDARD, EXEMPLARS)
     assert serialize_inventory(first) == serialize_inventory(second)
-    assert _check() == (247, 29, 14)
+    assert _check(final=True) == (248, 29, 14)
     identities = [item["id"] for item in first["items"]]
-    assert len(identities) == len(set(identities)) == 290
+    assert len(identities) == len(set(identities)) == 291
     assert all(not Path(item["path"]).is_absolute() for item in first["items"])
 
 
@@ -84,6 +84,49 @@ def test_live_corpus_path_change_makes_inventory_stale(tmp_path: Path) -> None:
     with pytest.raises(PolcError, match="inventory differs from the live corpus"):
         check(
             repository / "audit", repository, repository / "docs/policies",
+            repository / "docs/standard", repository / "docs/exemplars",
+        )
+
+
+@pytest.mark.parametrize("operation", ["add", "remove", "duplicate-topic"])
+def test_live_corpus_membership_changes_are_detected(
+    tmp_path: Path, operation: str
+) -> None:
+    repository = tmp_path / "repository"
+    shutil.copytree(REPOSITORY / "docs", repository / "docs")
+    shutil.copytree(AUDIT, repository / "audit")
+    policies = repository / "docs/policies"
+    policy = policies / "POL-0249-preserve-copy-elision.md"
+    topics = policies / "TOPICS.md"
+    if operation == "add":
+        (policies / "POL-0250-preserve-copy-elision.md").write_text(
+            policy.read_text(encoding="utf-8").replace("POL-0249", "POL-0250"),
+            encoding="utf-8",
+        )
+        topics.write_text(
+            topics.read_text(encoding="utf-8").replace(
+                "POL-0249", "POL-0249 POL-0250"
+            ), encoding="utf-8",
+        )
+    elif operation == "remove":
+        policy.unlink()
+        topics.write_text(
+            topics.read_text(encoding="utf-8").replace(" POL-0249", ""),
+            encoding="utf-8",
+        )
+    else:
+        topics.write_text(
+            topics.read_text(encoding="utf-8").replace(
+                "POL-0249", "POL-0249 POL-0249"
+            ), encoding="utf-8",
+        )
+    expected = (
+        "duplicate topic membership" if operation == "duplicate-topic"
+        else "inventory differs from the live corpus"
+    )
+    with pytest.raises(PolcError, match=expected):
+        check(
+            repository / "audit", repository, policies,
             repository / "docs/standard", repository / "docs/exemplars",
         )
 

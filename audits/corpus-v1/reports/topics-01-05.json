@@ -5616,6 +5616,72 @@
       "change": null,
       "follow_up_issue": null,
       "finding_status": "resolved"
+    },
+    {
+      "id": "POL-0249",
+      "disposition": "revise",
+      "dimensions": {
+        "technical_truth": {
+          "status": "finding",
+          "reason": "Distinguish optional NRVO from C++17 same-type prvalue initialization; a conditional lvalue is not an NRVO or implicit-move operand, while separate named return statements can qualify."
+        },
+        "strength": {
+          "status": "finding",
+          "reason": "Prefer clear direct construction; do not mandate default construction or assignment to manufacture a single result variable."
+        },
+        "scope": {
+          "status": "reviewed"
+        },
+        "decision_clarity": {
+          "status": "reviewed"
+        },
+        "generation_routing": {
+          "status": "reviewed"
+        },
+        "review_routing": {
+          "status": "finding",
+          "reason": "Route from visible std::move(local) or conditional selection of named results, not the mere presence of different return locals."
+        },
+        "consistency": {
+          "status": "finding",
+          "reason": "Scope the move restriction to eligible locals and retain intentional ownership transfers from members; related policies remain owned by their existing slices."
+        },
+        "attribution": {
+          "status": "finding",
+          "reason": "Replace the vague locator with language clauses and precise Core Guidelines identities supporting the return-value decision."
+        },
+        "examples_and_evidence": {
+          "status": "finding",
+          "reason": "The bad conditional example constructs both alternatives and returns an lvalue; it does not establish a universal prohibition on multiple named locals."
+        },
+        "model_behavior": {
+          "status": "reviewed"
+        }
+      },
+      "highest_severity": "major",
+      "rationale": "Integrate the post-audit policy into Writing a function and correct overbroad NRVO, implicit-move, and std::move claims across the supported C++14–23 versions. No exemplar currently claims this identity. Model-readability review is static judgment, not a measured effectiveness result.",
+      "evidence": [
+        "docs/policies/POL-0249-preserve-copy-elision.md",
+        "https://eel.is/c++draft/class.copy.elision",
+        "https://eel.is/c++draft/stmt.return",
+        "https://eel.is/c++draft/dcl.init",
+        "https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#f48-dont-return-stdmovelocal",
+        "https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#f20-for-out-output-values-prefer-return-values-to-output-parameters"
+      ],
+      "related_ids": [
+        "POL-0037",
+        "POL-0049",
+        "POL-0140"
+      ],
+      "change": {
+        "files": [
+          "docs/policies/POL-0249-preserve-copy-elision.md",
+          "docs/policies/TOPICS.md"
+        ],
+        "commit": "Integrate and audit copy-elision policy"
+      },
+      "follow_up_issue": null,
+      "finding_status": "resolved"
     }
   ]
 }

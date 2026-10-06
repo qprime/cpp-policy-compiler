@@ -2,18 +2,20 @@
 id: POL-0249
 kind: guideline
 trigger: "return a value assembled over several statements or selected between branches"
-review_trigger: "a function returns different named locals on different paths"
+review_trigger: "a value-returning function uses std::move on a local or selects named results with a conditional expression"
 attribution:
   - source: standard-practice
-    locator: "copy elision and named return value optimization"
+    locator: "C++ [class.copy.elision], [stmt.return], and [dcl.init]; CG F.20 and F.48"
     upstream: ["CG F.20", "CG F.48"]
 ---
 
 # Shape value returns for copy elision
 
-Return a newly constructed value directly when possible. If construction spans
-several statements, build one named result and return that same object from
-every path. Do not add `std::move` to a return.
+Prefer returning a newly constructed value directly. If construction spans
+several statements, prefer one named result where that keeps construction and
+control flow clear. Return an eligible local by name rather than adding
+`std::move`. Do not introduce default construction or assignment solely to
+force all branches through one result variable.
 
 ```cpp
 Toolpath make_line(Vec2 from_mm, Vec2 to_mm) {
@@ -41,7 +43,7 @@ Toolpath assemble(const Job& job) {
 ```
 
 ```cpp
-// Bad: competing named results prevent NRVO.
+// Bad: constructs both alternatives and returns an lvalue expression.
 Toolpath make(bool closed) {
     Toolpath open = assemble_open();
     Toolpath loop = assemble_closed();
@@ -49,7 +51,18 @@ Toolpath make(bool closed) {
 }
 ```
 
-Directly returned values have guaranteed copy elision since C++17. A returned
-named local is eligible for named return value optimization and is moved if the
-compiler does not elide it. Competing named locals prevent NRVO; return a value
-directly from each branch or carry the result in one object instead.
+Since C++17, a prvalue of the function's return type initializes the result
+directly; C++14 permits but does not guarantee this elision. Returning a
+non-volatile automatic local of the same class type, other than a parameter,
+permits named return value optimization (NRVO). NRVO is optional: the return
+must still be valid if elision does not occur. Implicit move applies to eligible
+locals, but the selected constructor can copy, and a deleted move can make the
+return ill-formed.
+
+The conditional expression above is an lvalue, not the name of an eligible
+local, so it does not qualify for NRVO or implicit move. Separate `return local;`
+statements can each qualify for NRVO even when they name different locals;
+whether a compiler performs it depends on the implementation and control flow.
+Prefer the direct branch returns shown above when each branch constructs its
+own result. Moving a member or another expression that is not eligible for
+implicit move can be appropriate when ownership is intentionally transferred.
