@@ -4,20 +4,20 @@
 
 The audit covers all 291 identities in the inventory: 248 policies, 29
 decided-once standard entries, and 14 exemplars. Every identity has an affirmative
-disposition. There are 231 `keep` and 60 `revise` results; no identity was split,
+disposition. There are 227 `keep` and 64 `revise` results; no identity was split,
 merged, or removed.
 
 By layer:
 
 | Layer | Keep | Revise | Total |
 |---|---:|---:|---:|
-| Policies | 210 | 38 | 248 |
+| Policies | 206 | 42 | 248 |
 | Decided-once standard | 18 | 11 | 29 |
 | Exemplars | 3 | 11 | 14 |
-| **Total** | **231** | **60** | **291** |
+| **Total** | **227** | **64** | **291** |
 
-The highest recorded severities were 19 major findings, 41 minor findings, and
-231 notes. Every finding is resolved in the audited corpus. No blocking, major,
+The highest recorded severities were 22 major findings, 42 minor findings, and
+227 notes. Every finding is resolved in the audited corpus. No blocking, major,
 or accepted minor debt remains open.
 
 ## Review outcome
@@ -80,3 +80,13 @@ report records its semantic review. The correction distinguishes optional NRVO
 from guaranteed same-type prvalue initialization, narrows the restriction on
 `std::move`, and avoids forcing construction through one mutable result. The
 totals above include this addition; earlier slice reviews retain their provenance.
+
+## Standard, FFI, and coroutine follow-up
+
+Verification of issues #31, #33, and #34 found five further corrections: formatter
+keys now enforce the declared layout; a C-string boundary contains exceptions;
+FFI ownership distinguishes conversion, copy, move, borrowing, and explicit
+transfer; fallthrough guidance admits C++14; and coroutine lifetime guidance
+accounts for borrowed views and enforced referent lifetimes. EXM-0014 prose now
+explains its ownership guarantee without asserting references always dangle.
+All findings are resolved and recorded in the owning reports.

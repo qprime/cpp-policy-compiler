@@ -97,19 +97,22 @@
     },
     {
       "id": "POL-0144",
-      "disposition": "keep",
+      "disposition": "revise",
       "dimensions": {
         "technical_truth": {
-          "status": "reviewed"
+          "status": "finding",
+          "reason": "Standard fallthrough is available since C++17. C++14 needs an admitted compiler marker or diagnostic-recognized comment; stacked labels require no marker."
         },
         "strength": {
           "status": "reviewed"
         },
         "scope": {
-          "status": "reviewed"
+          "status": "finding",
+          "reason": "Standard fallthrough is available since C++17. C++14 needs an admitted compiler marker or diagnostic-recognized comment; stacked labels require no marker."
         },
         "decision_clarity": {
-          "status": "reviewed"
+          "status": "finding",
+          "reason": "Standard fallthrough is available since C++17. C++14 needs an admitted compiler marker or diagnostic-recognized comment; stacked labels require no marker."
         },
         "generation_routing": {
           "status": "reviewed"
@@ -121,23 +124,33 @@
           "status": "reviewed"
         },
         "attribution": {
-          "status": "reviewed"
+          "status": "finding",
+          "reason": "Standard fallthrough is available since C++17. C++14 needs an admitted compiler marker or diagnostic-recognized comment; stacked labels require no marker."
         },
         "examples_and_evidence": {
-          "status": "reviewed"
+          "status": "finding",
+          "reason": "Standard fallthrough is available since C++17. C++14 needs an admitted compiler marker or diagnostic-recognized comment; stacked labels require no marker."
         },
         "model_behavior": {
-          "status": "reviewed"
+          "status": "finding",
+          "reason": "Standard fallthrough is available since C++17. C++14 needs an admitted compiler marker or diagnostic-recognized comment; stacked labels require no marker."
         }
       },
-      "highest_severity": "note",
-      "rationale": "The statement, scope, strength, routes, attribution, relationships, and examples are coherent for the admitted configurations.",
+      "highest_severity": "minor",
+      "rationale": "Standard fallthrough is available since C++17. C++14 needs an admitted compiler marker or diagnostic-recognized comment; stacked labels require no marker.",
       "evidence": [
         "docs/policies/POL-0144-no-implicit-fallthrough.md",
-        "the attribution locator declared in the policy frontmatter"
+        "the attribution locator declared in the policy frontmatter",
+        "https://eel.is/c++draft/dcl.attr.fallthrough",
+        "https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wimplicit-fallthrough"
       ],
       "related_ids": [],
-      "change": null,
+      "change": {
+        "files": [
+          "docs/policies/POL-0144-no-implicit-fallthrough.md"
+        ],
+        "commit": "Complete standard, FFI, and coroutine audit follow-ups"
+      },
       "follow_up_issue": null,
       "finding_status": "resolved"
     },
@@ -511,19 +524,22 @@
     },
     {
       "id": "POL-0179",
-      "disposition": "keep",
+      "disposition": "revise",
       "dimensions": {
         "technical_truth": {
-          "status": "reviewed"
+          "status": "finding",
+          "reason": "Suspension does not inherently destroy the caller; references are valid with an enforced referent lifetime. By-value views and pointers still borrow and do not solve the lifetime risk."
         },
         "strength": {
           "status": "reviewed"
         },
         "scope": {
-          "status": "reviewed"
+          "status": "finding",
+          "reason": "Suspension does not inherently destroy the caller; references are valid with an enforced referent lifetime. By-value views and pointers still borrow and do not solve the lifetime risk."
         },
         "decision_clarity": {
-          "status": "reviewed"
+          "status": "finding",
+          "reason": "Suspension does not inherently destroy the caller; references are valid with an enforced referent lifetime. By-value views and pointers still borrow and do not solve the lifetime risk."
         },
         "generation_routing": {
           "status": "reviewed"
@@ -535,23 +551,32 @@
           "status": "reviewed"
         },
         "attribution": {
-          "status": "reviewed"
+          "status": "finding",
+          "reason": "Suspension does not inherently destroy the caller; references are valid with an enforced referent lifetime. By-value views and pointers still borrow and do not solve the lifetime risk."
         },
         "examples_and_evidence": {
-          "status": "reviewed"
+          "status": "finding",
+          "reason": "Suspension does not inherently destroy the caller; references are valid with an enforced referent lifetime. By-value views and pointers still borrow and do not solve the lifetime risk."
         },
         "model_behavior": {
-          "status": "reviewed"
+          "status": "finding",
+          "reason": "Suspension does not inherently destroy the caller; references are valid with an enforced referent lifetime. By-value views and pointers still borrow and do not solve the lifetime risk."
         }
       },
-      "highest_severity": "note",
-      "rationale": "The statement, scope, strength, routes, attribution, relationships, and examples are coherent for the admitted configurations.",
+      "highest_severity": "major",
+      "rationale": "Suspension does not inherently destroy the caller; references are valid with an enforced referent lifetime. By-value views and pointers still borrow and do not solve the lifetime risk.",
       "evidence": [
         "docs/policies/POL-0179-coroutine-parameters-by-value.md",
-        "the attribution locator declared in the policy frontmatter"
+        "the attribution locator declared in the policy frontmatter",
+        "https://eel.is/c++draft/dcl.fct.def.coroutine"
       ],
       "related_ids": [],
-      "change": null,
+      "change": {
+        "files": [
+          "docs/policies/POL-0179-coroutine-parameters-by-value.md"
+        ],
+        "commit": "Complete standard, FFI, and coroutine audit follow-ups"
+      },
       "follow_up_issue": null,
       "finding_status": "resolved"
     },

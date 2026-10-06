@@ -10,3 +10,4 @@ must eventually link to a correction or state the accepted rationale.
 | EXM-0013 asserted pointer preconditions inside independently callable public C functions. | final integration | exemplars/integration | major | resolved | The C boundary now rejects invalid pointers and the test calls those failure paths. |
 | EXM-0014 retained a continuation after an unfinished coroutine task destroyed its frame. | final integration | exemplars/integration | major | resolved | Task destruction unregisters the continuation before destroying the frame, with a cancellation regression test. |
 
+| Coroutine exemplar prose described references as inherently invalid, overstating the lifetime rule corrected in POL-0179. | topics 11–15 | exemplars/integration | minor | resolved | EXM-0014 now explains why its owning shared_ptr establishes a lifetime guarantee; its source and demonstrates claims remain valid. |

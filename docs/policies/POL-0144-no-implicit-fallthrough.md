@@ -10,8 +10,11 @@ attribution:
 
 # Every `switch` arm ends in a jump, or in `[[fallthrough]]`
 
-End each arm with `break`, `return`, `throw`, or `[[fallthrough]]` where falling
-through is intended.
+End an arm that executes work with `break`, `return`, `throw`, or an explicit
+fallthrough marker where falling through is intended. Stacked labels sharing one
+body need no marker. Use standard `[[fallthrough]]` in C++17 and later; in C++14,
+use the selected compiler's supported marker or a documented comment recognized
+by the project's fallthrough diagnostic.
 
 ```cpp
 switch (motion) {

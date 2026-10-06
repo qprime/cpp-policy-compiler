@@ -26,9 +26,10 @@ applicability:
 # A coroutine that suspends on a device read and resumes with the value
 
 `load_reading` takes its slot as a `std::shared_ptr` by value, so the frame owns a
-share of the thing it suspends on and the slot cannot go away underneath it. That is
-the whole reason a coroutine parameter is never a reference: a reference argument
-outlives nothing, and the frame outlives the call.
+share of the thing it suspends on and the slot cannot go away underneath it. A
+reference parameter would not extend the slot's lifetime; it would require a
+separate guarantee covering suspension and cancellation. Passing the owning
+`shared_ptr` by value establishes that guarantee in this exemplar.
 
 Nothing is locked across the `co_await`. There is no lock in this exemplar at all,
 which is how the property is carried — no test asserts it, because none could.

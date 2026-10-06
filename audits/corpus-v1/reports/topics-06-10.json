@@ -419,19 +419,22 @@
     },
     {
       "id": "POL-0043",
-      "disposition": "keep",
+      "disposition": "revise",
       "dimensions": {
         "technical_truth": {
-          "status": "reviewed"
+          "status": "finding",
+          "reason": "Contain string construction and operation exceptions inside the public C entry point; state readable null-termination, borrowing lifetime, and C++14 view constraints."
         },
         "strength": {
           "status": "reviewed"
         },
         "scope": {
-          "status": "reviewed"
+          "status": "finding",
+          "reason": "Contain string construction and operation exceptions inside the public C entry point; state readable null-termination, borrowing lifetime, and C++14 view constraints."
         },
         "decision_clarity": {
-          "status": "reviewed"
+          "status": "finding",
+          "reason": "Contain string construction and operation exceptions inside the public C entry point; state readable null-termination, borrowing lifetime, and C++14 view constraints."
         },
         "generation_routing": {
           "status": "reviewed"
@@ -443,23 +446,33 @@
           "status": "reviewed"
         },
         "attribution": {
-          "status": "reviewed"
+          "status": "finding",
+          "reason": "Contain string construction and operation exceptions inside the public C entry point; state readable null-termination, borrowing lifetime, and C++14 view constraints."
         },
         "examples_and_evidence": {
-          "status": "reviewed"
+          "status": "finding",
+          "reason": "Contain string construction and operation exceptions inside the public C entry point; state readable null-termination, borrowing lifetime, and C++14 view constraints."
         },
         "model_behavior": {
-          "status": "reviewed"
+          "status": "finding",
+          "reason": "Contain string construction and operation exceptions inside the public C entry point; state readable null-termination, borrowing lifetime, and C++14 view constraints."
         }
       },
-      "highest_severity": "note",
-      "rationale": "The statement, scope, strength, routes, attribution, relationships, and examples are coherent for the admitted configurations.",
+      "highest_severity": "major",
+      "rationale": "Contain string construction and operation exceptions inside the public C entry point; state readable null-termination, borrowing lifetime, and C++14 view constraints.",
       "evidence": [
         "docs/policies/POL-0043-c-string-converted-on-entry.md",
-        "the attribution locator declared in the policy frontmatter"
+        "the attribution locator declared in the policy frontmatter",
+        "https://eel.is/c++draft/except.handle",
+        "https://eel.is/c++draft/string.view"
       ],
       "related_ids": [],
-      "change": null,
+      "change": {
+        "files": [
+          "docs/policies/POL-0043-c-string-converted-on-entry.md"
+        ],
+        "commit": "Complete standard, FFI, and coroutine audit follow-ups"
+      },
       "follow_up_issue": null,
       "finding_status": "resolved"
     },
@@ -1559,19 +1572,22 @@
     },
     {
       "id": "POL-0237",
-      "disposition": "keep",
+      "disposition": "revise",
       "dimensions": {
         "technical_truth": {
-          "status": "reviewed"
+          "status": "finding",
+          "reason": "A value crossing can move or convert; explicit handles and binding lifetime policies can transfer ownership safely. Raw pointer syntax alone does not establish the binding ownership contract."
         },
         "strength": {
           "status": "reviewed"
         },
         "scope": {
-          "status": "reviewed"
+          "status": "finding",
+          "reason": "A value crossing can move or convert; explicit handles and binding lifetime policies can transfer ownership safely. Raw pointer syntax alone does not establish the binding ownership contract."
         },
         "decision_clarity": {
-          "status": "reviewed"
+          "status": "finding",
+          "reason": "A value crossing can move or convert; explicit handles and binding lifetime policies can transfer ownership safely. Raw pointer syntax alone does not establish the binding ownership contract."
         },
         "generation_routing": {
           "status": "reviewed"
@@ -1583,23 +1599,32 @@
           "status": "reviewed"
         },
         "attribution": {
-          "status": "reviewed"
+          "status": "finding",
+          "reason": "A value crossing can move or convert; explicit handles and binding lifetime policies can transfer ownership safely. Raw pointer syntax alone does not establish the binding ownership contract."
         },
         "examples_and_evidence": {
-          "status": "reviewed"
+          "status": "finding",
+          "reason": "A value crossing can move or convert; explicit handles and binding lifetime policies can transfer ownership safely. Raw pointer syntax alone does not establish the binding ownership contract."
         },
         "model_behavior": {
-          "status": "reviewed"
+          "status": "finding",
+          "reason": "A value crossing can move or convert; explicit handles and binding lifetime policies can transfer ownership safely. Raw pointer syntax alone does not establish the binding ownership contract."
         }
       },
-      "highest_severity": "note",
-      "rationale": "The statement, scope, strength, routes, attribution, relationships, and examples are coherent for the admitted configurations.",
+      "highest_severity": "major",
+      "rationale": "A value crossing can move or convert; explicit handles and binding lifetime policies can transfer ownership safely. Raw pointer syntax alone does not establish the binding ownership contract.",
       "evidence": [
         "docs/policies/POL-0237-ffi-ownership-is-explicit.md",
-        "the attribution locator declared in the policy frontmatter"
+        "the attribution locator declared in the policy frontmatter",
+        "https://pybind11.readthedocs.io/en/stable/advanced/functions.html#return-value-policies"
       ],
       "related_ids": [],
-      "change": null,
+      "change": {
+        "files": [
+          "docs/policies/POL-0237-ffi-ownership-is-explicit.md"
+        ],
+        "commit": "Complete standard, FFI, and coroutine audit follow-ups"
+      },
       "follow_up_issue": null,
       "finding_status": "resolved"
     },

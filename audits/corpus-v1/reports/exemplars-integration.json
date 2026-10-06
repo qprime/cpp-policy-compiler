@@ -727,11 +727,12 @@
         }
       },
       "highest_severity": "major",
-      "rationale": "The complete tree now supports every demonstrates claim without the resolved adjacent correctness defect.",
+      "rationale": "The complete tree now supports every demonstrates claim without the resolved adjacent correctness defect. Follow-up: clarify that reference parameters can be valid with an enforced lifetime, while the shown by-value shared_ptr explicitly retains the slot across suspension and cancellation.",
       "evidence": [
         "docs/exemplars/EXM-0014-coroutine/exemplar.md",
         "clean syntax compilation with the stated language floor and project warning set",
-        "manual inspection of every source and test file"
+        "manual inspection of every source and test file",
+        "https://eel.is/c++draft/dcl.fct.def.coroutine"
       ],
       "related_ids": [],
       "change": {
@@ -743,7 +744,7 @@
           "docs/exemplars/EXM-0014-coroutine/device/async_read_test.cpp",
           "docs/exemplars/EXM-0014-coroutine/exemplar.md"
         ],
-        "commit": "this commit"
+        "commit": "Complete standard, FFI, and coroutine audit follow-ups"
       },
       "follow_up_issue": null,
       "finding_status": "resolved"
